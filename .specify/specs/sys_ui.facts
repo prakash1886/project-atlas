@@ -1,0 +1,22 @@
+# Fact Sheet: UI/UX & Portal Screens (SYS-UI)
+
+[ui/dashboard]
+F-001: The system shall display opportunity score badges colored by threshold rules (Green >80, Amber 50-80, Red <50). @spec @ui
+F-002: Dashboard must list active pipeline queue items in a tabular format. @spec @ui
+
+[ui/graph]
+F-003: Graph Explorer must render interactive node-link diagrams. @spec @ui
+F-004: Inspection drawer must show node summaries and allow accepting auto-link suggestions. @spec @ui
+
+[ui/research]
+F-005: Research Workspace must list fact dossiers with linked citations. @spec @ui
+F-006: Audit panel must display highlighted alerts for factual contradictions. @spec @ui
+
+[ui/factory]
+F-007: Script Editor must align script narration with visual/audio asset cues. @spec @ui
+F-008: Asset Preview must integrate ElevenLabs audio play and image card renders. @spec @ui
+F-009: Human-in-the-Loop publishing buttons must remain locked until Editor approval. @spec @ui
+
+[ui/analytics]
+F-010: Analytics Dashboard must plot views, CTR, and watch time retention curves. @spec @ui
+F-011: The system must display the learning loop weight values and auto-tuning log. @spec @ui
