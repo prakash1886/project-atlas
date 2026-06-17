@@ -1,5 +1,5 @@
 import { Module, Global } from '@nestjs/common';
-import IORedis from 'ioredis';
+import { Redis } from 'ioredis';
 
 @Global()
 @Module({
@@ -11,7 +11,7 @@ import IORedis from 'ioredis';
         console.log('[RedisModule] Connecting to Redis...');
         // We create a mock/fallback client if Redis is unavailable to prevent app crash
         try {
-          return new IORedis(redisUrl, { lazyConnect: true, maxRetriesPerRequest: 1 });
+          return new Redis(redisUrl, { lazyConnect: true, maxRetriesPerRequest: 1 });
         } catch (e) {
           console.warn('[RedisModule] Redis connection failed, using stub');
           return {};
