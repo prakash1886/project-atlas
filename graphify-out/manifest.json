@@ -1,0 +1,27 @@
+{
+  "otel.ts": {
+    "mtime": 1781706244.466055,
+    "ast_hash": "2588a8dd489d9d8fd99d1bc19ab4248e",
+    "semantic_hash": "2588a8dd489d9d8fd99d1bc19ab4248e"
+  },
+  "src/app.module.ts": {
+    "mtime": 1781706244.467062,
+    "ast_hash": "d67cfbf6fa694649a6f6861c3882105f",
+    "semantic_hash": "d67cfbf6fa694649a6f6861c3882105f"
+  },
+  "src/main.ts": {
+    "mtime": 1781706244.467062,
+    "ast_hash": "df91ce31097877e5cf8742459459d85c",
+    "semantic_hash": "df91ce31097877e5cf8742459459d85c"
+  },
+  "src/modules/database/database.module.ts": {
+    "mtime": 1781706244.4680684,
+    "ast_hash": "47de6a86344294fa672e681bf842f40f",
+    "semantic_hash": "47de6a86344294fa672e681bf842f40f"
+  },
+  "src/modules/redis/redis.module.ts": {
+    "mtime": 1781706244.4680684,
+    "ast_hash": "acd8c35f77b2f4c57ebc9a8779537acf",
+    "semantic_hash": "acd8c35f77b2f4c57ebc9a8779537acf"
+  }
+}

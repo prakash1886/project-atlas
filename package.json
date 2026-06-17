@@ -11,7 +11,10 @@
     "server:dev": "tsx --tsconfig tsconfig.server.json server/src/main.ts",
     "server:build": "tsc -p tsconfig.server.json",
     "start": "node dist-server/src/main.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "qmd:add": "qmd collection add ./.specify --name specify --mask \"**/*.{md,facts}\" --overwrite",
+    "qmd:embed": "qmd embed",
+    "qmd:search": "qmd search"
   },
   "dependencies": {
     "@fastify/static": "^9.1.3",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tobilu/qmd": "^2.5.3",
     "@types/node": "^24.12.3",
     "@types/pg": "^8.20.0",
     "@types/react": "^19.2.14",
