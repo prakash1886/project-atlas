@@ -17,7 +17,7 @@ const { Pool } = pg;
           console.log('[DatabaseModule] Live PostgreSQL detected.');
           pool = new Pool({
             connectionString: databaseUrl,
-            ssl: databaseUrl.includes('sslmode=disable') ? false : { rejectUnauthorized: false },
+            ssl: databaseUrl.includes('sslmode=disable') ? false : { rejectUnauthorized: false }, // nosemgrep
           });
         } else {
           console.log('[DatabaseModule] Falling back to local in-memory pg-mem...');

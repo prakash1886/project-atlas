@@ -22,7 +22,7 @@ def main():
         
     print(f"Running command: {' '.join(cmd)}")
     try:
-        result = subprocess.run(cmd, cwd=project_root, shell=True, capture_output=True, text=True)
+        result = subprocess.run(cmd, cwd=project_root, shell=False, capture_output=True, text=True)
         print("STDOUT:\n", result.stdout)
         if result.stderr:
             print("STDERR:\n", result.stderr)

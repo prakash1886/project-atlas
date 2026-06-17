@@ -1,53 +1,6 @@
 {
-  "nodes": [
-    {
-      "id": "redis_redis_module",
-      "label": "redis.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "redis_redis_module_redismodule",
-      "label": "RedisModule",
-      "file_type": "code",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L24",
-      "_origin": "ast"
-    }
-  ],
-  "edges": [
-    {
-      "source": "redis_redis_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "redis_redis_module",
-      "target": "ioredis",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "redis_redis_module",
-      "target": "redis_redis_module_redismodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L24",
-      "weight": 1.0
-    }
-  ],
+  "nodes": [],
+  "edges": [],
   "hyperedges": [],
   "input_tokens": 0,
   "output_tokens": 0
