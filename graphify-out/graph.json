@@ -1,6 +1,203 @@
 {
-  "nodes": [],
-  "edges": [],
+  "nodes": [
+    {
+      "id": "src_main",
+      "label": "main.ts",
+      "file_type": "code",
+      "source_file": "server/src/main.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_main_bootstrap",
+      "label": "bootstrap()",
+      "file_type": "code",
+      "source_file": "server/src/main.ts",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "database_database_module",
+      "label": "database.module.ts",
+      "file_type": "code",
+      "source_file": "server/src/modules/database/database.module.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "database_database_module_databasemodule",
+      "label": "DatabaseModule",
+      "file_type": "code",
+      "source_file": "server/src/modules/database/database.module.ts",
+      "source_location": "L102",
+      "_origin": "ast"
+    },
+    {
+      "id": "redis_redis_module",
+      "label": "redis.module.ts",
+      "file_type": "code",
+      "source_file": "server/src/modules/redis/redis.module.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "redis_redis_module_redismodule",
+      "label": "RedisModule",
+      "file_type": "code",
+      "source_file": "server/src/modules/redis/redis.module.ts",
+      "source_location": "L24",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_main",
+      "target": "d_project_atlas_server_otel_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "core",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "platform_fastify",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "d_project_atlas_server_src_app_module_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_app_module_appmodule",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "node_path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "static",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_bootstrap",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/main.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "database_database_module",
+      "target": "common",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/database/database.module.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "database_database_module",
+      "target": "pg",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/database/database.module.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "database_database_module",
+      "target": "pg_mem",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/database/database.module.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "database_database_module",
+      "target": "database_database_module_databasemodule",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/database/database.module.ts",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "redis_redis_module",
+      "target": "common",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/redis/redis.module.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "redis_redis_module",
+      "target": "ioredis",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/redis/redis.module.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "redis_redis_module",
+      "target": "redis_redis_module_redismodule",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/redis/redis.module.ts",
+      "source_location": "L24",
+      "weight": 1.0
+    }
+  ],
   "hyperedges": [],
   "input_tokens": 0,
   "output_tokens": 0

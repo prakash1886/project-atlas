@@ -34,7 +34,7 @@ const { Pool } = pg;
         }
 
         // Initialize schema for Project Atlas
-        await pool.query(`
+        let initSql = `
           CREATE TABLE IF NOT EXISTS content_opportunities (
             id SERIAL PRIMARY KEY,
             topic VARCHAR(250) UNIQUE NOT NULL,
@@ -62,7 +62,14 @@ const { Pool } = pg;
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             UNIQUE(source_id, target_id, type)
           );
-        `);
+        `;
+
+        if (!databaseUrl) {
+          // pg-mem does not support pgvector, rewrite type to text
+          initSql = initSql.replace(/vector\(1536\)/g, 'text');
+        }
+
+        await pool.query(initSql);
 
         // Seed Mock Data
         const opportunitiesCount = await pool.query(`SELECT COUNT(*) FROM content_opportunities;`);
