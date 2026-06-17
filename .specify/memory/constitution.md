@@ -43,3 +43,21 @@ To prevent architectural drift and verify feature completeness, all development 
    - Keep functions small, focused, and single-purpose.
    - Preserve all existing comments and docstrings unless explicitly refactoring that code block.
    - Code symbols (classes, functions, types) must be documented inline.
+
+---
+
+## 4. Agent Memory & Local Search Architecture
+
+To ensure zero-token search latency and cross-agent coordination in production, the platform utilizes a file-based Markdown database (Obsidian Vault structure) backed by local vector and graph indexing engines:
+
+1. **Obsidian Vault substrate**:
+   - **Working Memory**: Located at `03_Working_State/Active_Run_State.md` to coordinate current topics, tasks, and budgets.
+   - **Episodic Memory**: Located at `02_Episodic_Ledger/Run_0XX_Report.md` to log metadata (timestamps, variables, status, errors) after every swarm execution.
+   - **Semantic Memory**: Located at `01_Semantic_Base/` using `[[Wiki_Links]]` to define relationships between entities.
+2. **QMD (Quick Markdown Search)**:
+   - Exposes local vector and keyword query endpoints (hybrid search) for agents to query documentation, theories, and historical logs in milliseconds.
+3. **Graphify**:
+   - Compiles Markdown link paths to build the live relational database model (`graph.json`), allowing agents to run pathfinding queries to determine how entities connect.
+4. **Development and Production Alignment**:
+   - *Coding Agents* use QMD & Graphify to query specifications and code the platform.
+   - *Production Swarms* use QMD & Graphify to execute semantic searches and link facts within their own knowledge base.

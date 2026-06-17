@@ -8,3 +8,9 @@ F-003: Chief Editor Agent coordinates work between Research, Fact-Check, and Sto
 [agents/safety]
 F-004: All LLM payloads must be sanitized and monitored for injection. @spec
 F-005: Every agent run must record its duration, cost, and LLM tokens used. @spec @db
+
+[agents/memory]
+F-006: The active execution state must be read and written in 03_Working_State/Active_Run_State.md. @spec
+F-007: Every agent run must write structured episodic logs in 02_Episodic_Ledger/Run_0XX_Report.md. @spec
+F-008: Swarm agents must execute semantic retrieval against the Obsidian vault using QMD search endpoints. @spec
+F-009: Swarm agents must trace node path connections using Graphify pathfinding commands. @spec

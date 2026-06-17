@@ -11,6 +11,10 @@ Establishes the runtime environment for coordinate-based agent activities, utili
 - Queue-based worker execution. (F-002)
 - Coordinator governance and audit logs. (F-003, F-005)
 - LLM prompt sanitization. (F-004)
+- Read/write active orchestration state in working memory. (F-006)
+- Log episodic run details after every swarm execution. (F-007)
+- Retrieve semantic memory via QMD local search queries. (F-008)
+- Traverse concept relationships using Graphify pathfinding. (F-009)
 
 ## 4. Edge Cases
 - Agent loops indefinitely: LangGraph max-iterations rule exits with error.
