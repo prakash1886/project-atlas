@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 
+interface Opportunity {
+  id: number;
+  topic: string;
+  trend_score: number;
+  status: string;
+}
+
 export default function App() {
-  const [opportunities, setOpportunities] = useState<any[]>([]);
+  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
 
   useEffect(() => {
     // Simulated opportunities for frontend fallback

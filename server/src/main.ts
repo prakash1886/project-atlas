@@ -18,6 +18,7 @@ async function bootstrap() {
   });
 
   const httpAdapter = app.getHttpAdapter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   httpAdapter.get('/*', (req: { url?: string }, res: any) => {
     const url = req.url;
     if (url && url.startsWith('/api')) {

@@ -12,7 +12,7 @@ import { Redis } from 'ioredis';
         // We create a mock/fallback client if Redis is unavailable to prevent app crash
         try {
           return new Redis(redisUrl, { lazyConnect: true, maxRetriesPerRequest: 1 });
-        } catch (e) {
+        } catch {
           console.warn('[RedisModule] Redis connection failed, using stub');
           return {};
         }
