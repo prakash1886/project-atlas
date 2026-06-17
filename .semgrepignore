@@ -1,0 +1,8 @@
+scripts/
+e2e/
+node_modules/
+dist/
+dist-server/
+*.spec.ts
+*.spec.js
+index.html

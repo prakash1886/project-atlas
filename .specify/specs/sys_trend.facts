@@ -1,0 +1,11 @@
+# Fact Sheet: Trend Intelligence (SYS-TREND)
+
+[trend/signals]
+F-001: System shall poll Google Trends, Reddit, YouTube, Wikipedia, and RSS feeds for trend signals. @spec @db
+F-002: Ingested raw signals must be cleaned and stored in raw_signals table. @spec @db
+F-003: Rate limits for third-party APIs must be throttled using Redis rate limiters. @spec @cache
+
+[trend/scoring]
+F-004: System calculates a weighted Opportunity Score using: Search (20%), Discussion (15%), Video (15%), Evergreen (15%), Emotional (10%), Competition (10%), Monetization (10%), and Regional (5%). @spec
+F-005: Opportunities scoring above 80 must trigger a notification in the Operator Dashboard. @spec @ui
+F-006: Opportunity records are stored in content_opportunities table with fields: topic, scores, and status. @spec @db

@@ -1,0 +1,14 @@
+language: "en-US"
+reviews:
+  profile: "chill"
+  request_reviews_by_default: true
+  auto_review:
+    enabled: true
+    ignore_paths:
+      - "node_modules/**"
+      - "dist/**"
+      - "dist-server/**"
+      - "*.log"
+      - "public/**"
+      - ".storybook/**"
+  collapse_walkthrough: false

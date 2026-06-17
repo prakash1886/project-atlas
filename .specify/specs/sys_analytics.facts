@@ -1,0 +1,9 @@
+# Fact Sheet: Analytics & Learning Loop (SYS-ANALYTICS)
+
+[analytics/metrics]
+F-001: System shall fetch view counts, CTR, watch time, and retention metrics from the YouTube API daily. @spec
+F-002: Ingested metrics must be stored in video_analytics database table. @spec @db
+
+[analytics/learning]
+F-003: Retention drop-offs must trigger negative feedback weights in prompt generation variables. @spec
+F-004: Performance metrics are combined to adjust the Opportunity Scoring weights dynamically. @spec

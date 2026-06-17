@@ -1,0 +1,9 @@
+# Fact Sheet: [Feature/System Name]
+# Syntax Rules:
+# - Group facts under bracketed sections e.g., [feature/sub-system]
+# - Define facts as single-line, flat, atomic assertions: ID: Statement. @tag1 @tag2
+# - Tags represent lifecycle state (e.g. @draft, @spec, @implemented, @verified) and context (e.g. @db, @ui).
+
+[feature/core]
+F-001: Statement here. @spec
+F-002: Another statement. @spec

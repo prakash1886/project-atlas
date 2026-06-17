@@ -1,0 +1,10 @@
+# Fact Sheet: Knowledge Graph (SYS-GRAPH)
+
+[graph/model]
+F-001: The system shall represent knowledge using Entity nodes and Relationship edges. @spec @db
+F-002: Entity records must include pgvector embeddings for semantic search. @spec @db
+F-003: Relationship types are strictly typed (e.g. FACED, INFLUENCED_BY, PLAYED_FOR). @spec @db
+
+[graph/apis]
+F-004: Graph API must expose semantic similarity endpoints using pgvector cosine distance. @spec
+F-005: Ingesting a new entity automatically triggers semantic linker to identify potential edges. @spec

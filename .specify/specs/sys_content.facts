@@ -1,0 +1,11 @@
+# Fact Sheet: Content Factory (SYS-CONTENT)
+
+[content/generation]
+F-001: The system shall generate four assets per topic: Research Pack, YouTube Script, Blog Article, and Thumbnail Prompts. @spec
+F-002: Programmatic assets must be uploaded to S3-compatible storage with unique hash IDs. @spec @db
+F-003: Video narrations must be generated using ElevenLabs API and stored in S3. @spec
+
+[content/governance]
+F-004: Content status must follow workflow: DRAFT ➔ UNDER_REVIEW ➔ APPROVED ➔ PUBLISHED. @spec @db
+F-005: Every content asset must require manual Human Editor approval before status changes to APPROVED. @spec @ui
+F-006: Asset metadata must reference active licenses for all Envato/Stock elements. @spec @db
