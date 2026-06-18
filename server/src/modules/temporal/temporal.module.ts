@@ -4,10 +4,12 @@ import { DefaultFailureConverter } from '@temporalio/common';
 import { EncryptionCodec } from './crypto/encryption-codec.js';
 import { LlmModule } from '../llm/llm.module.js';
 import { AdAutomationActivities } from './activities/ad-automation.activities.js';
+import { TemporalController } from './temporal.controller.js';
 
 @Global()
 @Module({
   imports: [LlmModule],
+  controllers: [TemporalController],
   providers: [
     AdAutomationActivities,
     {

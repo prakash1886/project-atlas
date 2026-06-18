@@ -720,7 +720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "envato_envato_module",
-      "community": 47,
+      "community": 0,
       "norm_label": "envato.module.ts"
     },
     {
@@ -730,7 +730,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "envato_envato_module_envatomodule",
-      "community": 47,
+      "community": 0,
       "norm_label": "envatomodule"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "envato_envato_service",
-      "community": 47,
+      "community": 0,
       "norm_label": "envato.service.ts"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "envato_envato_service_envatoservice",
-      "community": 47,
+      "community": 0,
       "norm_label": "envatoservice"
     },
     {
@@ -760,7 +760,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "envato_envato_service_envatoservice_constructor",
-      "community": 47,
+      "community": 0,
       "norm_label": ".constructor()"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "envato_envato_service_envatoservice_verifypurchase",
-      "community": 47,
+      "community": 0,
       "norm_label": ".verifypurchase()"
     },
     {
@@ -780,7 +780,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "envato_envato_service_envatoservice_searchcatalog",
-      "community": 47,
+      "community": 0,
       "norm_label": ".searchcatalog()"
     },
     {
@@ -1154,6 +1154,56 @@
       "norm_label": ".decode()"
     },
     {
+      "label": "temporal.controller.ts",
+      "file_type": "code",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "temporal_temporal_controller",
+      "community": 0,
+      "norm_label": "temporal.controller.ts"
+    },
+    {
+      "label": "TemporalClientWithConnection",
+      "file_type": "code",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "temporal_temporal_controller_temporalclientwithconnection",
+      "community": 0,
+      "norm_label": "temporalclientwithconnection"
+    },
+    {
+      "label": "TemporalController",
+      "file_type": "code",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "temporal_temporal_controller_temporalcontroller",
+      "community": 0,
+      "norm_label": "temporalcontroller"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "temporal_temporal_controller_temporalcontroller_constructor",
+      "community": 0,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".getHealth()",
+      "file_type": "code",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "temporal_temporal_controller_temporalcontroller_gethealth",
+      "community": 0,
+      "norm_label": ".gethealth()"
+    },
+    {
       "label": "temporal.module.ts",
       "file_type": "code",
       "source_file": "server/src/modules/temporal/temporal.module.ts",
@@ -1167,7 +1217,7 @@
       "label": "TemporalModule",
       "file_type": "code",
       "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L54",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "temporal_temporal_module_temporalmodule",
       "community": 0,
@@ -5416,9 +5466,9 @@
       "source_file": "server/src/app.module.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_module",
-      "target": "envato_envato_module",
-      "confidence_score": 1.0
+      "target": "envato_envato_module"
     },
     {
       "relation": "imports",
@@ -5427,9 +5477,9 @@
       "source_file": "server/src/app.module.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_app_module",
-      "target": "envato_envato_module_envatomodule",
-      "confidence_score": 1.0
+      "target": "envato_envato_module_envatomodule"
     },
     {
       "relation": "imports_from",
@@ -5566,9 +5616,9 @@
       "source_file": "server/src/modules/envato/envato.module.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_module",
-      "target": "envato_envato_module_envatomodule",
-      "confidence_score": 1.0
+      "target": "envato_envato_module_envatomodule"
     },
     {
       "relation": "imports_from",
@@ -5577,9 +5627,9 @@
       "source_file": "server/src/modules/envato/envato.module.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_module",
-      "target": "envato_envato_service",
-      "confidence_score": 1.0
+      "target": "envato_envato_service"
     },
     {
       "relation": "imports",
@@ -5588,9 +5638,9 @@
       "source_file": "server/src/modules/envato/envato.module.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_module",
-      "target": "envato_envato_service_envatoservice",
-      "confidence_score": 1.0
+      "target": "envato_envato_service_envatoservice"
     },
     {
       "relation": "contains",
@@ -5598,9 +5648,9 @@
       "source_file": "server/src/modules/envato/envato.service.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_service",
-      "target": "envato_envato_service_envatoservice",
-      "confidence_score": 1.0
+      "target": "envato_envato_service_envatoservice"
     },
     {
       "relation": "method",
@@ -5608,9 +5658,9 @@
       "source_file": "server/src/modules/envato/envato.service.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_service_envatoservice",
-      "target": "envato_envato_service_envatoservice_constructor",
-      "confidence_score": 1.0
+      "target": "envato_envato_service_envatoservice_constructor"
     },
     {
       "relation": "method",
@@ -5618,9 +5668,9 @@
       "source_file": "server/src/modules/envato/envato.service.ts",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_service_envatoservice",
-      "target": "envato_envato_service_envatoservice_searchcatalog",
-      "confidence_score": 1.0
+      "target": "envato_envato_service_envatoservice_searchcatalog"
     },
     {
       "relation": "method",
@@ -5628,9 +5678,9 @@
       "source_file": "server/src/modules/envato/envato.service.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "envato_envato_service_envatoservice",
-      "target": "envato_envato_service_envatoservice_verifypurchase",
-      "confidence_score": 1.0
+      "target": "envato_envato_service_envatoservice_verifypurchase"
     },
     {
       "relation": "contains",
@@ -6172,6 +6222,68 @@
       "confidence_score": 1.0,
       "source": "temporal_temporal_module",
       "target": "crypto_encryption_codec_encryptioncodec"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "temporal_temporal_controller",
+      "target": "temporal_temporal_controller_temporalclientwithconnection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "temporal_temporal_controller",
+      "target": "temporal_temporal_controller_temporalcontroller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/temporal/temporal.module.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "temporal_temporal_module",
+      "target": "temporal_temporal_controller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "temporal_temporal_controller_temporalcontroller",
+      "target": "temporal_temporal_controller_temporalcontroller_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/temporal/temporal.controller.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "temporal_temporal_controller_temporalcontroller",
+      "target": "temporal_temporal_controller_temporalcontroller_gethealth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/temporal/temporal.module.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "temporal_temporal_module",
+      "target": "temporal_temporal_controller_temporalcontroller",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7500,9 +7612,9 @@
       "source_file": ".specify/specs/sys_envato.intent.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_intent",
-      "target": "specs_sys_envato_intent_intent_envato_api_mcp_integration_sys_envato",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_intent_intent_envato_api_mcp_integration_sys_envato"
     },
     {
       "relation": "contains",
@@ -7510,9 +7622,9 @@
       "source_file": ".specify/specs/sys_envato.intent.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_intent_intent_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_intent_1_goals",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_intent_1_goals"
     },
     {
       "relation": "contains",
@@ -7520,9 +7632,9 @@
       "source_file": ".specify/specs/sys_envato.intent.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_intent_intent_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_intent_2_constraints",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_intent_2_constraints"
     },
     {
       "relation": "contains",
@@ -7530,9 +7642,9 @@
       "source_file": ".specify/specs/sys_envato.intent.md",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_intent_intent_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_intent_3_success_criteria",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_intent_3_success_criteria"
     },
     {
       "relation": "contains",
@@ -7540,9 +7652,9 @@
       "source_file": ".specify/specs/sys_envato.plan.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_plan",
-      "target": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato"
     },
     {
       "relation": "contains",
@@ -7550,9 +7662,9 @@
       "source_file": ".specify/specs/sys_envato.plan.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_plan_1_system_architecture",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_plan_1_system_architecture"
     },
     {
       "relation": "contains",
@@ -7560,9 +7672,9 @@
       "source_file": ".specify/specs/sys_envato.plan.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_plan_2_technical_decisions",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_plan_2_technical_decisions"
     },
     {
       "relation": "contains",
@@ -7570,9 +7682,9 @@
       "source_file": ".specify/specs/sys_envato.plan.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_plan_3_database_schema_changes",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_plan_3_database_schema_changes"
     },
     {
       "relation": "contains",
@@ -7580,9 +7692,9 @@
       "source_file": ".specify/specs/sys_envato.plan.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_plan_4_file_structure",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_plan_4_file_structure"
     },
     {
       "relation": "contains",
@@ -7590,9 +7702,9 @@
       "source_file": ".specify/specs/sys_envato.plan.md",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_plan_technical_plan_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_plan_5_verification_test_plan",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_plan_5_verification_test_plan"
     },
     {
       "relation": "contains",
@@ -7600,9 +7712,9 @@
       "source_file": ".specify/specs/sys_envato.spec.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_spec",
-      "target": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato"
     },
     {
       "relation": "contains",
@@ -7610,9 +7722,9 @@
       "source_file": ".specify/specs/sys_envato.spec.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_spec_1_overview_goal",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_spec_1_overview_goal"
     },
     {
       "relation": "contains",
@@ -7620,9 +7732,9 @@
       "source_file": ".specify/specs/sys_envato.spec.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_spec_2_user_stories",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_spec_2_user_stories"
     },
     {
       "relation": "contains",
@@ -7630,9 +7742,9 @@
       "source_file": ".specify/specs/sys_envato.spec.md",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_spec_3_functional_requirements",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_spec_3_functional_requirements"
     },
     {
       "relation": "contains",
@@ -7640,9 +7752,9 @@
       "source_file": ".specify/specs/sys_envato.spec.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_spec_4_edge_cases",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_spec_4_edge_cases"
     },
     {
       "relation": "contains",
@@ -7650,9 +7762,9 @@
       "source_file": ".specify/specs/sys_envato.spec.md",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_envato_spec_feature_specification_envato_api_mcp_integration_sys_envato",
-      "target": "specs_sys_envato_spec_5_acceptance_criteria",
-      "confidence_score": 1.0
+      "target": "specs_sys_envato_spec_5_acceptance_criteria"
     },
     {
       "relation": "contains",
@@ -9336,5 +9448,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1e09e019ef8ec5a6b3899b9377d37ea65918882a"
+  "built_at_commit": "c78d1bd5b8e11b71d37db4b688696a2bfab4f4e1"
 }

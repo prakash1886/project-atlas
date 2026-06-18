@@ -1,16 +1,16 @@
 # Graph Report - Project Atlas  (2026-06-18)
 
 ## Corpus Check
-- 62 files · ~14,446 words
+- 63 files · ~14,584 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 476 nodes · 453 edges · 51 communities (45 shown, 6 thin omitted)
+- 481 nodes · 459 edges · 50 communities (45 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1e09e019`
+- Built from commit: `c78d1bd5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -59,7 +59,6 @@
 - [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
-- [[_COMMUNITY_Community 47|Community 47]]
 - [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
@@ -82,11 +81,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (51 total, 6 thin omitted)
+## Communities (50 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.09
-Nodes (11): AdAutomationActivities, EncryptionCodec, DatabaseModule, LlmModule, LlmService, RedisModule, sdk, AppModule (+3 more)
+Cohesion: 0.06
+Nodes (15): AdAutomationActivities, EncryptionCodec, DatabaseModule, EnvatoModule, EnvatoService, LlmModule, LlmService, RedisModule (+7 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.07
@@ -253,9 +252,9 @@ Cohesion: 0.40
 Nodes (4): 1. Goals, 2. Constraints, 3. Success Criteria, Intent: Envato API & MCP Integration (SYS-ENVATO)
 
 ## Knowledge Gaps
-- **303 isolated node(s):** `options`, `name`, `private`, `version`, `type` (+298 more)
+- **304 isolated node(s):** `options`, `name`, `private`, `version`, `type` (+299 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -265,9 +264,9 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `scripts` connect `Community 8` to `Community 5`?**
   _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `options`, `name`, `private` to the rest of the system?**
-  _310 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _311 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.09206349206349207 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06471631205673758 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
