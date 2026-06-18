@@ -1,16 +1,16 @@
 # Graph Report - Project Atlas  (2026-06-18)
 
 ## Corpus Check
-- 57 files · ~13,674 words
+- 62 files · ~14,446 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 450 nodes · 428 edges · 47 communities (42 shown, 5 thin omitted)
+- 476 nodes · 453 edges · 51 communities (45 shown, 6 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9c93e03b`
+- Built from commit: `1e09e019`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -59,6 +59,10 @@
 - [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 49|Community 49]]
+- [[_COMMUNITY_Community 50|Community 50]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 17 edges
@@ -78,7 +82,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (47 total, 5 thin omitted)
+## Communities (51 total, 6 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.09
@@ -236,20 +240,32 @@ Nodes (4): 1. Goals, 2. Constraints, 3. Success Criteria, Intent: Temporal Orche
 Cohesion: 0.12
 Nodes (12): compliance_guardrail(), Gemma4InferenceEngine, generate_ad_variations(), ghl_webhook_receiver(), Runs instantly (<2 seconds) on every incoming serverless burst invocation, Processes lead/ad performance logs and routes dynamically, Weekly deep reasoning task that runs at midnight Sunday to analyze multi-platfor, Extracts GHL metadata instantly and decides whether to trigger GPU inference (+4 more)
 
+### Community 48 - "Community 48"
+Cohesion: 0.29
+Nodes (6): 1. System Architecture, 2. Technical Decisions, 3. Database & Schema Changes, 4. File Structure, 5. Verification & Test Plan, Technical Plan: Envato API & MCP Integration (SYS-ENVATO)
+
+### Community 49 - "Community 49"
+Cohesion: 0.29
+Nodes (6): 1. Overview & Goal, 2. User Stories, 3. Functional Requirements, 4. Edge Cases, 5. Acceptance Criteria, Feature Specification: Envato API & MCP Integration (SYS-ENVATO)
+
+### Community 50 - "Community 50"
+Cohesion: 0.40
+Nodes (4): 1. Goals, 2. Constraints, 3. Success Criteria, Intent: Envato API & MCP Integration (SYS-ENVATO)
+
 ## Knowledge Gaps
-- **290 isolated node(s):** `options`, `name`, `private`, `version`, `type` (+285 more)
+- **303 isolated node(s):** `options`, `name`, `private`, `version`, `type` (+298 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `Community 3` to `Community 5`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Why does `scripts` connect `Community 8` to `Community 5`?**
   _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `options`, `name`, `private` to the rest of the system?**
-  _297 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _310 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09206349206349207 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**

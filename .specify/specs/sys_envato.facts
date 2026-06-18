@@ -1,0 +1,10 @@
+# Fact Sheet: Envato API & MCP Integration (SYS-ENVATO)
+
+[envato/api]
+F-001: The system shall query the Envato API (build.envato.com) to search stock graphics, templates, and audio. @spec
+F-002: The Envato client must authorize requests using a secure personal token or OAuth2 client credentials. @spec @security
+F-003: Ingested assets from Envato must record their license key, item ID, and purchase timestamp. @spec @db
+
+[envato/mcp]
+F-004: The system shall support registering the Envato MCP Server (mcp.envato.com/mcp) to enable direct catalog search in AI chats. @spec
+F-005: AI agents shall use the Envato MCP tools to discover stock art matching current trend keywords in real-time. @spec
