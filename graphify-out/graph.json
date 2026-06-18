@@ -1,182 +1,6 @@
 {
   "nodes": [
     {
-      "id": "server_otel",
-      "label": "otel.ts",
-      "file_type": "code",
-      "source_file": "server/otel.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "server_otel_sdk",
-      "label": "sdk",
-      "file_type": "code",
-      "source_file": "server/otel.ts",
-      "source_location": "L7",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_app_module",
-      "label": "app.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_app_module_appmodule",
-      "label": "AppModule",
-      "file_type": "code",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L17",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_main",
-      "label": "main.ts",
-      "file_type": "code",
-      "source_file": "server/src/main.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_main_bootstrap",
-      "label": "bootstrap()",
-      "file_type": "code",
-      "source_file": "server/src/main.ts",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "database_database_module",
-      "label": "database.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/database/database.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "database_database_module_databasemodule",
-      "label": "DatabaseModule",
-      "file_type": "code",
-      "source_file": "server/src/modules/database/database.module.ts",
-      "source_location": "L102",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_module",
-      "label": "envato.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_module_envatomodule",
-      "label": "EnvatoModule",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.module.ts",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_service",
-      "label": "envato.service.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_service_envatoservice",
-      "label": "EnvatoService",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L4",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_service_envatoservice_constructor",
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_service_envatoservice_verifypurchase",
-      "label": ".verifyPurchase()",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L16",
-      "_origin": "ast"
-    },
-    {
-      "id": "envato_envato_service_envatoservice_searchcatalog",
-      "label": ".searchCatalog()",
-      "file_type": "code",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L47",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_module",
-      "label": "llm.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_module_llmmodule",
-      "label": "LlmModule",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.module.ts",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_service",
-      "label": "llm.service.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_service_llmservice",
-      "label": "LlmService",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L5",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_service_llmservice_constructor",
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L9",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_service_llmservice_generatetext",
-      "label": ".generateText()",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L26",
-      "_origin": "ast"
-    },
-    {
-      "id": "llm_llm_service_llmservice_generateimage",
-      "label": ".generateImage()",
-      "file_type": "code",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L52",
-      "_origin": "ast"
-    },
-    {
       "id": "modal_app",
       "label": "app.py",
       "file_type": "code",
@@ -189,7 +13,7 @@
       "label": "ghl_webhook_receiver()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L25",
+      "source_location": "L26",
       "_origin": "ast"
     },
     {
@@ -197,7 +21,7 @@
       "label": "compliance_guardrail()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L43",
+      "source_location": "L44",
       "_origin": "ast"
     },
     {
@@ -205,7 +29,7 @@
       "label": "generate_ad_variations()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L58",
+      "source_location": "L59",
       "_origin": "ast"
     },
     {
@@ -213,7 +37,7 @@
       "label": "Gemma4InferenceEngine",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L88",
+      "source_location": "L89",
       "_origin": "ast"
     },
     {
@@ -221,7 +45,7 @@
       "label": ".freeze_runtime_state()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L91",
+      "source_location": "L92",
       "_origin": "ast"
     },
     {
@@ -229,7 +53,7 @@
       "label": ".wake_engine()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L117",
+      "source_location": "L118",
       "_origin": "ast"
     },
     {
@@ -237,7 +61,15 @@
       "label": ".analyze_and_route()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L123",
+      "source_location": "L124",
+      "_origin": "ast"
+    },
+    {
+      "id": "modal_app_gemma4inferenceengine_openai_proxy",
+      "label": ".openai_proxy()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L131",
       "_origin": "ast"
     },
     {
@@ -245,731 +77,67 @@
       "label": "weekly_ad_audit()",
       "file_type": "code",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L131",
+      "source_location": "L167",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_26",
+      "id": "modal_app_rationale_27",
       "label": "Extracts GHL metadata instantly and decides whether to trigger GPU inference",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_44",
+      "id": "modal_app_rationale_45",
       "label": "Runs ShieldGemma locally on a cost-effective T4 GPU to verify safety/policies",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_59",
+      "id": "modal_app_rationale_60",
       "label": "Runs creative copy generation on L4. High token-per-second output speeds up runt",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_92",
+      "id": "modal_app_rationale_93",
       "label": "Runs ONLY once during image build / snapshot capture.         Pre-loads the mod",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L92",
+      "source_location": "L93",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_118",
+      "id": "modal_app_rationale_119",
       "label": "Runs instantly (<2 seconds) on every incoming serverless burst invocation",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L118",
+      "source_location": "L119",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_124",
+      "id": "modal_app_rationale_125",
       "label": "Processes lead/ad performance logs and routes dynamically",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L124",
+      "source_location": "L125",
       "_origin": "ast"
     },
     {
-      "id": "modal_app_rationale_132",
+      "id": "modal_app_rationale_168",
       "label": "Weekly deep reasoning task that runs at midnight Sunday to analyze multi-platfor",
       "file_type": "rationale",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L132",
-      "_origin": "ast"
-    },
-    {
-      "id": "redis_redis_module",
-      "label": "redis.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "redis_redis_module_redismodule",
-      "label": "RedisModule",
-      "file_type": "code",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L24",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities",
-      "label": "ad-automation.activities.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities_adautomationactivities",
-      "label": "AdAutomationActivities",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L5",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities_adautomationactivities_constructor",
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities_adautomationactivities_scantrends",
-      "label": ".scanTrends()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L10",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities_adautomationactivities_generateadcontent",
-      "label": ".generateAdContent()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L15",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities_adautomationactivities_registerprintondemand",
-      "label": ".registerPrintOnDemand()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L25",
-      "_origin": "ast"
-    },
-    {
-      "id": "activities_ad_automation_activities_adautomationactivities_publishtoshopify",
-      "label": ".publishToShopify()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L31",
-      "_origin": "ast"
-    },
-    {
-      "id": "crypto_encryption_codec",
-      "label": "encryption-codec.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "crypto_encryption_codec_encryptioncodec",
-      "label": "EncryptionCodec",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L4",
-      "_origin": "ast"
-    },
-    {
-      "id": "crypto_encryption_codec_encryptioncodec_constructor",
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "crypto_encryption_codec_encryptioncodec_encode",
-      "label": ".encode()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L12",
-      "_origin": "ast"
-    },
-    {
-      "id": "crypto_encryption_codec_encryptioncodec_decode",
-      "label": ".decode()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L40",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_controller",
-      "label": "temporal.controller.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_controller_temporalclientwithconnection",
-      "label": "TemporalClientWithConnection",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L4",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_controller_temporalcontroller",
-      "label": "TemporalController",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L13",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_controller_temporalcontroller_constructor",
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L14",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_controller_temporalcontroller_gethealth",
-      "label": ".getHealth()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L20",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_module",
-      "label": "temporal.module.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "temporal_temporal_module_temporalmodule",
-      "label": "TemporalModule",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L56",
-      "_origin": "ast"
-    },
-    {
-      "id": "workflows_ad_automation_workflow",
-      "label": "ad-automation.workflow.ts",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "workflows_ad_automation_workflow_scantrends_generateadcontent_registerprintondemand_publishtoshopify",
-      "label": "{ scanTrends, generateAdContent, registerPrintOnDemand, publishToShopify }",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L4",
-      "_origin": "ast"
-    },
-    {
-      "id": "workflows_ad_automation_workflow_adautomationworkflow",
-      "label": "adAutomationWorkflow()",
-      "file_type": "code",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L9",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_worker",
-      "label": "worker.ts",
-      "file_type": "code",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L1",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_worker_bootstrap",
-      "label": "bootstrap()",
-      "file_type": "code",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L9",
+      "source_location": "L168",
       "_origin": "ast"
     }
   ],
   "edges": [
-    {
-      "source": "server_otel",
-      "target": "sdk_node",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/otel.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_otel",
-      "target": "auto_instrumentations_node",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/otel.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "server_otel",
-      "target": "exporter_trace_otlp_http",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/otel.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_otel",
-      "target": "server_otel_sdk",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/otel.ts",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "database_database_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "database_database_module_databasemodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "redis_redis_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "redis_redis_module_redismodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "temporal_temporal_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "temporal_temporal_module_temporalmodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "llm_llm_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "llm_llm_module_llmmodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "envato_envato_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "envato_envato_module_envatomodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_module",
-      "target": "src_app_module_appmodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/app.module.ts",
-      "source_location": "L17",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "server_otel",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "core",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "platform_fastify",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_app_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_app_module_appmodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "node_path",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "static",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "src_main",
-      "target": "src_main_bootstrap",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/main.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "database_database_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/database/database.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "database_database_module",
-      "target": "pg",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/database/database.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "database_database_module",
-      "target": "pg_mem",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/database/database.module.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "database_database_module",
-      "target": "database_database_module_databasemodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/database/database.module.ts",
-      "source_location": "L102",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_module",
-      "target": "envato_envato_service",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_module",
-      "target": "envato_envato_service_envatoservice",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_module",
-      "target": "envato_envato_module_envatomodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.module.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_service",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_service",
-      "target": "envato_envato_service_envatoservice",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_service_envatoservice",
-      "target": "envato_envato_service_envatoservice_constructor",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_service_envatoservice",
-      "target": "envato_envato_service_envatoservice_verifypurchase",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "envato_envato_service_envatoservice",
-      "target": "envato_envato_service_envatoservice_searchcatalog",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/envato/envato.service.ts",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_module",
-      "target": "llm_llm_service",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_module",
-      "target": "llm_llm_service_llmservice",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_module",
-      "target": "llm_llm_module_llmmodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.module.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_service",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_service",
-      "target": "openai",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_service",
-      "target": "llm_llm_service_llmservice",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_service_llmservice",
-      "target": "llm_llm_service_llmservice_constructor",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_service_llmservice",
-      "target": "llm_llm_service_llmservice_generatetext",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L26",
-      "weight": 1.0
-    },
-    {
-      "source": "llm_llm_service_llmservice",
-      "target": "llm_llm_service_llmservice_generateimage",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/llm/llm.service.ts",
-      "source_location": "L52",
-      "weight": 1.0
-    },
     {
       "source": "modal_app",
       "target": "os",
@@ -1003,7 +171,7 @@
     {
       "source": "modal_app",
       "target": "modal",
-      "relation": "imports_from",
+      "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
@@ -1012,11 +180,21 @@
     },
     {
       "source": "modal_app",
+      "target": "modal",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "modal_app",
       "target": "modal_app_ghl_webhook_receiver",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -1025,7 +203,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -1034,7 +212,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L58",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -1043,7 +221,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L88",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -1052,7 +230,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -1061,7 +239,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L117",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -1070,7 +248,16 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L123",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "modal_app_gemma4inferenceengine",
+      "target": "modal_app_gemma4inferenceengine_openai_proxy",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -1079,615 +266,70 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L131",
+      "source_location": "L167",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_26",
+      "source": "modal_app_rationale_27",
       "target": "modal_app_ghl_webhook_receiver",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_44",
+      "source": "modal_app_rationale_45",
       "target": "modal_app_compliance_guardrail",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_59",
+      "source": "modal_app_rationale_60",
       "target": "modal_app_generate_ad_variations",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L59",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_92",
+      "source": "modal_app_rationale_93",
       "target": "modal_app_gemma4inferenceengine_freeze_runtime_state",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_118",
+      "source": "modal_app_rationale_119",
       "target": "modal_app_gemma4inferenceengine_wake_engine",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_124",
+      "source": "modal_app_rationale_125",
       "target": "modal_app_gemma4inferenceengine_analyze_and_route",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L124",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
-      "source": "modal_app_rationale_132",
+      "source": "modal_app_rationale_168",
       "target": "modal_app_weekly_ad_audit",
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "server/src/modules/llm/modal/app.py",
-      "source_location": "L132",
-      "weight": 1.0
-    },
-    {
-      "source": "redis_redis_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "redis_redis_module",
-      "target": "ioredis",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "redis_redis_module",
-      "target": "redis_redis_module_redismodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/redis/redis.module.ts",
-      "source_location": "L24",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities",
-      "target": "llm_llm_service",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities",
-      "target": "llm_llm_service_llmservice",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities",
-      "target": "activities_ad_automation_activities_adautomationactivities",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities_adautomationactivities",
-      "target": "activities_ad_automation_activities_adautomationactivities_constructor",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities_adautomationactivities",
-      "target": "activities_ad_automation_activities_adautomationactivities_scantrends",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities_adautomationactivities",
-      "target": "activities_ad_automation_activities_adautomationactivities_generateadcontent",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L15",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities_adautomationactivities",
-      "target": "activities_ad_automation_activities_adautomationactivities_registerprintondemand",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L25",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities_adautomationactivities",
-      "target": "activities_ad_automation_activities_adautomationactivities_publishtoshopify",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "crypto_encryption_codec",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "crypto_encryption_codec",
-      "target": "crypto",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "crypto_encryption_codec",
-      "target": "crypto_encryption_codec_encryptioncodec",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "crypto_encryption_codec_encryptioncodec",
-      "target": "crypto_encryption_codec_encryptioncodec_constructor",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "crypto_encryption_codec_encryptioncodec",
-      "target": "crypto_encryption_codec_encryptioncodec_encode",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "crypto_encryption_codec_encryptioncodec",
-      "target": "crypto_encryption_codec_encryptioncodec_decode",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/crypto/encryption-codec.ts",
-      "source_location": "L40",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_controller",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_controller",
-      "target": "fastify",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_controller",
-      "target": "temporal_temporal_controller_temporalclientwithconnection",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_controller",
-      "target": "temporal_temporal_controller_temporalcontroller",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_controller_temporalcontroller",
-      "target": "temporal_temporal_controller_temporalcontroller_constructor",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_controller_temporalcontroller",
-      "target": "temporal_temporal_controller_temporalcontroller_gethealth",
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.controller.ts",
-      "source_location": "L20",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "client",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "crypto_encryption_codec",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "crypto_encryption_codec_encryptioncodec",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "llm_llm_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "llm_llm_module_llmmodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "activities_ad_automation_activities",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "activities_ad_automation_activities_adautomationactivities",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "temporal_temporal_controller",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "temporal_temporal_controller_temporalcontroller",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "temporal_temporal_module",
-      "target": "temporal_temporal_module_temporalmodule",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/temporal.module.ts",
-      "source_location": "L56",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow",
-      "target": "workflow",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow",
-      "target": "activities_ad_automation_activities",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow",
-      "target": "activities_ad_automation_activities_adautomationactivities",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow",
-      "target": "workflows_ad_automation_workflow_scantrends_generateadcontent_registerprintondemand_publishtoshopify",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow",
-      "target": "workflows_ad_automation_workflow_adautomationworkflow",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "core",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "src_app_module",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "src_app_module_appmodule",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "worker",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "common",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "url",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "activities_ad_automation_activities",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "activities_ad_automation_activities_adautomationactivities",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "crypto_encryption_codec",
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "crypto_encryption_codec_encryptioncodec",
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "src_worker",
-      "target": "src_worker_bootstrap",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/worker.ts",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "activities_ad_automation_activities_adautomationactivities_constructor",
-      "target": "llm_llm_service_llmservice",
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "server/src/modules/temporal/activities/ad-automation.activities.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow_adautomationworkflow",
-      "target": "activities_ad_automation_activities_adautomationactivities_scantrends",
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow_adautomationworkflow",
-      "target": "activities_ad_automation_activities_adautomationactivities_generateadcontent",
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow_adautomationworkflow",
-      "target": "activities_ad_automation_activities_adautomationactivities_registerprintondemand",
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L17",
-      "weight": 1.0
-    },
-    {
-      "source": "workflows_ad_automation_workflow_adautomationworkflow",
-      "target": "activities_ad_automation_activities_adautomationactivities_publishtoshopify",
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/src/modules/temporal/workflows/ad-automation.workflow.ts",
-      "source_location": "L20",
+      "source_location": "L168",
       "weight": 1.0
     }
   ],

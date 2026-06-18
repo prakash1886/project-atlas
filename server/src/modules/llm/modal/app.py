@@ -1,6 +1,7 @@
 import os
 import time
 import subprocess
+import modal
 from modal import App, Image, Volume, web_endpoint, gpu, Cron
 
 # 1. Build a lightning-fast image with pre-installed vLLM dependencies
@@ -125,6 +126,41 @@ class Gemma4InferenceEngine:
         Processes lead/ad performance logs and routes dynamically
         """
         return {"status": "success", "agent_decision": "LOGGED_AND_ROUTED"}
+
+    @modal.asgi_app()
+    def openai_proxy(self):
+        from fastapi import FastAPI, Request
+        from fastapi.responses import StreamingResponse
+        import httpx
+
+        web_app = FastAPI()
+        client = httpx.AsyncClient(base_url="http://localhost:8000", timeout=120.0)
+
+        @web_app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
+        async def proxy(request: Request, path: str):
+            body = await request.body()
+            
+            # Forward headers, discarding host
+            headers = dict(request.headers)
+            headers.pop("host", None)
+            
+            # Route request to local vLLM server
+            req = client.build_request(
+                method=request.method,
+                url=f"/{path}",
+                headers=headers,
+                content=body,
+                params=request.query_params
+            )
+            res = await client.send(req, stream=True)
+            
+            return StreamingResponse(
+                res.aiter_raw(),
+                status_code=res.status_code,
+                headers=dict(res.headers)
+            )
+
+        return web_app
 
 # 5. Scheduled Analytics Audit - Runs once a week at midnight Sunday on A10G
 @app.function(gpu=gpu.A10G(), schedule=Cron("0 0 * * 0"), image=vllm_image)
