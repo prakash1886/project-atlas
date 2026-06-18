@@ -1,0 +1,14 @@
+# Fact Sheet: Temporal Orchestration & Modal Integration (SYS-TEMPORAL)
+
+[temporal/orchestration]
+F-001: The orchestration engine must use Temporal.io to manage stateful, long-running agent workflows. @verified
+F-002: Workflow clients must connect securely via the NestJS TemporalModule provider. @verified
+F-003: A standalone Worker must boot using the NestJS application context and poll task queues. @verified
+
+[temporal/security]
+F-004: All workflow payloads, including inputs, outputs, and query variables, must be encrypted with AES-256-GCM using client-side PayloadCodecs. @verified @security
+F-005: Failure messages and stack traces must be masked in the Temporal Web UI by encoding common failure attributes through the encryption codec. @verified @security
+
+[modal/inference]
+F-006: LLM inference requests must bridge to specialized Gemma 4 and DiffusionGemma models hosted on Modal. @verified
+F-007: Connections to Modal models must use an OpenAI-compatible client library with bearer token authorization. @verified
