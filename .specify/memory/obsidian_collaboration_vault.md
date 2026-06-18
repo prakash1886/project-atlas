@@ -100,5 +100,43 @@ Using Markdown cross-linking to create a native, visual knowledge graph.
 ---
 
 ## 4. Why this matches QMD & Graphify
+
 1.  **QMD Local Indexing**: QMD indexes the entire `.specify/vault/` folder. Agents can run semantic vector searches locally (`qmd query "clay evaporation"`) to query the Semantic Base in milliseconds.
 2.  **Graphify Structural Resolution**: Because Obsidian notes are linked via `[[Wikilinks]]`, Graphify parses these markdown link relationships programmatically (treating them as edges) and renders them in `graph.json` and `graph.html`.
+
+---
+
+## 5. Centralized Production Layer & Local Synergy Loop
+
+To scale the platform beyond local file execution, Project Atlas integrates the local Markdown Obsidian Vault with a centralized PostgreSQL production database engine.
+
+```
+           [ Runtime Swarms / sys_graph ]
+               │                 │
+               ▼ (openCypher)    ▼ (SQL / Vectors)
+         ┌────────────┐    ┌─────────────────┐
+         │ Apache AGE │    │    Pgvector     │
+         │ Graph DB   │    │ & PG Text Search│
+         └─────┬──────┘    └────────┬────────┘
+               │                    │
+               └─────────┬──────────┘
+                         ▼ (Periodic Sync)
+               ┌────────────────────┐
+               │   Obsidian Vault   │ <─── [ QMD / Graphify ]
+               │  (Markdown Docs)   │      (Local Dev Search)
+               └────────────────────┘
+```
+
+### A. Centralized Production Engines (PostgreSQL)
+*   **Apache AGE**: Extends PostgreSQL to support graph queries. Live runtime agents (`sys_graph` and `sys_agents`) store and traverse relational nodes (people, events, products, trends) in the production database using the **openCypher** query language.
+*   **Pgvector**: Stores high-dimensional embeddings (e.g. 1536-dimension vectors) of entity summaries and opportunity metadata in PostgreSQL, enabling semantic similarity checks (`<=>` cosine distance).
+*   **PG Text Search**: Provides lexical search (`to_tsvector` and `to_tsquery`) to ensure proper nouns, exact keywords, and codes are never missed in search queries.
+
+### B. The Synchronization and Synergy Loop
+1.  **Dynamic Learning Ingestion**: When the runtime agent swarm (`sys_trend`) discovers new trending entities, they are saved as nodes and edges in **Apache AGE** on the production server.
+2.  **Obsidian Markdown Generation**: A background sync service periodically exports active subgraphs from Apache AGE into the `.specify/vault/01_Semantic_Base/Entities/` directory as markdown files, fully cross-linked using standard `[[Wikilinks]]`.
+3.  **Local Indexing & Search**:
+    *   **QMD** instantly embeds and indexes these new files, giving developer coding agents zero-token local RAG capabilities.
+    *   **Graphify** reads the structural files to keep codebase mapping current.
+    *   The human operator can open the Obsidian desktop app to visually audit the live, expanding production knowledge graph.
+4.  **Evergreen Updates**: Manual changes or corrections made by humans in their local Obsidian Vault are parsed and merged back into the production **Apache AGE** and **Pgvector** tables, maintaining a perfect human-in-the-loop validation cycle.
