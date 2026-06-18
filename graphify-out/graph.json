@@ -784,6 +784,166 @@
       "norm_label": ".generateimage()"
     },
     {
+      "label": "app.py",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "modal_app",
+      "community": 46,
+      "norm_label": "app.py"
+    },
+    {
+      "label": "ghl_webhook_receiver()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "modal_app_ghl_webhook_receiver",
+      "community": 46,
+      "norm_label": "ghl_webhook_receiver()"
+    },
+    {
+      "label": "compliance_guardrail()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "modal_app_compliance_guardrail",
+      "community": 46,
+      "norm_label": "compliance_guardrail()"
+    },
+    {
+      "label": "generate_ad_variations()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "modal_app_generate_ad_variations",
+      "community": 46,
+      "norm_label": "generate_ad_variations()"
+    },
+    {
+      "label": "Gemma4InferenceEngine",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "modal_app_gemma4inferenceengine",
+      "community": 46,
+      "norm_label": "gemma4inferenceengine"
+    },
+    {
+      "label": ".freeze_runtime_state()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "modal_app_gemma4inferenceengine_freeze_runtime_state",
+      "community": 46,
+      "norm_label": ".freeze_runtime_state()"
+    },
+    {
+      "label": ".wake_engine()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "modal_app_gemma4inferenceengine_wake_engine",
+      "community": 46,
+      "norm_label": ".wake_engine()"
+    },
+    {
+      "label": ".analyze_and_route()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L123",
+      "_origin": "ast",
+      "id": "modal_app_gemma4inferenceengine_analyze_and_route",
+      "community": 46,
+      "norm_label": ".analyze_and_route()"
+    },
+    {
+      "label": "weekly_ad_audit()",
+      "file_type": "code",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "modal_app_weekly_ad_audit",
+      "community": 46,
+      "norm_label": "weekly_ad_audit()"
+    },
+    {
+      "label": "Extracts GHL metadata instantly and decides whether to trigger GPU inference",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "modal_app_rationale_26",
+      "community": 46,
+      "norm_label": "extracts ghl metadata instantly and decides whether to trigger gpu inference"
+    },
+    {
+      "label": "Runs ShieldGemma locally on a cost-effective T4 GPU to verify safety/policies",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "modal_app_rationale_44",
+      "community": 46,
+      "norm_label": "runs shieldgemma locally on a cost-effective t4 gpu to verify safety/policies"
+    },
+    {
+      "label": "Runs creative copy generation on L4. High token-per-second output speeds up runt",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "modal_app_rationale_59",
+      "community": 46,
+      "norm_label": "runs creative copy generation on l4. high token-per-second output speeds up runt"
+    },
+    {
+      "label": "Runs ONLY once during image build / snapshot capture.         Pre-loads the mode",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "modal_app_rationale_92",
+      "community": 46,
+      "norm_label": "runs only once during image build / snapshot capture.         pre-loads the mode"
+    },
+    {
+      "label": "Runs instantly (<2 seconds) on every incoming serverless burst invocation",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "modal_app_rationale_118",
+      "community": 46,
+      "norm_label": "runs instantly (<2 seconds) on every incoming serverless burst invocation"
+    },
+    {
+      "label": "Processes lead/ad performance logs and routes dynamically",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L124",
+      "_origin": "ast",
+      "id": "modal_app_rationale_124",
+      "community": 46,
+      "norm_label": "processes lead/ad performance logs and routes dynamically"
+    },
+    {
+      "label": "Weekly deep reasoning task that runs at midnight Sunday to analyze multi-platfor",
+      "file_type": "rationale",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L132",
+      "_origin": "ast",
+      "id": "modal_app_rationale_132",
+      "community": 46,
+      "norm_label": "weekly deep reasoning task that runs at midnight sunday to analyze multi-platfor"
+    },
+    {
       "label": "redis.module.ts",
       "file_type": "code",
       "source_file": "server/src/modules/redis/redis.module.ts",
@@ -2777,7 +2937,7 @@
       "label": "5. Verification Plan",
       "file_type": "document",
       "source_file": ".specify/specs/sys_temporal.plan.md",
-      "source_location": "L37",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "specs_sys_temporal_plan_5_verification_plan",
       "community": 43,
@@ -2837,7 +2997,7 @@
       "label": "4. Edge Cases",
       "file_type": "document",
       "source_file": ".specify/specs/sys_temporal.spec.md",
-      "source_location": "L17",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "specs_sys_temporal_spec_4_edge_cases",
       "community": 44,
@@ -2847,7 +3007,7 @@
       "label": "5. Acceptance Criteria",
       "file_type": "document",
       "source_file": ".specify/specs/sys_temporal.spec.md",
-      "source_location": "L21",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "specs_sys_temporal_spec_5_acceptance_criteria",
       "community": 44,
@@ -4114,10 +4274,50 @@
       "norm_label": "**1.3.2 frontmatter metadata specification**"
     },
     {
-      "label": "**SECTION 2: Scientific & Engineering Models (Equations & Constraints)**",
+      "label": "**1.4 Cost-Optimized Serverless GPU Inference (Modal.com)**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
       "source_location": "L96",
+      "_origin": "ast",
+      "id": "system_and_frontend_app_specifications_1_4_cost_optimized_serverless_gpu_inference_modal_com",
+      "community": 2,
+      "norm_label": "**1.4 cost-optimized serverless gpu inference (modal.com)**"
+    },
+    {
+      "label": "**1.4.1 The Low-Cost Modal Resource Matrix**",
+      "file_type": "document",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "system_and_frontend_app_specifications_1_4_1_the_low_cost_modal_resource_matrix",
+      "community": 2,
+      "norm_label": "**1.4.1 the low-cost modal resource matrix**"
+    },
+    {
+      "label": "**1.4.2 Strategic Routing Architecture**",
+      "file_type": "document",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "system_and_frontend_app_specifications_1_4_2_strategic_routing_architecture",
+      "community": 2,
+      "norm_label": "**1.4.2 strategic routing architecture**"
+    },
+    {
+      "label": "**1.4.3 Cold Start Optimization via GPU Snapshots & Sleep Mode**",
+      "file_type": "document",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "system_and_frontend_app_specifications_1_4_3_cold_start_optimization_via_gpu_snapshots_sleep_mode",
+      "community": 2,
+      "norm_label": "**1.4.3 cold start optimization via gpu snapshots & sleep mode**"
+    },
+    {
+      "label": "**SECTION 2: Scientific & Engineering Models (Equations & Constraints)**",
+      "file_type": "document",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L123",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_section_2_scientific_engineering_models_equations_constraints",
       "community": 2,
@@ -4127,7 +4327,7 @@
       "label": "**2.1 Thermodynamic & Psychrometric Models**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L100",
+      "source_location": "L127",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_2_1_thermodynamic_psychrometric_models",
       "community": 2,
@@ -4137,7 +4337,7 @@
       "label": "**2.1.1 Wet-Bulb Temperature (![][image2]) Approximation (Stull Equation)**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L104",
+      "source_location": "L131",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_2_1_1_wet_bulb_temperature_image2_approximation_stull_equation",
       "community": 2,
@@ -4147,7 +4347,7 @@
       "label": "**![][image7]2.1.2 Evaporation Mass Flow Rate (![][image8])**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L108",
+      "source_location": "L135",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_image7_2_1_2_evaporation_mass_flow_rate_image8",
       "community": 2,
@@ -4157,7 +4357,7 @@
       "label": "**2.2 Fluid Dynamics & Aerodynamics Models**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L119",
+      "source_location": "L146",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_2_2_fluid_dynamics_aerodynamics_models",
       "community": 2,
@@ -4167,7 +4367,7 @@
       "label": "**2.2.1 Free Area Ratio (![][image14])**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L123",
+      "source_location": "L150",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_2_2_1_free_area_ratio_image14",
       "community": 2,
@@ -4177,7 +4377,7 @@
       "label": "**![][image15]2.2.2 Static Pressure Drop (![][image16])**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L127",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_image15_2_2_2_static_pressure_drop_image16",
       "community": 2,
@@ -4187,7 +4387,7 @@
       "label": "**2.3 Acoustics & Vibration Models**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L140",
+      "source_location": "L167",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_2_3_acoustics_vibration_models",
       "community": 2,
@@ -4197,7 +4397,7 @@
       "label": "**2.3.1 Fan Acoustic Power Level (![][image25]) Scaling**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L144",
+      "source_location": "L171",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_2_3_1_fan_acoustic_power_level_image25_scaling",
       "community": 2,
@@ -4207,7 +4407,7 @@
       "label": "**![][image27]2.3.2 Non-Symmetrical Blade Spacing**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L148",
+      "source_location": "L175",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_image27_2_3_2_non_symmetrical_blade_spacing",
       "community": 2,
@@ -4217,7 +4417,7 @@
       "label": "**SECTION 3: Frontend Application Specifications**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L154",
+      "source_location": "L181",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_section_3_frontend_application_specifications",
       "community": 2,
@@ -4227,7 +4427,7 @@
       "label": "**3.1 Tech Stack Requirements**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L177",
+      "source_location": "L204",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_3_1_tech_stack_requirements",
       "community": 2,
@@ -4237,7 +4437,7 @@
       "label": "**3.2 Core Component Specifications**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L185",
+      "source_location": "L212",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_3_2_core_component_specifications",
       "community": 2,
@@ -4247,7 +4447,7 @@
       "label": "**3.2.1 Component 1: The Interactive Digital Twin (Canvas)**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L187",
+      "source_location": "L214",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_3_2_1_component_1_the_interactive_digital_twin_canvas",
       "community": 2,
@@ -4257,7 +4457,7 @@
       "label": "**3.2.2 Component 2: The Obsidian Force-Directed Graph**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L197",
+      "source_location": "L224",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_3_2_2_component_2_the_obsidian_force_directed_graph",
       "community": 2,
@@ -4267,7 +4467,7 @@
       "label": "**3.2.3 Component 3: Performance & Optimization Charts**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L208",
+      "source_location": "L235",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_3_2_3_component_3_performance_optimization_charts",
       "community": 2,
@@ -4277,7 +4477,7 @@
       "label": "**SECTION 4: Design for Assembly (DFA) & Design for Maintenance (DFM) Guidelines**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L215",
+      "source_location": "L242",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_section_4_design_for_assembly_dfa_design_for_maintenance_dfm_guidelines",
       "community": 2,
@@ -4287,7 +4487,7 @@
       "label": "**4.1 Modular Cassette Slide System**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L219",
+      "source_location": "L246",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_4_1_modular_cassette_slide_system",
       "community": 2,
@@ -4297,7 +4497,7 @@
       "label": "**4.2 Fluid-Electrical Zoning (Poka-Yoke & Safety)**",
       "file_type": "document",
       "source_file": "System and Frontend App Specifications.md",
-      "source_location": "L224",
+      "source_location": "L251",
       "_origin": "ast",
       "id": "system_and_frontend_app_specifications_4_2_fluid_electrical_zoning_poka_yoke_safety",
       "community": 2,
@@ -5204,6 +5404,156 @@
       "confidence_score": 1.0,
       "source": "llm_llm_service_llmservice",
       "target": "llm_llm_service_llmservice_generatetext"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "modal_app",
+      "target": "modal_app_compliance_guardrail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "modal_app",
+      "target": "modal_app_gemma4inferenceengine",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "modal_app",
+      "target": "modal_app_generate_ad_variations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "modal_app",
+      "target": "modal_app_ghl_webhook_receiver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "modal_app",
+      "target": "modal_app_weekly_ad_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "modal_app_rationale_26",
+      "target": "modal_app_ghl_webhook_receiver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "modal_app_rationale_44",
+      "target": "modal_app_compliance_guardrail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "modal_app_rationale_59",
+      "target": "modal_app_generate_ad_variations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "modal_app_gemma4inferenceengine",
+      "target": "modal_app_gemma4inferenceengine_analyze_and_route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "modal_app_gemma4inferenceengine",
+      "target": "modal_app_gemma4inferenceengine_freeze_runtime_state",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "modal_app_gemma4inferenceengine",
+      "target": "modal_app_gemma4inferenceengine_wake_engine",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "modal_app_rationale_92",
+      "target": "modal_app_gemma4inferenceengine_freeze_runtime_state",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "modal_app_rationale_118",
+      "target": "modal_app_gemma4inferenceengine_wake_engine",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "modal_app_rationale_124",
+      "target": "modal_app_gemma4inferenceengine_analyze_and_route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/modules/llm/modal/app.py",
+      "source_location": "L132",
+      "weight": 1.0,
+      "source": "modal_app_rationale_132",
+      "target": "modal_app_weekly_ad_audit",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6956,9 +7306,9 @@
       "source_file": ".specify/specs/sys_temporal.intent.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_intent",
-      "target": "specs_sys_temporal_intent_intent_temporal_orchestration_modal_integration_sys_temporal",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_intent_intent_temporal_orchestration_modal_integration_sys_temporal"
     },
     {
       "relation": "contains",
@@ -6966,9 +7316,9 @@
       "source_file": ".specify/specs/sys_temporal.intent.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_intent_intent_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_intent_1_goals",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_intent_1_goals"
     },
     {
       "relation": "contains",
@@ -6976,9 +7326,9 @@
       "source_file": ".specify/specs/sys_temporal.intent.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_intent_intent_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_intent_2_constraints",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_intent_2_constraints"
     },
     {
       "relation": "contains",
@@ -6986,9 +7336,9 @@
       "source_file": ".specify/specs/sys_temporal.intent.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_intent_intent_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_intent_3_success_criteria",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_intent_3_success_criteria"
     },
     {
       "relation": "contains",
@@ -6996,9 +7346,9 @@
       "source_file": ".specify/specs/sys_temporal.plan.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_plan",
-      "target": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal"
     },
     {
       "relation": "contains",
@@ -7006,9 +7356,9 @@
       "source_file": ".specify/specs/sys_temporal.plan.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_plan_1_system_architecture",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_plan_1_system_architecture"
     },
     {
       "relation": "contains",
@@ -7016,9 +7366,9 @@
       "source_file": ".specify/specs/sys_temporal.plan.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_plan_2_technical_decisions",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_plan_2_technical_decisions"
     },
     {
       "relation": "contains",
@@ -7026,9 +7376,9 @@
       "source_file": ".specify/specs/sys_temporal.plan.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_plan_3_database_schema_changes",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_plan_3_database_schema_changes"
     },
     {
       "relation": "contains",
@@ -7036,9 +7386,9 @@
       "source_file": ".specify/specs/sys_temporal.plan.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_plan_4_file_structure",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_plan_4_file_structure"
     },
     {
       "relation": "contains",
@@ -7046,9 +7396,9 @@
       "source_file": ".specify/specs/sys_temporal.plan.md",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_plan_technical_plan_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_plan_5_verification_plan",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_plan_5_verification_plan"
     },
     {
       "relation": "contains",
@@ -7056,9 +7406,9 @@
       "source_file": ".specify/specs/sys_temporal.spec.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_spec",
-      "target": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal"
     },
     {
       "relation": "contains",
@@ -7066,9 +7416,9 @@
       "source_file": ".specify/specs/sys_temporal.spec.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_spec_1_overview_goal",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_spec_1_overview_goal"
     },
     {
       "relation": "contains",
@@ -7076,9 +7426,9 @@
       "source_file": ".specify/specs/sys_temporal.spec.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_spec_2_user_stories",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_spec_2_user_stories"
     },
     {
       "relation": "contains",
@@ -7086,9 +7436,9 @@
       "source_file": ".specify/specs/sys_temporal.spec.md",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_spec_3_functional_requirements",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_spec_3_functional_requirements"
     },
     {
       "relation": "contains",
@@ -7096,9 +7446,9 @@
       "source_file": ".specify/specs/sys_temporal.spec.md",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_spec_4_edge_cases",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_spec_4_edge_cases"
     },
     {
       "relation": "contains",
@@ -7106,9 +7456,9 @@
       "source_file": ".specify/specs/sys_temporal.spec.md",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "specs_sys_temporal_spec_feature_specification_temporal_orchestration_modal_integration_sys_temporal",
-      "target": "specs_sys_temporal_spec_5_acceptance_criteria",
-      "confidence_score": 1.0
+      "target": "specs_sys_temporal_spec_5_acceptance_criteria"
     },
     {
       "relation": "contains",
@@ -8254,6 +8604,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "system_and_frontend_app_specifications_section_1_multi_agent_system_mas_architectural_specifications",
+      "target": "system_and_frontend_app_specifications_1_4_cost_optimized_serverless_gpu_inference_modal_com",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "System and Frontend App Specifications.md",
       "source_location": "L67",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8269,6 +8629,36 @@
       "confidence_score": 1.0,
       "source": "system_and_frontend_app_specifications_1_3_knowledge_management_the_obsidian_vault_schema",
       "target": "system_and_frontend_app_specifications_1_3_2_frontmatter_metadata_specification"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "system_and_frontend_app_specifications_1_4_cost_optimized_serverless_gpu_inference_modal_com",
+      "target": "system_and_frontend_app_specifications_1_4_1_the_low_cost_modal_resource_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "system_and_frontend_app_specifications_1_4_cost_optimized_serverless_gpu_inference_modal_com",
+      "target": "system_and_frontend_app_specifications_1_4_2_strategic_routing_architecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "System and Frontend App Specifications.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "system_and_frontend_app_specifications_1_4_cost_optimized_serverless_gpu_inference_modal_com",
+      "target": "system_and_frontend_app_specifications_1_4_3_cold_start_optimization_via_gpu_snapshots_sleep_mode",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8432,5 +8822,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1b927d74c3d38a67c9b5b00df77152b774cb6ccc"
+  "built_at_commit": "9c93e03b5b9994a993c5881040bd78a77268bef5"
 }

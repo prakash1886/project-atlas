@@ -93,6 +93,33 @@ noise\_level\_dba: 41.2
 temperature\_drop\_c: 13.5  
 \---
 
+### **1.4 Cost-Optimized Serverless GPU Inference (Modal.com)**
+
+To maximize the system's $30 monthly free credit tier on Modal.com, the multi-agent execution loop uses a strategic routing architecture. Heavy tasks are routed to appropriate GPU classes, while lightweight tasks run on cheap CPU resources, and cold start times are bypassed using pre-compiled GPU memory snapshots.
+
+#### **1.4.1 The Low-Cost Modal Resource Matrix**
+
+| GPU/CPU Tier | Modal Cost (per second) | Approx. Hourly Rate | Best For (Purpose & Use Case) |
+| :--- | :--- | :--- | :--- |
+| **CPU Only (Standard)** | $0.0000131 / core | ~$0.047 / hr | Webhooks, GHL receivers, API routers, light data transformation, and routing payloads. |
+| **NVIDIA T4 (16GB)** | $0.000164 | ~$0.59 / hr | Text classification, structured JSON parsing, lightweight safety and compliance filtering (ShieldGemma). |
+| **NVIDIA L4 (24GB)** | $0.000222 | ~$0.80 / hr | Highly optimized 8B models (Gemma 4 12B/E4B) and extremely fast creative copy generation. |
+| **NVIDIA A10G (24GB)** | $0.000306 | ~$1.10 / hr | Heavy text generation, quantized 26B/31B architectures with minimal footprints (Gemma 4 31B Dense). |
+
+#### **1.4.2 Strategic Routing Architecture**
+
+*   **The Gatekeeper (CPU Tier)**: Ingests incoming GoHighLevel webhooks, extracts lead attributes, validates payloads, and hands off to GPU resources only when an LLM action is required.
+*   **The JSON Formatter & Guardrail (NVIDIA T4 Tier)**: Runs ShieldGemma 2 locally to screen generated text for compliance and policy violations before pushing ads live.
+*   **The Creative Writer (NVIDIA L4 Tier)**: Invokes optimized models like Gemma 4 12B to generate copy variations and creative headlines.
+*   **The Deep Analytics Master (NVIDIA A10G Tier)**: Runs quantized Gemma 4 31B Dense to perform weekly campaign audits and performance analysis on a bounded cron schedule.
+
+#### **1.4.3 Cold Start Optimization via GPU Snapshots & Sleep Mode**
+
+1.  **AWQ/GPTQ Quantization**: Large model weights are loaded in quantized INT4/INT8 formats to fit within single L4 or A10G cards, avoiding expensive multi-GPU setups.
+2.  **GPU Memory Snapshots**: Using Modal's `@modal.enter(snap=True)` lifecycle hook, the vLLM engine is booted, weights loaded, and CUDA graphs compiled once at image build time.
+3.  **vLLM Sleep Mode**: The engine is put to sleep using the vLLM `/sleep` endpoint to clear the VRAM footprint before saving the memory snapshot.
+4.  **Instant Wake-up**: Live invocations awaken the engine in under 2 seconds, eliminating the 2–4 minute cold-start billing overhead.
+
 ## **SECTION 2: Scientific & Engineering Models (Equations & Constraints)**
 
 The agents must execute physical simulations guided by these core mathematical relationships.

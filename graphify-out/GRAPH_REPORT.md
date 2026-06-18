@@ -1,16 +1,16 @@
 # Graph Report - Project Atlas  (2026-06-18)
 
 ## Corpus Check
-- 56 files · ~12,606 words
+- 57 files · ~13,674 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 430 nodes · 409 edges · 46 communities (41 shown, 5 thin omitted)
+- 450 nodes · 428 edges · 47 communities (42 shown, 5 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1b927d74`
+- Built from commit: `9c93e03b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -58,6 +58,7 @@
 - [[_COMMUNITY_Community 43|Community 43]]
 - [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 17 edges
@@ -77,7 +78,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (46 total, 5 thin omitted)
+## Communities (47 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.09
@@ -88,8 +89,8 @@ Cohesion: 0.07
 Nodes (26): **1\. Orchestrator Agent (The Principal Investigator)**, **2\. CAD Architect Agent (FreeCAD Specialist)**, **3\. Aerothermal Analyst Agent (OpenFOAM Specialist)**, **4\. Psychrometric Calculator Agent (Cantera Specialist)**, **5\. Acoustics & Vibration Agent (ElmerFEM & QBlade Specialist)**, **6\. Industrial Design & Aesthetics Agent (Blender/CMF Specialist)**, **7\. Collaborative Data Exchange Schema (JSON Core)**, **Aesthetic Decision Matrix & Brand Integrity Rules** (+18 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.07
-Nodes (26): **1.1 Agent Topology & Core Responsibilities**, **1.2 Durable Execution via Temporal.io**, **1.3.1 Directory Structure**, **1.3.2 Frontmatter Metadata Specification**, **1.3 Knowledge Management: The Obsidian Vault Schema**, **2.1.1 Wet-Bulb Temperature (![][image2]) Approximation (Stull Equation)**, **2.1 Thermodynamic & Psychrometric Models**, **2.2.1 Free Area Ratio (![][image14])** (+18 more)
+Cohesion: 0.06
+Nodes (30): **1.1 Agent Topology & Core Responsibilities**, **1.2 Durable Execution via Temporal.io**, **1.3.1 Directory Structure**, **1.3.2 Frontmatter Metadata Specification**, **1.3 Knowledge Management: The Obsidian Vault Schema**, **1.4.1 The Low-Cost Modal Resource Matrix**, **1.4.2 Strategic Routing Architecture**, **1.4.3 Cold Start Optimization via GPU Snapshots & Sleep Mode** (+22 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.08
@@ -231,8 +232,12 @@ Nodes (6): 1. Overview & Goal, 2. User Stories, 3. Functional Requirements, 4. E
 Cohesion: 0.40
 Nodes (4): 1. Goals, 2. Constraints, 3. Success Criteria, Intent: Temporal Orchestration & Modal Integration (SYS-TEMPORAL)
 
+### Community 46 - "Community 46"
+Cohesion: 0.12
+Nodes (12): compliance_guardrail(), Gemma4InferenceEngine, generate_ad_variations(), ghl_webhook_receiver(), Runs instantly (<2 seconds) on every incoming serverless burst invocation, Processes lead/ad performance logs and routes dynamically, Weekly deep reasoning task that runs at midnight Sunday to analyze multi-platfor, Extracts GHL metadata instantly and decides whether to trigger GPU inference (+4 more)
+
 ## Knowledge Gaps
-- **287 isolated node(s):** `options`, `name`, `private`, `version`, `type` (+282 more)
+- **290 isolated node(s):** `options`, `name`, `private`, `version`, `type` (+285 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -240,16 +245,16 @@ Nodes (4): 1. Goals, 2. Constraints, 3. Success Criteria, Intent: Temporal Orche
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `Community 3` to `Community 5`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `scripts` connect `Community 8` to `Community 5`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `options`, `name`, `private` to the rest of the system?**
-  _287 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _297 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09206349206349207 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.08 - nodes in this community are weakly interconnected._

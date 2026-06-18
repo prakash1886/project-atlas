@@ -12,3 +12,5 @@ F-005: Failure messages and stack traces must be masked in the Temporal Web UI b
 [modal/inference]
 F-006: LLM inference requests must bridge to specialized Gemma 4 and DiffusionGemma models hosted on Modal. @verified
 F-007: Connections to Modal models must use an OpenAI-compatible client library with bearer token authorization. @verified
+F-008: Campaign pipeline tasks must route to specific CPU or GPU tiers (T4, L4, A10G) based on compute requirements to maximize credit efficiency. @verified
+F-009: GPU cold-start billing overhead must be bypassed using model quantization, CUDA graph compilation, and vLLM sleep-mode memory snapshots. @verified

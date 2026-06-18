@@ -30,6 +30,7 @@ No SQL database migrations required. All persistence is managed by the Temporal 
 - `[NEW]` [temporal.module.ts](file:///d:/Project%20Atlas/server/src/modules/temporal/temporal.module.ts)
 - `[NEW]` [llm.module.ts](file:///d:/Project%20Atlas/server/src/modules/llm/llm.module.ts)
 - `[NEW]` [llm.service.ts](file:///d:/Project%20Atlas/server/src/modules/llm/llm.service.ts)
+- `[NEW]` [app.py (Modal App)](file:///d:/Project%20Atlas/server/src/modules/llm/modal/app.py)
 - `[NEW]` [ad-automation.workflow.ts](file:///d:/Project%20Atlas/server/src/modules/temporal/workflows/ad-automation.workflow.ts)
 - `[NEW]` [ad-automation.activities.ts](file:///d:/Project%20Atlas/server/src/modules/temporal/activities/ad-automation.activities.ts)
 - `[NEW]` [worker.ts](file:///d:/Project%20Atlas/server/src/worker.ts)

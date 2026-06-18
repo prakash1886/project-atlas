@@ -13,6 +13,8 @@ Enforces reliable orchestration and execution of the multi-agent trend-based ad 
 - **Zero-Trust Encryption**: Payload codecs encrypt/decrypt inputs/outputs using AES-256-GCM. (F-004)
 - **Failure Obfuscation**: Enforce encryption of messages and stack traces for all failing activities and workflows. (F-005)
 - **Modal GPU Inference**: Delegate language/image model runs to specialized serverless Gemma models on Modal. (F-006, F-007)
+- **Cost-Optimized Routing**: Tasks in the campaign automation loop are mapped to the absolute lowest-cost GPU or CPU tier that can handle it (CPU for webhook, T4 for compliance, L4 for copy variants, A10G for cron analytics). (F-008)
+- **Startup Latency Elimination**: Use vLLM sleep mode and GPU memory snapshots to bypass cold start billing. (F-009)
 
 ## 4. Edge Cases
 - **Temporal Cluster Unreachable**: System defaults to offline mock client so NestJS bootstraps correctly without blocking development startup.
