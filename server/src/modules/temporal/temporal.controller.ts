@@ -3,7 +3,9 @@ import type { FastifyReply } from 'fastify';
 
 interface TemporalClientWithConnection {
   connection?: {
-    checkHealth: () => Promise<void>;
+    healthService: {
+      check: (req: { service: string }) => Promise<{ status: string }>;
+    };
   };
 }
 
@@ -28,7 +30,7 @@ export class TemporalController {
     }
 
     try {
-      await this.client.connection.checkHealth();
+      await this.client.connection.healthService.check({ service: '' });
       return res.status(200).send({
         status: 'connected',
         address,
