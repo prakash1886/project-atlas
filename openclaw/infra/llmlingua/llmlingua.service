@@ -1,0 +1,17 @@
+[Unit]
+Description=LLMLingua-2 prompt compression service (Project Atlas)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=HF_HOME=/opt/llmlingua/hf
+Environment=OMP_NUM_THREADS=2
+ExecStart=/opt/llmlingua/venv/bin/uvicorn server:app --host 127.0.0.1 --port 8200
+WorkingDirectory=/opt/llmlingua
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target

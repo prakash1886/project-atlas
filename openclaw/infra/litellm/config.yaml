@@ -1,0 +1,45 @@
+# LiteLLM unified gateway for Project Atlas (spec §11.3).
+# Exposes one OpenAI-compatible endpoint that routes to DeepSeek + Gemini.
+# drop_params=true auto-strips provider-unsupported fields (e.g. OpenAI `store`,
+# which Gemini's OpenAI-compat layer rejects with HTTP 400).
+model_list:
+  - model_name: deepseek-chat
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+  - model_name: deepseek-reasoner
+    litellm_params:
+      model: deepseek/deepseek-reasoner
+      api_key: os.environ/DEEPSEEK_API_KEY
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+      api_key: os.environ/GEMINI_API_KEY
+  # `-compressed` variants trigger the LLMLingua-2 pre-call hook (input-heavy agents, spec §11.3)
+  - model_name: deepseek-chat-compressed
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DEEPSEEK_API_KEY
+  - model_name: gemini-2.5-flash-compressed
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+litellm_settings:
+  drop_params: true          # strip provider-unsupported params instead of erroring
+  num_retries: 2
+  request_timeout: 600
+  callbacks: ["custom_compress.proxy_handler_instance"]   # LLMLingua-2 compression hook
+
+router_settings:
+  routing_strategy: simple-shuffle
+  # cheap workhorse falls back to gemini flash if deepseek is unavailable (spec §11.3)
+  fallbacks:
+    - deepseek-chat: ["gemini-2.5-flash"]
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

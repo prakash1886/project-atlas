@@ -1,0 +1,18 @@
+[Unit]
+Description=LiteLLM unified LLM gateway (Project Atlas)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/atlas-llm.env
+WorkingDirectory=/opt/litellm
+Environment=LLMLINGUA_URL=http://127.0.0.1:8200/compress
+Environment=LLMLINGUA_RATE=0.5
+ExecStart=/opt/litellm/venv/bin/litellm --config /opt/litellm/config.yaml --host 127.0.0.1 --port 4000
+Restart=on-failure
+RestartSec=5
+# loopback-only; OpenClaw and other local agents reach it at http://127.0.0.1:4000
+
+[Install]
+WantedBy=multi-user.target
