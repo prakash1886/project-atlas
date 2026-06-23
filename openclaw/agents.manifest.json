@@ -1,0 +1,65 @@
+{
+  "$comment": "Project Atlas OpenClaw agents -> model + skills. Source of truth for deploy.sh. Spec section 11.1 (OpenClaw orchestration bucket).",
+  "providers": {
+    "deepseek-direct/deepseek-chat": "Cheap high-volume workhorse (spec 11.3)",
+    "gemini-direct/gemini-2.5-flash": "Premium reasoning/judgment (spec 11.3)"
+  },
+  "agents": [
+    {
+      "id": "chief-editor",
+      "name": "Chief Editor",
+      "emoji": "🎬",
+      "role": "Swarm supervisor & workflow coordinator",
+      "model": "gemini-direct/gemini-2.5-flash",
+      "skills": ["orchestrate-content-run", "submit-editorial-review"]
+    },
+    {
+      "id": "trend-intelligence",
+      "name": "Trend Intelligence",
+      "emoji": "📈",
+      "role": "Social & search signal harvester",
+      "model": "deepseek-direct/deepseek-chat",
+      "skills": ["fetch-signals", "calculate-opportunity-score"]
+    },
+    {
+      "id": "knowledge-graph",
+      "name": "Knowledge Graph Curator",
+      "emoji": "🕸️",
+      "role": "Semantic memory & Human Story Graph curator",
+      "model": "deepseek-direct/deepseek-chat",
+      "skills": ["query-semantic-nodes", "autolink-entities"]
+    },
+    {
+      "id": "research-factcheck",
+      "name": "Research & Fact-Check",
+      "emoji": "🔎",
+      "role": "Information harvester & factual auditor",
+      "model": "deepseek-direct/deepseek-chat",
+      "skills": ["gather-citations", "verify-claims"]
+    },
+    {
+      "id": "narrative-psychology",
+      "name": "Narrative & Psychology",
+      "emoji": "🎭",
+      "role": "Audience engagement & scriptwriting engineer",
+      "model": "gemini-direct/gemini-2.5-flash",
+      "skills": ["generate-psych-profile", "draft-video-script"]
+    },
+    {
+      "id": "commerce-design",
+      "name": "Commerce & Design",
+      "emoji": "🛍️",
+      "role": "CMF designer & merch matching engine",
+      "model": "deepseek-direct/deepseek-chat",
+      "skills": ["generate-design-prompt", "audit-trademark-compliance"]
+    },
+    {
+      "id": "ds-star",
+      "name": "DS-Star",
+      "emoji": "📊",
+      "role": "Chief data scientist / strategy layer (production host: Railway)",
+      "model": "gemini-direct/gemini-2.5-flash",
+      "skills": ["forecast-retention", "optimize-scoring-weights"]
+    }
+  ]
+}

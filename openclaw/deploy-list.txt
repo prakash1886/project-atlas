@@ -1,0 +1,50 @@
+trend-discovery|deepseek-direct/deepseek-chat|📡|Trend Discovery|vps|discover-trends
+demand-forecast|deepseek-direct/deepseek-chat|🔮|Demand Forecast|vps|forecast-demand
+coverage-gap|deepseek-direct/deepseek-chat|🕳️|Coverage Gap|vps|find-coverage-gaps
+personality-discovery|deepseek-direct/deepseek-chat|🧑‍🚀|Personality Discovery|vps|discover-personalities
+hidden-legends|gemini-direct/gemini-2.5-flash|🕵️|Hidden Legends|vps|discover-hidden-legends
+personality-graph|deepseek-direct/deepseek-chat|🧬|Personality Graph|vps|build-personality-graph
+story-atomizer|deepseek-direct/deepseek-chat|⚛️|Story Atomizer|vps|atomize-stories
+psychological-arc|gemini-direct/gemini-2.5-flash|🧠|Psychological Arc|vps|extract-psychological-arc
+cultural-context|deepseek-direct/deepseek-chat|🏛️|Cultural Context|vps|analyze-cultural-context
+human-meaning|gemini-direct/gemini-2.5-flash|💡|Human Meaning|vps|extract-human-meaning
+archetype|gemini-direct/gemini-2.5-flash|🃏|Archetype|vps|assign-archetype
+audience-mapping|deepseek-direct/deepseek-chat|👥|Audience Mapping|vps|map-audience
+geographic-intelligence|deepseek-direct/deepseek-chat|🌍|Geographic Intelligence|vps|score-geography
+engagement-prediction|deepseek-direct/deepseek-chat|📶|Engagement Prediction|vps|predict-engagement
+playlist-intelligence|deepseek-direct/deepseek-chat|📚|Playlist Intelligence|vps|organize-playlists
+hook|deepseek-direct/deepseek-chat|🪝|Hook|vps|generate-hooks
+narrative|gemini-direct/gemini-2.5-flash|📖|Narrative|vps|structure-narrative
+vibe|deepseek-direct/deepseek-chat|🎨|Vibe|vps|select-vibe
+script|deepseek-direct/deepseek-chat|📜|Script|modal|generate-script
+voice-director|deepseek-direct/deepseek-chat|🎙️|Voice Director|vps|direct-voice
+asset-planner|deepseek-direct/deepseek-chat|🎞️|Asset Planner|vps|plan-assets
+thumbnail|deepseek-direct/deepseek-chat|🖼️|Thumbnail|vps|generate-thumbnails
+fact-verification|deepseek-direct/deepseek-chat|✅|Fact Verification|vps|verify-facts
+retention|deepseek-direct/deepseek-chat|📉|Retention|vps|flag-retention-risks
+merch-opportunity|deepseek-direct/deepseek-chat|🎯|Merch Opportunity|vps|detect-merch-opportunities
+product-discovery|deepseek-direct/deepseek-chat|🛒|Product Discovery|vps|discover-products
+regional-culture|deepseek-direct/deepseek-chat|🗺️|Regional Culture|vps|profile-regional-culture
+revenue-optimization|gemini-direct/gemini-2.5-flash|💰|Revenue Optimization|vps|forecast-revenue
+story-opportunity-intelligence|gemini-direct/gemini-2.5-flash|🛂|Story Opportunity Intelligence|vps|gatekeep-opportunity
+ad-revenue-optimization|deepseek-direct/deepseek-chat|📺|Ad Revenue Optimization|vps|optimize-ad-revenue
+affiliate-management|deepseek-direct/deepseek-chat|🔗|Affiliate Management|vps|manage-affiliates
+sponsorship-matching|deepseek-direct/deepseek-chat|🤝|Sponsorship Matching|vps|match-sponsorships
+owned-audience|deepseek-direct/deepseek-chat|📧|Owned Audience|vps|grow-owned-audience
+community-monetization|deepseek-direct/deepseek-chat|🏅|Community Monetization|vps|monetize-community
+thumbnail-title-ctr|deepseek-direct/deepseek-chat|🅰️|Thumbnail/Title CTR|vps|optimize-ctr
+posting-schedule|deepseek-direct/deepseek-chat|🗓️|Posting Schedule|vps|manage-posting-schedule
+community-engagement|deepseek-direct/deepseek-chat|💬|Community Engagement|vps|drive-community-engagement
+collaboration-outreach|deepseek-direct/deepseek-chat|📨|Collaboration Outreach|vps|manage-collab-outreach
+merch-task-brief|deepseek-direct/deepseek-chat|📝|Merch Task Brief|vps|write-merch-brief
+designer-assignment|deepseek-direct/deepseek-chat|🧑‍🎨|Designer Assignment|vps|assign-designer
+submission-review|deepseek-direct/deepseek-chat|🔍|Submission Review|vps|review-submission
+upload|deepseek-direct/deepseek-chat|⬆️|Upload|vps|upload-listing
+content-opportunity-scientist|gemini-direct/gemini-2.5-flash|🧪|Content Opportunity Scientist|railway|science-content-opportunity
+audience-scientist|gemini-direct/gemini-2.5-flash|🧪|Audience Scientist|railway|science-audience
+story-universe-scientist|gemini-direct/gemini-2.5-flash|🧪|Story Universe Scientist|railway|science-story-universe
+archetype-scientist|gemini-direct/gemini-2.5-flash|🧪|Archetype Scientist|railway|science-archetype
+geographic-intelligence-scientist|gemini-direct/gemini-2.5-flash|🧪|Geographic Intelligence Scientist|railway|science-geography
+hidden-legends-discovery-scientist|gemini-direct/gemini-2.5-flash|🧪|Hidden Legends Discovery Scientist|railway|science-hidden-legends
+youtube-scientist|gemini-direct/gemini-2.5-flash|🧪|YouTube Scientist|railway|science-youtube
+backlog-scientist|gemini-direct/gemini-2.5-flash|🧪|Backlog Scientist|railway|science-backlog
