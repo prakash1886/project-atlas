@@ -1,167 +1,2197 @@
 {
-  "otel.ts": {
+  ".mcp.json": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "800af87714de9563eb44d61bca8535bf",
+    "semantic_hash": ""
+  },
+  "build_graph.py": {
+    "mtime": 1781709012.6800349,
+    "ast_hash": "7d6d5e34ad6856d8019f10632d68bbf7",
+    "semantic_hash": ""
+  },
+  "ds-star/api.py": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "dd7d32c865c1903e5b94c2f0960f03e8",
+    "semantic_hash": ""
+  },
+  "ds-star/setup.sh": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "18daeed7eabaa9692b125fb64adeea6e",
+    "semantic_hash": ""
+  },
+  "eslint.config.js": {
+    "mtime": 1781709136.5849328,
+    "ast_hash": "8d077804f48a9b6c0354bae68bcf815a",
+    "semantic_hash": ""
+  },
+  "hello_modal.py": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "7661b75cfa7497b2e5dde6d8bbb9f967",
+    "semantic_hash": ""
+  },
+  "load-test.js": {
+    "mtime": 1781706244.4723978,
+    "ast_hash": "9e6a7ca1c7986f0971e12419a55bcdf9",
+    "semantic_hash": ""
+  },
+  "openclaw/agents.manifest.json": {
+    "mtime": 1782373851.2887912,
+    "ast_hash": "b0814bdebdb4b1e975c88e37432f44a8",
+    "semantic_hash": ""
+  },
+  "openclaw/atlas-agents.json": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "20ab0a68241b77e46df3a1a16cbf15e6",
+    "semantic_hash": ""
+  },
+  "openclaw/deploy.sh": {
+    "mtime": 1782373851.336406,
+    "ast_hash": "d946bf18b49445f25027577d39f3f89f",
+    "semantic_hash": ""
+  },
+  "openclaw/generate.py": {
+    "mtime": 1782380669.5460074,
+    "ast_hash": "00c6fc1dd4f65e21d5e1e0e25c61428e",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/install-infra.sh": {
+    "mtime": 1782373851.336406,
+    "ast_hash": "ff7e5fbfc0bc5394205fcceb423aec42",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/litellm/custom_compress.py": {
+    "mtime": 1782373851.336406,
+    "ast_hash": "54b024f4c57121d4539153a10cf918c2",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/llmlingua/server.py": {
+    "mtime": 1782373851.3421555,
+    "ast_hash": "ac76b49cd85159cd513817e2e8df7c62",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/wire-openclaw.sh": {
+    "mtime": 1782373851.3421555,
+    "ast_hash": "fbab15ae8f34ed7864b5b5c30cfdfc60",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/wire-search-mcp.sh": {
+    "mtime": 1782380669.5466447,
+    "ast_hash": "68de947e914d0a193c281d6a67f47dfa",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1782373851.383884,
+    "ast_hash": "dfb3d2e035a877dc308dc2ac0e5b7997",
+    "semantic_hash": ""
+  },
+  "scripts/plane_check_auth.py": {
+    "mtime": 1782380669.6391268,
+    "ast_hash": "d478305580ef6e1a2b187def1ef4a002",
+    "semantic_hash": ""
+  },
+  "server/otel.ts": {
     "mtime": 1781706244.466055,
     "ast_hash": "2588a8dd489d9d8fd99d1bc19ab4248e",
-    "semantic_hash": "2588a8dd489d9d8fd99d1bc19ab4248e"
+    "semantic_hash": ""
   },
-  "src/app.module.ts": {
-    "mtime": 1782212443.7461765,
+  "server/src/app.module.ts": {
+    "mtime": 1782380669.6391268,
     "ast_hash": "c0188c52973c639cd2f39245f782ea5e",
-    "semantic_hash": "c0188c52973c639cd2f39245f782ea5e"
+    "semantic_hash": ""
   },
-  "src/main.ts": {
+  "server/src/main.ts": {
     "mtime": 1781709136.586332,
     "ast_hash": "d36d5d8bc08ae19857f88359f1ac1637",
-    "semantic_hash": "d36d5d8bc08ae19857f88359f1ac1637"
+    "semantic_hash": ""
   },
-  "src/modules/database/database.module.ts": {
-    "mtime": 1782275989.3291776,
+  "server/src/modules/database/database.module.ts": {
+    "mtime": 1782380669.6391268,
     "ast_hash": "eaeede5f5a6521f029c28dbbffcbf20e",
-    "semantic_hash": "eaeede5f5a6521f029c28dbbffcbf20e"
+    "semantic_hash": ""
   },
-  "src/modules/envato/envato.module.ts": {
+  "server/src/modules/envato/envato.module.ts": {
     "mtime": 1781774532.9425404,
     "ast_hash": "ea0f6dd1962cca0bc794c206a96979e9",
-    "semantic_hash": "ea0f6dd1962cca0bc794c206a96979e9"
+    "semantic_hash": ""
   },
-  "src/modules/envato/envato.service.ts": {
-    "mtime": 1782211521.5737474,
+  "server/src/modules/envato/envato.service.ts": {
+    "mtime": 1782380669.6391268,
     "ast_hash": "5c8bce970e4599d84b20bc9be8f99cf9",
-    "semantic_hash": "5c8bce970e4599d84b20bc9be8f99cf9"
+    "semantic_hash": ""
   },
-  "src/modules/llm/llm.module.ts": {
+  "server/src/modules/llm/llm.module.ts": {
     "mtime": 1781770131.8834777,
     "ast_hash": "09971495d3a0dcf56388de8c094887fc",
-    "semantic_hash": "09971495d3a0dcf56388de8c094887fc"
+    "semantic_hash": ""
   },
-  "src/modules/llm/llm.service.ts": {
-    "mtime": 1782056886.2211764,
+  "server/src/modules/llm/llm.service.ts": {
+    "mtime": 1782380669.6391268,
     "ast_hash": "1fb1dce03fa93e92d1afca40ced979bb",
-    "semantic_hash": "1fb1dce03fa93e92d1afca40ced979bb"
+    "semantic_hash": ""
   },
-  "src/modules/llm/modal/app.py": {
-    "mtime": 1781944480.5776865,
-    "ast_hash": "9a655539301c53cafd359c2c483c4f5e",
-    "semantic_hash": "9a655539301c53cafd359c2c483c4f5e"
+  "server/src/modules/llm/modal/app.py": {
+    "mtime": 1782380669.6391268,
+    "ast_hash": "4a06b26e2748ea485fc8e65066f2ee83",
+    "semantic_hash": ""
   },
-  "src/modules/redis/redis.module.ts": {
+  "server/src/modules/redis/redis.module.ts": {
     "mtime": 1781709136.586332,
     "ast_hash": "adcd2178cc8b4d7af16fd40d89c25b6f",
-    "semantic_hash": "adcd2178cc8b4d7af16fd40d89c25b6f"
+    "semantic_hash": ""
   },
-  "src/modules/search/open-source-search.service.ts": {
-    "mtime": 1782198748.2835257,
-    "ast_hash": "6b70b70bd6b63ab084dcf87ab8fac91c",
-    "semantic_hash": "6b70b70bd6b63ab084dcf87ab8fac91c"
+  "server/src/modules/search/open-source-search.service.ts": {
+    "mtime": 1782380669.645032,
+    "ast_hash": "9c93f357f6010c05b1dc011b99952ec8",
+    "semantic_hash": ""
   },
-  "src/modules/search/search.module.ts": {
-    "mtime": 1782196553.2399,
-    "ast_hash": "35e37a83929c99b740d51021c29cb2e2",
-    "semantic_hash": "35e37a83929c99b740d51021c29cb2e2"
+  "server/src/modules/search/search.module.ts": {
+    "mtime": 1782380669.645032,
+    "ast_hash": "5a3019b2cf8825a0e164f438c23ef804",
+    "semantic_hash": ""
   },
-  "src/modules/search/search.service.ts": {
-    "mtime": 1782187806.1619987,
-    "ast_hash": "cdb5b781ebf31877a275084510c5a8cd",
-    "semantic_hash": "cdb5b781ebf31877a275084510c5a8cd"
+  "server/src/modules/search/search.service.ts": {
+    "mtime": 1782380669.6461835,
+    "ast_hash": "b7caf85201212a9c23beabcf90945c9c",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/activities/ad-automation.activities.ts": {
+  "server/src/modules/temporal/activities/ad-automation.activities.ts": {
     "mtime": 1781770131.8844688,
     "ast_hash": "708969965f09a00e7bc8ce494ed8cc16",
-    "semantic_hash": "708969965f09a00e7bc8ce494ed8cc16"
+    "semantic_hash": ""
   },
-  "src/modules/temporal/activities/ds-star-scientists.activities.ts": {
-    "mtime": 1782056753.6947532,
-    "ast_hash": "d51331904f552ce81658b54afeb39e9a",
-    "semantic_hash": "d51331904f552ce81658b54afeb39e9a"
+  "server/src/modules/temporal/activities/ds-star-scientists.activities.ts": {
+    "mtime": 1782380669.6461835,
+    "ast_hash": "ce23831877988f7ad4ef0afdf75db5fc",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/activities/trend-signals.activities.ts": {
-    "mtime": 1782184447.0670843,
-    "ast_hash": "9d4a2a8b7e8f4953310e9e5c25ab1e88",
-    "semantic_hash": "9d4a2a8b7e8f4953310e9e5c25ab1e88"
+  "server/src/modules/temporal/activities/trend-signals.activities.ts": {
+    "mtime": 1782380669.6461835,
+    "ast_hash": "71f076e06abccb557bdb82d803b153dc",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/crypto/encryption-codec.ts": {
+  "server/src/modules/temporal/crypto/encryption-codec.ts": {
     "mtime": 1781770131.8844688,
     "ast_hash": "86fc4b7821180309c91c11cadca6da77",
-    "semantic_hash": "86fc4b7821180309c91c11cadca6da77"
+    "semantic_hash": ""
   },
-  "src/modules/temporal/temporal.controller.ts": {
+  "server/src/modules/temporal/temporal.controller.ts": {
     "mtime": 1781790915.4045236,
     "ast_hash": "5964dd84f4efcc28afd85656a57340d3",
-    "semantic_hash": "5964dd84f4efcc28afd85656a57340d3"
+    "semantic_hash": ""
   },
-  "src/modules/temporal/temporal.module.ts": {
-    "mtime": 1782184459.9890544,
+  "server/src/modules/temporal/temporal.module.ts": {
+    "mtime": 1782380669.6476202,
     "ast_hash": "eb3f150f98c235fb13bc99205279d372",
-    "semantic_hash": "eb3f150f98c235fb13bc99205279d372"
+    "semantic_hash": ""
   },
-  "src/modules/temporal/types/ds-star.types.ts": {
-    "mtime": 1782056708.753947,
-    "ast_hash": "8fdbd80d7b4b0aea724f73c585b7e05d",
-    "semantic_hash": "8fdbd80d7b4b0aea724f73c585b7e05d"
+  "server/src/modules/temporal/types/ds-star.types.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "84e62003888ae2abec5ade1d1d33f878",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/workflows/ad-automation.workflow.ts": {
-    "mtime": 1781770131.8854697,
-    "ast_hash": "4f2bd01f1df8b59c731b09063d1752f4",
-    "semantic_hash": "4f2bd01f1df8b59c731b09063d1752f4"
+  "server/src/modules/temporal/workflows/ad-automation.workflow.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "00925d385e6993b35ed262fe6c229b51",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/workflows/index.ts": {
-    "mtime": 1782184461.9389858,
-    "ast_hash": "738b9b2f29b84408a0bd63f57e98fe63",
-    "semantic_hash": "738b9b2f29b84408a0bd63f57e98fe63"
+  "server/src/modules/temporal/workflows/index.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "3f52fdc375ea6f16078fcf8706a6ccb2",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/workflows/nightly-intelligence.workflow.ts": {
-    "mtime": 1782056767.3048017,
-    "ast_hash": "727e22312c36db400817a14c63897ecd",
-    "semantic_hash": "727e22312c36db400817a14c63897ecd"
+  "server/src/modules/temporal/workflows/nightly-intelligence.workflow.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "676f302e6db571cde33f5abdb7020340",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/workflows/trend-signals.workflow.ts": {
-    "mtime": 1782184451.073581,
-    "ast_hash": "001f550a98c43f896e66b632b0a3db24",
-    "semantic_hash": "001f550a98c43f896e66b632b0a3db24"
+  "server/src/modules/temporal/workflows/trend-signals.workflow.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "880005ee6aedbe0e6ac71264a70c49ad",
+    "semantic_hash": ""
   },
-  "src/modules/temporal/workflows/weekly-intelligence.workflow.ts": {
-    "mtime": 1782056789.3376267,
-    "ast_hash": "75ba3007bd84713f1401e0a1810bc457",
-    "semantic_hash": "75ba3007bd84713f1401e0a1810bc457"
+  "server/src/modules/temporal/workflows/weekly-intelligence.workflow.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "4472258e8b82155106a2efc15d92515e",
+    "semantic_hash": ""
   },
-  "src/worker.ts": {
-    "mtime": 1782184473.2032323,
-    "ast_hash": "44e08240f72470bddfce0b9531f229ec",
-    "semantic_hash": "44e08240f72470bddfce0b9531f229ec"
+  "server/src/modules/video/google-lyria.service.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "0abc3a6bbf014a75a7a304a46547c1d0",
+    "semantic_hash": ""
   },
-  "src/modules/video/video-render.service.ts": {
-    "mtime": 1782276025.3158395,
-    "ast_hash": "99e823be05383f9a04efa57d391ea9e9",
-    "semantic_hash": "99e823be05383f9a04efa57d391ea9e9"
+  "server/src/modules/video/google-veo.service.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "cf809a54c8c0118a2d59d4442a005b86",
+    "semantic_hash": ""
   },
-  "src/modules/video/video.module.ts": {
-    "mtime": 1782275995.3479545,
-    "ast_hash": "82382251fc393210f6a865cc51763448",
-    "semantic_hash": "82382251fc393210f6a865cc51763448"
+  "server/src/modules/video/heygen.service.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "2c22ba0a0a02cdec87aede1539921b3a",
+    "semantic_hash": ""
   },
-  "src/modules/video/heygen.service.ts": {
-    "mtime": 1782275962.8593488,
-    "ast_hash": "85cd2578afe4cbab6661fd61c80add4e",
-    "semantic_hash": "85cd2578afe4cbab6661fd61c80add4e"
+  "server/src/modules/video/higgsfield.service.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "10db0c9f832bc75360d00e9d9b2d53a1",
+    "semantic_hash": ""
   },
-  "src/modules/video/higgsfield.service.ts": {
-    "mtime": 1782220471.7572331,
-    "ast_hash": "14ec59cdf8f053899682ad83573098fb",
-    "semantic_hash": "14ec59cdf8f053899682ad83573098fb"
+  "server/src/modules/video/video-render.service.ts": {
+    "mtime": 1782380669.6476202,
+    "ast_hash": "5214818a76022a26a032b2022ffb4539",
+    "semantic_hash": ""
   },
-  "src/modules/video/google-lyria.service.ts": {
-    "mtime": 1782275952.591351,
-    "ast_hash": "73ba9f20816a8ee9f0df8774b71b894d",
-    "semantic_hash": "73ba9f20816a8ee9f0df8774b71b894d"
+  "server/src/modules/video/video.controller.ts": {
+    "mtime": 1782380669.661607,
+    "ast_hash": "38b7f20b76f37546df1363923ea5e8b1",
+    "semantic_hash": ""
   },
-  "src/modules/video/google-veo.service.ts": {
-    "mtime": 1782275743.2551024,
-    "ast_hash": "52785e503b4e37d290ce54633ef1a4a1",
-    "semantic_hash": "52785e503b4e37d290ce54633ef1a4a1"
+  "server/src/modules/video/video.module.ts": {
+    "mtime": 1782380669.662616,
+    "ast_hash": "b9d09ad93aace5571cfa9a010cba0e55",
+    "semantic_hash": ""
   },
-  "src/modules/video/video.controller.ts": {
-    "mtime": 1782275992.1595385,
-    "ast_hash": "268585646a29030ed4259082a9f67e66",
-    "semantic_hash": "268585646a29030ed4259082a9f67e66"
+  "server/src/worker.ts": {
+    "mtime": 1782380669.662616,
+    "ast_hash": "365372022afc5b00ba2b5eb94d5b0098",
+    "semantic_hash": ""
+  },
+  "src/App.tsx": {
+    "mtime": 1781709136.5873437,
+    "ast_hash": "79b9bf8e00239164fc31db52a3173b52",
+    "semantic_hash": ""
+  },
+  "src/main.tsx": {
+    "mtime": 1781706244.4693387,
+    "ast_hash": "df3369963799e47ef5a77cdca932abf0",
+    "semantic_hash": ""
+  },
+  "tsconfig.app.json": {
+    "mtime": 1781706244.4640417,
+    "ast_hash": "5a831626403727aa1ce2b8085eb501cf",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1781706244.462752,
+    "ast_hash": "852c3a5df14a4b43ac28e9554ebedf4a",
+    "semantic_hash": ""
+  },
+  "tsconfig.node.json": {
+    "mtime": 1781706244.462752,
+    "ast_hash": "49c671e62303f7b297d2178b8474ed5f",
+    "semantic_hash": ""
+  },
+  "tsconfig.server.json": {
+    "mtime": 1781706244.4640417,
+    "ast_hash": "cbb707d1083aa4d3b17219f9d8821b19",
+    "semantic_hash": ""
+  },
+  "vite.config.ts": {
+    "mtime": 1781706244.4650478,
+    "ast_hash": "d46a61ac404fcf7373c71e87234f712e",
+    "semantic_hash": ""
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1781708590.1232333,
+    "ast_hash": "a0e4d192b9e2e17256124dbfc8e24e6a",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1781708590.124354,
+    "ast_hash": "637776aa6f7496d069afe7520c845c8a",
+    "semantic_hash": ""
+  },
+  ".bin/_claw_clean.txt": {
+    "mtime": 1782380669.1641893,
+    "ast_hash": "78444667f3ff2f28af811216037248de",
+    "semantic_hash": ""
+  },
+  ".bin/_req.txt": {
+    "mtime": 1782380669.1641893,
+    "ast_hash": "342314f42a7f00734fc8e0a64d3c04e3",
+    "semantic_hash": ""
+  },
+  ".bin/_req_clean.txt": {
+    "mtime": 1782380669.1641893,
+    "ast_hash": "cc153926eeadb5c402f60547a49d4f38",
+    "semantic_hash": ""
+  },
+  ".bin/newrelic/CHANGELOG.md": {
+    "mtime": 1782380669.180669,
+    "ast_hash": "dc906f42d047936ae5fd125d99e39f63",
+    "semantic_hash": ""
+  },
+  ".bin/newrelic/README.md": {
+    "mtime": 1782380669.180669,
+    "ast_hash": "997228db74835559680992b1ad446370",
+    "semantic_hash": ""
+  },
+  ".coderabbit.yaml": {
+    "mtime": 1781706244.4703808,
+    "ast_hash": "ec2228ba07442982c71d96906c951c03",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1781709012.6787846,
+    "ast_hash": "4f697e26dc1582216948a194310efd44",
+    "semantic_hash": ""
+  },
+  ".github/workflows/semgrep.yml": {
+    "mtime": 1781706244.4723978,
+    "ast_hash": "a48c6e0f0e1c8bf81ec17a93c3a4fdb2",
+    "semantic_hash": ""
+  },
+  ".specify/memory/constitution.md": {
+    "mtime": 1781708590.124354,
+    "ast_hash": "e25cc3288562f4e0bb73d8688d92b72a",
+    "semantic_hash": ""
+  },
+  ".specify/memory/f_sdd_guide.md": {
+    "mtime": 1781704536.9154055,
+    "ast_hash": "89082a445cdc612d1716da2af4517f9b",
+    "semantic_hash": ""
+  },
+  ".specify/memory/obsidian_collaboration_vault.md": {
+    "mtime": 1781767657.051114,
+    "ast_hash": "840fe72e3d11edcffd76b921f7b430c1",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_agents.intent.md": {
+    "mtime": 1781704289.1573756,
+    "ast_hash": "b99775c1c585214a20af7a4efbb96205",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_agents.plan.md": {
+    "mtime": 1781704289.1583755,
+    "ast_hash": "5f4bb2bf6d73024df3520575d645994b",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_agents.spec.md": {
+    "mtime": 1781708590.1256566,
+    "ast_hash": "5a1c47f1237ca83956daf55ed23d61e5",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_analytics.intent.md": {
+    "mtime": 1781704289.1603742,
+    "ast_hash": "8f75c4d1808b5e85f4000de2c8962459",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_analytics.plan.md": {
+    "mtime": 1781704289.1613748,
+    "ast_hash": "05415f5b488f6b18ca295d8d4065417e",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_analytics.spec.md": {
+    "mtime": 1781704289.1603742,
+    "ast_hash": "f1567dfae916fc3741f64f2758d9277f",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_content.intent.md": {
+    "mtime": 1781704289.159375,
+    "ast_hash": "cd0fd37aac23905f48d5f3e7c3cf6e43",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_content.plan.md": {
+    "mtime": 1781704289.159375,
+    "ast_hash": "f77d0b3c8948fc67a7b2468e01104c0a",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_content.spec.md": {
+    "mtime": 1781704289.159375,
+    "ast_hash": "aa6fa2a001328e1b257e3126f825faba",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_envato.intent.md": {
+    "mtime": 1781774532.9293478,
+    "ast_hash": "5f2dd1b0cf1789cd95bcb2c0eac9eaa3",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_envato.plan.md": {
+    "mtime": 1781774532.9298747,
+    "ast_hash": "59064cad2073a334fa39559d24b11911",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_envato.spec.md": {
+    "mtime": 1781774532.930406,
+    "ast_hash": "9b2fe5fb6ede063095e916b6fbf3baf9",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_graph.intent.md": {
+    "mtime": 1781704289.155375,
+    "ast_hash": "5629e5a5702f155d3a78ebdf4ac6c1be",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_graph.plan.md": {
+    "mtime": 1781704289.156375,
+    "ast_hash": "d5f23545eac0863a10fa09ed50cfe6e1",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_graph.spec.md": {
+    "mtime": 1781704289.156375,
+    "ast_hash": "42e1ce9e2567d359d754c53a0f1452b1",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_policy.intent.md": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "0dc17ebf7bd1cfe1fcc16982977c140b",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_policy.plan.md": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "c667b9a412edd7575a831d52c47b6270",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_policy.spec.md": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "e551989dddf96af641ac035f1d04dfcd",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_search.intent.md": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "e43da9411dd5cb47fbcd4fe7ab378e72",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_search.plan.md": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "210c9ddcea2955d4078a604e93800280",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_search.spec.md": {
+    "mtime": 1782380669.3475306,
+    "ast_hash": "d989eea298bef8c1004ea18c60742975",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_temporal.intent.md": {
+    "mtime": 1781770131.8569486,
+    "ast_hash": "f79f4067cda669adc32941a6eea83668",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_temporal.plan.md": {
+    "mtime": 1781770393.5367062,
+    "ast_hash": "57fdfd9188be9338108d8e08f2a18856",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_temporal.spec.md": {
+    "mtime": 1781770393.5377054,
+    "ast_hash": "1d8c71449f001d571901c4cc83c1d4b4",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_trend.intent.md": {
+    "mtime": 1781704289.1543684,
+    "ast_hash": "6d403d13695b47288c2779eae59cd620",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_trend.plan.md": {
+    "mtime": 1781704289.1543684,
+    "ast_hash": "e96780bfafc8b46ac6f5b7fee5211d80",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_trend.spec.md": {
+    "mtime": 1781704289.1543684,
+    "ast_hash": "b8aa3fb75b6129b482a47be43f6631b5",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_ui.intent.md": {
+    "mtime": 1781708590.127005,
+    "ast_hash": "04a6444f560b697987a3895dfc50ddc4",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_ui.plan.md": {
+    "mtime": 1781708590.127005,
+    "ast_hash": "b0c14b3090e94d6ede4440b763cbe484",
+    "semantic_hash": ""
+  },
+  ".specify/specs/sys_ui.spec.md": {
+    "mtime": 1781708590.128014,
+    "ast_hash": "34c1d148f15f3a848a3dd500b265488c",
+    "semantic_hash": ""
+  },
+  ".specify/templates/intent.template.md": {
+    "mtime": 1781704257.7252145,
+    "ast_hash": "23de9281dd5c0b5e94c40c25d714fe71",
+    "semantic_hash": ""
+  },
+  ".specify/templates/plan.template.md": {
+    "mtime": 1781704261.7272844,
+    "ast_hash": "4263f8dad3d512be6693a296ffd56a74",
+    "semantic_hash": ""
+  },
+  ".specify/templates/spec.template.md": {
+    "mtime": 1781704259.9171538,
+    "ast_hash": "10ac1adf88b46f1451d4dcba140a11b6",
+    "semantic_hash": ""
+  },
+  ".specify/templates/trace.template.md": {
+    "mtime": 1781704263.817633,
+    "ast_hash": "169577039fc2720be269e2271cb21318",
+    "semantic_hash": ""
+  },
+  "Open_Claw.txt": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "e01723f644290b582027c5eb5e0fcf58",
+    "semantic_hash": ""
+  },
+  "Project Atlas Agent Skills Manifest.md": {
+    "mtime": 1781708590.1293554,
+    "ast_hash": "f5fa6e7b7ff5b751451b6438c9c90b65",
+    "semantic_hash": ""
+  },
+  "Project_Atlas.txt": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "676111a10f3647878e331d24cd00ab6b",
+    "semantic_hash": ""
+  },
+  "Project_Atlas_Frontend_Requirements.txt": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "68b14760c03e7fedd9e4c632b96ede4a",
+    "semantic_hash": ""
+  },
+  "Project_Atlas_Requirements.txt": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "6cc7e38dd0b61b195236d39b35dad744",
+    "semantic_hash": ""
+  },
+  "_Other Projects/Terracotta Cooling Appliance/Agent Skills Manifest.md": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "f9733456025777a29ad8efc54d9f5078",
+    "semantic_hash": ""
+  },
+  "_Other Projects/Terracotta Cooling Appliance/System and Frontend App Specifications.md": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "314d29bb0f1d84285affaabd06384460",
+    "semantic_hash": ""
+  },
+  "ds-star/config.yaml": {
+    "mtime": 1782380669.3642187,
+    "ast_hash": "159069f85069eb686926401789d237ae",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1781706244.4650478,
+    "ast_hash": "c75a2f9fb7b1c29728a361dac9f8def3",
+    "semantic_hash": ""
+  },
+  "openclaw/README.md": {
+    "mtime": 1782373851.2887912,
+    "ast_hash": "2b181428700f00b7be1abdd662a4d794",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/ad-revenue-optimization-auditor/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "1d08fe25d0721e6b60f974df6af54cde",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/ad-revenue-optimization-compiler/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "94e0d31611d6a2ffbdd9ff703faf0323",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/ad-revenue-optimization-creator/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "2c988a1a9a9364cb306412417859f8c4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/affiliate-management-auditor/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "85eb4dbf985b63172818e927f1bf88a3",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/affiliate-management-compiler/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "0713a4192a43e09fe766a9d5aa7e8559",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/affiliate-management-creator/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "f0f522adc9d03660af70f5ea008dcf62",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/archetype-auditor/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "cd3675b05dcc2d587e1dbbecd0557aa0",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/archetype-compiler/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "f38f6354ab972a8730113f6e267fc4a6",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/archetype-creator/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "d2a87adc3e4f0429d66992d67e8c3ff1",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/archetype-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "7df7d5557866244fb2b4e2696997ae46",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/archetype-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "0d137047604d9ec4cdc9e05adf550a05",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/archetype-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.447533,
+    "ast_hash": "05e86d9e98675d393ae69a41b5216621",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/asset-planner-auditor/SOUL.md": {
+    "mtime": 1782380669.461629,
+    "ast_hash": "611a0ba499662b88840d71e9eb40f0a0",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/asset-planner-compiler/SOUL.md": {
+    "mtime": 1782380669.461629,
+    "ast_hash": "a9652325ccf84d986275b646b600d58b",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/asset-planner-creator/SOUL.md": {
+    "mtime": 1782380669.4626417,
+    "ast_hash": "2685223d2fbc55290484b3e18909ff2a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/audience-mapping-auditor/SOUL.md": {
+    "mtime": 1782380669.4636421,
+    "ast_hash": "182cb10e6b9b6a0b6e7b7e3d411114e4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/audience-mapping-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "6dd296bf94b7da6814e5516471af4d75",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/audience-mapping-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "03d673bce75f36f305b26447313e90eb",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/audience-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "67ad1fe7a507b2890f448689feaa7470",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/audience-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "83b80e99e5ec02316566bf9d948173f7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/audience-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "f3ca6c1e1133e8596e4f7380f4441556",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/backlog-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "ec28c8fc641e489d2f55b5c2804054f5",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/backlog-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "0827375f0c56935e62cff70f3ccdec14",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/backlog-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "cf6edc7958f8c6b49f6500526931c84c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/chief-editor/SOUL.md": {
+    "mtime": 1782373851.3022165,
+    "ast_hash": "2adb2ef1bf01d178559a9371a0ee7f49",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/collaboration-outreach-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "7e239cda03a334d501df34bdbabada1b",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/collaboration-outreach-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "23e4ac3bdbc89daed217062997561333",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/collaboration-outreach-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "cdb01d5703f1f03b086d03883d0ffd9c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/commerce-design/SOUL.md": {
+    "mtime": 1782373851.3042247,
+    "ast_hash": "e059385540c1dde2ebc83abfb4a478f8",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/community-engagement-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "f6fb5844014f9a59dfefa58b0bec19f7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/community-engagement-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "0fc50f4c857a08de71e5216fef10bb42",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/community-engagement-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "6cb8ed4432eb9b8f973a1eba583a2b16",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/community-monetization-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "e343f27d22c353e38e7cf06ba7049f8e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/community-monetization-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "59d9c88a5a1b9105484063364e306326",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/community-monetization-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "d76aecb963b8a93bc13332b67957fa8b",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/content-opportunity-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "449c7c30d4d4973920f425a101690eea",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/content-opportunity-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "a5d64f7cef76857d3057db32ebb6123a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/content-opportunity-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "b1101f3bd969f4f597654e5e195feac5",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/coverage-gap-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "225f9955bccac0cdf0904b8434f991ba",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/coverage-gap-compiler/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "300903f56a87f4b0b9ed0af916b9fbb7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/coverage-gap-creator/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "dcda3def2eb81d93c3fe428915794463",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/cultural-context-auditor/SOUL.md": {
+    "mtime": 1782380669.4643533,
+    "ast_hash": "7b3654c16edd3c72daaf97512b2e0543",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/cultural-context-compiler/SOUL.md": {
+    "mtime": 1782380669.4782977,
+    "ast_hash": "1b65f4661c85286a0648e28b08639e37",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/cultural-context-creator/SOUL.md": {
+    "mtime": 1782380669.4796567,
+    "ast_hash": "2abda3c8eda436452b308281d2524ae2",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/demand-forecast-auditor/SOUL.md": {
+    "mtime": 1782380669.4806685,
+    "ast_hash": "baf52110f20b8024c518dba2cb25d227",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/demand-forecast-compiler/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "4e7e31b3788eca4a3754d28bf23642b4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/demand-forecast-creator/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "0a943a889832eb9d3ec07c660b5f6b59",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/designer-assignment-auditor/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "5f159c31c948a7ae969ba34b2127196d",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/designer-assignment-compiler/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "9e3ed9c1e9393b8323620db108e82198",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/designer-assignment-creator/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "83a1dfcc3e7d973bc583ef4f7bfad5f7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/ds-star/SOUL.md": {
+    "mtime": 1782373851.3108737,
+    "ast_hash": "f77dcebec93c24e22372bd2337d63dd6",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/engagement-prediction-auditor/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "8ba3cb9f9e73807fb04669cb382df7d6",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/engagement-prediction-compiler/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "64b0930b15acfcc9d9289d1668379a39",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/engagement-prediction-creator/SOUL.md": {
+    "mtime": 1782380669.4810126,
+    "ast_hash": "80c3d4843ebf81a16227505d01e7626d",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/fact-verification-auditor/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "acd8d64c68862a9acd4de17c813ba83f",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/fact-verification-compiler/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "27f4bffd6b544b35d2fed34f7388bf8f",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/fact-verification-creator/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "ba92fa0dc9866e94042ec18a90e2cf7c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/geographic-intelligence-auditor/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "8547f833e2568d59fd65bc4549db25d4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/geographic-intelligence-compiler/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "d8d20dc1b538a6783f9a4d48b4f12834",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/geographic-intelligence-creator/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "30bbd07a51048452879f964966bdd5be",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/geographic-intelligence-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "fb3f3f6595fbeb0a87c3844cbaf5a66a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/geographic-intelligence-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "83dcea1bc919ebf32c36971c065d3c88",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/geographic-intelligence-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "326f96451e510e304b38c68b71aba716",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hidden-legends-auditor/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "a50630b69baab13f16fb9979198503dd",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hidden-legends-compiler/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "d1f9daee4502edbcba0d433a022aef39",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hidden-legends-creator/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "df05205035163caadee0427db9f0b1c4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hidden-legends-discovery-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "dee99d6e5a53573a753a48bf0d81a055",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hidden-legends-discovery-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.486166,
+    "ast_hash": "92eb3b34f29b15dde8ecb053a0b83b00",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hidden-legends-discovery-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.4938445,
+    "ast_hash": "7cec261a3d3d28b21289135e0feb3681",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hook-auditor/SOUL.md": {
+    "mtime": 1782380669.4938445,
+    "ast_hash": "748ea2950922389292a1645a2fd49488",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hook-compiler/SOUL.md": {
+    "mtime": 1782380669.4949913,
+    "ast_hash": "57c5a5200d224cb80d4eab70f838507e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/hook-creator/SOUL.md": {
+    "mtime": 1782380669.4949913,
+    "ast_hash": "af2a7e9ae8e17b1415fd7ae9b92ba602",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/human-meaning-auditor/SOUL.md": {
+    "mtime": 1782380669.4960022,
+    "ast_hash": "2ccd2b44a5ec799e0ac35ede050e5b02",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/human-meaning-compiler/SOUL.md": {
+    "mtime": 1782380669.497003,
+    "ast_hash": "16c41fa79a37edfc951d48d07710ebff",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/human-meaning-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "44d47b649b3b5399c05c264bb9ea01ae",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/knowledge-graph/SOUL.md": {
+    "mtime": 1782373851.3140998,
+    "ast_hash": "d5e91f36366188959124a3e73139b1b7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/merch-opportunity-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "40b4a58b66ea1dcf92bf76e6d72cdb76",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/merch-opportunity-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "90a974b272fc7d88cac8993359ce8be7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/merch-opportunity-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "052be00acae4ce5101034ece5dd1141b",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/merch-task-brief-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "6fc666b4142e20ae65cbe4dbecac8945",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/merch-task-brief-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "a07de288d8061e8dd99a0f4d30f9ac3a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/merch-task-brief-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "56dc3c9a2bc8a2a48957ef8cd2684e31",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/narrative-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "095fe8a8bfbb9977476a3ccd8e02d714",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/narrative-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "af12a6db8f09d1f9ea5d26a0e35ac7d0",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/narrative-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "d17f5e92beee172060c821aadf7b1900",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/narrative-psychology/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "4d499c6c728e6935dd5eb7d66c7c5278",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/owned-audience-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "2aaf8a996eb3b89b137c025990f0e728",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/owned-audience-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "c0ce976e71f4ec6946a0b8d858435d19",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/owned-audience-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "e9e1b7588b2823303ec72c90da686af5",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/personality-discovery-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "26da0d498aed578b6e24ac7e61f5241c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/personality-discovery-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "cefbce615f990bce4c8842c747cf3fcd",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/personality-discovery-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "419a3401a77f2f13ad22b1b3c71175d2",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/personality-graph-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "a5d0816de57f03a9bc32fd1be439bd92",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/personality-graph-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "b30d7f1ffebea8d53542dc0425e04149",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/personality-graph-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "3a0ace56ea1c53b317af476948d2596b",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/playlist-intelligence-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "654373e16c80be7a60d1dc4455388e03",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/playlist-intelligence-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "ef650a4a231637b593cdb1c94668221a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/playlist-intelligence-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "34180322d1d6883bb5a6da02c9048c05",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/posting-schedule-auditor/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "ed31c70f30050c701a75148680237322",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/posting-schedule-compiler/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "79ff416e1b75ec1c4ae125fb4e5712a7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/posting-schedule-creator/SOUL.md": {
+    "mtime": 1782380669.4976459,
+    "ast_hash": "1e7677f35e3cd14016fac2189122ab08",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/product-discovery-auditor/SOUL.md": {
+    "mtime": 1782380669.5116358,
+    "ast_hash": "3cc209904cd45b967aa05a38f1baaf9e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/product-discovery-compiler/SOUL.md": {
+    "mtime": 1782380669.5116358,
+    "ast_hash": "3ba800460c925bbd97886bcad296fd69",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/product-discovery-creator/SOUL.md": {
+    "mtime": 1782380669.5126474,
+    "ast_hash": "31a47531e64e4cf917823c9816667fa3",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/psychological-arc-auditor/SOUL.md": {
+    "mtime": 1782380669.513645,
+    "ast_hash": "cac5e91e53896f3ff39bfa6ca27256a6",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/psychological-arc-compiler/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "e1b1f4a4f491e4772e3c3a903af162d2",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/psychological-arc-creator/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "024050c9e1bc7a50fbd571148b37f100",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/regional-culture-auditor/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "a72eddc4d2f30c11c700c5a46bd59c42",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/regional-culture-compiler/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "ecea9eb5f61dcdd61aadb5e282110d94",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/regional-culture-creator/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "2c5ea3f9d23a8396c5077b41f26856b8",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/research-factcheck/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "8b71c3456a5f0ad413f2f94d7162fe98",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/retention-auditor/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "575ac3aa2fa7cf524e23e10abffc4d12",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/retention-compiler/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "93d3508308b8b368c7bf93bdd1183210",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/retention-creator/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "4077b91a0f0a85027447af8fb07c4a0c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/revenue-optimization-auditor/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "cd11c9de34a01132b3527781a5d4c3c3",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/revenue-optimization-compiler/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "e0862734947b51b969f8ac47c46eeb5c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/revenue-optimization-creator/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "70997c076ca97145d3d34479021d9d15",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/script-auditor/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "f315c8a4c2b9016cdc9db57213ce0e32",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/script-compiler/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "1dbd7b0e103f5300a8d0d017cace7055",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/script-creator/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "58c98e6bb26387a2c6c701a37ece7b7e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/sponsorship-matching-auditor/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "8f863620c140651e68ae8d8d245a8a59",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/sponsorship-matching-compiler/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "88cadc497d010a6d8cd7dd29c0f687bb",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/sponsorship-matching-creator/SOUL.md": {
+    "mtime": 1782380669.514394,
+    "ast_hash": "42697e9bf4f584024395b4e8c927f05e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-atomizer-auditor/SOUL.md": {
+    "mtime": 1782380669.5248337,
+    "ast_hash": "d07ba234941459ccb8ac383778a42b76",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-atomizer-compiler/SOUL.md": {
+    "mtime": 1782380669.5254047,
+    "ast_hash": "78561043c0706b1e07013234f2e8c2ee",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-atomizer-creator/SOUL.md": {
+    "mtime": 1782380669.5254047,
+    "ast_hash": "bf73e5d86386fb459e5f85b3a92a52b4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-opportunity-intelligence-auditor/SOUL.md": {
+    "mtime": 1782380669.5254047,
+    "ast_hash": "99b09bad7d4508fb669ef4aa88213e03",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-opportunity-intelligence-compiler/SOUL.md": {
+    "mtime": 1782380669.5254047,
+    "ast_hash": "74f90ed3e9fdd6d481b50309c170d243",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-opportunity-intelligence-creator/SOUL.md": {
+    "mtime": 1782380669.5254047,
+    "ast_hash": "3e3ac86e7dd539008207aa60da2d8f0e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-universe-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.528319,
+    "ast_hash": "fa022fdd9fcc00d04b94020f5b1baf3c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-universe-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.5295737,
+    "ast_hash": "817c12abc3e00781f268d2e967af72a6",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/story-universe-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.5295737,
+    "ast_hash": "eaec34936c31672c13665e56a45b9b2c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/submission-review-auditor/SOUL.md": {
+    "mtime": 1782380669.5305836,
+    "ast_hash": "944f6a134b63715391c3e2d6d04a998a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/submission-review-compiler/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "a7d429462bf03f00f4adf434ce2afcee",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/submission-review-creator/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "d3b2c07f2ed444fb7db85072543342a9",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/thumbnail-auditor/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "64c792a9719b53b1ce33c9b27a9e7108",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/thumbnail-compiler/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "41a2bb02c7ed66308d8ea02b15ab3e73",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/thumbnail-creator/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "04d0632bc1d8a01f358372ee7ea6fb3f",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/thumbnail-title-ctr-auditor/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "667104b73fe85c072a626ac5a2ca5c88",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/thumbnail-title-ctr-compiler/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "d9b9fc6d044e104c7267f725da0ce853",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/thumbnail-title-ctr-creator/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "e11ea534515f5b6f35d1ab9c0ba2fbf5",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/trend-discovery-auditor/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "8e8d96cd9ea7d03c17457f29fcb0fd27",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/trend-discovery-compiler/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "c4355f92b2c9a7698c1ba09fb6b7c674",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/trend-discovery-creator/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "4e05cfa65f676459a57b0889d8d773cc",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/trend-intelligence/SOUL.md": {
+    "mtime": 1782373851.3269267,
+    "ast_hash": "c9a75a73ff1fc4aef093f565786dfeb8",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/upload-auditor/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "c92fd71b34c27deea02626efb8894d3f",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/upload-compiler/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "8830483511e9075a84fee2eee026dc9c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/upload-creator/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "c6219c8a7e68347c900f65a145f56283",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/vibe-auditor/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "32da0cdc36ec38275f26a3288aef6a96",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/vibe-compiler/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "20c11c5f8b9127a793cce350aa19a474",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/vibe-creator/SOUL.md": {
+    "mtime": 1782380669.5309148,
+    "ast_hash": "2d94ca73d54caac0952fcdd0d56e826a",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/voice-director-auditor/SOUL.md": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "101b89a21aceacb0737ded4302beeea4",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/voice-director-compiler/SOUL.md": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "5955023ccfcf881c2499fce38c80105c",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/voice-director-creator/SOUL.md": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "9ea4d6849b494fe820fcaa20ce5bef08",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/youtube-scientist-auditor/SOUL.md": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "8d9a3cd26a0da5e7ebdf8459a31267d7",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/youtube-scientist-compiler/SOUL.md": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "31621f709f0385b93c668ef36f8aef1e",
+    "semantic_hash": ""
+  },
+  "openclaw/agents/youtube-scientist-creator/SOUL.md": {
+    "mtime": 1782380669.540774,
+    "ast_hash": "493994f05bdd732e6b9f379cd979c661",
+    "semantic_hash": ""
+  },
+  "openclaw/deploy-list.txt": {
+    "mtime": 1782380669.5449958,
+    "ast_hash": "df3f542e0225a3a35972b9a492bae7ab",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/README.md": {
+    "mtime": 1782373851.336406,
+    "ast_hash": "3a8df5b60ae7dbb0869e764584319fff",
+    "semantic_hash": ""
+  },
+  "openclaw/infra/litellm/config.yaml": {
+    "mtime": 1782373851.336406,
+    "ast_hash": "80394a5130f35171ec154e1aa70574c5",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/analyze-cultural-context-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "a210eccab707ef4c461a2951b3b35c35",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/analyze-cultural-context-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "a692405612a2586df5aa1fe8fe23459c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/analyze-cultural-context-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "91e18f1db9f8b22f05ef51e9711487b6",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/assign-archetype-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "4aa8f34843a90d26d1e132840a9ea92b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/assign-archetype-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "e2576ef2cf5ed1f432201671fe655ecd",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/assign-archetype-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "383aaf72cdafcaebd39c0f96050ca94d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/assign-designer-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "d7b991af20092c7f78c2a67b2e60fb20",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/assign-designer-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "e2a517e28368a5f244630d99c60cdd28",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/assign-designer-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "60cada9a3146de47fba2036fa593fb0b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/atomize-stories-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "44f31e0e869c57bb68e322ee7ff341fa",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/atomize-stories-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "76ad1e8b703075bd7d33dcd17607f25e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/atomize-stories-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "0218caea76c94f5327375b93e3d8fe38",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/audit-trademark-compliance/SKILL.md": {
+    "mtime": 1782373851.346461,
+    "ast_hash": "9107f659a90e0e5acec0bc99ed4329ca",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/autolink-entities/SKILL.md": {
+    "mtime": 1782373851.346461,
+    "ast_hash": "703dc2879a1e56ee85014a9eb88a9437",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/build-personality-graph-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "094f7ffd95a9d8a208b13ff92d1c53a3",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/build-personality-graph-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "7959d3071b8515c07529b7aeb8a11958",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/build-personality-graph-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "be42eb5e636e9843f0817a06ac470221",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/calculate-opportunity-score/SKILL.md": {
+    "mtime": 1782373851.348835,
+    "ast_hash": "b8f45ef5d996043b545f0dcbf2b932df",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/detect-merch-opportunities-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "377a05d2fc8e5d15cb977b1b3dcd6ca1",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/detect-merch-opportunities-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "99a0bd17b7ff877d5e6382da2d337859",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/detect-merch-opportunities-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "f38629a6faa87ae91cf52ec89dddef1b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/direct-voice-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "b5517ec09c1c1f74a20a8d8e408995ab",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/direct-voice-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "272528bb657019195f722e454f933f40",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/direct-voice-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "417692c34fee9356bfa09d85454a0158",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-hidden-legends-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "3dfa9eb992680348509f2c36a14f48d0",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-hidden-legends-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "38578d98bf0769183151fd75ed56348b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-hidden-legends-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "caca8f95933fddc5b43645f47029f126",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-personalities-auditor/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "cdfa6914f6dc1f98a9a85d17f1c3fa2e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-personalities-compiler/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "2fc93c26f1e7aadd0a61bc0f326a4b2c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-personalities-creator/SKILL.md": {
+    "mtime": 1782380669.5474412,
+    "ast_hash": "35803fa1bec9e713ea5245b2e2cd4b14",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-products-auditor/SKILL.md": {
+    "mtime": 1782380669.5631588,
+    "ast_hash": "3820a9a0d56dde6159e52bbf516d624a",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-products-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "538e783ad9b23252360ac64a4af6ef2c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-products-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "a88b51f45508f915cbd4ef1f8bad54bf",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-trends-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "ea09f0c94d25b8de701bdb3e5694a2a5",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-trends-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "3e822afd1ea3f5232fb6ac63360904c4",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/discover-trends-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "b01dc20c706005ce4b2c3c50be9f9e09",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/draft-video-script/SKILL.md": {
+    "mtime": 1782373851.3522005,
+    "ast_hash": "6908f93455abde8bb6bdc05b3d5c2909",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/drive-community-engagement-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "71099ecd1307403af0a4e898fdfe6f29",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/drive-community-engagement-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "85756d4db9682234d3879f436ff41cf6",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/drive-community-engagement-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "a2f53f54f0684fc69ea8695b17e1e0dc",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/extract-human-meaning-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "8f366d322af032d2546533a11f739a77",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/extract-human-meaning-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "19a1c90480dcede16fa4616d2f4e6c2e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/extract-human-meaning-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "a44e53653c2ceda5c7f5e375a9700d1c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/extract-psychological-arc-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "c0b3e60af340a4a88bf59285fea17364",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/extract-psychological-arc-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "07839e5d16c7c12e022f87717ebeee36",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/extract-psychological-arc-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "19acba801bc72eee131c679e7ff40d24",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/fetch-signals/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "ba57cb45f5fd41c37660a54e66865c32",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/find-coverage-gaps-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "554694eb9a1ccd998c923b0424820224",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/find-coverage-gaps-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "a7b5cfe5be37b1365191b3e1139dc7dc",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/find-coverage-gaps-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "10cc3a09fa0b39b08c401fe9880df533",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/flag-retention-risks-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "0db5071df01fdb8105bbfba32abc671d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/flag-retention-risks-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "15ab36c49020da4a9d9339c0ca3819e9",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/flag-retention-risks-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "22b6cc388b97da3d8b754aaa659d929c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-demand-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "d5cb04ede013bac3e4a81c4d6f22f578",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-demand-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "2e942be2c424a1acc8208f655bd557c2",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-demand-creator/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "fb7c51e32a91229acc53e7023874d42d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-retention/SKILL.md": {
+    "mtime": 1782373851.3522005,
+    "ast_hash": "095a96afa27840765b816294c0c8d501",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-revenue-auditor/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "926f4801905e56e65669a5006d9427fc",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-revenue-compiler/SKILL.md": {
+    "mtime": 1782380669.564255,
+    "ast_hash": "4d1b773d65c2f19a0845f6fae68a21ca",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/forecast-revenue-creator/SKILL.md": {
+    "mtime": 1782380669.5784323,
+    "ast_hash": "4e3597932174c6bfa610af12f56c0edd",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/gatekeep-opportunity-auditor/SKILL.md": {
+    "mtime": 1782380669.5794435,
+    "ast_hash": "817627a33e379682ebeb689a6d449df3",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/gatekeep-opportunity-compiler/SKILL.md": {
+    "mtime": 1782380669.5794435,
+    "ast_hash": "984bbc82f64803fea23c65e2de98b7c0",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/gatekeep-opportunity-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "1e096768ece19ec324d7b16905886ceb",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/gather-citations/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "cab1fc875546f0d37427cb2e4e9fb43d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-design-prompt/SKILL.md": {
+    "mtime": 1782373851.3522005,
+    "ast_hash": "4303a28751a27c015d1886475a240926",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-hooks-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "e8778b960fd4aac2000b4f5fbabed89b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-hooks-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "843cf97ed122c4968d697cb7ccf85464",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-hooks-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "04bbd16ab67683a8835376cde755da96",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-psych-profile/SKILL.md": {
+    "mtime": 1782373851.3522005,
+    "ast_hash": "432cb8810fb030c07276828deb798387",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-script-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "77796c0d661fdfb6dbbc712b1ce425c8",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-script-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "bc6771a6a3dbc5c5a62be95ff2f61224",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-script-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "cfafea01c40b3414f287217283f48e88",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-thumbnails-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "1723ddf888b11b6cf8e02337a186a973",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-thumbnails-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "10b7a56ba547aa06f7e571fc526c0314",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/generate-thumbnails-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "fcecfe6ff2c8d0a4638a1810eb6f94d1",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/grow-owned-audience-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "60c4ee973d405021e09d4d798162dd81",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/grow-owned-audience-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "279a017089d5255bb5ad600aa3a20716",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/grow-owned-audience-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "ca6c30c2c96b28ccf9ca85f491f1d882",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-affiliates-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "45401032e9bc043c7cc2f0ed60947597",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-affiliates-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "3280a355dd52646495ebb527e0c8fc84",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-affiliates-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "e7731ba1d3ea0162777636190b6c736b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-collab-outreach-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "1a5570dceb52cba05021b8f1bb4b011a",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-collab-outreach-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "ecdbc5eaaeb52b9ae5b60a353f948074",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-collab-outreach-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "653fd2c6d606980a60673f26c6145cd2",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-posting-schedule-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "d5cea363824fe43a9d7d594d90ad62c8",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-posting-schedule-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "4632ca0d9128ab13951b0494b6133c28",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/manage-posting-schedule-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "33ea499075f8d14abef833b9b5251b1b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/map-audience-auditor/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "535325eb21d43d6d7f03bf21f4945777",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/map-audience-compiler/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "f8f97f362061ed1bb502b8c7573b91c6",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/map-audience-creator/SKILL.md": {
+    "mtime": 1782380669.5808368,
+    "ast_hash": "8a6e430b758cfeb73795efc307c08ac4",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/match-sponsorships-auditor/SKILL.md": {
+    "mtime": 1782380669.5950017,
+    "ast_hash": "a30c066a9d3d0083ec8db9564b72b689",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/match-sponsorships-compiler/SKILL.md": {
+    "mtime": 1782380669.5950017,
+    "ast_hash": "fb328cf9adfce207c1b293b96d6e7463",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/match-sponsorships-creator/SKILL.md": {
+    "mtime": 1782380669.5961378,
+    "ast_hash": "55f73021ac92b4115926c0c48558012c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/monetize-community-auditor/SKILL.md": {
+    "mtime": 1782380669.59729,
+    "ast_hash": "36e9eebb0b73ef80e5870a09f0c04164",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/monetize-community-compiler/SKILL.md": {
+    "mtime": 1782380669.5981996,
+    "ast_hash": "c960b45991a2f90c202fcaa0712e855e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/monetize-community-creator/SKILL.md": {
+    "mtime": 1782380669.5987256,
+    "ast_hash": "22e1a28ce2a1acfa2df36824259a2acd",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-ad-revenue-auditor/SKILL.md": {
+    "mtime": 1782380669.599267,
+    "ast_hash": "a752ea32dbf093a8a8cf909569a435a0",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-ad-revenue-compiler/SKILL.md": {
+    "mtime": 1782380669.599789,
+    "ast_hash": "3ae73ac6610fdc60ece9bbc11f89001f",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-ad-revenue-creator/SKILL.md": {
+    "mtime": 1782380669.600836,
+    "ast_hash": "9214008f008df2d9f0c981ee98119f89",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-ctr-auditor/SKILL.md": {
+    "mtime": 1782380669.6013627,
+    "ast_hash": "0b0faccdbb05087c007265eee737de70",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-ctr-compiler/SKILL.md": {
+    "mtime": 1782380669.601887,
+    "ast_hash": "d6f7b2396f307685d7fc34e52762604a",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-ctr-creator/SKILL.md": {
+    "mtime": 1782380669.602411,
+    "ast_hash": "56305984f38213fb8c668d094e8a8667",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/optimize-scoring-weights/SKILL.md": {
+    "mtime": 1782373851.367842,
+    "ast_hash": "b8eb81f884684fded7eb3771581e3ea8",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/orchestrate-content-run/SKILL.md": {
+    "mtime": 1782373851.367842,
+    "ast_hash": "5bb6d862dc2beb6d137b33dbbdf74fce",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/organize-playlists-auditor/SKILL.md": {
+    "mtime": 1782380669.6029277,
+    "ast_hash": "3781694f91cc0b87b3a68fc174e9c3a7",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/organize-playlists-compiler/SKILL.md": {
+    "mtime": 1782380669.6034477,
+    "ast_hash": "401d4b3bd6ba48faf59f48fa9231208d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/organize-playlists-creator/SKILL.md": {
+    "mtime": 1782380669.6044917,
+    "ast_hash": "4545993c28ca03d125a3d331be17780e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/plan-assets-auditor/SKILL.md": {
+    "mtime": 1782380669.6050165,
+    "ast_hash": "dd140fd5b93fa8d276977ee8348080c2",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/plan-assets-compiler/SKILL.md": {
+    "mtime": 1782380669.6055381,
+    "ast_hash": "f317977945b1fe4a2ade1ebc98e10661",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/plan-assets-creator/SKILL.md": {
+    "mtime": 1782380669.60606,
+    "ast_hash": "c6280ca68d9fb12815bcc3e5439e1473",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/predict-engagement-auditor/SKILL.md": {
+    "mtime": 1782380669.6065855,
+    "ast_hash": "f10ffb950bf143a9bdb861892f4996ab",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/predict-engagement-compiler/SKILL.md": {
+    "mtime": 1782380669.6071017,
+    "ast_hash": "71a8dafd9ea2b5551af0002489fdf0ab",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/predict-engagement-creator/SKILL.md": {
+    "mtime": 1782380669.6076221,
+    "ast_hash": "4079a62aedec575a0121b524c6316a92",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/profile-regional-culture-auditor/SKILL.md": {
+    "mtime": 1782380669.6081498,
+    "ast_hash": "7d304502bdcfaa0a1661317052fc09dd",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/profile-regional-culture-compiler/SKILL.md": {
+    "mtime": 1782380669.6086707,
+    "ast_hash": "74596c4625ccda3982b03060ca6c784e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/profile-regional-culture-creator/SKILL.md": {
+    "mtime": 1782380669.6092367,
+    "ast_hash": "756cd518d56ad42431cd91538a3f387d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/query-semantic-nodes/SKILL.md": {
+    "mtime": 1782373851.367842,
+    "ast_hash": "d63a825f54ced689f2ee621002f0ae77",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/review-submission-auditor/SKILL.md": {
+    "mtime": 1782380669.6097634,
+    "ast_hash": "213e3eed9b9794c66696ce434efb71de",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/review-submission-compiler/SKILL.md": {
+    "mtime": 1782380669.6102862,
+    "ast_hash": "e9ed6f8283670743066976b819ab6874",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/review-submission-creator/SKILL.md": {
+    "mtime": 1782380669.6108081,
+    "ast_hash": "d5530493d94ca2fe98ece856a617faed",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-archetype-auditor/SKILL.md": {
+    "mtime": 1782380669.6117308,
+    "ast_hash": "6ae9832d9498cdd255bded4397d9b46a",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-archetype-compiler/SKILL.md": {
+    "mtime": 1782380669.612723,
+    "ast_hash": "f1796cc21d9f0ff92a0e2055a153c86b",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-archetype-creator/SKILL.md": {
+    "mtime": 1782380669.6137364,
+    "ast_hash": "6d405be5dbfa6451f2e62cb4a686a222",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-audience-auditor/SKILL.md": {
+    "mtime": 1782380669.6142545,
+    "ast_hash": "106f566fa3fb8bd1cad6aecead7c1b80",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-audience-compiler/SKILL.md": {
+    "mtime": 1782380669.6145976,
+    "ast_hash": "0035e3ce5281156ae3955f5f499701eb",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-audience-creator/SKILL.md": {
+    "mtime": 1782380669.6156716,
+    "ast_hash": "5da0fdf4813f869f8ad04573460e8d2a",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-backlog-auditor/SKILL.md": {
+    "mtime": 1782380669.6161985,
+    "ast_hash": "b279443d2ded39e5da2e0ea1830cefe5",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-backlog-compiler/SKILL.md": {
+    "mtime": 1782380669.6167202,
+    "ast_hash": "9b0b3734f6c7d9e7b52f994d9578edd7",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-backlog-creator/SKILL.md": {
+    "mtime": 1782380669.6172419,
+    "ast_hash": "fc35b950ed40098c4c0011c66532c413",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-content-opportunity-auditor/SKILL.md": {
+    "mtime": 1782380669.6182997,
+    "ast_hash": "f1c4fc037a7df2905c040bcbf6b6b380",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-content-opportunity-compiler/SKILL.md": {
+    "mtime": 1782380669.6188269,
+    "ast_hash": "a2d1afacb96ddfbdc7921f80f3c53a9a",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-content-opportunity-creator/SKILL.md": {
+    "mtime": 1782380669.6193533,
+    "ast_hash": "eeb5b498e99d5dfaa76a180349332ce6",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-geography-auditor/SKILL.md": {
+    "mtime": 1782380669.6199358,
+    "ast_hash": "544f43ba3b5a34252aa82e598bc0e217",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-geography-compiler/SKILL.md": {
+    "mtime": 1782380669.6209853,
+    "ast_hash": "c5c3259edf185bab07ea550717e5435d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-geography-creator/SKILL.md": {
+    "mtime": 1782380669.621507,
+    "ast_hash": "b97c03d31c7095cff1f59e0265ba8b33",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-hidden-legends-auditor/SKILL.md": {
+    "mtime": 1782380669.6220243,
+    "ast_hash": "308374aaa676e3e21bd6e67971f092fc",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-hidden-legends-compiler/SKILL.md": {
+    "mtime": 1782380669.6225476,
+    "ast_hash": "47a0246d8ed9ead657e1be2abb678083",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-hidden-legends-creator/SKILL.md": {
+    "mtime": 1782380669.6235902,
+    "ast_hash": "e543247f8a12304eb54109d9575351dc",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-story-universe-auditor/SKILL.md": {
+    "mtime": 1782380669.624122,
+    "ast_hash": "d861a6947a0879987ff921e603731859",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-story-universe-compiler/SKILL.md": {
+    "mtime": 1782380669.6246407,
+    "ast_hash": "1a44a80d57c5ab6076859e433469a0ed",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-story-universe-creator/SKILL.md": {
+    "mtime": 1782380669.6251676,
+    "ast_hash": "d3aee2e1d7c4642eace619e30938b117",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-youtube-auditor/SKILL.md": {
+    "mtime": 1782380669.6256945,
+    "ast_hash": "2c20cb48cd9b81e43b189146d7ae187d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-youtube-compiler/SKILL.md": {
+    "mtime": 1782380669.6262155,
+    "ast_hash": "4783172e2ae03abfbc100da70b59aa85",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/science-youtube-creator/SKILL.md": {
+    "mtime": 1782380669.6267314,
+    "ast_hash": "adef8b858a1df3b0faf695919d248003",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/score-geography-auditor/SKILL.md": {
+    "mtime": 1782380669.627763,
+    "ast_hash": "596ba9ec62bcbb3bf7158c2e5247603c",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/score-geography-compiler/SKILL.md": {
+    "mtime": 1782380669.6283197,
+    "ast_hash": "87683eb2f57c3e8b2891ab34686ef9b1",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/score-geography-creator/SKILL.md": {
+    "mtime": 1782380669.6293294,
+    "ast_hash": "014370360364cc5e3c9c1b75ad2c5ffb",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/select-vibe-auditor/SKILL.md": {
+    "mtime": 1782380669.6293294,
+    "ast_hash": "1093f94b17084227b50512319ccda773",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/select-vibe-compiler/SKILL.md": {
+    "mtime": 1782380669.6309092,
+    "ast_hash": "4a0c86e3b9bb626da50ee76c773d6832",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/select-vibe-creator/SKILL.md": {
+    "mtime": 1782380669.6309092,
+    "ast_hash": "6460b973af025c1210b0fd057e13b250",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/structure-narrative-auditor/SKILL.md": {
+    "mtime": 1782380669.6309092,
+    "ast_hash": "81411781d979631cfedb36ccca57f1f1",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/structure-narrative-compiler/SKILL.md": {
+    "mtime": 1782380669.6309092,
+    "ast_hash": "99cc60bd7771d8d654d4d55e31ce790d",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/structure-narrative-creator/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "150d4bdfa30af95b6addb978f99de9a0",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/submit-editorial-review/SKILL.md": {
+    "mtime": 1782373851.367842,
+    "ast_hash": "6eeca01cb79fc54e6ccc7a4c5e14aa2e",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/upload-listing-auditor/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "801588dbf6f09713836c132b87ff5df5",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/upload-listing-compiler/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "3c82a8bac56657c6c798a2ae09d6a8af",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/upload-listing-creator/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "effe40d9a6b9dbc9994abe65a1b598a4",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/verify-claims/SKILL.md": {
+    "mtime": 1782373851.367842,
+    "ast_hash": "9869072dd6f588f3a95fbb27dfee92da",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/verify-facts-auditor/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "f77fa5bf07da5ce053ac459f8ce34133",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/verify-facts-compiler/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "43c57907e0326ae546468c70f8c44710",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/verify-facts-creator/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "c5d1917519c196c66bf548b1892ae64f",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/write-merch-brief-auditor/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "de870416092e4621f2208c68347e8707",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/write-merch-brief-compiler/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "4842f69382f0416d3195d4a845a71512",
+    "semantic_hash": ""
+  },
+  "openclaw/skills/write-merch-brief-creator/SKILL.md": {
+    "mtime": 1782380669.6336806,
+    "ast_hash": "b6ce3b167b04503aa32590e541f1aa36",
+    "semantic_hash": ""
   }
 }
