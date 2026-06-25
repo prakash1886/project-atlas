@@ -1,0 +1,109 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": {
+      "type": "string"
+    },
+    "archetype_performance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "archetype": {
+            "type": "string",
+            "enum": [
+              "underdog",
+              "rebel",
+              "visionary",
+              "mentor",
+              "hero",
+              "outlaw",
+              "explorer",
+              "sage"
+            ]
+          },
+          "avg_watch_time_minutes": {
+            "type": "number"
+          },
+          "avg_retention_pct": {
+            "type": "number"
+          },
+          "share_rate": {
+            "type": "number"
+          },
+          "comment_engagement_rate": {
+            "type": "number"
+          },
+          "subscriber_conversion_rate": {
+            "type": "number"
+          },
+          "video_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "archetype",
+          "avg_watch_time_minutes",
+          "avg_retention_pct",
+          "share_rate",
+          "comment_engagement_rate",
+          "subscriber_conversion_rate",
+          "video_count"
+        ]
+      }
+    },
+    "best_for_retention": {
+      "type": "string",
+      "enum": [
+        "underdog",
+        "rebel",
+        "visionary",
+        "mentor",
+        "hero",
+        "outlaw",
+        "explorer",
+        "sage"
+      ]
+    },
+    "best_for_shares": {
+      "type": "string",
+      "enum": [
+        "underdog",
+        "rebel",
+        "visionary",
+        "mentor",
+        "hero",
+        "outlaw",
+        "explorer",
+        "sage"
+      ]
+    },
+    "best_for_watch_time": {
+      "type": "string",
+      "enum": [
+        "underdog",
+        "rebel",
+        "visionary",
+        "mentor",
+        "hero",
+        "outlaw",
+        "explorer",
+        "sage"
+      ]
+    },
+    "production_recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "generated_at",
+    "archetype_performance",
+    "best_for_retention",
+    "best_for_shares",
+    "best_for_watch_time",
+    "production_recommendations"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": {
+      "type": "string"
+    },
+    "create_now": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "personality_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "composite_score": {
+            "type": "number"
+          },
+          "trend_score": {
+            "type": "number"
+          },
+          "story_quality_score": {
+            "type": "number"
+          },
+          "geographic_demand_score": {
+            "type": "number"
+          },
+          "audience_fit_score": {
+            "type": "number"
+          },
+          "competition_gap_score": {
+            "type": "number"
+          },
+          "recommended_story_type": {
+            "type": "string"
+          },
+          "recommended_archetype": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "personality_id",
+          "name",
+          "composite_score",
+          "trend_score",
+          "story_quality_score",
+          "geographic_demand_score",
+          "audience_fit_score",
+          "competition_gap_score"
+        ]
+      }
+    },
+    "create_later": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "personality_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "composite_score": {
+            "type": "number"
+          },
+          "trend_score": {
+            "type": "number"
+          },
+          "story_quality_score": {
+            "type": "number"
+          },
+          "geographic_demand_score": {
+            "type": "number"
+          },
+          "audience_fit_score": {
+            "type": "number"
+          },
+          "competition_gap_score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "personality_id",
+          "name",
+          "composite_score",
+          "trend_score",
+          "story_quality_score",
+          "geographic_demand_score",
+          "audience_fit_score",
+          "competition_gap_score"
+        ]
+      }
+    },
+    "archive": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "personality_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "composite_score": {
+            "type": "number"
+          },
+          "trend_score": {
+            "type": "number"
+          },
+          "story_quality_score": {
+            "type": "number"
+          },
+          "geographic_demand_score": {
+            "type": "number"
+          },
+          "audience_fit_score": {
+            "type": "number"
+          },
+          "competition_gap_score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "personality_id",
+          "name",
+          "composite_score",
+          "trend_score",
+          "story_quality_score",
+          "geographic_demand_score",
+          "audience_fit_score",
+          "competition_gap_score"
+        ]
+      }
+    },
+    "scoring_weights": {
+      "type": "object",
+      "properties": {
+        "trend": {
+          "type": "number"
+        },
+        "story_quality": {
+          "type": "number"
+        },
+        "geographic_demand": {
+          "type": "number"
+        },
+        "audience_fit": {
+          "type": "number"
+        },
+        "competition_gap": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "trend",
+        "story_quality",
+        "geographic_demand",
+        "audience_fit",
+        "competition_gap"
+      ]
+    }
+  },
+  "required": [
+    "generated_at",
+    "create_now",
+    "create_later",
+    "archive",
+    "scoring_weights"
+  ]
+}

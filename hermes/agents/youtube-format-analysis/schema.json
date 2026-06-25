@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "properties": {
+    "channel_id": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "optimal_video_length_by_topic": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "best_hook_duration_seconds": {
+      "type": "number"
+    },
+    "best_publish_times": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string"
+          },
+          "hour_utc": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "day",
+          "hour_utc"
+        ]
+      }
+    },
+    "chapter_structure_recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "insights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric": {
+            "type": "string"
+          },
+          "finding": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "recommendation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "metric",
+          "finding",
+          "confidence",
+          "recommendation"
+        ]
+      }
+    }
+  },
+  "required": [
+    "channel_id",
+    "generated_at",
+    "optimal_video_length_by_topic",
+    "best_hook_duration_seconds",
+    "best_publish_times",
+    "chapter_structure_recommendations",
+    "insights"
+  ]
+}

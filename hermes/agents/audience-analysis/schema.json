@@ -1,0 +1,132 @@
+{
+  "type": "object",
+  "properties": {
+    "channel_id": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "primary_persona": {
+      "type": "object",
+      "properties": {
+        "segment_name": {
+          "type": "string"
+        },
+        "age_range": {
+          "type": "string"
+        },
+        "top_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "content_preferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "watch_behaviour": {
+          "type": "string"
+        },
+        "emotional_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "share_propensity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      },
+      "required": [
+        "segment_name",
+        "age_range",
+        "top_regions",
+        "content_preferences",
+        "watch_behaviour",
+        "emotional_triggers",
+        "share_propensity"
+      ]
+    },
+    "secondary_personas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "segment_name": {
+            "type": "string"
+          },
+          "age_range": {
+            "type": "string"
+          },
+          "top_regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "content_preferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "watch_behaviour": {
+            "type": "string"
+          },
+          "emotional_triggers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "share_propensity": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        },
+        "required": [
+          "segment_name",
+          "age_range",
+          "top_regions",
+          "content_preferences",
+          "watch_behaviour",
+          "emotional_triggers",
+          "share_propensity"
+        ]
+      }
+    },
+    "geographic_breakdown": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "retention_insights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "channel_id",
+    "generated_at",
+    "primary_persona",
+    "secondary_personas",
+    "geographic_breakdown",
+    "retention_insights"
+  ]
+}

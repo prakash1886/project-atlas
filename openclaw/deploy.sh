@@ -16,8 +16,7 @@ AGENTS=(
   "knowledge-graph|deepseek-direct/deepseek-chat|🕸️|Knowledge Graph Curator|query-semantic-nodes,autolink-entities"
   "research-factcheck|deepseek-direct/deepseek-chat|🔎|Research & Fact-Check|gather-citations,verify-claims"
   "narrative-psychology|gemini-direct/gemini-2.5-flash|🎭|Narrative & Psychology|generate-psych-profile,draft-video-script"
-  "commerce-design|deepseek-direct/deepseek-chat|🛍️|Commerce & Design|generate-design-prompt,audit-trademark-compliance"
-  "ds-star|gemini-direct/gemini-2.5-flash|📊|DS-Star|forecast-retention,optimize-scoring-weights"
+  "commerce-design|deepseek-direct/deepseek-chat|🛍|Commerce & Design|generate-design-prompt,audit-trademark-compliance"
 )
 
 echo ">> staging skills + personas to $HOST:$REMOTE"

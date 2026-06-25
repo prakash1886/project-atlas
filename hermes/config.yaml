@@ -1,0 +1,17 @@
+# Hermes DS-STAR Configuration — Cost Optimized Settings
+# Configured for Project Atlas Railway/Hostinger Deployment
+
+api:
+  port: 8000
+  host: "0.0.0.0"
+  secret_key: "default-ds-star-api-secret-key-12345"
+
+ds_star:
+  data_directory: "../ds-star/data"
+  max_refinement_rounds: 3
+  agent_models:
+    router: "gemini/gemini-1.5-flash-lite"
+    researcher: "gemini/gemini-1.5-flash"
+    analyzer: "gemini/gemini-1.5-flash"
+    verifier: "gemini/gemini-1.5-flash-lite"
+    finalizer: "gemini/gemini-1.5-flash"

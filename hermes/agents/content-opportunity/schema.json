@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": {
+      "type": "string"
+    },
+    "top_opportunities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "search_growth_score": {
+            "type": "integer"
+          },
+          "discussion_intensity_score": {
+            "type": "integer"
+          },
+          "virality_score": {
+            "type": "integer"
+          },
+          "monetization_score": {
+            "type": "integer"
+          },
+          "evergreen_score": {
+            "type": "integer"
+          },
+          "composite_score": {
+            "type": "number"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "topic",
+          "search_growth_score",
+          "discussion_intensity_score",
+          "virality_score",
+          "monetization_score",
+          "evergreen_score",
+          "composite_score",
+          "reasons"
+        ]
+      }
+    },
+    "merchandise_opportunities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "audience_opportunities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forecasted_trends": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "generated_at",
+    "top_opportunities",
+    "merchandise_opportunities",
+    "audience_opportunities",
+    "forecasted_trends"
+  ]
+}

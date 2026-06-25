@@ -124,27 +124,3 @@ submission-review-auditor|gemini-direct/gemini-2.5-flash|🔍|Submission Review 
 upload-creator|deepseek-direct/deepseek-chat|🎨|Upload Creator|vps|upload-listing-creator
 upload-compiler|deepseek-direct/deepseek-chat|⚙️|Upload Compiler|vps|upload-listing-compiler
 upload-auditor|gemini-direct/gemini-2.5-flash|🔍|Upload Auditor|vps|upload-listing-auditor
-content-opportunity-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Content Opportunity Scientist Creator|railway|science-content-opportunity-creator
-content-opportunity-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Content Opportunity Scientist Compiler|railway|science-content-opportunity-compiler
-content-opportunity-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Content Opportunity Scientist Auditor|railway|science-content-opportunity-auditor
-audience-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Audience Scientist Creator|railway|science-audience-creator
-audience-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Audience Scientist Compiler|railway|science-audience-compiler
-audience-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Audience Scientist Auditor|railway|science-audience-auditor
-story-universe-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Story Universe Scientist Creator|railway|science-story-universe-creator
-story-universe-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Story Universe Scientist Compiler|railway|science-story-universe-compiler
-story-universe-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Story Universe Scientist Auditor|railway|science-story-universe-auditor
-archetype-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Archetype Scientist Creator|railway|science-archetype-creator
-archetype-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Archetype Scientist Compiler|railway|science-archetype-compiler
-archetype-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Archetype Scientist Auditor|railway|science-archetype-auditor
-geographic-intelligence-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Geographic Intelligence Scientist Creator|railway|science-geography-creator
-geographic-intelligence-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Geographic Intelligence Scientist Compiler|railway|science-geography-compiler
-geographic-intelligence-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Geographic Intelligence Scientist Auditor|railway|science-geography-auditor
-hidden-legends-discovery-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Hidden Legends Discovery Scientist Creator|railway|science-hidden-legends-creator
-hidden-legends-discovery-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Hidden Legends Discovery Scientist Compiler|railway|science-hidden-legends-compiler
-hidden-legends-discovery-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Hidden Legends Discovery Scientist Auditor|railway|science-hidden-legends-auditor
-youtube-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|YouTube Scientist Creator|railway|science-youtube-creator
-youtube-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|YouTube Scientist Compiler|railway|science-youtube-compiler
-youtube-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|YouTube Scientist Auditor|railway|science-youtube-auditor
-backlog-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Backlog Scientist Creator|railway|science-backlog-creator
-backlog-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Backlog Scientist Compiler|railway|science-backlog-compiler
-backlog-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Backlog Scientist Auditor|railway|science-backlog-auditor

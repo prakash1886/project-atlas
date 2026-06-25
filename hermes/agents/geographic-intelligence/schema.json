@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "channel_id": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "top_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          },
+          "watch_time_pct": {
+            "type": "number"
+          },
+          "top_content_categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cultural_hooks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "opportunity_score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "region",
+          "country_code",
+          "watch_time_pct",
+          "top_content_categories",
+          "cultural_hooks",
+          "opportunity_score"
+        ]
+      }
+    },
+    "regional_topic_opportunities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "backlog_priority_adjustments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  },
+  "required": [
+    "channel_id",
+    "generated_at",
+    "top_regions",
+    "regional_topic_opportunities",
+    "backlog_priority_adjustments"
+  ]
+}

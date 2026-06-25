@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "personality_id": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "ranked_story_types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "story_type": {
+            "type": "string",
+            "enum": [
+              "failure_story",
+              "origin_story",
+              "rivalry_story",
+              "legacy_story",
+              "comeback_story",
+              "product_launch_story",
+              "underdog_story"
+            ]
+          },
+          "avg_retention_pct": {
+            "type": "number"
+          },
+          "avg_watch_time_minutes": {
+            "type": "number"
+          },
+          "sample_size": {
+            "type": "integer"
+          },
+          "top_performing_video_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "story_type",
+          "avg_retention_pct",
+          "avg_watch_time_minutes",
+          "sample_size"
+        ]
+      }
+    },
+    "recommended_next_story_type": {
+      "type": "string",
+      "enum": [
+        "failure_story",
+        "origin_story",
+        "rivalry_story",
+        "legacy_story",
+        "comeback_story",
+        "product_launch_story",
+        "underdog_story"
+      ]
+    },
+    "recommendation_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "personality_id",
+    "generated_at",
+    "ranked_story_types",
+    "recommended_next_story_type",
+    "recommendation_reason"
+  ]
+}

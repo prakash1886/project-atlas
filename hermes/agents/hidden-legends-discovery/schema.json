@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": {
+      "type": "string"
+    },
+    "discoveries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "story_quality_score": {
+            "type": "number"
+          },
+          "coverage_gap_score": {
+            "type": "number"
+          },
+          "wikipedia_pageview_growth_pct": {
+            "type": "number"
+          },
+          "existing_best_video_views": {
+            "type": "integer"
+          },
+          "opportunity_score": {
+            "type": "number"
+          },
+          "story_angles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "domain",
+          "story_quality_score",
+          "coverage_gap_score",
+          "wikipedia_pageview_growth_pct",
+          "existing_best_video_views",
+          "opportunity_score",
+          "story_angles",
+          "sources"
+        ]
+      }
+    },
+    "total_scanned": {
+      "type": "integer"
+    },
+    "filter_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "generated_at",
+    "discoveries",
+    "total_scanned",
+    "filter_criteria"
+  ]
+}

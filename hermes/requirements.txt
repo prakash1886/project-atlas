@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pyyaml
+pydantic
+litellm
+google-generativeai
+git+https://github.com/NousResearch/hermes-agent.git
