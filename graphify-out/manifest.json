@@ -5,9 +5,9 @@
     "semantic_hash": "2588a8dd489d9d8fd99d1bc19ab4248e"
   },
   "src/app.module.ts": {
-    "mtime": 1781774532.9425404,
-    "ast_hash": "df63d918f50b8bd22fc9fd7848106eca",
-    "semantic_hash": "df63d918f50b8bd22fc9fd7848106eca"
+    "mtime": 1782212443.7461765,
+    "ast_hash": "c0188c52973c639cd2f39245f782ea5e",
+    "semantic_hash": "c0188c52973c639cd2f39245f782ea5e"
   },
   "src/main.ts": {
     "mtime": 1781709136.586332,
@@ -15,9 +15,9 @@
     "semantic_hash": "d36d5d8bc08ae19857f88359f1ac1637"
   },
   "src/modules/database/database.module.ts": {
-    "mtime": 1781709847.6925974,
-    "ast_hash": "577ff21bd954b3b27d27ac1f51f85379",
-    "semantic_hash": "577ff21bd954b3b27d27ac1f51f85379"
+    "mtime": 1782275989.3291776,
+    "ast_hash": "eaeede5f5a6521f029c28dbbffcbf20e",
+    "semantic_hash": "eaeede5f5a6521f029c28dbbffcbf20e"
   },
   "src/modules/envato/envato.module.ts": {
     "mtime": 1781774532.9425404,
@@ -25,9 +25,9 @@
     "semantic_hash": "ea0f6dd1962cca0bc794c206a96979e9"
   },
   "src/modules/envato/envato.service.ts": {
-    "mtime": 1781774532.94354,
-    "ast_hash": "b1eebea8702add54809caea056c88117",
-    "semantic_hash": "b1eebea8702add54809caea056c88117"
+    "mtime": 1782211521.5737474,
+    "ast_hash": "5c8bce970e4599d84b20bc9be8f99cf9",
+    "semantic_hash": "5c8bce970e4599d84b20bc9be8f99cf9"
   },
   "src/modules/llm/llm.module.ts": {
     "mtime": 1781770131.8834777,
@@ -35,24 +35,49 @@
     "semantic_hash": "09971495d3a0dcf56388de8c094887fc"
   },
   "src/modules/llm/llm.service.ts": {
-    "mtime": 1781770131.8834777,
-    "ast_hash": "3493a344863b5f9e64c4dd3e8a5d7a7e",
-    "semantic_hash": "3493a344863b5f9e64c4dd3e8a5d7a7e"
+    "mtime": 1782056886.2211764,
+    "ast_hash": "1fb1dce03fa93e92d1afca40ced979bb",
+    "semantic_hash": "1fb1dce03fa93e92d1afca40ced979bb"
   },
   "src/modules/llm/modal/app.py": {
-    "mtime": 1781793384.1145215,
-    "ast_hash": "4bd462a7eeb6fe685fbb4f545045460e",
-    "semantic_hash": "4bd462a7eeb6fe685fbb4f545045460e"
+    "mtime": 1781944480.5776865,
+    "ast_hash": "9a655539301c53cafd359c2c483c4f5e",
+    "semantic_hash": "9a655539301c53cafd359c2c483c4f5e"
   },
   "src/modules/redis/redis.module.ts": {
     "mtime": 1781709136.586332,
     "ast_hash": "adcd2178cc8b4d7af16fd40d89c25b6f",
     "semantic_hash": "adcd2178cc8b4d7af16fd40d89c25b6f"
   },
+  "src/modules/search/open-source-search.service.ts": {
+    "mtime": 1782198748.2835257,
+    "ast_hash": "6b70b70bd6b63ab084dcf87ab8fac91c",
+    "semantic_hash": "6b70b70bd6b63ab084dcf87ab8fac91c"
+  },
+  "src/modules/search/search.module.ts": {
+    "mtime": 1782196553.2399,
+    "ast_hash": "35e37a83929c99b740d51021c29cb2e2",
+    "semantic_hash": "35e37a83929c99b740d51021c29cb2e2"
+  },
+  "src/modules/search/search.service.ts": {
+    "mtime": 1782187806.1619987,
+    "ast_hash": "cdb5b781ebf31877a275084510c5a8cd",
+    "semantic_hash": "cdb5b781ebf31877a275084510c5a8cd"
+  },
   "src/modules/temporal/activities/ad-automation.activities.ts": {
     "mtime": 1781770131.8844688,
     "ast_hash": "708969965f09a00e7bc8ce494ed8cc16",
     "semantic_hash": "708969965f09a00e7bc8ce494ed8cc16"
+  },
+  "src/modules/temporal/activities/ds-star-scientists.activities.ts": {
+    "mtime": 1782056753.6947532,
+    "ast_hash": "d51331904f552ce81658b54afeb39e9a",
+    "semantic_hash": "d51331904f552ce81658b54afeb39e9a"
+  },
+  "src/modules/temporal/activities/trend-signals.activities.ts": {
+    "mtime": 1782184447.0670843,
+    "ast_hash": "9d4a2a8b7e8f4953310e9e5c25ab1e88",
+    "semantic_hash": "9d4a2a8b7e8f4953310e9e5c25ab1e88"
   },
   "src/modules/temporal/crypto/encryption-codec.ts": {
     "mtime": 1781770131.8844688,
@@ -65,18 +90,78 @@
     "semantic_hash": "5964dd84f4efcc28afd85656a57340d3"
   },
   "src/modules/temporal/temporal.module.ts": {
-    "mtime": 1781788770.4915304,
-    "ast_hash": "c3bcfb7bb5a77ac93eb543f3a79e58f2",
-    "semantic_hash": "c3bcfb7bb5a77ac93eb543f3a79e58f2"
+    "mtime": 1782184459.9890544,
+    "ast_hash": "eb3f150f98c235fb13bc99205279d372",
+    "semantic_hash": "eb3f150f98c235fb13bc99205279d372"
+  },
+  "src/modules/temporal/types/ds-star.types.ts": {
+    "mtime": 1782056708.753947,
+    "ast_hash": "8fdbd80d7b4b0aea724f73c585b7e05d",
+    "semantic_hash": "8fdbd80d7b4b0aea724f73c585b7e05d"
   },
   "src/modules/temporal/workflows/ad-automation.workflow.ts": {
     "mtime": 1781770131.8854697,
     "ast_hash": "4f2bd01f1df8b59c731b09063d1752f4",
     "semantic_hash": "4f2bd01f1df8b59c731b09063d1752f4"
   },
+  "src/modules/temporal/workflows/index.ts": {
+    "mtime": 1782184461.9389858,
+    "ast_hash": "738b9b2f29b84408a0bd63f57e98fe63",
+    "semantic_hash": "738b9b2f29b84408a0bd63f57e98fe63"
+  },
+  "src/modules/temporal/workflows/nightly-intelligence.workflow.ts": {
+    "mtime": 1782056767.3048017,
+    "ast_hash": "727e22312c36db400817a14c63897ecd",
+    "semantic_hash": "727e22312c36db400817a14c63897ecd"
+  },
+  "src/modules/temporal/workflows/trend-signals.workflow.ts": {
+    "mtime": 1782184451.073581,
+    "ast_hash": "001f550a98c43f896e66b632b0a3db24",
+    "semantic_hash": "001f550a98c43f896e66b632b0a3db24"
+  },
+  "src/modules/temporal/workflows/weekly-intelligence.workflow.ts": {
+    "mtime": 1782056789.3376267,
+    "ast_hash": "75ba3007bd84713f1401e0a1810bc457",
+    "semantic_hash": "75ba3007bd84713f1401e0a1810bc457"
+  },
   "src/worker.ts": {
-    "mtime": 1781770131.8854697,
-    "ast_hash": "96f9a1add5d3e4d773e69615f8df9021",
-    "semantic_hash": "96f9a1add5d3e4d773e69615f8df9021"
+    "mtime": 1782184473.2032323,
+    "ast_hash": "44e08240f72470bddfce0b9531f229ec",
+    "semantic_hash": "44e08240f72470bddfce0b9531f229ec"
+  },
+  "src/modules/video/video-render.service.ts": {
+    "mtime": 1782276025.3158395,
+    "ast_hash": "99e823be05383f9a04efa57d391ea9e9",
+    "semantic_hash": "99e823be05383f9a04efa57d391ea9e9"
+  },
+  "src/modules/video/video.module.ts": {
+    "mtime": 1782275995.3479545,
+    "ast_hash": "82382251fc393210f6a865cc51763448",
+    "semantic_hash": "82382251fc393210f6a865cc51763448"
+  },
+  "src/modules/video/heygen.service.ts": {
+    "mtime": 1782275962.8593488,
+    "ast_hash": "85cd2578afe4cbab6661fd61c80add4e",
+    "semantic_hash": "85cd2578afe4cbab6661fd61c80add4e"
+  },
+  "src/modules/video/higgsfield.service.ts": {
+    "mtime": 1782220471.7572331,
+    "ast_hash": "14ec59cdf8f053899682ad83573098fb",
+    "semantic_hash": "14ec59cdf8f053899682ad83573098fb"
+  },
+  "src/modules/video/google-lyria.service.ts": {
+    "mtime": 1782275952.591351,
+    "ast_hash": "73ba9f20816a8ee9f0df8774b71b894d",
+    "semantic_hash": "73ba9f20816a8ee9f0df8774b71b894d"
+  },
+  "src/modules/video/google-veo.service.ts": {
+    "mtime": 1782275743.2551024,
+    "ast_hash": "52785e503b4e37d290ce54633ef1a4a1",
+    "semantic_hash": "52785e503b4e37d290ce54633ef1a4a1"
+  },
+  "src/modules/video/video.controller.ts": {
+    "mtime": 1782275992.1595385,
+    "ast_hash": "268585646a29030ed4259082a9f67e66",
+    "semantic_hash": "268585646a29030ed4259082a9f67e66"
   }
 }

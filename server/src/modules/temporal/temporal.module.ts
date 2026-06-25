@@ -3,15 +3,20 @@ import { Connection, Client } from '@temporalio/client';
 import { DefaultFailureConverter } from '@temporalio/common';
 import { EncryptionCodec } from './crypto/encryption-codec.js';
 import { LlmModule } from '../llm/llm.module.js';
+import { SearchModule } from '../search/search.module.js';
 import { AdAutomationActivities } from './activities/ad-automation.activities.js';
+import { DsStarScientistActivities } from './activities/ds-star-scientists.activities.js';
+import { TrendSignalsActivities } from './activities/trend-signals.activities.js';
 import { TemporalController } from './temporal.controller.js';
 
 @Global()
 @Module({
-  imports: [LlmModule],
+  imports: [LlmModule, SearchModule],
   controllers: [TemporalController],
   providers: [
     AdAutomationActivities,
+    DsStarScientistActivities,
+    TrendSignalsActivities,
     {
       provide: 'TEMPORAL_CLIENT',
       useFactory: async () => {
@@ -51,6 +56,6 @@ import { TemporalController } from './temporal.controller.js';
       },
     },
   ],
-  exports: ['TEMPORAL_CLIENT', AdAutomationActivities],
+  exports: ['TEMPORAL_CLIENT', AdAutomationActivities, DsStarScientistActivities, TrendSignalsActivities],
 })
 export class TemporalModule {}

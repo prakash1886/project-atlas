@@ -4,6 +4,8 @@ import { Worker, NativeConnection } from '@temporalio/worker';
 import { DefaultFailureConverter } from '@temporalio/common';
 import { fileURLToPath } from 'url';
 import { AdAutomationActivities } from './modules/temporal/activities/ad-automation.activities.js';
+import { DsStarScientistActivities } from './modules/temporal/activities/ds-star-scientists.activities.js';
+import { TrendSignalsActivities } from './modules/temporal/activities/trend-signals.activities.js';
 import { EncryptionCodec } from './modules/temporal/crypto/encryption-codec.js';
 
 async function bootstrap() {
@@ -12,12 +14,14 @@ async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
 
   const activitiesInstance = app.get(AdAutomationActivities);
+  const scientistActivitiesInstance = app.get(DsStarScientistActivities);
+  const trendSignalsInstance = app.get(TrendSignalsActivities);
   const temporalAddress = process.env.TEMPORAL_ADDRESS || 'localhost:7233';
   const secretKey = process.env.TEMPORAL_ENCRYPTION_KEY || 'default-temporary-insecure-32-chars-key';
 
   // Resolve absolute path to the workflows module cleanly across all OS platforms
   const workflowsPath = fileURLToPath(
-    new URL('./modules/temporal/workflows/ad-automation.workflow.js', import.meta.url)
+    new URL('./modules/temporal/workflows/index.js', import.meta.url)
   );
 
   console.log(`[Worker] Connecting to Temporal Cluster at ${temporalAddress}...`);
@@ -34,7 +38,7 @@ async function bootstrap() {
     }),
   };
 
-  const worker = await Worker.create({
+  const adAutomationWorker = await Worker.create({
     connection,
     workflowsPath,
     activities: {
@@ -47,8 +51,40 @@ async function bootstrap() {
     dataConverter: secureDataConverter,
   });
 
-  console.log('[Worker] Temporal Worker registered. Polling task queue: "ad-automation"...');
-  await worker.run();
+  const trendSignalsWorker = await Worker.create({
+    connection,
+    workflowsPath,
+    activities: {
+      fetchSignals: trendSignalsInstance.fetchSignals.bind(trendSignalsInstance),
+      computeCoverageGap: trendSignalsInstance.computeCoverageGap.bind(trendSignalsInstance),
+    },
+    taskQueue: 'trend-signals',
+    dataConverter: secureDataConverter,
+  });
+
+  const dsStarScienceWorker = await Worker.create({
+    connection,
+    workflowsPath,
+    activities: {
+      runContentOpportunityScientist: scientistActivitiesInstance.runContentOpportunityScientist.bind(scientistActivitiesInstance),
+      runAudienceScientist: scientistActivitiesInstance.runAudienceScientist.bind(scientistActivitiesInstance),
+      runStoryUniverseScientist: scientistActivitiesInstance.runStoryUniverseScientist.bind(scientistActivitiesInstance),
+      runArchetypeScientist: scientistActivitiesInstance.runArchetypeScientist.bind(scientistActivitiesInstance),
+      runGeographicScientist: scientistActivitiesInstance.runGeographicScientist.bind(scientistActivitiesInstance),
+      runHiddenLegendsScientist: scientistActivitiesInstance.runHiddenLegendsScientist.bind(scientistActivitiesInstance),
+      runYouTubeScientist: scientistActivitiesInstance.runYouTubeScientist.bind(scientistActivitiesInstance),
+      runBacklogScientist: scientistActivitiesInstance.runBacklogScientist.bind(scientistActivitiesInstance),
+    },
+    taskQueue: 'ds-star-science',
+    dataConverter: secureDataConverter,
+  });
+
+  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science"...');
+  await Promise.all([
+    adAutomationWorker.run(),
+    trendSignalsWorker.run(),
+    dsStarScienceWorker.run(),
+  ]);
 }
 
 bootstrap().catch((err) => {

@@ -1,0 +1,401 @@
+PROJECT ATLAS
+Operator Console — Frontend Application
+Requirements Specification: Catalog, Production Dashboard, Revenue & Growth Analytics, Designer Task Console
+Companion document to Project_Atlas_Requirements.docx (Sections 1–10)
+
+Table of Contents
+
+
+
+1. Executive Summary
+The backend architecture defined in Project_Atlas_Requirements.docx produces and tracks an enormous amount of state — personalities, story universes, backlog items, agent pipeline status, revenue actuals, growth metrics, and now human merch-design tasks — but none of it is currently visible to a human. This document specifies a frontend application, the “Operator Console,” whose job is to make that backend state visible, searchable, and actionable for the small internal team running the platform.
+The Console is scoped to five functional areas, matching how the underlying data model is already organized: a Content Catalog (personalities, story universes, backlog), a Production Dashboard (daily workflow and agent pipeline health), Revenue & Monetization (actuals against the daily floor, affiliate and sponsorship pipelines), Growth & Analytics (CTR, retention, and the daily learning loop), and a Designer Task Console (the human merch-production workflow defined in Section 10 of the main requirements document). It is built as an internal tool for a small team, not a public-facing product, which simplifies auth, permissions, and scale requirements considerably.
+This is a requirements specification, not an implementation. It defines screens, data needs, and API/backend touchpoints in enough detail that a build can start directly from this document, cross-referenced against the data model and agents already defined in the main requirements document.
+2. Goals, Users & Scope
+2.1 Goals
+Visibility. Give the team a single place to see what the system has discovered, what it's producing, what it's earning, and how it's growing — without querying Postgres/AGE directly.
+Control. Let an operator intervene where the spec calls for human judgment: approving backlog items (Chief Editor Agent's role), overriding the evergreen vault pick on a forecasted revenue-floor miss (Section 8.11), pausing a sponsorship deal stage, or reviewing a designer's merch submission (Section 10 of the main requirements document).
+Trust. Surface enough of the “why” behind a score or a diagnosis (e.g. why a video was flagged as a CTR problem vs. a hook problem, per Section 9.10, or why a merch submission was rejected on compliance grounds, per Section 10.5) that the team can sanity-check the agents rather than blindly trusting a number.
+Speed. The daily revenue floor (Section 8.11), daily learning loop (Section 9.10), and time-sensitive merch briefs tied to event/festival windows (Section 10.1) all depend on same-day human or agent action — the Console must make today's anomalies and deadlines obvious within seconds of opening it, not buried in a report.
+2.2 Users
+Internal team tool. Initial user base is the small team operating Project Atlas — expected to be a handful of people (content lead, ops/producer, the person managing revenue/partnerships, and one or more human designers fulfilling merch tasks). No public or external accounts. A simple shared-login or lightweight per-person login is sufficient; this is explicitly not a multi-tenant, role-gated enterprise system at this stage, though designers are the first user segment that meaningfully needs a scoped view (their own tasks only) rather than full visibility — addressed in Section 8.
+If the team grows, the data model (Section 7) already includes a generic user/session table that can later support per-role views without a redesign — noted as a forward-compatibility consideration, not a v1 requirement.
+2.3 In Scope (v1)
+Content Catalog: browse, search, and filter personalities, story universes, and the story_backlog.
+Production Dashboard: daily workflow status across the six agent layers and the Temporal pipeline; today's publish queue.
+Revenue & Monetization: revenue_actuals vs. the daily floor target; affiliate_links and sponsorship_deals pipelines.
+Growth & Analytics: CTR, retention, subscriber conversion, and the daily learning/feedback loop diagnosis feed.
+Designer Task Console: assigned merch task list, task detail with brief and Envato reference material, submission upload, and compliance review status (Section 10 of the main requirements document).
+2.4 Out of Scope (v1)
+Editing scripts, thumbnails, or any content asset directly in the Console — production stays inside the agent pipeline.
+Direct SQL/raw-Cypher query tools for non-technical users remain out of scope — the Console stays a curated view, not a database client. A bounded, point-and-click Knowledge Graph Explorer is now in scope as of Section 12, which extends this principle to the graph rather than violating it.
+Multi-tenant access and public/customer-facing views remain out of scope. Granular RBAC is now in scope as of Section 14 (Role-Based Access Control), which supersedes this v1 placeholder.
+Mobile app — a responsive web app is sufficient for an internal team checking it from a laptop or occasionally a phone browser.
+In-browser design/editing tools for designers — the Designer Task Console handles brief delivery and file submission, not artwork creation itself.
+
+3. Information Architecture
+The Console is organized as a left-nav app shell with five top-level sections plus a global search. Each section maps directly to one functional area from Section 2.3.
+Nav Item
+Default Landing View
+Primary Question It Answers
+Dashboard (home)
+Today's pipeline + floor status summary
+“Is anything broken or behind right now?”
+Catalog
+Story backlog, sorted by final_score
+“What's queued, and what's the highest-value thing to produce next?”
+Revenue
+Today vs. daily floor target
+“Are we going to hit the floor today, and if not, what's the fix?”
+Growth
+Yesterday's published videos with diagnosis
+“What worked, what didn't, and what should change tomorrow?”
+My Tasks (Designer Console)
+Assigned merch tasks, sorted by deadline
+“What do I need to design, and by when?”
+Global search (header, all screens) queries across personalities, story titles, archetypes, and designer task briefs by name, backed by the existing Apache AGE graph and PGVector embeddings rather than a separate search index.
+
+4. Content Catalog
+Surfaces story_backlog, story_universes, and the personality graph (Sections 3 and 4 of the main requirements document) as a browsable, filterable catalog — the human-facing equivalent of what the Chief Editor and Backlog Scientist agents already rank internally.
+4.1 Backlog List View
+A sortable, filterable table over story_backlog. Default sort: final_score descending.
+Column
+Source Field(s)
+Notes
+Story title
+story_backlog.story_title
+Links to detail view
+Personality
+story_backlog.personality
+Links to personality detail
+Archetype
+archetypes (joined)
+Tag/chip display
+Final score
+story_backlog.final_score
+Includes the revenue_multiplier from Section 8.9
+Status
+story_backlog.status
+create-now / create-later / archive (Backlog Scientist categories)
+Region fit
+story_scores.india_score / us_score / europe_score
+Small bar/heatmap per region
+Filters: archetype, region, status, score range, personality domain (Sports, Business, Politics, History, Philosophy, Science, Military, Entertainment, Religion, per Section 4.2 of the main doc).
+Bulk actions: approve selected items into create-now (writes back to story_backlog.status), matching the Chief Editor Agent's existing approval responsibility — the Console provides a human override on top of the automated ranking, not a replacement for it.
+4.2 Story / Personality Detail View
+Opened from the list. Combines data already modeled across the personality graph, psychological_arcs, and story_universes tables.
+Header: personality name, photo/placeholder, archetype tags, domain.
+Psychological arc summary (identity, struggle, failure, growth, leadership, resilience, reinvention, legacy fields).
+Story Universe list: all story_universes entries for this personality, with episode sequencing and status, so the team can see the franchise (Section 7 of the main doc) at a glance rather than one video at a time.
+Score breakdown: the individual components feeding final_score (psychology_score, emotion_score, trend_score, evergreen_score, monetization_score) shown as a simple breakdown, not just the composite number — this is what gives the team enough “why” to trust or challenge a ranking.
+Revenue history: trailing revenue_actuals for this personality/archetype, reused from the Revenue section (Section 6) so the connection between content and revenue is visible without leaving the page.
+4.3 Hidden Legends / Coverage Gap View
+A secondary catalog view filtered to personalities flagged by the Hidden Legends Agent and Coverage Gap Agent — the differentiation-moat content called out in Section 7 of the main requirements document (30% hidden-legends backlog composition target). Useful as a standing “what's underexploited” list separate from the main score-sorted backlog.
+
+5. Production Dashboard
+The home screen. Answers “is today's pipeline healthy” at a glance, surfacing the Temporal daily workflow (Section 6.4 of the main requirements document) as a visual status board rather than logs.
+5.1 Daily Pipeline Status
+A vertical timeline/stepper mirroring the documented daily workflow stages, each with a status indicator (pending / running / complete / failed) and a timestamp:
+Trend Discovery Swarm
+Personality Discovery Swarm
+Story Discovery Swarm
+Audience Intelligence Swarm
+Scoring Engine (DS-Star)
+Chief Editor approval
+Content Factory (Gemma)
+Publishing Queue
+Analytics → DS-Star → Knowledge Graph update
+Each stage links out to the Catalog or Growth section where relevant (e.g. clicking “Chief Editor approval” jumps to the Backlog List View pre-filtered to pending approvals).
+5.2 Publish Queue (Today / This Week)
+Field
+Source
+Notes
+Scheduled time
+Posting Schedule Agent calendar
+Per Section 9.8 of the main doc
+Format
+long-form / Short / Reel / feed post
+Matches Section 9.4 cadence targets
+Story / personality
+story_backlog join
+Links to Catalog detail view
+Production status
+Content Factory stage
+Script / voice / asset / thumbnail complete flags
+Affiliate attach
+affiliate_links join
+Confirms the Section 8.11 mandatory-attach-rate gate was satisfied before publish
+5.3 Agent Health Panel
+A compact status grid, one row per agent across all six layers plus the Executive Layer (Section 3 of the main doc), each showing: last run time, last output count, and error state if any. Not a full observability/logging tool — deep debugging stays in backend logs — but enough to notice “the Hook Agent hasn't run today” without opening a terminal.
+
+6. Revenue & Monetization
+Surfaces revenue_actuals, affiliate_links, sponsorship_deals, and membership_tiers (Section 8.3 of the main requirements document), centered on the Daily Revenue Floor Mechanism (Section 8.11).
+6.1 Daily Floor Status (default view)
+Floor target vs. actual, today. Big-number comparison of daily_floor_target (Section 8.11 formula: monthly sponsorship + membership revenue ÷ 30) against today's running revenue_actuals total, refreshed at the same cadence as the Revenue Optimization Agent's twice-daily re-forecast.
+Forecast trend line. Intraday forecast vs. floor, so a likely miss is visible before end of day rather than after.
+Compensating action log. When the system or an operator triggers a compensating action (evergreen vault pull, flash affiliate push, pulled-forward sponsorship deliverable, per Section 8.11), it's logged here with a timestamp and outcome — this is the audit trail for “what did we do when we were about to miss.”
+Evergreen vault quick-access. One-click list of the Backlog Scientist's tagged proven earners, so an operator can manually trigger a pull if the automated response hasn't fired yet.
+6.2 Revenue Breakdown
+View
+Dimensions
+Source
+By stream
+Ad / affiliate / sponsorship / membership, trailing 30/90 days
+revenue_actuals
+By archetype / personality
+Revenue per archetype, matching the Section 8.9 feedback-loop multiplier
+revenue_actuals joined to archetypes
+Diversification ratio
+Share of revenue NOT from ad RPM, tracked against the 40%-by-month-12 target (Section 8.10)
+Computed from revenue_actuals
+6.3 Affiliate Pipeline View
+Table over affiliate_links: program name, category, archetype match, placement type, clicks, conversions, revenue, last rotated. Sortable by revenue and by conversion rate, so underperforming placements (candidates for A/B testing per the Affiliate Management Agent) are easy to spot.
+6.4 Sponsorship Pipeline View
+Kanban-style board over sponsorship_deals matching the five-stage pipeline in Section 8.7 of the main requirements document: Prospect → Outreach → Negotiation → Delivered → Paid. Each card shows brand name, archetype match, rate, and deliverables; drag-or-click to advance stage, which writes back to sponsorship_deals.stage.
+
+7. Growth & Analytics
+Surfaces the metrics defined in Section 9.9 and the Daily Learning & Feedback Loop defined in Section 9.10 of the main requirements document. This is the screen the team should check every morning before that day's production decisions are finalized.
+7.1 Yesterday's Videos (default view)
+One row per video published in the last 24–48 hours, exactly matching the Section 9.10 daily analytics pull.
+Column
+Source
+Notes
+Video / story
+Production metadata
+Links to Catalog detail
+CTR
+YouTube Analytics API / Instagram Insights API
+Shown against rolling 30-day archetype baseline, not an absolute bar (Section 9.10)
+Retention curve
+YouTube Analytics API
+Mini sparkline, not full chart, in list view
+Diagnosis
+Computed (Thumbnail/Title CTR Agent, Retention Agent)
+CTR problem / hook problem / pacing problem / win — shown as a tag
+Production tags
+Production metadata at publish time
+Hook type, thumbnail style, archetype, title pattern, length, posting time
+Clicking a row opens a detail view showing the full retention curve, the specific production variables tagged at publish, and the diagnosis reasoning — so the team can verify the agent's call, not just read a label.
+7.2 Variable Performance View
+Answers “which production choices are working,” aggregated rather than per-video — directly supporting the one-variable-at-a-time discipline in Section 9.10.
+CTR by thumbnail style, trailing 30 days
+Retention by hook type, trailing 30 days
+CTR/retention by posting time, trailing 30 days
+Performance by archetype vs. its own rolling baseline (not cross-archetype, per the baseline-comparison principle in Section 9.10)
+This view is what the Thumbnail/Title CTR Agent and Hook Agent use to update their next test set (Section 9.10's “forward routing” step) — the Console should let a human see the same view the agents are acting on, not a different summarized version of it.
+7.3 Growth Funnel View
+Visualizes the Section 9.2 Discovery-to-Subscribe Funnel (Impression → Click → Retention → Action → Return) as a drop-off funnel chart, trailing 7/30 days, so the team can see which stage is the actual bottleneck rather than guessing from a single metric.
+7.4 Returning-Viewer & Series Health
+Tracks returning-viewer rate per Story Universe/series (Section 9.9), to confirm whether series structure is actually generating repeat audience rather than each episode being independently discovered.
+
+8. Designer Task Console
+Surfaces the human merch-production workflow defined in Section 10 of the main requirements document (the Merch Task Brief Agent → Designer Assignment Agent → human Designer → Submission Review Agent → Upload Agent pipeline, with Envato Elements sourcing and the licensing compliance gate). This is the one section of the Console primarily used by a different user — the human designer fulfilling a task — rather than the content/ops/revenue team, so it is scoped as a focused, single-purpose view rather than a dense data console.
+8.1 Designer Scoped View
+Unlike the rest of the Console, this section should be usable by a designer who only needs to see their own work, not the full backend.
+Default scope: own tasks only. A logged-in designer's “My Tasks” view filters designer_tasks to assignee_id = self by default. Ops/content team logins can switch to an all-designers view for workload balancing (Section 8.4).
+No backend visibility required. Designers do not need, and should not be given by default, visibility into story_backlog scores, revenue_actuals, or other agents' internal data — only the fields on their assigned designer_tasks and merch_briefs records.
+8.2 My Tasks List View
+A sortable list over designer_tasks filtered to the logged-in designer. Default sort: deadline ascending, with time-sensitive briefs (merch_briefs.is_time_sensitive) visually flagged.
+Column
+Source Field(s)
+Notes
+Brief title / theme
+merch_briefs.theme, product_type_suggestions
+Links to task detail
+Event / trend reference
+merch_briefs.event_or_trend_ref
+e.g. "Diwali 2026", "Stoicism New Year trend"
+Deadline
+designer_tasks.deadline
+Color-flagged red within 48 hours of a time-sensitive deadline
+Status
+designer_tasks.status
+assigned / in_progress / submitted / in_review / approved / rejected / live
+Archetype / region
+merch_briefs.archetype, target_region
+Tag/chip display
+8.3 Task Detail View
+Opened from the list. Combines the brief with any Envato-sourced reference material and the submission/review state.
+Brief panel: product type, theme, archetype, target region, motif/key phrase, deadline, and the event/trend rationale behind the opportunity — pulled directly from merch_briefs so the designer sees the same reasoning the Merch Task Brief Agent used.
+Envato reference panel: thumbnails and links for any envato_asset_references attached to the task (stock photos, mockup templates, fonts, graphic elements), each labeled with its usage_role (reference / mockup / incorporated_component) — making explicit to the designer which assets are starting material only versus assets the compliance gate (Section 10.5 of the main requirements document) expects to see meaningfully transformed in the final file.
+Submission panel: file upload control for the finished artwork (and any requested source/working files), plus a required incorporated_description text field whenever the task has non-empty Envato references with usage_role = incorporated_component — the field is enforced as required at the UI level specifically because Section 10.5 makes the Submission Review Agent's compliance check dependent on this description existing and being substantive, not boilerplate.
+Review status panel: read-only display of review_outcome and review_notes once the Submission Review Agent (or a human reviewer overriding it) has processed the submission — approved, sent back for revision with specific notes, or rejected with a reason. On approval, the live listing_url appears here once the Upload Agent publishes it.
+8.4 Ops/Content Team Views (All-Designers)
+Available to the content/ops team logins, not designers, for workload visibility and queue management — the human-facing equivalent of the Designer Assignment Agent's own routing logic.
+View
+Purpose
+Source
+Workload board
+See active_task_count and avg_turnaround_hours per designer to spot bottlenecks before a time-sensitive brief misses its window
+designers
+Unassigned briefs queue
+Surface merch_briefs/designer_tasks not yet routed to a designer, sorted by relevance_window_end
+merch_briefs, designer_tasks
+Submission review queue
+Manual override/escalation point when the Submission Review Agent flags a borderline compliance case (vague incorporated_description, ambiguous originality check)
+designer_tasks (status = in_review)
+The submission review queue is intentionally a human escalation point, not a bypass: Section 10.5 of the main requirements document treats the Envato compliance interpretation as unverified, so borderline cases should default to a human decision rather than an automatic approval.
+8.5 Notifications
+New assignment. Designer is notified when a brief is routed to them, with the deadline surfaced immediately.
+Review outcome. Designer is notified when a submission is approved, sent back for revision, or rejected, with the review_notes included in the notification, not just a status change the designer has to go find.
+Deadline approaching. A time-sensitive task within 48 hours of its deadline and still in assigned or in_progress status triggers both a designer notification and a content/ops escalation, mirroring the Designer Assignment Agent's own escalation rule in Section 10.2 of the main requirements document.
+
+9. Technical Architecture
+9.1 Recommended Stack
+Sized for an internal tool for a small team, prioritizing development speed and direct reuse of the existing Postgres/AGE/PGVector backend over public-scale concerns.
+Layer
+Recommendation
+Why
+Framework
+Next.js (App Router), TypeScript
+Server components for data-heavy list/detail views; one deployable for frontend + API routes; large ecosystem of admin-dashboard references
+UI components
+shadcn/ui + Tailwind CSS
+Unstyled, composable primitives — avoids fighting a heavy pre-built admin theme while still moving fast
+Tables
+TanStack Table
+Handles the sorting/filtering/pagination needs of the Backlog List and Affiliate Pipeline views without a custom build
+Charts
+Recharts or Tremor
+Sparklines, funnel charts, and trend lines needed in Sections 6–7; both integrate cleanly with React server components
+File uploads
+Direct-to-storage upload (e.g. signed URL to S3-compatible storage)
+Needed for Designer Task Console submissions (Section 8.3) — keeps large design files off the application server
+API layer
+tRPC
+End-to-end type safety between the Next.js frontend and a TypeScript backend layer reading Postgres/AGE — appropriate for an internal, single-frontend tool; avoids REST boilerplate for a surface area that will change frequently early on
+Auth
+Auth.js (NextAuth) with email/passwordless or a single shared org login, extended with a designer role
+Internal team scale (Section 2.2) does not justify a full RBAC/SSO system in v1, but the designer-scoped view (Section 8.1) requires at minimum a role flag distinguishing designer logins from ops/content logins
+Data access
+Existing PostgreSQL / Apache AGE / PGVector
+The Console reads from — and for approvals/stage-changes/submissions, writes back to — the existing system of record (Section 2.3 of the main requirements document); it must not introduce a second source of truth
+Note on tRPC vs. REST: tRPC is recommended specifically because this is an internal TypeScript monorepo-style tool with one frontend consumer. If the Console's API is ever opened to third parties or other internal services outside this codebase, those integration points should use REST endpoints alongside tRPC rather than forcing tRPC on external consumers.
+9.2 Data Access Pattern
+Read path. Server components / tRPC queries read directly from PostgreSQL for relational tables (story_backlog, revenue_actuals, affiliate_links, sponsorship_deals, designer_tasks, merch_briefs) and from Apache AGE for graph traversals (personality relationships, story universe structure).
+Write path (limited). The Console only writes back for the specific human-in-the-loop actions defined in this document: backlog approval (4.1), sponsorship stage advance (6.4), manual evergreen-vault pull (6.1), and designer task submission/review (8.3–8.4). It does not write production data, scores, or analytics — those remain owned by the agents per the Section 2.3 data-ownership principle in the main requirements document.
+Caching. Dashboard and Growth views can tolerate a few minutes of staleness; use short-TTL server-side caching (e.g. 2–5 minutes) rather than real-time subscriptions for v1, given the daily (not real-time) cadence of the underlying feedback loops (Sections 8.11, 9.10). The Designer Task Console's deadline/notification logic (Section 8.5) is the one area that should not be cached beyond a minute or two, since it gates time-sensitive escalations.
+9.3 Non-Functional Requirements
+Requirement
+Target
+Users
+Small internal team (single digits) plus one or more human designers; no public access
+Auth
+Simple login (Auth.js) with a designer/ops role flag; no granular RBAC required in v1 beyond that distinction
+Availability
+Best-effort; this is an internal ops tool, not a production-facing service — brief downtime is acceptable
+Responsiveness
+Desktop-first responsive web; no native mobile app required
+Data freshness
+Dashboard/Revenue: near-real-time to a few minutes; Growth: daily, matching the analytics pull cadence in Section 9.10; Designer Console deadlines/notifications: near-real-time
+Browser support
+Latest two versions of Chrome, Edge, Safari — no legacy browser support required for an internal tool
+
+10. Phased Rollout
+Phase
+Focus
+Key Deliverables
+Phase 1 — Visibility
+Read-only views across all five sections
+Dashboard pipeline status, Backlog List/Detail, Revenue floor view, Growth video list, My Tasks list/detail (read-only) — no write-back actions yet
+Phase 2 — Control
+Add the human-in-the-loop write actions
+Backlog approval, sponsorship stage advance, manual evergreen-vault pull, designer submission upload and review actions (Sections 4.1, 6.1, 6.4, 8.3–8.4)
+Phase 3 — Depth
+Add the analytical/diagnostic depth views
+Variable Performance view, Growth Funnel view, score-breakdown detail on Catalog, ops workload board and submission review queue (Sections 4.2, 7.2, 7.3, 8.4)
+Recommended sequencing rationale: Phase 1 alone already replaces “querying Postgres by hand” and gives designers a working task list, which are the two most acute current gaps. Phases 2–3 add control and depth once the team has lived with the read-only views long enough to know which actions and breakdowns they actually reach for.
+11. Multi-Channel Console Views
+Extends the v1 Console (Sections 4–7, scoped to a single master channel) to the multi-channel tenancy model defined in the main requirements document's Section 11 — birds, wild animals, pet animals, skill development, and personalities each running as a distinct channel-tenant with its own backlog, publish queue, and revenue stream.
+11.1 Channel Selector & Scope
+A persistent channel switcher in the header, alongside global search. Super Users default to an “All Channels” rollup; channel-scoped Operators (Section 14) land directly on their assigned channel with no switcher shown, since they have nothing else to switch to.
+11.2 Per-Channel Published Content Tracker
+A new list view answering “what is actually live right now, on which platform, for this channel” — distinct from the existing Publish Queue (Section 5.2), which shows what's scheduled, not what's already out.
+Column
+Source
+Notes
+Title / thumbnail
+Production metadata
+Links to Catalog detail view (Section 4.2)
+Platform
+YouTube / Instagram / Redbubble / affiliate page
+One row per platform the object is live on, not one row per object
+Published date
+Publishing Queue completion timestamp
+
+Channel / niche_cohort
+channel_id, niche_cohort (main doc Section 11.1, 11.3)
+Drives the channel filter
+Compliance status
+Section 13 compliance gate result
+Clear / Flagged / Needs Review badge
+Live link
+Platform API response (video ID / post ID)
+Opens the actual published object on the platform
+This view is the answer to “what is published” called out directly in scope for this proposal — it is the published-state counterpart to the Catalog's pre-publish backlog view.
+11.3 Per-Channel Performance Roll-Up
+Reuses the existing Growth & Analytics view (Section 7) filtered and grouped by channel, with baselines computed per niche_cohort rather than per archetype for non-personality channels — matching the main requirements document's principle that performance comparisons stay within a channel's own rolling baseline, not cross-channel.
+11.4 Cross-Channel Portfolio View
+Surfaces the Cross-Channel Portfolio Scientist's output (main doc Section 11.4): a ranked table of every active channel by return-on-attention, supporting the weekly capacity-rebalancing decision (main doc Section 11.6). This is a Super User / Operator view, not exposed to Designers.
+11.5 Agent Activity Log, Per Channel
+Extends the existing Agent Health Panel (Section 5.3) by adding channel as a dimension. Niche-specific DS-Star roles (Behavioral Motif, Pedagogy Effectiveness, Seasonal Pattern, Visual Style Performance, and Audience Overlap Scientists — main doc Section 11.4) only run for specific channels, so “last run / last output” needs to be tracked per (agent, channel) pair rather than per agent globally, or a niche-specific scientist that hasn't run in days would be invisible in a channel-blind health check.
+12. Knowledge Graph Explorer
+Adds the drill-down/explore capability the v1 spec explicitly excluded (Section 2.4) — but as a bounded, curated view, not the raw database client the v1 exclusion was actually guarding against. The distinction matters: this section extends the Console's existing principle of curated access to a new data shape (graph) rather than abandoning the principle.
+12.1 Entry Points
+From a detail view. Every Catalog detail view (Section 4.2) and Published Content row (Section 11.2) gets an “Explore in Knowledge Graph” action that opens the graph centered on that entity.
+Standalone nav item. A top-level “Knowledge Graph” section with a search-to-center control, backed by the same Apache AGE-powered global search already used elsewhere in the Console (Section 3).
+12.2 Visualization
+Rendering. A force-directed graph component (e.g. react-force-graph or Cytoscape.js) rendering node types (Personality/Subject, Story, Archetype, Theme, Event, Region) and the Apache AGE relationship types from both the original model (INSPIRED, RIVALED, FAILED, REINVENTED, LED, MENTORED, INFLUENCED, ACQUIRED) and the Section 11 generalization (PREYS_ON, MIGRATES_TO, NESTS_IN, EXHIBITS, REQUIRES_SKILL, PROGRESSES_FROM).
+Drill-down panel. Clicking a node opens a side panel reusing existing detail-view data (entity summary, linked published objects, score breakdown where the viewer's role permits it per Section 14) rather than introducing new backend logic.
+Depth control. A 1-hop / 2-hop expand toggle, since the underlying graph is large (50,000+ personalities / 5M+ relationships per the main doc's Section 6.3 target scale) and an unbounded render would be unusable.
+12.3 Data Access Pattern
+The graph view is served by a small, fixed set of parameterized Cypher queries behind tRPC endpoints — getNeighborhood(entityId, depth) and searchEntities(query) are the only two needed for v1 — never an open query box. This is what keeps the “curated view, not a database client” principle intact while still answering the drill-down requirement.
+12.4 Performance Guardrail
+Cap server-side expansion at 2 hops or 150 nodes per request, whichever is hit first, with a “load more” action to page further rather than returning an unbounded neighborhood in one response.
+13. Platform Policy Compliance Center
+Generalizes two compliance mechanisms that already exist but are buried inside agent logic — the Redbubble AI-content rules reference (main doc Section 10.7) and the Fact Verification Agent's advertiser-unfriendly/demonetization-trigger flagging (main doc Section 8.4) — into one cross-platform subsystem covering YouTube and Instagram as well, visible directly in the Console rather than only inferable from a pass/fail flag on a video.
+13.1 Data Model Addition: platform_policies
+Field
+Notes
+platform
+YouTube / Instagram / Redbubble / affiliate program, etc.
+policy_area
+Monetization, Community Guidelines, Copyright, AI-Disclosure
+summary
+Plain-language summary of the current rule, not a link dump
+source_url
+Canonical policy page, for the re-verification workflow below
+last_verified_date
+When an operator last confirmed this row against the live policy
+version_note
+What changed since the previous verification, if anything
+This is explicitly a reference table that must be periodically reverified by a human, not a one-time import — the same caveat the main requirements document already applies to Redbubble's AI-content rules (Section 10.7) and affiliate commission structures (Section 8.7), now generalized as a standing operational discipline rather than a one-off note.
+13.2 Pre-Publish Compliance Gate
+Before an item moves from Content Factory to the Publishing Queue (main doc Section 6.4 daily workflow), a compliance check runs against the active platform_policies rows: demonetization triggers, AI-disclosure requirements (YouTube's altered/synthetic content toggle, Instagram's AI label), and copyright-safe sourcing (already governed by main doc Section 2.5). The result becomes a new column on the existing Publish Queue view (Section 5.2) and the new Published Content Tracker (Section 11.2): Clear / Flagged / Needs Review.
+13.3 Policy Change Monitoring
+A scheduled job periodically re-checks each platform_policies.source_url for material change and opens a review task for an operator — it never silently auto-applies a detected change. This surfaces as a new “Policy Watch” view: every tracked policy, its last-verified date, and any pending change alert.
+13.4 Audit Trail
+Every compliance check result — pass, flag, or human override — is logged with a timestamp and the specific policy version it was checked against, so a strike or takedown can be traced back to exactly what was known and verified at publish time. Exposed as a read-only, filterable audit log (by video/post, by channel, by policy area).
+14. Role-Based Access Control
+Replaces the v1 placeholder — “simple login with a designer/ops role flag” (Section 9.3) and “granular RBAC: out of scope” (Section 2.4) — with a real role model, needed now that the Designer Task Console (Section 8) is being opened to outside collaborators rather than internal staff only, and the team itself is expected to grow beyond a single Super User.
+14.1 Roles
+Role
+Access
+Super User / Admin
+Full visibility: every channel, every Console section (Sections 4–13), agent health, Knowledge Graph, Compliance Center, and RBAC management itself.
+Operator (channel-scoped)
+Same Console sections as Super User, but scoped to their assigned channel(s) only — supports the multi-channel model (Section 11) without every channel needing a full admin.
+Designer / Visual Artist (ticket-scoped)
+The Designer Task Console (Section 8) only, hardened per Section 14.2 below. Sees only their own assigned tickets.
+Reserved for future: Reviewer, Finance/Revenue-only viewer
+Not built in this phase. Noted as extension points — the existing data model's generic user/session table (Section 2.2) already supports adding these without a redesign.
+14.2 Designer / Visual Artist: Allow-List Field Model
+Section 8.1 already states a designer “should not be given by default” visibility into agent internals. This section converts that intent into an explicit allow-list enforced at the API layer — not a UI-level filter that a determined user could route around by inspecting network requests.
+Allowed, and only this: brief title / theme, product type, archetype tag, target region, motif / key phrase, deadline, Envato reference assets (thumbnails and links), the artwork submission control, and review_outcome / review_notes once a submission has been reviewed.
+Never returned to a designer-scoped session, enforced at the API layer: agent names, opportunity / final / psychology / emotion scores, story_backlog or revenue_actuals rows, the Knowledge Graph, or the words “agent,” “AI,” “DS-Star,” or “KiloClaw” anywhere in UI copy or API payloads reaching that session.
+Vocabulary. The ticket itself should read as an ordinary freelance creative brief — “Creative Brief,” “Reference Assets,” “Submit Artwork” — never “task generated by Merch Opportunity Agent.”
+14.3 Enforcement Mechanism
+API layer. tRPC middleware resolves the caller's role before a response is constructed and applies the field allow-list there — a designer-scoped query physically cannot retrieve a disallowed field, rather than retrieving it and hiding it in the UI.
+Database layer (defense in depth). Postgres Row-Level Security policies on story_backlog, revenue_actuals, and other internal tables, scoped by role and channel, so a future API surface that bypasses the tRPC layer still can't leak this data.
+14.4 Onboarding a New Designer
+A Super User creates the account, assigns the Designer / Visual Artist role, and optionally restricts it to specific channels or product types. No backend training or context is required — the experience is identical to receiving a brief from any ordinary client and submitting finished artwork back, which is the entire point.

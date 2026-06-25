@@ -1,50 +1,150 @@
-trend-discovery|deepseek-direct/deepseek-chat|📡|Trend Discovery|vps|discover-trends
-demand-forecast|deepseek-direct/deepseek-chat|🔮|Demand Forecast|vps|forecast-demand
-coverage-gap|deepseek-direct/deepseek-chat|🕳️|Coverage Gap|vps|find-coverage-gaps
-personality-discovery|deepseek-direct/deepseek-chat|🧑‍🚀|Personality Discovery|vps|discover-personalities
-hidden-legends|gemini-direct/gemini-2.5-flash|🕵️|Hidden Legends|vps|discover-hidden-legends
-personality-graph|deepseek-direct/deepseek-chat|🧬|Personality Graph|vps|build-personality-graph
-story-atomizer|deepseek-direct/deepseek-chat|⚛️|Story Atomizer|vps|atomize-stories
-psychological-arc|gemini-direct/gemini-2.5-flash|🧠|Psychological Arc|vps|extract-psychological-arc
-cultural-context|deepseek-direct/deepseek-chat|🏛️|Cultural Context|vps|analyze-cultural-context
-human-meaning|gemini-direct/gemini-2.5-flash|💡|Human Meaning|vps|extract-human-meaning
-archetype|gemini-direct/gemini-2.5-flash|🃏|Archetype|vps|assign-archetype
-audience-mapping|deepseek-direct/deepseek-chat|👥|Audience Mapping|vps|map-audience
-geographic-intelligence|deepseek-direct/deepseek-chat|🌍|Geographic Intelligence|vps|score-geography
-engagement-prediction|deepseek-direct/deepseek-chat|📶|Engagement Prediction|vps|predict-engagement
-playlist-intelligence|deepseek-direct/deepseek-chat|📚|Playlist Intelligence|vps|organize-playlists
-hook|deepseek-direct/deepseek-chat|🪝|Hook|vps|generate-hooks
-narrative|gemini-direct/gemini-2.5-flash|📖|Narrative|vps|structure-narrative
-vibe|deepseek-direct/deepseek-chat|🎨|Vibe|vps|select-vibe
-script|deepseek-direct/deepseek-chat|📜|Script|modal|generate-script
-voice-director|deepseek-direct/deepseek-chat|🎙️|Voice Director|vps|direct-voice
-asset-planner|deepseek-direct/deepseek-chat|🎞️|Asset Planner|vps|plan-assets
-thumbnail|deepseek-direct/deepseek-chat|🖼️|Thumbnail|vps|generate-thumbnails
-fact-verification|deepseek-direct/deepseek-chat|✅|Fact Verification|vps|verify-facts
-retention|deepseek-direct/deepseek-chat|📉|Retention|vps|flag-retention-risks
-merch-opportunity|deepseek-direct/deepseek-chat|🎯|Merch Opportunity|vps|detect-merch-opportunities
-product-discovery|deepseek-direct/deepseek-chat|🛒|Product Discovery|vps|discover-products
-regional-culture|deepseek-direct/deepseek-chat|🗺️|Regional Culture|vps|profile-regional-culture
-revenue-optimization|gemini-direct/gemini-2.5-flash|💰|Revenue Optimization|vps|forecast-revenue
-story-opportunity-intelligence|gemini-direct/gemini-2.5-flash|🛂|Story Opportunity Intelligence|vps|gatekeep-opportunity
-ad-revenue-optimization|deepseek-direct/deepseek-chat|📺|Ad Revenue Optimization|vps|optimize-ad-revenue
-affiliate-management|deepseek-direct/deepseek-chat|🔗|Affiliate Management|vps|manage-affiliates
-sponsorship-matching|deepseek-direct/deepseek-chat|🤝|Sponsorship Matching|vps|match-sponsorships
-owned-audience|deepseek-direct/deepseek-chat|📧|Owned Audience|vps|grow-owned-audience
-community-monetization|deepseek-direct/deepseek-chat|🏅|Community Monetization|vps|monetize-community
-thumbnail-title-ctr|deepseek-direct/deepseek-chat|🅰️|Thumbnail/Title CTR|vps|optimize-ctr
-posting-schedule|deepseek-direct/deepseek-chat|🗓️|Posting Schedule|vps|manage-posting-schedule
-community-engagement|deepseek-direct/deepseek-chat|💬|Community Engagement|vps|drive-community-engagement
-collaboration-outreach|deepseek-direct/deepseek-chat|📨|Collaboration Outreach|vps|manage-collab-outreach
-merch-task-brief|deepseek-direct/deepseek-chat|📝|Merch Task Brief|vps|write-merch-brief
-designer-assignment|deepseek-direct/deepseek-chat|🧑‍🎨|Designer Assignment|vps|assign-designer
-submission-review|deepseek-direct/deepseek-chat|🔍|Submission Review|vps|review-submission
-upload|deepseek-direct/deepseek-chat|⬆️|Upload|vps|upload-listing
-content-opportunity-scientist|gemini-direct/gemini-2.5-flash|🧪|Content Opportunity Scientist|railway|science-content-opportunity
-audience-scientist|gemini-direct/gemini-2.5-flash|🧪|Audience Scientist|railway|science-audience
-story-universe-scientist|gemini-direct/gemini-2.5-flash|🧪|Story Universe Scientist|railway|science-story-universe
-archetype-scientist|gemini-direct/gemini-2.5-flash|🧪|Archetype Scientist|railway|science-archetype
-geographic-intelligence-scientist|gemini-direct/gemini-2.5-flash|🧪|Geographic Intelligence Scientist|railway|science-geography
-hidden-legends-discovery-scientist|gemini-direct/gemini-2.5-flash|🧪|Hidden Legends Discovery Scientist|railway|science-hidden-legends
-youtube-scientist|gemini-direct/gemini-2.5-flash|🧪|YouTube Scientist|railway|science-youtube
-backlog-scientist|gemini-direct/gemini-2.5-flash|🧪|Backlog Scientist|railway|science-backlog
+trend-discovery-creator|deepseek-direct/deepseek-chat|🎨|Trend Discovery Creator|vps|discover-trends-creator
+trend-discovery-compiler|deepseek-direct/deepseek-chat|⚙️|Trend Discovery Compiler|vps|discover-trends-compiler
+trend-discovery-auditor|gemini-direct/gemini-2.5-flash|🔍|Trend Discovery Auditor|vps|discover-trends-auditor
+demand-forecast-creator|deepseek-direct/deepseek-chat|🎨|Demand Forecast Creator|vps|forecast-demand-creator
+demand-forecast-compiler|deepseek-direct/deepseek-chat|⚙️|Demand Forecast Compiler|vps|forecast-demand-compiler
+demand-forecast-auditor|gemini-direct/gemini-2.5-flash|🔍|Demand Forecast Auditor|vps|forecast-demand-auditor
+coverage-gap-creator|deepseek-direct/deepseek-chat|🎨|Coverage Gap Creator|vps|find-coverage-gaps-creator
+coverage-gap-compiler|deepseek-direct/deepseek-chat|⚙️|Coverage Gap Compiler|vps|find-coverage-gaps-compiler
+coverage-gap-auditor|gemini-direct/gemini-2.5-flash|🔍|Coverage Gap Auditor|vps|find-coverage-gaps-auditor
+personality-discovery-creator|deepseek-direct/deepseek-chat|🎨|Personality Discovery Creator|vps|discover-personalities-creator
+personality-discovery-compiler|deepseek-direct/deepseek-chat|⚙️|Personality Discovery Compiler|vps|discover-personalities-compiler
+personality-discovery-auditor|gemini-direct/gemini-2.5-flash|🔍|Personality Discovery Auditor|vps|discover-personalities-auditor
+hidden-legends-creator|gemini-direct/gemini-2.5-flash|🎨|Hidden Legends Creator|vps|discover-hidden-legends-creator
+hidden-legends-compiler|gemini-direct/gemini-2.5-flash|⚙️|Hidden Legends Compiler|vps|discover-hidden-legends-compiler
+hidden-legends-auditor|gemini-direct/gemini-2.5-flash|🔍|Hidden Legends Auditor|vps|discover-hidden-legends-auditor
+personality-graph-creator|deepseek-direct/deepseek-chat|🎨|Personality Graph Creator|vps|build-personality-graph-creator
+personality-graph-compiler|deepseek-direct/deepseek-chat|⚙️|Personality Graph Compiler|vps|build-personality-graph-compiler
+personality-graph-auditor|gemini-direct/gemini-2.5-flash|🔍|Personality Graph Auditor|vps|build-personality-graph-auditor
+story-atomizer-creator|deepseek-direct/deepseek-chat|🎨|Story Atomizer Creator|vps|atomize-stories-creator
+story-atomizer-compiler|deepseek-direct/deepseek-chat|⚙️|Story Atomizer Compiler|vps|atomize-stories-compiler
+story-atomizer-auditor|gemini-direct/gemini-2.5-flash|🔍|Story Atomizer Auditor|vps|atomize-stories-auditor
+psychological-arc-creator|gemini-direct/gemini-2.5-flash|🎨|Psychological Arc Creator|vps|extract-psychological-arc-creator
+psychological-arc-compiler|gemini-direct/gemini-2.5-flash|⚙️|Psychological Arc Compiler|vps|extract-psychological-arc-compiler
+psychological-arc-auditor|gemini-direct/gemini-2.5-flash|🔍|Psychological Arc Auditor|vps|extract-psychological-arc-auditor
+cultural-context-creator|deepseek-direct/deepseek-chat|🎨|Cultural Context Creator|vps|analyze-cultural-context-creator
+cultural-context-compiler|deepseek-direct/deepseek-chat|⚙️|Cultural Context Compiler|vps|analyze-cultural-context-compiler
+cultural-context-auditor|gemini-direct/gemini-2.5-flash|🔍|Cultural Context Auditor|vps|analyze-cultural-context-auditor
+human-meaning-creator|gemini-direct/gemini-2.5-flash|🎨|Human Meaning Creator|vps|extract-human-meaning-creator
+human-meaning-compiler|gemini-direct/gemini-2.5-flash|⚙️|Human Meaning Compiler|vps|extract-human-meaning-compiler
+human-meaning-auditor|gemini-direct/gemini-2.5-flash|🔍|Human Meaning Auditor|vps|extract-human-meaning-auditor
+archetype-creator|gemini-direct/gemini-2.5-flash|🎨|Archetype Creator|vps|assign-archetype-creator
+archetype-compiler|gemini-direct/gemini-2.5-flash|⚙️|Archetype Compiler|vps|assign-archetype-compiler
+archetype-auditor|gemini-direct/gemini-2.5-flash|🔍|Archetype Auditor|vps|assign-archetype-auditor
+audience-mapping-creator|deepseek-direct/deepseek-chat|🎨|Audience Mapping Creator|vps|map-audience-creator
+audience-mapping-compiler|deepseek-direct/deepseek-chat|⚙️|Audience Mapping Compiler|vps|map-audience-compiler
+audience-mapping-auditor|gemini-direct/gemini-2.5-flash|🔍|Audience Mapping Auditor|vps|map-audience-auditor
+geographic-intelligence-creator|deepseek-direct/deepseek-chat|🎨|Geographic Intelligence Creator|vps|score-geography-creator
+geographic-intelligence-compiler|deepseek-direct/deepseek-chat|⚙️|Geographic Intelligence Compiler|vps|score-geography-compiler
+geographic-intelligence-auditor|gemini-direct/gemini-2.5-flash|🔍|Geographic Intelligence Auditor|vps|score-geography-auditor
+engagement-prediction-creator|deepseek-direct/deepseek-chat|🎨|Engagement Prediction Creator|vps|predict-engagement-creator
+engagement-prediction-compiler|deepseek-direct/deepseek-chat|⚙️|Engagement Prediction Compiler|vps|predict-engagement-compiler
+engagement-prediction-auditor|gemini-direct/gemini-2.5-flash|🔍|Engagement Prediction Auditor|vps|predict-engagement-auditor
+playlist-intelligence-creator|deepseek-direct/deepseek-chat|🎨|Playlist Intelligence Creator|vps|organize-playlists-creator
+playlist-intelligence-compiler|deepseek-direct/deepseek-chat|⚙️|Playlist Intelligence Compiler|vps|organize-playlists-compiler
+playlist-intelligence-auditor|gemini-direct/gemini-2.5-flash|🔍|Playlist Intelligence Auditor|vps|organize-playlists-auditor
+hook-creator|deepseek-direct/deepseek-chat|🎨|Hook Creator|vps|generate-hooks-creator
+hook-compiler|deepseek-direct/deepseek-chat|⚙️|Hook Compiler|vps|generate-hooks-compiler
+hook-auditor|gemini-direct/gemini-2.5-flash|🔍|Hook Auditor|vps|generate-hooks-auditor
+narrative-creator|gemini-direct/gemini-2.5-flash|🎨|Narrative Creator|vps|structure-narrative-creator
+narrative-compiler|gemini-direct/gemini-2.5-flash|⚙️|Narrative Compiler|vps|structure-narrative-compiler
+narrative-auditor|gemini-direct/gemini-2.5-flash|🔍|Narrative Auditor|vps|structure-narrative-auditor
+vibe-creator|deepseek-direct/deepseek-chat|🎨|Vibe Creator|railway|select-vibe-creator
+vibe-compiler|deepseek-direct/deepseek-chat|⚙️|Vibe Compiler|railway|select-vibe-compiler
+vibe-auditor|gemini-direct/gemini-2.5-flash|🔍|Vibe Auditor|railway|select-vibe-auditor
+script-creator|deepseek-direct/deepseek-chat|🎨|Script Creator|modal|generate-script-creator
+script-compiler|deepseek-direct/deepseek-chat|⚙️|Script Compiler|modal|generate-script-compiler
+script-auditor|gemini-direct/gemini-2.5-flash|🔍|Script Auditor|modal|generate-script-auditor
+voice-director-creator|deepseek-direct/deepseek-chat|🎨|Voice Director Creator|railway|direct-voice-creator
+voice-director-compiler|deepseek-direct/deepseek-chat|⚙️|Voice Director Compiler|railway|direct-voice-compiler
+voice-director-auditor|gemini-direct/gemini-2.5-flash|🔍|Voice Director Auditor|railway|direct-voice-auditor
+asset-planner-creator|deepseek-direct/deepseek-chat|🎨|Asset Planner Creator|railway|plan-assets-creator
+asset-planner-compiler|deepseek-direct/deepseek-chat|⚙️|Asset Planner Compiler|railway|plan-assets-compiler
+asset-planner-auditor|gemini-direct/gemini-2.5-flash|🔍|Asset Planner Auditor|railway|plan-assets-auditor
+thumbnail-creator|deepseek-direct/deepseek-chat|🎨|Thumbnail Creator|railway|generate-thumbnails-creator
+thumbnail-compiler|deepseek-direct/deepseek-chat|⚙️|Thumbnail Compiler|railway|generate-thumbnails-compiler
+thumbnail-auditor|gemini-direct/gemini-2.5-flash|🔍|Thumbnail Auditor|railway|generate-thumbnails-auditor
+fact-verification-creator|deepseek-direct/deepseek-chat|🎨|Fact Verification Creator|vps|verify-facts-creator
+fact-verification-compiler|deepseek-direct/deepseek-chat|⚙️|Fact Verification Compiler|vps|verify-facts-compiler
+fact-verification-auditor|gemini-direct/gemini-2.5-flash|🔍|Fact Verification Auditor|vps|verify-facts-auditor
+retention-creator|deepseek-direct/deepseek-chat|🎨|Retention Creator|railway|flag-retention-risks-creator
+retention-compiler|deepseek-direct/deepseek-chat|⚙️|Retention Compiler|railway|flag-retention-risks-compiler
+retention-auditor|gemini-direct/gemini-2.5-flash|🔍|Retention Auditor|railway|flag-retention-risks-auditor
+merch-opportunity-creator|deepseek-direct/deepseek-chat|🎨|Merch Opportunity Creator|vps|detect-merch-opportunities-creator
+merch-opportunity-compiler|deepseek-direct/deepseek-chat|⚙️|Merch Opportunity Compiler|vps|detect-merch-opportunities-compiler
+merch-opportunity-auditor|gemini-direct/gemini-2.5-flash|🔍|Merch Opportunity Auditor|vps|detect-merch-opportunities-auditor
+product-discovery-creator|deepseek-direct/deepseek-chat|🎨|Product Discovery Creator|vps|discover-products-creator
+product-discovery-compiler|deepseek-direct/deepseek-chat|⚙️|Product Discovery Compiler|vps|discover-products-compiler
+product-discovery-auditor|gemini-direct/gemini-2.5-flash|🔍|Product Discovery Auditor|vps|discover-products-auditor
+regional-culture-creator|deepseek-direct/deepseek-chat|🎨|Regional Culture Creator|vps|profile-regional-culture-creator
+regional-culture-compiler|deepseek-direct/deepseek-chat|⚙️|Regional Culture Compiler|vps|profile-regional-culture-compiler
+regional-culture-auditor|gemini-direct/gemini-2.5-flash|🔍|Regional Culture Auditor|vps|profile-regional-culture-auditor
+revenue-optimization-creator|gemini-direct/gemini-2.5-flash|🎨|Revenue Optimization Creator|vps|forecast-revenue-creator
+revenue-optimization-compiler|gemini-direct/gemini-2.5-flash|⚙️|Revenue Optimization Compiler|vps|forecast-revenue-compiler
+revenue-optimization-auditor|gemini-direct/gemini-2.5-flash|🔍|Revenue Optimization Auditor|vps|forecast-revenue-auditor
+story-opportunity-intelligence-creator|gemini-direct/gemini-2.5-flash|🎨|Story Opportunity Intelligence Creator|vps|gatekeep-opportunity-creator
+story-opportunity-intelligence-compiler|gemini-direct/gemini-2.5-flash|⚙️|Story Opportunity Intelligence Compiler|vps|gatekeep-opportunity-compiler
+story-opportunity-intelligence-auditor|gemini-direct/gemini-2.5-flash|🔍|Story Opportunity Intelligence Auditor|vps|gatekeep-opportunity-auditor
+ad-revenue-optimization-creator|deepseek-direct/deepseek-chat|🎨|Ad Revenue Optimization Creator|vps|optimize-ad-revenue-creator
+ad-revenue-optimization-compiler|deepseek-direct/deepseek-chat|⚙️|Ad Revenue Optimization Compiler|vps|optimize-ad-revenue-compiler
+ad-revenue-optimization-auditor|gemini-direct/gemini-2.5-flash|🔍|Ad Revenue Optimization Auditor|vps|optimize-ad-revenue-auditor
+affiliate-management-creator|deepseek-direct/deepseek-chat|🎨|Affiliate Management Creator|vps|manage-affiliates-creator
+affiliate-management-compiler|deepseek-direct/deepseek-chat|⚙️|Affiliate Management Compiler|vps|manage-affiliates-compiler
+affiliate-management-auditor|gemini-direct/gemini-2.5-flash|🔍|Affiliate Management Auditor|vps|manage-affiliates-auditor
+sponsorship-matching-creator|deepseek-direct/deepseek-chat|🎨|Sponsorship Matching Creator|vps|match-sponsorships-creator
+sponsorship-matching-compiler|deepseek-direct/deepseek-chat|⚙️|Sponsorship Matching Compiler|vps|match-sponsorships-compiler
+sponsorship-matching-auditor|gemini-direct/gemini-2.5-flash|🔍|Sponsorship Matching Auditor|vps|match-sponsorships-auditor
+owned-audience-creator|deepseek-direct/deepseek-chat|🎨|Owned Audience Creator|vps|grow-owned-audience-creator
+owned-audience-compiler|deepseek-direct/deepseek-chat|⚙️|Owned Audience Compiler|vps|grow-owned-audience-compiler
+owned-audience-auditor|gemini-direct/gemini-2.5-flash|🔍|Owned Audience Auditor|vps|grow-owned-audience-auditor
+community-monetization-creator|deepseek-direct/deepseek-chat|🎨|Community Monetization Creator|vps|monetize-community-creator
+community-monetization-compiler|deepseek-direct/deepseek-chat|⚙️|Community Monetization Compiler|vps|monetize-community-compiler
+community-monetization-auditor|gemini-direct/gemini-2.5-flash|🔍|Community Monetization Auditor|vps|monetize-community-auditor
+thumbnail-title-ctr-creator|deepseek-direct/deepseek-chat|🎨|Thumbnail/Title CTR Creator|vps|optimize-ctr-creator
+thumbnail-title-ctr-compiler|deepseek-direct/deepseek-chat|⚙️|Thumbnail/Title CTR Compiler|vps|optimize-ctr-compiler
+thumbnail-title-ctr-auditor|gemini-direct/gemini-2.5-flash|🔍|Thumbnail/Title CTR Auditor|vps|optimize-ctr-auditor
+posting-schedule-creator|deepseek-direct/deepseek-chat|🎨|Posting Schedule Creator|vps|manage-posting-schedule-creator
+posting-schedule-compiler|deepseek-direct/deepseek-chat|⚙️|Posting Schedule Compiler|vps|manage-posting-schedule-compiler
+posting-schedule-auditor|gemini-direct/gemini-2.5-flash|🔍|Posting Schedule Auditor|vps|manage-posting-schedule-auditor
+community-engagement-creator|deepseek-direct/deepseek-chat|🎨|Community Engagement Creator|vps|drive-community-engagement-creator
+community-engagement-compiler|deepseek-direct/deepseek-chat|⚙️|Community Engagement Compiler|vps|drive-community-engagement-compiler
+community-engagement-auditor|gemini-direct/gemini-2.5-flash|🔍|Community Engagement Auditor|vps|drive-community-engagement-auditor
+collaboration-outreach-creator|deepseek-direct/deepseek-chat|🎨|Collaboration Outreach Creator|vps|manage-collab-outreach-creator
+collaboration-outreach-compiler|deepseek-direct/deepseek-chat|⚙️|Collaboration Outreach Compiler|vps|manage-collab-outreach-compiler
+collaboration-outreach-auditor|gemini-direct/gemini-2.5-flash|🔍|Collaboration Outreach Auditor|vps|manage-collab-outreach-auditor
+merch-task-brief-creator|deepseek-direct/deepseek-chat|🎨|Merch Task Brief Creator|vps|write-merch-brief-creator
+merch-task-brief-compiler|deepseek-direct/deepseek-chat|⚙️|Merch Task Brief Compiler|vps|write-merch-brief-compiler
+merch-task-brief-auditor|gemini-direct/gemini-2.5-flash|🔍|Merch Task Brief Auditor|vps|write-merch-brief-auditor
+designer-assignment-creator|deepseek-direct/deepseek-chat|🎨|Designer Assignment Creator|vps|assign-designer-creator
+designer-assignment-compiler|deepseek-direct/deepseek-chat|⚙️|Designer Assignment Compiler|vps|assign-designer-compiler
+designer-assignment-auditor|gemini-direct/gemini-2.5-flash|🔍|Designer Assignment Auditor|vps|assign-designer-auditor
+submission-review-creator|deepseek-direct/deepseek-chat|🎨|Submission Review Creator|railway|review-submission-creator
+submission-review-compiler|deepseek-direct/deepseek-chat|⚙️|Submission Review Compiler|railway|review-submission-compiler
+submission-review-auditor|gemini-direct/gemini-2.5-flash|🔍|Submission Review Auditor|railway|review-submission-auditor
+upload-creator|deepseek-direct/deepseek-chat|🎨|Upload Creator|vps|upload-listing-creator
+upload-compiler|deepseek-direct/deepseek-chat|⚙️|Upload Compiler|vps|upload-listing-compiler
+upload-auditor|gemini-direct/gemini-2.5-flash|🔍|Upload Auditor|vps|upload-listing-auditor
+content-opportunity-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Content Opportunity Scientist Creator|railway|science-content-opportunity-creator
+content-opportunity-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Content Opportunity Scientist Compiler|railway|science-content-opportunity-compiler
+content-opportunity-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Content Opportunity Scientist Auditor|railway|science-content-opportunity-auditor
+audience-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Audience Scientist Creator|railway|science-audience-creator
+audience-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Audience Scientist Compiler|railway|science-audience-compiler
+audience-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Audience Scientist Auditor|railway|science-audience-auditor
+story-universe-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Story Universe Scientist Creator|railway|science-story-universe-creator
+story-universe-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Story Universe Scientist Compiler|railway|science-story-universe-compiler
+story-universe-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Story Universe Scientist Auditor|railway|science-story-universe-auditor
+archetype-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Archetype Scientist Creator|railway|science-archetype-creator
+archetype-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Archetype Scientist Compiler|railway|science-archetype-compiler
+archetype-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Archetype Scientist Auditor|railway|science-archetype-auditor
+geographic-intelligence-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Geographic Intelligence Scientist Creator|railway|science-geography-creator
+geographic-intelligence-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Geographic Intelligence Scientist Compiler|railway|science-geography-compiler
+geographic-intelligence-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Geographic Intelligence Scientist Auditor|railway|science-geography-auditor
+hidden-legends-discovery-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Hidden Legends Discovery Scientist Creator|railway|science-hidden-legends-creator
+hidden-legends-discovery-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Hidden Legends Discovery Scientist Compiler|railway|science-hidden-legends-compiler
+hidden-legends-discovery-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Hidden Legends Discovery Scientist Auditor|railway|science-hidden-legends-auditor
+youtube-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|YouTube Scientist Creator|railway|science-youtube-creator
+youtube-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|YouTube Scientist Compiler|railway|science-youtube-compiler
+youtube-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|YouTube Scientist Auditor|railway|science-youtube-auditor
+backlog-scientist-creator|gemini-direct/gemini-2.5-flash|🎨|Backlog Scientist Creator|railway|science-backlog-creator
+backlog-scientist-compiler|gemini-direct/gemini-2.5-flash|⚙️|Backlog Scientist Compiler|railway|science-backlog-compiler
+backlog-scientist-auditor|gemini-direct/gemini-2.5-flash|🔍|Backlog Scientist Auditor|railway|science-backlog-auditor

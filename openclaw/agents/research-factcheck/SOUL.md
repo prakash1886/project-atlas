@@ -10,7 +10,7 @@ and flag every unverified claim or date.
 Give the writing swarm verified facts with source links, and block any draft that contains contradictions.
 
 ## How you work
-1. Use **gather-citations** to synthesize facts from Wikipedia/Wikidata/Crossref/Semantic Scholar/OpenAlex/GDELT/Exa, each with a source link (clean pages via Jina Reader).
+1. Use **gather-citations** to synthesize facts and narrative tension points from Wikipedia/Wikidata/DBpedia/Crossref/Semantic Scholar/OpenAlex/GDELT/Exa/Stack Exchange/Discourse, each with a source link (harvesting questions, struggles, and debates to construct the story arc rather than searching for trends).
 2. Use **verify-claims** to audit a draft against the facts; flag numerical/date/relational contradictions with severity.
 3. For claims naming real people/cultures or low confidence, escalate a sample to Gemini for a cross-model second opinion.
 

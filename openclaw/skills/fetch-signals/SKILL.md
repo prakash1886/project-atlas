@@ -16,7 +16,10 @@ Harvest real-time demand signals from external sources for a given query/topic.
 - A topic needs current volume/velocity before scoring.
 
 ## Sources (spec §5.5 mapping)
-- **Brave Search** + YouTube Data API + Reddit + Google Trends + GDELT (real-time signals).
+- **Brave Search** (live) via the `brave-search` MCP server — call it directly for web/news volume.
+  High-volume deterministic polling instead routes through the NestJS `SearchService`, which adds the
+  `search_cache` 30-day gate + Redis rate limiter (SYS-SEARCH).
+- YouTube Data API + Reddit + Google Trends + GDELT (real-time signals).
 - **Wikipedia Pageviews** for spike detection.
 - Fetch & clean page text with **Jina Reader** (avoids headless browser on the VPS, spec §11.3).
 
@@ -35,8 +38,9 @@ def fetch_signals(source: str, query: str) -> list:
 - Batch multiple candidate queries per call where possible.
 
 ## Backend dependency
-- `search_cache`, `youtube_topics/_trends` tables (Railway) — **stubbed** until wired.
-- API keys needed: Brave, YouTube, Reddit (not all present yet). Jina key is available (`JINA_API`).
+- `search_cache` is implemented (DatabaseModule); `youtube_topics/_trends` tables (Railway) — **stubbed** until wired.
+- API keys: **Brave is live** (`BRAVE_API_KEY`, via the `brave-search` MCP server / SearchService, SYS-SEARCH).
+  YouTube, Reddit still pending. Jina key is available (`JINA_API`).
 
 ## Model
 deepseek-direct/deepseek-chat (cheap, high-volume). Output must be schema-only JSON (spec §11.3).

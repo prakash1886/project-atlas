@@ -1,0 +1,32 @@
+# DS-STAR API Configuration — Cost Optimized Settings
+# Configured for Project Atlas Railway/Hostinger Deployment
+
+api:
+  port: 8000
+  host: "0.0.0.0"
+  # Set API key for access control (optional)
+  secret_key: "default-ds-star-api-secret-key-12345"
+
+ds_star:
+  # Path where data files (CSVs/JSONs) are stored on the server
+  data_directory: "./data"
+  
+  # Max refinement rounds for DS-STAR agent loop (optimized from default 5 to keep costs low)
+  max_refinement_rounds: 3
+  
+  # Cost-optimized routing of specialized agent roles to Gemini models
+  agent_models:
+    # Router needs quick decisions -> use Flash-Lite
+    router: "gemini/gemini-1.5-flash-lite"
+    
+    # Researcher needs search capability -> use Flash
+    researcher: "gemini/gemini-1.5-flash"
+    
+    # Analyzer needs detailed reasoning -> use Flash
+    analyzer: "gemini/gemini-1.5-flash"
+    
+    # Verifier checks logic -> use Flash-Lite
+    verifier: "gemini/gemini-1.5-flash-lite"
+    
+    # Finalizer outputs final code/conclusions -> use Flash
+    finalizer: "gemini/gemini-1.5-flash"

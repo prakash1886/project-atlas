@@ -1,0 +1,997 @@
+PROJECT ATLAS
+Human Stories Intelligence Platform
+Agent, Infrastructure, Third-Party API, Monetization & Growth Requirements
+Structured from OpenClaw / KiloClaw Architecture Discussion
+
+Table of Contents
+
+
+
+1. Executive Summary
+Project Atlas is positioned as a self-improving “Human Stories Intelligence Platform” rather than a video-generation tool. Its core asset is a proprietary graph connecting personalities, psychological arcs, audience segments, and story opportunities. Content generation is a downstream activity driven by this intelligence layer, not the starting point.
+The system is organized into six discovery/production layers plus an executive coordination layer, supported by an orchestration and data backbone (Temporal, PostgreSQL, Apache AGE, PGVector), an agent execution layer (KiloClaw), a content-generation layer (Gemma on Modal), and a strategy layer (DS-Star). External knowledge enters through a tiered set of third-party APIs.
+This document catalogs every agent, infrastructure component, data store, and external API referenced in the source discussion, organized for direct use as a build specification, and adds Monetization & Affiliate Strategy, Audience Growth & Distribution, and Human Merch Production sections to ensure the platform converts attention into diversified, durable, and compliant revenue and actually reaches an audience in the first place.
+2. Architecture Overview
+2.1 Six-Layer Agent Model
+Layer 1 — Trend Intelligence: detect what the world cares about right now.
+Layer 2 — Personality Intelligence: discover remarkable humans, known and hidden.
+Layer 3 — Story Intelligence: convert personalities into story universes and psychological arcs.
+Layer 4 — Audience Intelligence: determine who will watch and where.
+Layer 5 — Content Factory: produce scripts, hooks, voice, assets, thumbnails.
+Layer 6 — Commerce Intelligence: convert attention into merchandise and revenue.
+Above all six layers sits an Executive Layer (Chief Editor, Chief Intelligence/DS-Star, Knowledge Graph Curator) that decides what gets produced and when.
+2.2 Core Infrastructure Roles
+Component
+Role
+KiloClaw
+Managed agent execution environment: persistent 24/7 agents, scheduled/cron research, browser automation, multi-model routing, persistent memory cache. Performs research, reasoning, extraction, classification — does not own the system of record.
+Temporal
+Workflow orchestrator (“the real operating system”). Defines and retries multi-step workflows (e.g. nightly backlog generation) and calls KiloClaw / agent-service at each step.
+PostgreSQL
+System of record for all structured data — personalities, stories, scores, backlog.
+Apache AGE
+Graph extension on Postgres storing the Human Story Graph (personalities, relationships, archetypes).
+PGVector
+Vector store for embeddings of books, biographies, interviews, papers — enables agentic RAG.
+Gemma (on Modal GPUs)
+High-volume content production layer: scripts, repurposing, SEO, asset prompts. Fine-tunable on the platform's own successful output to build a proprietary style; 70–90% cheaper than premium models at scale.
+DS-Star
+Chief Data Scientist / strategy layer sitting above OpenClaw/KiloClaw. Performs pattern discovery, forecasting, opportunity scoring. Does not write scripts or generate content.
+Exa
+Semantic knowledge-discovery API; finds long-tail sources, hidden biographies, niche analysis that keyword search misses. Feeds PGVector/AGE.
+Brave Search API
+Real-time signal/trend discovery (“what's happening now”); complements Exa's depth-oriented discovery.
+agent-service (NestJS)
+Integration layer between Temporal and KiloClaw, exposing endpoints such as /agents/research, /agents/psychology, /agents/story-expansion, /agents/audience-analysis, /agents/hook-generation.
+2.3 Data Ownership Principle
+KiloClaw must never be the system of record. All durable state — personalities, story universes, opportunities, psychological arcs, audience segments, trend scores, backlog items — is stored in PostgreSQL / Apache AGE / PGVector. KiloClaw reads and writes but does not own.
+2.4 Model Allocation Strategy
+Tier
+Models
+Tasks
+Cheap / high-volume
+Gemini Flash, GPT-4.1 Mini, Qwen, DeepSeek
+Trend collection, Wikipedia/news extraction, classification
+Medium
+Claude Sonnet, GPT-5.5 Medium, Gemini Pro
+Story extraction, audience mapping, archetype detection
+Premium
+Claude Opus, GPT-5.5, Gemini Pro (reasoning)
+Psychological reasoning, narrative design, story universe generation, backlog prioritization
+2.5 Copyright-Safe Content Principle
+Required pipeline: Sources → Fact Extraction → Knowledge Graph → Psychological Analysis → Original Narrative → Video. Prohibited pattern: Article → Rewrite → Video.
+Store only facts, events, dates, relationships, and reference metadata — never full articles, books, or biographies.
+Visual assets limited to public-domain archives, licensed assets, original AI-generated visuals, and self-created motion graphics.
+Avoid movie, TV, WWE, UFC, or broadcast footage unless properly licensed.
+
+3. Agent Catalog
+Every agent referenced in the discussion, organized by layer. “Requires judgment” agents run on KiloClaw / premium models; high-volume production agents run on Gemma.
+3.1 Layer 1 — Trend Intelligence Swarm
+Find what the world cares about — signals, not personalities or stories.
+Agent
+Purpose
+Inputs / Sources
+Output
+Trend Discovery Agent
+Continuously discover rising topics, personalities, events, and discussions.
+Google Trends, YouTube, Reddit, News, Wikipedia, Podcasts, Quora
+{topic, trend_score, regions, growth_rate}
+Demand Forecast Agent
+Predict whether a topic will matter next week / month / quarter.
+Trend Discovery output
+{topic, predicted_growth, confidence}
+Coverage Gap Agent
+Find high-demand, low-content-supply opportunities.
+Search volume + content supply data
+{personality, interest_score, coverage_score, gap_score}
+3.2 Layer 2 — Personality Intelligence Swarm
+Find remarkable humans, both famous and unknown.
+Agent
+Purpose
+Inputs / Sources
+Output
+Personality Discovery Agent
+Find athletes, leaders, entrepreneurs, philosophers, scientists, reformers, military commanders across categories (Sports, Business, Politics, History, Philosophy, Science, Entertainment, Religion, Military, Exploration).
+Trend + Coverage data
+Personality candidate list
+Hidden Legends Agent
+Find unknown but fascinating people with extraordinary stories before they go mainstream.
+Biography sources, Wikipedia gap analysis
+{name, story_quality, fame_score}
+Personality Graph Agent
+Build the relationship graph for each person: relationships, psychology, rivalries, failures, successes, mentors, legacy.
+Research outputs
+Graph nodes/edges in Apache AGE
+3.3 Layer 3 — Story Intelligence Swarm
+Convert humans into story universes (1 personality → 50–200 stories).
+Agent
+Purpose
+Inputs / Sources
+Output
+Story Atomizer Agent
+Transform one personality into dozens to hundreds of distinct story angles (leadership, failure, psychology, rivalries, relationships, communication).
+Personality Graph
+50–200 story candidates per personality
+Psychological Arc Agent
+Extract identity, struggle, failure, growth, leadership, resilience, reinvention, legacy.
+Biographies, interviews (via Exa)
+psychological_arcs record
+Cultural Context Agent
+Determine why this person mattered at that specific moment in history / society.
+News, GDELT, cultural analysis sources
+Context narrative
+Human Meaning Agent
+Answer why people cared, what need was satisfied, what lesson exists today (the “missing agent” that turns facts into psychology/leadership/identity content).
+Arc + Cultural Context
+Meaning narrative
+Archetype Agent
+Map personalities to archetypes: rebel, warrior, builder, visionary, teacher, strategist, underdog, survivor.
+Psychological Arc
+Archetype tags
+3.4 Layer 4 — Audience Intelligence Swarm
+Know who will watch.
+Agent
+Purpose
+Inputs / Sources
+Output
+Audience Mapping Agent
+Identify segments: students, professionals, entrepreneurs, managers, athletes, history lovers, etc.
+Story + Archetype data
+audience_segments mapping
+Geographic Intelligence Agent
+Calculate India / US / Europe / Australia relevance scores.
+Trend + audience data
+{india, usa, europe} scores
+Engagement Prediction Agent
+Predict CTR, watch time, comments, shares before production.
+Historical performance + story metadata
+Predicted engagement metrics
+Playlist Intelligence Agent
+Organize stories into content universes / playlists (e.g. Sports Psychology, Wrestling Psychology, Leadership Psychology).
+Archetype + Theme data
+Playlist assignments
+3.5 Layer 5 — Content Factory Swarm
+Create content automatically (primarily Gemma-driven, high volume).
+Agent
+Purpose
+Inputs / Sources
+Output
+Hook Agent
+Generate curiosity, contrarian, emotional, and authority hooks for the first 3 seconds.
+Story + hook_patterns table
+Hook copy
+Narrative Agent
+Structure script as Hook → Conflict → Escalation → Resolution → Lesson.
+Story + Psychological Arc
+Narrative outline
+Vibe Agent
+Select emotional tone/style: epic, mysterious, dark, emotional, hopeful, motivational, intellectual, dramatic.
+Story + Archetype
+Vibe tag
+Script Agent
+Generate shorts, reels, long-form video, podcast, and blog scripts.
+Narrative outline
+Final script text
+Voice Director Agent
+Choose narration voice, pace, energy, emotion per channel/persona.
+voice_profiles table
+Voice assignment
+Asset Planner Agent
+Determine footage, music, images, motion graphics, animation needs.
+Script + Vibe
+Asset manifest JSON
+Thumbnail Agent
+Generate thumbnail concepts and image-generation prompts.
+Story + Hook
+Thumbnail prompts
+Fact Verification Agent
+Verify dates, claims, statistics, and sources before publishing.
+Knowledge Graph + sources
+Verification report
+Retention Agent
+Identify weak intros, slow sections, and drop-off points before upload.
+Draft script/video
+Retention risk flags
+3.6 Layer 6 — Commerce Intelligence Swarm
+Convert attention into revenue.
+Agent
+Purpose
+Inputs / Sources
+Output
+Merch Opportunity Agent
+Detect topics suitable for merchandise (e.g. Stoicism, Wrestling, Leadership).
+Story + Archetype
+Merch candidate list
+Product Discovery Agent
+Identify specific products: posters, journals, shirts, digital products, courses.
+Merch candidates
+Product list
+Regional Culture Agent
+Determine India / USA / Europe / Australia product preferences.
+Geographic Intelligence
+Regional preference profile
+Revenue Optimization Agent
+Predict RPM, affiliate, merch, and sponsorship potential.
+Story + Audience + Region data
+Revenue forecast
+3.7 Executive Layer (Coordination)
+These agents do not produce content — they decide what should be produced.
+Agent
+Mission
+Responsibilities
+Chief Editor Agent
+Decide what should be created next.
+Prioritize backlog; approve stories; manage playlists; balance trend vs. evergreen mix (target 70% evergreen / 30% trend).
+Chief Intelligence Agent (DS-Star)
+Find patterns and decide strategy across the whole platform.
+Analyze content performance; discover new opportunities and underserved audiences; forecast demand; update story/archetype/geographic rankings.
+Knowledge Graph Curator Agent
+Maintain the Human Story Graph.
+Manage nodes (Personality, Story, Archetype, Audience, Theme, Psychological Arc, Event, Region) and relationships (INSPIRED, RIVALED, FAILED, REINVENTED, LED, MENTORED, INFLUENCED) in Apache AGE.
+Story Opportunity Intelligence Agent
+Sit above all other agents as the final gatekeeper (identified as the one missing agent in OpenClaw/KiloClaw ecosystems).
+Decide if a personality is worth covering; estimate whether it can generate 50+ stories; identify which audiences/countries will care; assess YouTube saturation, shareability, and retention likelihood.
+DS-Star Specialized Scientist Roles
+DS-Star's strategy function is implemented as eight specialized scientist roles:
+Content Opportunity Scientist — Nightly analysis of Trends/YouTube/Reddit/Wikipedia/Search/News to recommend topics with scores and reasons.
+Audience Scientist — Analyze views, retention, comments, shares, geography, subscribers to discover who is actually watching.
+Story Universe Scientist — Compare retention across story types within one personality's universe (e.g. failure stories vs. product-launch stories) to direct future production.
+Archetype Scientist — Analyze engagement across thousands of videos to find which archetypes (underdog, rebel, visionary) drive retention vs. shares vs. watch time.
+Geographic Intelligence Scientist — Learn regional content preferences (e.g. India → Cricket Psychology, USA → Wrestling Psychology) to influence backlog ranking.
+Hidden Legends Discovery Scientist — Mine Wikipedia, books, biographies, and archives for high story-quality / low-coverage personalities.
+YouTube Scientist — Analyze CTR, watch time, retention, comments, likes, shares to find production-format insights (e.g. video length, best posting times by topic).
+Backlog Scientist — Rank all personalities and story opportunities into create-now / create-later / archive.
+Design rule: each scientist role above performs its actual analysis in Python/pandas (and, where the analysis is graph-shaped, via Apache AGE/networkx-style queries) running in the Railway agent-service at zero LLM cost — scoring, clustering, anomaly detection, and forecasting are arithmetic and statistical operations, not generation tasks. Gemini is invoked only for the narrow slice of the role's output that requires judgment a formula cannot produce: turning a ranked list into a plain-language reason, labeling a cluster with a human-readable description, or resolving a genuine tie/ambiguity. Most roles send Gemini a compact summary (tens to a few hundred tokens) rather than the underlying dataset, and several — Backlog Scientist's formula ranking, YouTube Scientist's anomaly detection on an unremarkable night — call Gemini on a minority of runs rather than every run, since there is nothing to interpret when nothing unusual occurred. Hidden Legends Discovery Scientist is the one role that remains LLM-dependent throughout, since judging the story-quality of a newly mined source is not reducible to a statistic; Python is still used there to pre-filter and novelty-score candidates before any of them reach a Gemini call.
+
+4. Data Model Requirements
+Tables and structures referenced in the discussion that the platform must implement in PostgreSQL (with Apache AGE for graph relationships and PGVector for embeddings).
+4.1 Core Scoring & Opportunity Tables
+Table
+Key Fields
+content_opportunities
+topic, domain, trend_score, emotion_score, story_score, evergreen_score, competition_score, business_score, final_score
+story_backlog
+id, personality, story_title, psychology_score, emotion_score, trend_score, evergreen_score, monetization_score, final_score, status
+story_scores
+india_score, us_score, europe_score, youtube_score, shorts_score, evergreen_score, emotion_score, shareability_score, business_score
+story_universes
+id, personality, theme, story, episode, priority
+story_templates
+Reusable angle templates: Psychology, Leadership, Failure, Success, Decision Making, Turning Point, Comeback, Rivalry, Mentorship, Identity, Communication, Discipline
+4.2 Personality, Audience & Taxonomy Tables
+Table
+Key Fields
+personality_domains
+id, name (Sports, Business, Politics, History, Philosophy, Science, Military, Entertainment, Religion, Social Reform, Explorers, Inventors, Literature)
+regions
+India, Tamil Nadu, South India, Asia, Global, USA, Europe, Australia
+psychological_arcs
+identity, struggle, failure, growth, leadership, resilience, reinvention, legacy
+audience_segments
+students, professionals, entrepreneurs, sports_fans, history_fans, leadership_seekers, self_improvement, parents, aspirants
+archetypes
+rebel, leader, strategist, visionary, underdog, warrior, teacher, builder, survivor
+4.3 Content Production & Hidden-Legend Tables
+Table
+Key Fields
+hook_patterns
+id, pattern, category, performance_score
+voice_profiles
+id, voice_name, pace, emotion, energy, authority
+content_gap_score / coverage tables
+interest_score, coverage_score, gap_score
+story_quality_score set
+struggle_score, transformation_score, leadership_score, controversy_score, lesson_score, uniqueness_score
+search_cache
+query, provider, response_hash, last_updated, expiry_date (30-day no-repeat rule)
+4.4 DS-Star Owned Tables
+trend_scores, audience_segments, archetype_scores, story_scores, personality_scores, content_gap_scores, forecast_scores, backlog_rankings.
+4.5 Apache AGE Graph Relationships
+Relationship types to support on the Human Story Graph: INSPIRED, RIVALED, FAILED, REINVENTED, LED, MENTORED, INFLUENCED, ACQUIRED. Example: (RatanTata)-[:LED]->(TataGroup), (RatanTata)-[:ACQUIRED]->(JaguarLandRover).
+
+5. Third-Party API Requirements
+APIs are organized into four functional tiers, plus a recommended discovery pair (Exa + Brave) that sits across Tiers 1–2.
+5.1 Tier 1 — Discovery APIs (“What should we create?”)
+API
+Use
+Notes
+YouTube Data API v3
+Trending videos, search-volume proxies, channel discovery, related topics, comment/view counts
+Stores into youtube_topics, youtube_channels, youtube_trends
+Reddit API (Reddit Developer Platform)
+Community discussion, sentiment, emerging personalities, topic validation
+Store themes/sentiment only — do not republish raw comments
+Google Trends
+Search-interest signals
+No full official API; use trend exports, a scraping service, or SerpAPI Trends support
+Wikipedia Pageviews API
+Detect pageview spikes signalling renewed interest
+Extremely valuable low-cost signal
+5.2 Tier 2 — Research APIs (“What actually happened?”)
+API
+Use
+Notes
+Wikipedia API
+Biographies, historical events, dates, references
+Never use as sole source
+Wikidata
+Structured factual graph (e.g. Steve Jobs → Apple → Pixar → Disney)
+Excellent for graph-building
+Crossref API
+Academic papers (psychology, leadership research)
+
+Semantic Scholar API
+Research-backed psychology / leadership / human-behavior content
+
+OpenAlex
+Academic graph for stoicism, leadership, cognitive bias, decision-making topics
+
+5.3 Tier 3 — Content Evidence APIs (“Supporting evidence”)
+API
+Use
+Notes
+NewsAPI
+Current events, recent personalities, validation
+
+GDELT Project
+Global events, media mentions, country-level sentiment
+One of the best sources for political leaders / geopolitics
+Internet Archive
+Old interviews, historical materials, public-domain content
+
+Project Gutenberg
+Public-domain biographies and books
+
+5.4 Tier 4 — Publishing APIs
+API
+Use
+Notes
+YouTube Data API v3
+Upload long videos and Shorts; retrieve analytics metadata
+Same API as Tier 1, different scope
+Meta Graph API
+Publish Instagram/Facebook Reels and posts; retrieve reach and engagement
+Covers Instagram and Facebook
+LinkedIn Developer Platform
+Distribute leadership and business content
+
+5.5 Recommended Discovery Pair: Exa + Brave
+Exa and Brave solve different problems and should both be used — not selected as an either/or.
+Capability
+Google-style Search APIs
+Exa
+Semantic discovery
+Limited
+Excellent
+Long-tail personalities
+Weak
+Strong
+Hidden legends
+Weak
+Strong
+Biography discovery
+Medium
+Strong
+Knowledge graph enrichment
+Medium
+Excellent
+Brave Search API is used for real-time signal detection (“what is trending right now”); Exa is used for semantic knowledge depth (“why does it matter”). Recommended agent mapping:
+Trend Discovery Agent: Brave, YouTube API, Reddit, Google Trends, GDELT
+Hidden Legends Agent: Exa, Wikipedia, Books, Archives
+Psychological Arc Agent: Exa
+Coverage Gap Agent: Brave + Exa combined (interest vs. depth)
+5.6 Supplementary APIs
+API
+Use
+Listen Notes API
+Podcast search — interviews, leadership and entrepreneur stories
+Google Books API
+Biography metadata discovery, hidden-legends sourcing
+5.7 Procurement Priority
+Priority
+APIs
+Must Have
+PostgreSQL, PGVector, Apache AGE, Temporal, Gemma, OpenClaw/KiloClaw, YouTube API, Reddit API, Wikipedia API, Wikidata, GDELT, Exa
+Strongly Recommended
+Brave Search API
+Later
+Premium social-listening platforms, premium media/news databases
+
+6. Cost & Operational Requirements
+6.1 Search Budget Targets
+Category
+Daily Queries
+Notes
+Trend discovery (Brave)
+10
+e.g. “rising leadership personalities,” “emerging entrepreneurs”
+Geographic discovery
+3–5
+India / USA / Europe
+Content validation
+10–20
+“Is this personality receiving attention?”
+Total / day
+30–50
+≈ 1,500/month ≈ $7.50–$20/month at $5 per 1,000 requests
+Target: Brave ≈ 2,000 requests/month, reserved for signal detection — never used as a bulk crawler. Exa performs the deep knowledge expansion once a signal is found.
+6.2 Cost Reduction Mechanisms
+Caching layer: search_cache table enforces a 30-day no-repeat-search rule per query, reducing search costs 70–90%.
+Event-based searching: only re-query when a real signal changes (trend shift, news event, Wikipedia/YouTube/Reddit spike) — not on a fixed schedule for every personality.
+Graph reuse: once a personality is discovered, expand new stories from the existing Apache AGE graph rather than re-searching externally.
+Workload separation: KiloClaw (research/reasoning, premium models) is kept separate from Gemma (high-volume content production, fine-tuned, cheap at scale).
+6.3 Target Production Capacity
+Metric
+Target
+Daily output
+1–3 long-form videos + 5–20 Shorts
+Monthly candidate stories needed
+500–1,000 (not 50,000 raw searches)
+6–12 month backlog scale
+50,000+ personalities; 5M+ story relationships; 250,000+ story opportunities; 10,000+ prioritized scripts; 365+ days of publishing backlog
+6.4 Daily Autonomous Workflow (Reference)
+02:00 — Trend Discovery Swarm
+03:00 — Personality Discovery Swarm
+→ Story Discovery Swarm
+→ Audience Intelligence Swarm
+→ Scoring Engine (DS-Star)
+→ Chief Editor approval
+→ Content Factory (Gemma)
+→ Publishing Queue
+→ Analytics → DS-Star → Knowledge Graph update (closes the loop)
+
+7. Content Organizing Principle
+The recommended channel strategy is a single master channel (“Human Psychology & Great Lives”) organized by archetype and theme rather than by country or by individual personality — mirroring how Netflix organizes by genre rather than by nationality.
+Global content universe, India-first distribution: ranking engine weights India highest initially, gradually increasing US/Europe/Australia influence as the audience grows.
+Archetype-first discovery: agents research archetypes (rebel, underdog, visionary, strategist) and map discovered people onto them, rather than researching people directly.
+Personality franchises: each personality is treated as a franchise (e.g. Steve Jobs → 100+ story opportunities) with dedicated story universes and episode sequencing, not a single biography video.
+Backlog composition target: 30% famous personalities (attract viewers) / 40% moderately known / 30% hidden legends (differentiation moat).
+
+8. Monetization & Affiliate Strategy
+The architecture in Sections 1–7 forecasts revenue (Revenue Optimization Agent) but has no execution layer that actually captures it, no affiliate or sponsorship infrastructure, and no mechanism for realized revenue to influence the backlog. This section closes those gaps with a new Monetization Intelligence sub-layer, concrete data model additions, platform-specific playbooks, an affiliate program map, a sponsorship pipeline, an owned-audience strategy, a phased rollout, and a daily revenue floor mechanism.
+8.1 Strategic Principles
+Diversify beyond ad RPM. Ad revenue alone is volatile and platform-controlled. Affiliate income, sponsorships, and owned-audience products should each become a meaningful, independent revenue line within 12 months.
+Revenue is a scoring input, not just an output. Realized revenue per video/personality must feed back into the backlog ranking engine, not just engagement metrics.
+Own the audience, not just the channel. Email, Discord/Telegram, and membership lists must be built from day one so the business survives any single platform's algorithm or policy change.
+Match monetization to archetype. Different archetypes (Strategist, Builder, Survivor, Visionary) naturally pull different affiliate and sponsor categories — monetization should be planned per archetype, not bolted on generically.
+8.2 New Agents: Monetization Intelligence Sub-Layer
+Added inside Layer 6 (Commerce Intelligence), alongside the existing Merch Opportunity, Product Discovery, Regional Culture, and Revenue Optimization Agents.
+Agent
+Purpose
+Key Actions
+Ad Revenue Optimization Agent
+Maximize ad RPM within each video without harming retention.
+Recommends mid-roll count/placement by video length; flags advertiser-unfriendly content before publish; tracks YPP/Shorts Fund eligibility; monitors RPM by niche and geography.
+Affiliate Management Agent
+Turn every relevant story into a trackable affiliate placement.
+Selects the right affiliate program per story/archetype; generates and rotates tracked links; inserts them into descriptions, pinned comments, and on-screen cards; A/B tests placement and copy; reconciles click and conversion data weekly.
+Sponsorship Matching Agent
+Build a repeatable brand-deal pipeline instead of ad-hoc outreach.
+Matches archetype/audience profile to advertiser categories; maintains a CRM-style pipeline (prospect → outreach → negotiation → delivered → paid); tracks rate benchmarks by view tier.
+Owned Audience Agent
+Decouple revenue from platform algorithm risk.
+Manages CTA placement for email/Discord/Telegram capture; runs lead magnets (free guides, archetype quizzes); segments subscribers by archetype interest for targeted offers.
+Community Monetization Agent
+Convert the most engaged viewers into recurring revenue.
+Manages channel memberships, Patreon-equivalent tiers, and paid courses/digital products tied to high-performing personality franchises; tracks churn and LTV.
+8.3 Data Model Additions
+Table
+Key Fields
+affiliate_links
+id, story_id, program_name, category, target_url, tracking_code, placement_type, clicks, conversions, revenue, last_rotated
+sponsorship_deals
+id, brand_name, category, archetype_match, stage (prospect/outreach/negotiation/delivered/paid), rate, deliverables, video_id, close_date
+revenue_actuals
+id, video_id, personality_id, archetype, platform, ad_revenue, affiliate_revenue, sponsorship_revenue, membership_revenue, total_revenue, period
+audience_capture
+id, source_video_id, channel (email/discord/telegram), archetype_interest, lead_magnet, capture_date
+membership_tiers
+id, tier_name, price, benefits, subscriber_count, churn_rate, ltv
+revenue_actuals is the critical addition: it lets the Backlog Scientist rank by realized dollars per archetype/personality, not only by engagement proxies. Recommended formula adjustment: final_score = existing weighted engagement score, with a revenue_multiplier derived from trailing 90-day revenue_actuals per archetype applied on top.
+8.4 YouTube Revenue Playbook
+Lever
+Action
+Ad RPM
+Qualify for YouTube Partner Program early; use 2–4 mid-rolls on videos over 8 minutes (Ad Revenue Optimization Agent decides count by retention curve, not a fixed rule); avoid demonetization triggers (violence/controversy framing) flagged by the Fact Verification Agent's content-safety pass.
+Shorts
+Shorts revenue share is lower per view than long-form ads but compounds at volume; treat Shorts primarily as a discovery/funnel layer into long-form and affiliate links, not a standalone revenue target.
+Channel Memberships / Super Thanks
+Enable once subscriber base is established; tie membership perks to personality franchises (e.g., early access to a new “Story Universe” episode).
+End screens / cards
+Use to route viewers to (a) the next video in the same Story Universe, (b) the email/Discord capture page, and (c) the top-performing affiliate link for that archetype.
+8.5 Instagram Revenue Playbook
+Lever
+Action
+Reels Bonus / Performance Programs
+Where available regionally, prioritize consistent daily Reels output from repurposed long-form content (Asset Planner Agent already produces repurposing assets).
+Brand Partnerships
+Use Instagram's branded-content tools once the Sponsorship Matching Agent closes a deal — required for proper disclosure and reach eligibility.
+Instagram Shopping / Product Tags
+Tag merch and affiliate-eligible products directly in Reels and posts where the platform's commerce tools support it.
+Subscriptions
+Offer a low-cost IG subscription tier for behind-the-scenes or extended psychological-arc content as a secondary funnel into the main membership tier.
+8.6 Affiliate Program Map
+Mapped by archetype/content fit. Commission structures shown are typical industry ranges and should be reverified at signup, as programs change terms.
+Program
+Best Fit
+Typical Structure
+Placement
+Amazon Associates / Bookshop.org
+All archetypes — every personality has a biography
+~1–4.5% of sale, varies by category
+“Read the full story” link in description and pinned comment
+Audible (via Amazon Associates)
+All archetypes
+Flat bounty per trial signup (typically $5–$15)
+Mid-video and description CTA: “listen to the full biography”
+MasterClass / Skillshare / Coursera / Udemy
+Strategist, Visionary, Builder, Teacher
+Flat bounty per signup or % of first purchase
+End screen + description for leadership/business/psychology videos
+Printful / Printify / branded store (Daily-Stoic model)
+Survivor, Warrior, Teacher (discipline/resilience content)
+Direct margin on owned product, no third-party commission
+Pinned comment + dedicated merch page link
+Headspace / Calm
+Survivor, Builder (psychology/resilience content)
+Flat bounty per trial signup
+Description CTA on psychology-arc videos
+Notion / productivity tools
+Builder, Strategist
+Flat bounty or % of subscription
+Description CTA on “how they organized their work” story angles
+Regional routing: use Amazon India Associates and Flipkart affiliate for India-sourced traffic; Amazon.com/UK/EU affiliate programs for US/European traffic. The Geographic Intelligence Agent's regional scores should determine which affiliate link variant is inserted per upload.
+8.7 Sponsorship Pipeline
+A five-stage pipeline owned by the Sponsorship Matching Agent and tracked in sponsorship_deals:
+1. Prospect — identify brands whose category matches an archetype/audience segment with strong recent performance.
+2. Outreach — templated pitch referencing specific story universes and audience data (views, retention, geography).
+3. Negotiation — rate benchmarked against view tier and engagement, not just subscriber count.
+4. Delivered — integration produced per platform disclosure rules (YouTube paid promotion tag, Instagram branded content tool).
+5. Paid / Reported — revenue logged to sponsorship_deals and rolled into revenue_actuals for backlog scoring.
+8.8 Owned Audience & Community Layer
+Lead magnets: archetype quizzes (“Which archetype are you — Rebel, Builder, Strategist?”) and free story-universe guides, offered via description links and end screens.
+Capture channels: email list as the primary owned asset; Discord or Telegram as a secondary community layer for the most engaged segment.
+Segmentation: tag captured audience by archetype interest so future course, membership, and affiliate offers can be targeted rather than broadcast.
+Monetization ladder: free content → email/community capture → paid membership tier → premium course or digital product, with each stage tracked in membership_tiers.
+8.9 Revenue Feedback Loop
+Currently, the Backlog Scientist ranks stories using trend, evergreen, and engagement scores only — it never learns which archetypes or personalities actually generate revenue. Required change: revenue_actuals must be aggregated by archetype and personality on a trailing 90-day basis and applied as a multiplier on top of the existing final_score formula used in story_backlog and story_scores. This ensures that an archetype which scores moderately on engagement but converts unusually well on affiliate or sponsorship revenue gets prioritized appropriately, and vice versa.
+8.10 Phased Implementation Roadmap
+Phase
+Timeline
+Focus
+Key Targets
+Phase 1 — Foundation
+Months 0–3
+Ad monetization setup, basic affiliate links, audience capture CTAs
+YPP/monetization approved on all eligible channels; affiliate_links table live with 3–5 active programs; email/Discord capture CTA on every video
+Phase 2 — Systematize
+Months 3–6
+Affiliate Management Agent automation, sponsorship outreach begins, first membership tier
+Affiliate link rotation and A/B testing automated; 10+ sponsorship prospects in pipeline; first paid membership tier launched
+Phase 3 — Compound
+Months 6–12
+Revenue feedback loop live, course/digital product launch, regional affiliate routing
+revenue_actuals feeding backlog scoring; first archetype-aligned digital course or product shipped; India/US/EU affiliate routing fully automated
+Recommended success metric beyond raw revenue: revenue diversification ratio — the share of total revenue NOT coming from ad RPM. Target moving this from near-zero at launch to 40%+ by month 12, which is the clearest signal the business is no longer fully dependent on platform ad algorithms.
+8.11 Daily Revenue Floor Mechanism
+Sections 8.1–8.10 establish revenue streams and a feedback loop, but none of them guarantee a minimum dollar amount on any given day. A daily floor requires treating revenue as a constraint the daily workflow must satisfy, not just a forecast it reports on.
+Separate the floor from the upside. Ad RPM and affiliate clicks are too variable to be the floor — they are the upside. The floor itself should come from fixed-revenue sources: monthly sponsorship retainers and channel memberships, both contracted or recurring rather than view-dependent. Size the retainer and membership base so their combined monthly total, divided by 30, already covers the minimum daily target before any ad or affiliate dollars arrive.
+Make publishing volume a hard SLA. The Temporal daily workflow should not be allowed to complete until a minimum publish count clears (e.g. 1 long-form video + 5 Shorts), enforced as a workflow gate rather than a target — because daily revenue is fundamentally volume × conversion, and a thin publishing day guarantees a floor miss regardless of how well any single video performs.
+Maintain an evergreen vault as a buffer. The Backlog Scientist tags a standing pool of personalities/archetypes with proven, repeatable revenue_actuals performance, not just engagement. When the Revenue Optimization Agent's same-day forecast trends below the floor, the Chief Editor Agent pulls from this vault and publishes a known earner instead of gambling on unproven trend content.
+Force a minimum monetization attach rate. The Affiliate Management Agent treats affiliate link insertion as a publish-blocking gate, not an optional step — every video carries at least one tracked, archetype-matched affiliate CTA, so floor revenue does not depend on a manual step being remembered.
+Track the floor in real time and define compensating actions. Roll revenue_actuals up daily against the floor target. When the Revenue Optimization Agent's intra-day forecast shows a miss coming, trigger a predefined response — boost an evergreen vault video, run a flash affiliate push, or pull a sponsorship deliverable forward — rather than logging the shortfall after the fact.
+Component
+Role in the Floor
+Owning Agent / Mechanism
+Sponsorship retainers + memberships
+Fixed baseline revenue, independent of daily views
+Sponsorship Matching Agent, Community Monetization Agent, membership_tiers
+Minimum daily publish count
+Guarantees the volume needed for ad + affiliate revenue to materialize
+Temporal workflow SLA gate
+Evergreen vault
+Buffer of proven earners to fill gaps on slow forecast days
+Backlog Scientist, Chief Editor Agent
+Mandatory affiliate attach rate
+Ensures every published video contributes to the floor, not just some
+Affiliate Management Agent (publish-blocking gate)
+Real-time revenue_actuals tracking
+Detects floor misses early enough to act same-day
+Revenue Optimization Agent, revenue_actuals table
+Recommended formula: daily_floor_target = (monthly_sponsorship_retainers + monthly_membership_revenue) / 30, with ad and affiliate revenue treated as variable upside layered on top. The Revenue Optimization Agent should re-forecast against this floor at least twice daily (after the morning publishing window and again in the evening) so compensating actions can still take effect before the day closes.
+
+9. Audience Growth & Distribution Strategy
+Sections 1–8 assume content reaches an audience. It does not, by default. YouTube and Instagram are algorithm-mediated platforms: distribution is earned through early engagement signals, not granted because a video is well-researched. This section defines how the platform earns views, converts viewers into subscribers, and converts subscribers into link clicks — closing the gap between "content is produced" and "content is actually seen, followed, and acted on."
+9.1 Platform Algorithm Mechanics
+Each platform decides distribution using different primary signals. Production and publishing decisions should be tuned per platform rather than treated as one undifferentiated "upload."
+Platform
+Primary Ranking Signals
+Implication for Production
+YouTube (long-form)
+Click-through rate on thumbnail/title, average view duration, session time after the video ends
+Thumbnail/title quality and pacing matter more than topic quality alone; end screens should keep viewers on YouTube, not send them away first
+YouTube Shorts
+Completion rate (full watch + rewatch), swipe-away rate in the first 1–2 seconds
+Open on the strongest single moment, not a slow setup; keep under 30–45 seconds where possible
+Instagram Reels
+Watch time relative to video length, shares/sends to others, completion rate
+Optimize for "send this to a friend" moments; native-feeling edits outperform polished/branded ones early in distribution
+Instagram feed/grid
+Saves, comments, profile visits following a post
+Carousel/quote-card repurposing of strong story beats drives saves and profile visits better than video reposts alone
+9.2 The Discovery-to-Subscribe Funnel
+Growth happens in a sequence; weakness at an earlier stage caps everything after it, so each stage needs its own design, not just "good content."
+1. Impression — the algorithm decides whether to show the thumbnail/title or feed card to a cold viewer at all.
+2. Click — the thumbnail, title, and (on Reels/Shorts) the first frame decide whether the viewer commits to watching.
+3. Retention — the first 3–5 seconds and overall pacing decide whether the viewer stays past the hook and through the middle.
+4. Action — a well-timed ask (subscribe, follow, click the link) converts an engaged viewer into a tracked asset instead of a one-time view.
+5. Return — series structure (Story Universes, recurring archetypes) gives a reason to come back without being re-discovered by the algorithm each time.
+9.3 Content-Level Growth Tactics
+Lever
+What Drives It
+Thumbnail / title (YouTube)
+Curiosity gap or stated stakes, high-contrast faces/text, consistent recognizable style per archetype so repeat viewers recognize the channel at a glance
+Hook (first 3–5 seconds, all platforms)
+Open mid-conflict or on the most surprising fact — never on context-setting or a slow introduction; the Hook Agent's output should be treated as the single highest-leverage line in the script
+Pacing / retention
+Cut on rhythm, not on a fixed shot length; remove any beat that doesn't escalate stakes or add new information, per the Retention Agent's flags
+Captions / on-screen text
+Sound-off viewing is the default on Instagram and common on YouTube; captions are not optional for either platform
+Series structure
+Numbering episodes within a Story Universe ("Part 3 of the Steve Jobs Story Universe") gives algorithmic and human signal that there's a reason to keep watching this channel
+9.4 Posting Cadence & Consistency
+Algorithms reward channels that publish predictably because it gives them a reliable signal to keep recommending; irregular posting resets momentum each time.
+Format
+Recommended Cadence
+Notes
+YouTube long-form
+3–7 per week, fixed days/times
+Matches the Section 6.3 target production capacity of 1–3 long-form/day across the backlog
+YouTube Shorts
+Daily, 1–3 per day
+Functions primarily as a discovery funnel into long-form and the channel, not a standalone revenue target (see Section 8.4)
+Instagram Reels
+Daily, 1–2 per day
+Repurposed from long-form via the Asset Planner Agent's existing repurposing assets — should not require separate production
+Instagram feed posts
+3–5 per week
+Quote cards, carousels, and behind-the-scenes posts to sustain profile visits between Reels
+9.5 Cross-Platform Funneling
+Shorts/Reels → long-form: every Short/Reel should reference or tease a related long-form video by name, with the channel/profile being the only place to find it — turning short-form virality into long-form discovery rather than a dead end.
+Social → owned audience: the strongest CTA real estate (end screens, pinned comments, bio links) should route to email/Discord/Telegram capture (Section 8.8), not just to more content, since owned audience is what survives an algorithm change.
+Cold platforms → warm platforms: use YouTube and Instagram purely for discovery; treat email and community as where actual relationship-building, course/membership upsells, and high-trust affiliate recommendations happen.
+9.6 Community & Collaboration Growth
+Comment engagement: replying to comments in the first hour after publish is itself a ranking signal on both platforms and should be a scheduled task, not an afterthought.
+Collaborations: cross-promotion with adjacent creators (history, psychology, leadership niches) exposes the channel to an already-warm, relevant audience faster than cold algorithmic discovery — the Sponsorship Matching Agent's outreach infrastructure (Section 8.2) can be reused for creator collab outreach, not just brand deals.
+Community-sourced topics: surfacing audience questions/comments as future story angles (feeding back into the Coverage Gap Agent) both improves targeting and makes the audience feel ownership over what gets made next.
+9.7 CTA Placement Rules
+Where and when an ask is made matters as much as the ask itself. Recommended placement rules for the Affiliate Management Agent, Owned Audience Agent, and video editing workflow:
+CTA Type
+Best Placement
+Why
+Subscribe / Follow
+Immediately after the strongest beat of the video (peak emotional/narrative moment), not in the first 10 seconds
+Viewers convert when they're convinced of value, not before they've seen any
+Affiliate link click
+Verbal callout + on-screen card timed to the exact moment the referenced product/book/topic appears, repeated in pinned comment and description
+Passive placement (description-only) under-converts; the moment of relevance is when intent is highest
+Email / community capture
+End screen plus one mid-video mention tied to a specific lead magnet (e.g. an archetype quiz), not a generic "join my newsletter"
+Specific, relevant offers convert better than generic asks
+Next-video / series continuation
+End screen and final on-screen card, referencing the Story Universe by name
+Keeps watch session on-platform, which itself is a ranking signal
+9.8 New/Updated Agents for Growth
+Agent
+Purpose
+Key Actions
+Thumbnail/Title CTR Agent
+Maximize click-through from cold impressions.
+Generates and A/B tests multiple thumbnail/title variants per video; tracks CTR by archetype and personality; feeds winning patterns back into the Thumbnail Agent (Section 3.5).
+Posting Schedule Agent
+Enforce consistent cadence across platforms.
+Maintains the publish calendar against Section 9.4 targets; flags gaps before they break momentum; coordinates repurposing timing so Shorts/Reels release alongside or shortly after the long-form source.
+Community Engagement Agent
+Drive comment-stage engagement signals.
+Drafts and schedules timely replies to early comments; surfaces high-signal audience questions to the Coverage Gap Agent; monitors comment sentiment for content-safety flags.
+Collaboration Outreach Agent
+Build creator-to-creator growth channel.
+Identifies adjacent creators by archetype/audience overlap; manages outreach pipeline (reusing the Sponsorship Matching Agent's CRM pattern); tracks collab performance vs. solo content.
+9.9 Growth Metrics & Targets
+Metric
+What It Measures
+Why It Matters
+Thumbnail/title CTR
+% of impressions that convert to a click
+Primary gate on whether the algorithm continues distributing a video
+Average view duration / retention curve
+How long viewers stay relative to video length
+Primary gate on whether the algorithm recommends the video further
+Subscriber conversion rate
+% of viewers who subscribe/follow per video
+Measures whether content is converting attention into a tracked, repeatable audience
+Link click-through rate
+% of viewers who click an affiliate/CTA link
+Directly determines affiliate revenue realized per Section 8.3's affiliate_links table
+Returning-viewer rate
+% of views from existing subscribers vs. new
+Indicates whether series structure (Section 9.2, stage 5) is working
+These metrics should be tracked per archetype and personality (not just channel-wide) so the Engagement Prediction Agent, Audience Scientist, and Backlog Scientist can learn which combinations of hook style, thumbnail style, and CTA placement actually convert — closing the loop between growth tactics and the backlog, the same way Section 8.9 closes the loop between revenue and the backlog.
+9.10 Daily Learning & Feedback Loop
+Sections 9.8-9.9 define the agents and metrics needed for growth, but without a daily cadence and explicit attribution, performance data stays descriptive instead of actionable. This subsection defines the mechanism that turns yesterday's analytics into a concrete change in tomorrow's production.
+Pull platform analytics daily, not weekly. YouTube Analytics API and Instagram Insights API expose CTR, average view duration, retention by timestamp, traffic source, subscriber conversion, and link clicks within hours of publish. A daily pull (rather than a weekly or monthly review) is what makes same-week correction possible.
+Tag every video with its production variables at publish time. Hook type, thumbnail style, archetype, title pattern, video length, and posting time should be logged per video before results come in. Without this tagging, outcomes can be tracked but never attributed to a cause.
+Compare against a rolling per-archetype baseline, not an absolute bar. Different archetypes and formats have different normal retention and CTR ranges; each video should be scored against its own archetype/format's trailing 30-day average so wins and losses are measured correctly.
+Diagnose the specific failure or success mode, not just the score. Low CTR with strong retention indicates a thumbnail/title problem on an otherwise good video; strong CTR with an early drop-off indicates a hook that overpromised; good early retention with a mid-video cliff isolates a pacing problem in a specific section. The daily process should output this diagnosis per video.
+Change one production variable at a time where possible. If thumbnail style and hook structure both change on the same video, a result cannot be attributed to either. This materially degrades what the loop can learn, and should be treated as a production discipline rule, not a suggestion.
+Route the diagnosis into the agents that act on it the next day. The Thumbnail/Title CTR Agent updates which patterns it tests next using yesterday's CTR results; the Retention Agent flags script structures correlated with drop-off so the Narrative and Hook Agents avoid repeating them; the Backlog Scientist re-ranks archetypes/personalities using actual outcomes rather than predictions only.
+Stage
+Question Answered
+Owning Agent / Mechanism
+Daily analytics pull
+What happened to each video published in the last 24-48 hours?
+YouTube Analytics API, Instagram Insights API
+Attribution join
+Which production variables does this outcome correlate with?
+Production metadata tags joined against analytics pull
+Baseline comparison
+Is this a win or a loss for this specific archetype/format?
+Audience Scientist, YouTube Scientist (rolling 30-day baseline)
+Failure-mode diagnosis
+Was this a CTR problem, a hook problem, or a pacing problem?
+Thumbnail/Title CTR Agent, Retention Agent
+Forward routing
+What should change in tomorrow's production?
+Hook Agent, Narrative Agent, Backlog Scientist
+This loop runs on a daily cycle for fast-moving levers (thumbnail, title, hook, pacing) and rolls up weekly/monthly for slower-moving patterns (archetype-level and regional preferences), mirroring the same actuals-feed-the-backlog principle already established for revenue in Section 8.9 and for growth metrics in Section 9.9. The addition here is the explicit daily attribution and one-variable-at-a-time discipline that makes the learning interpretable rather than just collected.
+
+10. Human Merch Production & Envato Integration
+Sections 3.6 and 8 treat merchandise as something the Commerce Intelligence layer can detect and forecast, but they implicitly assume the resulting artwork can simply be generated and uploaded. In practice, leading print-on-demand platforms — Redbubble specifically — apply disclosure requirements, upload-volume caps, and elevated scrutiny to AI-generated submissions, and bear-the-risk IP exposure falls on the uploading account either way. This section adds a human-in-the-loop production layer: agents continue to do all research and opportunity detection, but execution — the actual creation of sellable artwork — is assigned to and completed by human designers, with humans uploading the finished work themselves. It also adds an Envato sourcing capability so designers can work from human-made raw material instead of a blank canvas, together with an explicit compliance gate addressing Envato's licensing terms.
+10.1 Strategic Rationale
+Redbubble does not categorically ban AI-generated content, but its Content and IP policies impose real friction and risk that make agent-only merch production an unreliable path to sellable listings.
+Mandatory AI disclosure. Redbubble requires sellers to declare AI-generated content via an explicit disclosure checkbox/dropdown at upload. Misrepresenting AI art as hand-drawn or undisclosed is a policy violation that risks listing removal or account action.
+Tiered daily upload caps for AI-tagged content. Disclosed AI content is subject to materially lower daily upload limits than human-made content — roughly 5/day for new accounts, 20/day for established sellers with 100+ sales, and 50/day for invite-only "Boosted Artist" accounts — which caps how fast an agent-only pipeline could ever scale on-platform even if fully compliant.
+IP-infringement risk sits with the uploader. AI image generators are statistically more likely to reproduce elements of copyrighted training data (characters, logos, styles) without the uploader realizing it, and Redbubble's IP enforcement holds the account, not the model provider, responsible — making unreviewed agent-generated artwork a higher-variance legal exposure than human-created original work.
+The practical conclusion: agents remain the research and opportunity-detection engine — they identify what should be made and why, tied to events, festivals, and trends already detected by the Trend Intelligence and Commerce Intelligence layers — but a human designer performs the actual creative execution, and a human account performs the actual upload, keeping the platform inside Redbubble's higher-volume, lower-risk human-content lane.
+10.2 New Agents and Roles
+These additions extend Layer 6 (Commerce Intelligence) with a human-task-assignment pipeline. They do not replace the existing Merch Opportunity, Product Discovery, Regional Culture, or Revenue Optimization Agents — they consume those agents' output and turn it into an assignable, trackable, human-completed task.
+Agent / Role
+Purpose
+Key Actions
+Merch Task Brief Agent
+Convert a detected merch opportunity into a concrete, designer-ready brief.
+Pulls from Merch Opportunity Agent and Product Discovery Agent output plus event/festival/trend calendars; specifies product type (poster, shirt, journal, sticker, etc.), theme, archetype, target region, key phrase/visual motif, and a hard deadline tied to the event's relevance window; flags whether the opportunity is time-sensitive (e.g. a festival date) or evergreen.
+Designer Assignment Agent
+Route briefs to the right available human designer.
+Matches briefs to designers by skill tag, current workload, and past performance on similar archetypes/products; balances queue depth so no single designer becomes a bottleneck on time-sensitive briefs; escalates unassigned time-sensitive briefs before their relevance window closes.
+Designer (human role)
+Create and submit the finished, sellable artwork.
+Reviews the brief (and any sourced Envato reference/mockup material — see 10.4); produces original artwork by hand or with conventional design tools; uploads the finished file and any required source/working files to the platform for review; is the platform's own employee or contractor, not a generic crowd marketplace.
+Submission Review Agent
+Gate every submission before it reaches a sales platform.
+Checks the submission against the brief; runs an IP-similarity/originality pass; verifies any Envato-sourced material was used within the compliance pattern defined in 10.5 rather than reused as-is; approves, requests revision, or rejects with a specific reason logged to designer_tasks.
+Upload Agent
+Publish approved, human-created artwork to sales platforms under correct disclosure.
+Uploads the approved file to Redbubble (and other configured POD platforms) under the human-creator disclosure category (not flagged as AI-generated, since the sellable artwork itself is human-made); applies product type, tags, and pricing per the original brief; logs the live listing URL back to designer_tasks.
+Asset Planner Agent (extended)
+Existing Layer 5 agent, extended to source raw material for designers from Envato.
+In addition to its existing footage/music/image planning role, queries the Envato Elements MCP server for human-made stock assets, fonts, mockup templates, and texture/pattern packs relevant to a merch brief, and attaches them to the brief as reference/raw material — not as finished artwork (see 10.4–10.5).
+10.3 Data Model Additions
+Table
+Key Fields
+designer_tasks
+id, brief_id, product_type, theme, archetype, target_region, event_or_trend_ref, deadline, assignee_id, status (assigned/in_progress/submitted/in_review/approved/rejected/live), submission_file_url, envato_asset_refs, review_outcome, review_notes, listing_url
+merch_briefs
+id, source (event_calendar/trend/festival), opportunity_score, product_type_suggestions, theme, archetype, target_region, relevance_window_start, relevance_window_end, is_time_sensitive
+designers
+id, name, skill_tags, active_task_count, avg_turnaround_hours, approval_rate, status (active/inactive)
+envato_asset_references
+id, designer_task_id, envato_item_id, item_type (stock_photo/template/font/graphic/mockup), license_type, usage_role (reference/mockup/incorporated_component), incorporated_description
+envato_asset_references.usage_role and incorporated_description exist specifically to support the compliance gate in 10.5: every Envato-sourced asset attached to a task must be tagged with how it was actually used, so the Submission Review Agent has a record to check against, not just a download log.
+10.4 Envato Integration
+Two distinct Envato surfaces are relevant, and they serve different purposes in this pipeline.
+Surface
+What It Is
+Role in This Pipeline
+Envato Market API (build.envato.com)
+REST API over the pay-per-item Envato Market catalog; OAuth or personal-token authentication via build.envato.com/my-apps.
+Available as a fallback for one-off licensed purchases of specific items (e.g. a single premium font or graphic) where a per-item license is preferable to an Elements subscription item — used sparingly, not the primary sourcing path.
+Envato Elements MCP server (elements.envato.com/learn/envato-mcp-server)
+A Model Context Protocol server giving AI assistants structured, real-time search over the Envato Elements unlimited-download subscription catalog.
+Primary sourcing path: the Asset Planner Agent queries it directly from within the agent workflow to find stock photos, graphic elements, mockup templates, fonts, and texture packs to attach to a merch brief as raw material for the human designer — chosen specifically because the unlimited-download model removes per-asset cost as a constraint on how much reference material agents can surface.
+In both cases, Envato-sourced material enters the pipeline as input to a human designer's work, attached to a merch_briefs / designer_tasks record — never as the finished, uploaded artwork itself. That distinction is the basis of the compliance gate below.
+10.5 Envato Licensing Compliance Gate
+This subsection documents a specific, user-confirmed finding from research into Envato Elements' license terms, recorded explicitly so it is on record as something to verify with Envato or legal counsel before relying on it at scale — it is not a confirmed green light.
+The restriction. The Envato Elements license prohibits reselling or redistributing items "as-is," prohibits "merchandising" (an end product where the Envato item itself is the primary value driver), and restricts use in "on-demand" services where the end customer customizes the product/artwork themselves.
+The exception the pipeline relies on. The same license explicitly permits end products where "skill and effort have been applied to incorporate the Item into a larger design," and permits use as product packaging. The intended pattern in this pipeline is squarely aimed at this exception: a human designer must meaningfully transform any Envato-sourced element into a larger original design, not simply place a downloaded asset onto a blank product and upload it.
+The unresolved ambiguity. Research surfaced genuine disagreement across official and community sources on whether a fixed-design print-on-demand platform like Redbubble — where the seller, not the end customer, fixes the final design before listing it for sale — falls inside Envato's "on-demand"/"merchandising" restriction or inside its "incorporated into a larger design" exception. Sources do not converge on a single answer, and Envato's own documentation does not name Redbubble-style fixed-design POD specifically.
+Required compliance gate. The Submission Review Agent must treat any designer_task with non-empty envato_asset_references as requiring an explicit incorporated_description before approval — a human-readable statement of how the Envato asset was transformed or incorporated, not just downloaded and placed. Tasks where Envato material was used as moodboard/reference only (and does not appear in the final file) should be tagged usage_role = reference and carry no compliance burden.
+Action required before scaling. Before relying on Envato Elements sourcing at meaningful volume, this licensing interpretation should be verified directly with Envato support/legal or outside counsel. Until that verification happens, Envato sourcing should be treated as a productivity aid for designers (mockups, texture/reference material, fonts) rather than a guaranteed-compliant supply chain, and the compliance gate above should default to caution — reject or request revision when incorporated_description is vague or merely describes placement rather than transformation.
+10.6 End-to-End Workflow
+1. Detect — Trend Discovery Agent, Merch Opportunity Agent, and an event/festival calendar feed identify a time-sensitive or evergreen merch opportunity (e.g. a Stoicism-themed product ahead of New Year's resolution season, or a cricket-archetype product ahead of a major tournament).
+2. Brief — the Merch Task Brief Agent converts the opportunity into a designer-ready brief: product type, theme, archetype, region, motif, and deadline tied to the event's relevance window.
+3. Source reference material — the extended Asset Planner Agent queries the Envato Elements MCP server for relevant stock photos, mockups, fonts, and graphic elements, attaching them to the brief as envato_asset_references with usage_role set to reference or mockup.
+4. Assign — the Designer Assignment Agent routes the brief to an available human designer matched on skill and current workload, prioritizing time-sensitive briefs nearing their relevance window.
+5. Create — the human Designer produces original artwork, using any sourced Envato material as reference, mockup, or a meaningfully transformed/incorporated component — not as a placed, unmodified asset — and submits the finished file.
+6. Review — the Submission Review Agent checks the submission against the brief, runs an originality/IP-similarity pass, and applies the Envato compliance gate from 10.5 to any task with non-empty envato_asset_references.
+7. Upload — on approval, the Upload Agent publishes the human-created artwork to Redbubble (and other configured POD platforms) under correct human-creator disclosure, logging the live listing URL back to designer_tasks.
+8. Feed back — listing performance (via Revenue Optimization Agent / revenue_actuals, Section 8.3) flows back into the Merch Opportunity Agent and Backlog Scientist so future briefs favor product types, themes, and designers that actually convert.
+This workflow keeps agents in the role they are strongest at — continuous research, opportunity detection, and brief generation at scale — while keeping a human in the loop for the two steps (creative execution and platform upload) where Redbubble's policies and IP-risk allocation make human authorship materially safer than full automation.
+10.7 Redbubble AI-Content Rules Reference
+Account Tier
+Daily AI-Tagged Upload Cap
+Disclosure Requirement
+New account
+~5 per day
+Mandatory AI disclosure checkbox/dropdown at upload
+Established seller (100+ sales)
+~20 per day
+Mandatory AI disclosure checkbox/dropdown at upload
+Invite-only "Boosted Artist"
+~50 per day
+Mandatory AI disclosure checkbox/dropdown at upload
+Human-created, disclosed as such
+No AI-specific cap
+No AI disclosure required; standard content/IP policies still apply
+These figures reflect Redbubble's policy as researched at the time of this document and should be reconfirmed against Redbubble's current seller terms before the Upload Agent's disclosure logic is finalized, since platform policies of this kind change without much notice.
+10.8 Affiliate Distribution for Designer-Created Merch
+Sections 10.1-10.7 cover producing compliant, human-made merch artwork and uploading it to Redbubble. This subsection covers the separate question raised directly by research: which print-on-demand platforms have affiliate programs that can be linked from the platform's own YouTube videos and Instagram posts, so referral traffic into a designer's storefront generates a second, trackable revenue stream alongside the direct merch sale itself. All commission figures below are as found during research and have conflicting or unconfirmed data points in several cases, documented explicitly rather than smoothed over, consistent with the documentation practice established in 10.5.
+Platform
+Affiliate Program Status
+Commission / Terms Found
+Notes / Conflicts
+Redbubble
+Has an active affiliate program (commonly via Awin/Sovrn-style networks).
+~10% commission per referred sale; 30-day cookie window cited in most sources.
+One older/lower-traffic source cites 2% instead of 10% — conflicting figures not reconciled in research; verify the current rate directly with affiliates@redbubble.com before forecasting revenue from it.
+TeePublic
+Has its own affiliate program for referring buyers.
+Commission specifics not consistently documented across sources found.
+Weakest-documented of the confirmed-program platforms; commission rate must be confirmed at signup rather than assumed.
+Society6
+Has an active affiliate program.
+10% commission on confirmed purchases; 30-day cookie window.
+Commission is calculated on the artist's base price, not the marked-up retail price, and frequent site-wide discounts (20–60% off) reduce real payouts below the nominal 10% — should be modeled conservatively, not at face value.
+Amazon Merch on Demand
+Compatible with Amazon Associates — explicitly documented by Amazon as stackable.
+Standard Merch royalty (e.g., ~$5.23 on a $19.99 shirt) PLUS an additional ~7% Amazon Associates commission on the same sale if the channel also links via Associates.
+Strongest “double-dip” candidate identified: royalty and affiliate commission are paid independently on the same transaction per Amazon's own documentation. Recommended as a priority integration target.
+Etsy (via Awin)
+Has an affiliate program operated through the Awin network.
+4–8% commission depending on product category.
+Current Etsy policy allows sellers to earn affiliate commission on sales from their own shop; an older 2019 Awin article stated the opposite (own-shop sales not commissionable). This discrepancy should be confirmed directly at Awin signup before relying on it.
+Spreadshirt
+No clearly documented seller-facing affiliate program found.
+Not applicable — no confirmed terms.
+Comes up as a POD alternative in general search results, but no seller-facing affiliate program documentation was found. Needs direct confirmation with Spreadshirt support before inclusion as an integration target.
+Threadless
+No clearly documented seller-facing affiliate program found.
+Not applicable — no confirmed terms.
+Same status as Spreadshirt: appears as a POD alternative but lacks confirmed seller-facing affiliate documentation. Needs direct confirmation with Threadless support before inclusion as an integration target.
+Recommended initial integration priority, based on documentation strength and double-dip potential: Amazon Merch on Demand first (royalty plus Associates commission, both confirmed by Amazon's own documentation), Redbubble second (largest confirmed commission despite the 2%/10% discrepancy, and already the primary upload target per Section 10.1–10.7), and Etsy third (documented commission range, though the own-shop-sales policy should be reconfirmed at signup). TeePublic and Society6 remain viable secondary targets once the primary three are live. Spreadshirt and Threadless should not be treated as affiliate-revenue platforms until their support teams confirm a program exists.
+FTC affiliate disclosure requirement. Any YouTube video description, pinned comment, or Instagram caption/bio link that carries a tracked affiliate link from any platform in this table must carry a clear, conspicuous affiliate disclosure (e.g. “this description contains affiliate links”) per FTC endorsement guidance for monetized content. This is added as an explicit condition on the Upload Agent's existing compliance gate, alongside the AI-disclosure requirement in 10.1 and the Envato-compliance gate in 10.5: the Upload Agent must not publish a listing or video description containing an affiliate link from this table without the disclosure text present.
+These affiliate programs are distribution and referral mechanics layered on top of the merch production pipeline in 10.1–10.7 — they do not change how artwork is created, reviewed, or uploaded, only how traffic from the platform's own YouTube and Instagram channels back to a live merch listing is tracked and monetized a second time.
+11. Infrastructure Deployment & Inference Cost Governance
+This section documents how the agent fleet defined in Section 3 is distributed across hosting infrastructure, the data-security policy governing which model providers may be used for which workloads, and the concrete cost-control mechanisms applied to keep inference spend low given that most agent calls repeat the same instructions and context against a continuous stream of different items.
+11.1 Deployment Topology
+The agent fleet is split across three hosts based on workload type, not on a single uniform runtime:
+Railway — Data Science / DS-Star bucket. Hosts Temporal, PostgreSQL (with Apache AGE and PGVector as extensions on the same instance), and the agent-service running the Chief Intelligence Agent (DS-Star) and its eight Scientist roles (Content Opportunity, Audience, Story Universe, Archetype, Geographic Intelligence, Hidden Legends Discovery, YouTube, and Backlog Scientists). These agents are colocated with the graph and vector store specifically because their workload is dominated by repeated DB round-trips — pattern discovery, cross-agent correlation, nightly backlog re-scoring — and placing them elsewhere would add network latency and egress cost for every query with no offsetting benefit.
+Modal (GPU) — conditional, self-hosted bucket. Reserved for open-weight inference (Gemma) where self-hosting genuinely undercuts API pricing. At current channel volumes only the Script Agent is scoped here. Trend Discovery, Demand Forecast, and Coverage Gap are volume-triggered candidates for this bucket but should remain on the OpenClaw/Hostinger bucket until their call volume is high enough that GPU-seconds beat the now very low DeepSeek/Qwen flash-tier API pricing documented in 11.3 below — at present-day pricing that crossover point is materially further out than it was when only Gemini Flash-tier pricing was the comparison.
+Hostinger VPS — OpenClaw orchestration bucket. Runs the OpenClaw runtime for the remaining ~37 agents (intelligence, story, audience, content-factory, monetization, growth, and merch agents from Section 3), calling out to paid LLM APIs rather than hosting any model locally. A modest VPS (2–4 vCPU / 4–8GB RAM) is sufficient for pure API orchestration at 1–5 channel volume; sizing should be revisited upward only if any agent in this bucket performs live web browsing/scraping rather than calling an LLM on pre-fetched search results, since headless browser sessions carry a materially heavier memory footprint than text-only API calls.
+11.2 Model & Data Security Policy
+All production agent traffic must run on the paid tier of whichever provider it uses; no agent may route through a free API tier, since free tiers across every provider in this stack carry a data-training exposure risk that the paid tiers explicitly disclaim.
+Anthropic, OpenAI, Google (Gemini API). Paid-tier usage is not used for training by default, with provider-specific log retention terms (e.g., Anthropic's standard API log retention). These three providers are the default for any agent reasoning over proprietary story material, audience/personality graph data, or anything not already public.
+DeepSeek and Qwen (Alibaba). Both providers' paid tiers also claim no training on API inputs, but data residency and jurisdiction differ materially from the providers above. Given that difference, DeepSeek and Qwen should be restricted to agents working over non-sensitive, already-public data — trend scanning, demand/coverage classification, and similar high-volume candidate-scoring work — and should not be used for agents reasoning over proprietary story, personality-graph, or unreleased content data until that data-residency question is deliberately revisited, not defaulted into.
+This policy is a condition on model selection, not a recommendation: the cost-control mechanisms in 11.3 below assume every model swap stays inside this boundary.
+11.3 Inference Cost Control Mechanisms
+Most of the document's call volume repeats the same static content — system instructions, schema definitions, persona prompts, retrieved graph/vector context — against a stream of different dynamic items. The mechanisms below specifically target that repetition, organized by where the savings actually come from rather than treated as a single generic "use cheaper models" instruction.
+Flash-tier model selection.
+The table below is the current (as of this document's research) pricing comparison across the flash-tier models available across the three providers in active use. Pricing changes faster than this document is updated, so these figures should be reconfirmed against each provider's pricing page before being used to forecast spend.
+Model
+Input $/M tokens
+Output $/M tokens
+Recommended use
+Qwen-Turbo (Alibaba)
+$0.05
+$0.20
+Highest-volume, lowest-stakes classification/scanning agents (Trend Discovery, Demand Forecast, Coverage Gap, Geographic Intelligence, Engagement Prediction, Playlist Intelligence) — cheapest tier available, restricted to non-sensitive public data per 11.2.
+DeepSeek V4 Flash
+$0.14
+$0.28
+Mid-volume structured generation/extraction agents (Personality Graph, Story Atomizer, Cultural Context, Hook, Vibe, Asset Planner, Fact Verification, Retention) — cache-hit input drops to $0.003/M automatically, making this the cheapest option for any agent with a stable, frequently-reused prompt prefix.
+Gemini 2.5 Flash-Lite
+$0.10
+$0.40
+Fallback for the Qwen-Turbo tier when an agent's data sensitivity requires staying inside the Anthropic/OpenAI/Google boundary from 11.2, or where Qwen output quality proves insufficient for a given task.
+Gemini 2.5 Flash
+$0.30
+$2.50
+Fallback for the DeepSeek V4 Flash tier under the same sensitivity or quality conditions.
+Gemini 2.5 Pro / Gemini 3 Pro Preview
+$1.25 / $2.00
+$10.00 / $12.00
+Reserved for the premium reasoning agents (Psychological Arc, Narrative, Human Meaning, Archetype, Chief Editor, Knowledge Graph Curator, Story Opportunity Intelligence, and DS-Star's Chief Intelligence Agent and Scientist roles) — not swapped to a cheaper provider without first validating output quality against the current Gemini/Claude baseline.
+Prompt and context caching.
+Caching only matches an exact prefix, so every agent prompt must be structured with static content (system instructions, schema, persona) first and dynamic content (the specific item being processed) last — interleaving the two defeats caching entirely regardless of provider.
+DeepSeek. Caching is automatic and requires no setup: a cache hit on the input prefix costs $0.003/M versus $0.14/M on a miss, roughly 45x cheaper, with no separate storage fee. This is the simplest, lowest-maintenance saving in the stack and should be the default expectation for any DeepSeek-routed agent with a stable prompt template.
+Gemini. Cached reads cost roughly 10% of the standard input rate, but Gemini uniquely charges a separate cache storage fee ($1.00/M tokens/hour on Flash, $4.50/M tokens/hour on Pro). Caching only pays off if the cached content is reused often enough within the storage window to clear that fee — this should be checked per agent rather than enabled by default. DS-Star's nightly graph/vector snapshot is the clearest candidate, since all eight Scientist roles can share one cached read of the same snapshot instead of each role re-sending it.
+Cross-agent shared reference caching. The fastest way to clear Gemini's storage fee is to cache content that many different agents read, not just content one agent repeats to itself. Campaign briefs, brand guidelines, and the compliance documents already referenced in this specification — the AI-disclosure requirement in 10.1, the Envato-compliance gate in 10.5, the FTC affiliate-disclosure requirement in 10.8 — are read by Asset Planner, Thumbnail Agent, Script Agent, Submission Review Agent, and the Upload Agent's compliance gate alike. Caching that material once means every one of those agents' calls reads it at the 90% discount instead of each agent independently paying full input price for the same static document, which clears the storage fee far faster than caching content only one agent reuses.
+Setting the TTL. TTL should follow a break-even calculation, not the 1-hour default or an arbitrary round number: storage cost equals tokens times the hourly rate times TTL hours, and that cost only clears once enough calls have read the cache within the window to exceed it at the 90% discount. Since storage is billed for the full TTL regardless of how much of it is actually used, a campaign brief or compliance document that changes roughly daily should get a TTL sized to the fleet's actual call density across the day (a multi-hour window covering the bulk of that volume, refreshed when the source document changes) rather than an hourly refresh cycle that re-incurs the cache write more often than the document's real update frequency requires.
+Anthropic / OpenAI. Follow the same general pattern as Gemini — cheap cached reads, short default TTL, extendable — relevant if any Pro-tier agent is routed through these providers for the cross-model validation described below.
+Batch processing.
+Any workload that does not need an instant response should run through the provider's batch API for the standing 50% discount: DS-Star's nightly pass, and any non-real-time classification sweep (trend scanning, coverage-gap scoring) that already runs on a schedule rather than reacting to a live event. This applies cleanly to Gemini, Anthropic, and OpenAI's batch APIs; DeepSeek and Qwen's batch-discount availability should be confirmed directly before being counted on, since their base pricing is already low enough that batch savings matter less there than on the Gemini/Claude side.
+Multi-item batching within a single call.
+Distinct from the batch API above: where an agent's context window allows it, multiple candidate items should be processed in a single call rather than one call per item, so the static system-prompt overhead is amortized across all items in that call instead of being paid once per item. For the highest-volume agents (Trend Discovery, Demand Forecast, Coverage Gap), this is a larger lever than caching alone, since it reduces the number of calls outright rather than discounting the repeated portion of each one.
+Output token discipline.
+Output tokens are priced 2-4x input tokens across every provider in this stack. Every Flash-Lite/Turbo-tier agent should be constrained to structured, schema-only output (JSON, no narrated reasoning in the response) — verbose chain-of-thought-style output in production responses is the most expensive place for waste to hide, and it compounds at the call volumes these agents run at.
+Conditional cross-model validation.
+A second-opinion check from a different model provider is warranted only for the highest-stakes outputs where a same-model self-check is structurally weak — primarily the Fact Verification Agent's claims about real people or historical events, and the Cultural Context / Human Meaning Agents' judgment calls on sensitive cultural representation. This should run as conditional escalation (only when the primary model's confidence is low or the claim names a real person or culture) or as a random sampling audit (cross-validate roughly 5-10% of outputs), not as a blanket double-check on every call — applying it universally would double the Pro-tier cost line and erode the tiering savings documented above. The cross-check does not need to be the most expensive available model; a structurally different provider (different training lineage) catches a different class of error than a same-company escalation, so a mid-tier model from a separate provider is often sufficient.
+Non-generative task offloading (Jina AI).
+A number of agent sub-tasks are not generation tasks at all — they are retrieval, ranking, or classification tasks that are currently handled by spending an LLM call on them. Jina AI provides a suite of purpose-built, non-generative APIs (Reader, Embedding, Reranker, Classifier) sharing one pool of tokens, including a 10,000,000-token free allowance for new API keys and roughly $0.05/M tokens thereafter — meaningfully cheaper than routing the same task through even the lowest LLM tier, since these calls have no expensive output-generation cost.
+Reader API. Converts any URL into clean, LLM-ready text, handling JS rendering and scraping itself. This removes the need for headless-browser infrastructure on the Hostinger VPS for any agent doing live web research — Trend Discovery, Demand Forecast, Coverage Gap, and Hidden Legends Agent call Reader to fetch and clean source material, then feed the distilled text into the cheap Qwen-Turbo/DeepSeek Flash call rather than running a Chromium session directly on the OpenClaw host.
+Embedding API. Generates the vectors written into and queried from PGVector, as a cheap alternative to an LLM provider's embedding endpoint — used by Personality Graph Agent, Story Atomizer Agent, Audience Mapping Agent, Knowledge Graph Curator Agent, and DS-Star's retrieval step on the Railway bucket.
+Reranker API. Given a query and a batch of candidates, returns them ranked by relevance for a fraction of the cost of asking an LLM to do the same ranking via prompting. Applies to Coverage Gap Agent, Demand Forecast Agent, and Personality Discovery Agent's shortlisting step, and DS-Star's Backlog Scientist prioritization — narrowing the candidate set cheaply before it reaches a Pro-tier reasoning call, reinforcing the funnel discipline the tiering strategy already depends on.
+Classifier API. Zero/few-shot classification for the yes/no and category decisions currently handled by an LLM call — Submission Review Agent's originality/policy check, the Upload Agent's AI-disclosure and FTC-disclosure compliance gate, and Trend Discovery's categorization tagging.
+Jina is restricted to the same non-sensitive-data boundary as DeepSeek and Qwen under 11.2 unless its data-handling terms are separately confirmed: safe for public web content and candidate ranking/classification, not yet assumed safe for proprietary story or personality-graph text without that confirmation.
+Computation-first delegation (Python before LLM).
+The largest single reduction available is not a cheaper model — it is not calling a model at all for work that is actually arithmetic. Several agents, especially DS-Star's eight scientist roles (Section 3.7), were originally scoped as LLM calls over raw retrieved data, but their underlying task is statistical: ROAS calculation, anomaly detection, clustering/segmentation, and forecasting are pure Python/pandas operations with no generative component. The corrected design runs that computation in-process in the Railway agent-service at zero LLM cost, and sends Gemini only a compact summary of the result — typically tens to a few hundred tokens — for the one part of the job a formula cannot do: turning numbers into a plain-language interpretation, labeling a cluster, or resolving a genuine ambiguity. Several roles (Backlog Scientist's weighted-formula ranking, YouTube Scientist's anomaly check on an unremarkable night) call Gemini on a minority of runs rather than every run, since there is nothing to interpret when the computation surfaces nothing unusual.
+Applied to DS-Star, this took the bucket's nightly LLM spend from an estimated $30-35/month (driven by feeding large retrieved-context dumps into Pro-tier calls for all eight roles every night) down to roughly $1-3/month, with the Chief Intelligence Agent's synthesis call shrinking proportionally since it now aggregates eight short summaries instead of eight raw data dumps. The same principle should be applied wherever else an agent's job is fundamentally computational rather than generative — Revenue Optimization Agent and Ad Revenue Optimization Agent's spend-forecasting work (Sections 3.6/8.2) and Engagement Prediction Agent's anomaly-detection work are the clearest additional candidates: compute in Python, escalate to Gemini only on the flagged exception or the closing interpretation line, not on every call.
+General rule: an agent earns an LLM call when its job is narrative judgment, ambiguity resolution, or cross-agent synthesis — not when its job is arithmetic, clustering, or a deterministic scoring formula. Every agent in Section 3 should be checked against this rule before being assigned a model tier in the table above, since a cheaper model assigned to a task that should not be calling an LLM at all is still spending money that computation-first delegation would remove entirely.
+Prompt compression (LLMLingua-2).
+LLMLingua-2 is a small token-classification model, not a generative LLM, so it runs cheaply on the Hostinger VPS CPU as a pre-processing step before a request reaches any paid API. It compresses the input side of a prompt 4-20x depending on task, at a measured cost of roughly 1.5 benchmark points of quality at the high end of that range. The strategic point is that it only reduces input-token cost, not output-token cost, so where it gets applied should be decided by each agent's input-to-output ratio, not applied uniformly across the fleet.
+Where it pays off most. Input-heavy agents — those that ingest a large block of retrieved or extracted text relative to what they generate — see the closest to the full 75% reduction on their input line. This is Trend Discovery, Demand Forecast, and Coverage Gap Agent (large source/search-result text in, a short score and label out); Hidden Legends Discovery Scientist and any agent consuming Jina Reader output (the extracted web text is the input; the candidate verdict is the output); Knowledge Graph Curator Agent and the DS-Star scientist roles before their context is condensed into a short summary per 11.3's computation-first lever; and Fact Verification Agent when checking a claim against a long reference passage.
+Where to skip or limit it. Output-heavy generation agents — Hook, Vibe, Narrative, Script — have a small input and a large generated output, so compressing the input barely moves their total cost; applying it there adds a quality risk for little saving. Pro-tier reasoning agents (Psychological Arc, Human Meaning, Archetype, Chief Editor, Story Opportunity Intelligence) should either skip compression entirely or use the conservative end of the ratio (4-10x, not the maximum 20x), since the nuance in their input context is exactly what the premium model is being paid to reason over — losing 1.5 points of fidelity matters more on a judgment call than on a high-volume classification pass.
+Sequencing with caching. Compression must not run live on the static system-instructions portion of a prompt, since caching depends on an exact-match prefix and per-call compression output is not guaranteed to be byte-identical between runs. The static prefix should be compressed once, offline, and that fixed compressed version cached as the new prefix; live, per-request compression is then applied only to the dynamic per-item content that was never going to be cached anyway. Implemented in this order, the two levers stack — the cached prefix is already small, and the uncached dynamic portion is compressed before it is sent — rather than one undermining the other.
+Net placement: this lever runs last in the pipeline, after computation-first delegation has removed whatever doesn't need an LLM call at all and after Jina has offloaded retrieval/ranking/classification — it compresses whatever input is left over once those two levers have already done their work, which is also why its benefit is concentrated on the input-heavy research and intelligence agents rather than the generation-heavy content-factory agents.
+These mechanisms are cumulative, not alternatives: computation-first delegation removes the LLM call entirely wherever the task is arithmetic rather than generative, tier-matching determines which model an agent uses by default for what remains, prompt compression shrinks the input side of whatever is left before it is sent, caching and multi-item batching reduce what each call costs once that model is chosen, batch-API scheduling discounts anything that can tolerate latency, conditional cross-model validation adds a bounded, targeted cost only where the risk of a single model's blind spot is high enough to justify it, and non-generative offloading to Jina removes whole categories of call from the LLM bill entirely where the task was never really generation in the first place.
+11.4 Per-Host Cost Levers
+The mechanisms in 11.3 target repeated LLM-call cost specifically. The levers below sit outside that scope — they apply at the architecture, infrastructure, and lifecycle level, and are organized by how soon each is actionable rather than by host.
+Actionable now.
+Cross-channel deduplication of shared intelligence work. Trend Discovery, Demand Forecast, and Coverage Gap currently run implicitly per channel, but much of what they detect — global trending topics, search-demand shifts — is shared across channels and personalities rather than channel-specific. Running that analysis once and fanning the result out to every channel that needs it, instead of re-running it per channel, is the same fixed-cost-amortization logic that made per-video cost higher at 1 channel than at 5 in the worked examples earlier in this document — it should be designed in now, before a per-channel calling pattern gets built into the orchestration layer and becomes harder to unwind.
+Structured/schema-enforced outputs. When an agent's output fails to parse (malformed JSON, a missing required field), the orchestrator typically retries the call and pays for the input tokens a second time. Enforcing function-calling or strict JSON-schema output modes, supported natively by Gemini, Anthropic, OpenAI, DeepSeek, and Qwen, eliminates most of that retry cost. Small per call, but compounds at the volume the Flash-Lite/Turbo tier runs at.
+Storage and CDN cost discipline for generated media. Every lever above this point addresses LLM inference cost; Asset Planner, Voice Director, and Thumbnail Agent also produce video, audio, and image files that must be stored and served. Object storage with no egress fee (e.g. Cloudflare R2, Backblaze B2) versus a provider that charges per-GB egress (e.g. S3) can matter meaningfully once file sizes and view counts scale, and should be priced out explicitly rather than defaulted to whatever Railway or Hostinger bundles in.
+Actionable once volume or history exists.
+Distilling Pro-tier judgment into a small fine-tuned model. For a specific, narrow, recurring decision (e.g. FTC-disclosure flagging, a single archetype-scoring judgment), a small open-weight model can be fine-tuned on the Pro-tier model's own historical outputs as training labels once enough production history exists. Once validated, this replaces an ongoing per-call API cost with a one-time training cost plus near-zero self-hosted inference. This requires months of labeled history to train against, so it is a later-stage lever, not a day-one one.
+Self-hosted embeddings at scale. The same crossover logic that governs the Modal/Gemma decision in 11.1 applies to embeddings: Jina's embedding API is cheap at low volume, but if embedding volume grows large enough across Personality Graph, Story Atomizer, and DS-Star's retrieval step, self-hosting an open embedding model on Modal could eventually undercut Jina's per-token rate. Not worth doing at current volume; worth re-checking once embedding call volume is actually known.
+Committed-use or enterprise pricing. Not available at 1-5 channel scale, but once monthly spend with a single provider (most likely Gemini, given the Pro-tier concentration) becomes predictable, most providers offer committed-use or enterprise discounts in the 10-30% range. Revisit once a few months of cost_actuals data exist rather than planning around this now.
+These levers do not compound with each other the way the mechanisms in 11.3 do — most are independent architectural or lifecycle decisions rather than a stacked pipeline, so each should be evaluated on its own merits against the cost_actuals data once it exists, not assumed to deliver a fixed percentage on top of the savings already documented above.
+11.5 Cost Model & Governance
+Every figure in 11.1-11.4 is an estimate built from assumed call volumes, not measured spend. This subsection defines the table that replaces those estimates with fact, and the illustrative before/after view that table is meant to supersede.
+cost_actuals
+Mirrors revenue_actuals (Section 8.3) so cost and revenue can be joined into a single net-margin view rather than tracked as separate, disconnected ledgers.
+Table
+Key Fields
+cost_actuals
+id, video_id (nullable for infra-level or nightly batch cost), host (railway / modal / hostinger), provider (gemini / deepseek / qwen / anthropic / openai / jina / self-hosted), agent (nullable for pure infra cost), line_item (llm_input_tokens / llm_output_tokens / cache_storage / gpu_seconds / vcpu_minutes / ram_gb_minutes / egress_gb / storage_gb / jina_tokens), quantity, cost_usd, period
+Recommended formula: net_margin = total_revenue (revenue_actuals, trailing period) minus the sum of cost_usd across cost_actuals for the same period and scope (per video, per channel, or platform-wide). This is the join that turns the cost-control work in 11.1-11.4 from a set of assumptions into a measured outcome, and it is the only way to confirm that a given lever actually saved money rather than just looking like it should have on paper.
+Review cadence
+Daily. Roll up cost_actuals by host and provider, the same way revenue_actuals is rolled up daily against the revenue floor in Section 8.9 — primarily to catch a runaway cost (a caching misconfiguration, an agent stuck in a retry loop, a model swap that quietly increased call volume) before it accumulates for a month rather than a day.
+Weekly. Compare net_margin per channel against the cost model below; flag any channel where the gap between estimate and actual exceeds a defined threshold (e.g. 20%) for review of which lever is underperforming its assumption.
+Monthly. Reassess the per-host cost levers in 11.4 that are explicitly volume-gated (model distillation, self-hosted embeddings, committed-use pricing) against actual cost_actuals volume, since those levers were deliberately deferred until real usage data could justify them.
+Illustrative cost model (1-channel-per-day scenario, to be superseded by cost_actuals)
+The progression below is the order the levers in 11.1-11.4 were introduced through this document's analysis, shown cumulatively. These are estimates built from assumed call volumes, included here only as the baseline that cost_actuals should replace once production data exists — not as a forecast to plan budget against.
+Stage
+Monthly cost (1 channel)
+Cumulative reduction vs. baseline
+Original flat baseline (single host, single model, no tiering)
+$130-285
+—
++ Three-bucket split (Railway/Modal/OpenClaw) + Gemini-only tiering
+$115-185
+~15-30%
++ DeepSeek/Qwen flash-tier swap for OpenClaw flash agents
+$101-157
+~25-45%
++ Computation-first delegation (DS-Star Python-first, Gemini on exception only)
+$72-120
+~45-58%
++ Jina non-generative offloading (Reader/Embedding/Reranker/Classifier)
+$56-103
+~57-64%
++ LLMLingua-2 prompt compression on input-heavy agents
+$51-93
+~61-67%
++ Cross-agent shared-reference caching with break-even TTL sizing
+$45-85
+~65-70%
+Two scope notes on this table. First, it covers the 1-channel scenario specifically; the fixed-cost floor (Railway baseline, Hostinger VPS) is a larger share of total spend at 1 channel than at 5, so the same levers produce a better per-video number, even if the total monthly figure does not fall by the same proportion, as channel count grows. Second, the levers in 11.4 (per-host, lifecycle-gated) are not included in this progression, since several of them are explicitly deferred until cost_actuals volume justifies evaluating them.

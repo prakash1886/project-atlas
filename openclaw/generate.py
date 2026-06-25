@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Generate OpenClaw agent personas + skill packages from atlas-agents.json.
 
-Emits, for each granular agent:
+Emits, for each granular agent (decomposed into 3 Amigos):
   agents/<id>/SOUL.md      (persona / system prompt)
   skills/<skill>/SKILL.md  (capability package)
 and a machine-readable deploy-list.txt consumed by deploy.sh.
 
 Run: python openclaw/generate.py
 """
-import json, os, pathlib
+import json
+import os
+import pathlib
+import shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent
 data = json.loads((ROOT / "atlas-agents.json").read_text(encoding="utf-8"))
@@ -20,7 +23,8 @@ HOST_NOTE = {
     "modal": " (production host: Modal/Gemma, spec §11.1)",
 }
 
-def model_id(a): return MODELS[a["model"]]
+def model_id(a):
+    return MODELS[a["model"]]
 
 def tier_note(a):
     if a.get("compute"):
@@ -90,16 +94,98 @@ metadata:
 {model_id(a)} — {tier_note(a)}
 """
 
+def remove_dir(path):
+    if path.exists() and path.is_dir():
+        shutil.rmtree(path)
+
+def expand_agent(a):
+    if a.get("amigos") is False:
+        return [a]
+    
+    if isinstance(a.get("amigos"), list):
+        expanded = []
+        for am in a["amigos"]:
+            sub = a.copy()
+            sub["id"] = f"{a['id']}-{am['role']}"
+            sub["name"] = f"{a['name']} {am['role'].capitalize()}"
+            sub["skill"] = am["skill"]
+            sub["model"] = am.get("model", a["model"])
+            sub["emoji"] = am.get("emoji", a["emoji"])
+            sub["purpose"] = f"Sub-agent for {am['role'].capitalize()} operations: {a['purpose']}"
+            expanded.append(sub)
+        return expanded
+
+    # Default 3 Amigos expansion (Creator, Compiler, Auditor)
+    return [
+        {
+            "id": f"{a['id']}-creator",
+            "name": f"{a['name']} Creator",
+            "emoji": "🎨",
+            "layer": a["layer"],
+            "host": a["host"],
+            "model": a["model"],
+            "skill": f"{a['skill']}-creator",
+            "purpose": f"Focus on sourcing, drafting, and creative selection for: {a['purpose']}",
+            "inputs": a["inputs"],
+            "output": f"Draft proposal and creative options for: {a['output']}",
+            "section": a["section"],
+            "note": a.get("note")
+        },
+        {
+            "id": f"{a['id']}-compiler",
+            "name": f"{a['name']} Compiler",
+            "emoji": "⚙️",
+            "layer": a["layer"],
+            "host": a["host"],
+            "model": a["model"],
+            "skill": f"{a['skill']}-compiler",
+            "purpose": f"Focus on structural integrity, schemas, and format alignment for: {a['purpose']}",
+            "inputs": f"Draft proposal from Creator + original inputs: {a['inputs']}",
+            "output": f"Compiled and formatted candidate structure for: {a['output']}",
+            "section": a["section"],
+            "note": a.get("note")
+        },
+        {
+            "id": f"{a['id']}-auditor",
+            "name": f"{a['name']} Auditor",
+            "emoji": "🔍",
+            "layer": a["layer"],
+            "host": a["host"],
+            "model": "reason",  # Auditing requires premium reasoning by default
+            "skill": f"{a['skill']}-auditor",
+            "purpose": f"Focus on fact-checking, safety policies, and final validation for: {a['purpose']}",
+            "inputs": f"Compiled candidate from Compiler + original sources: {a['inputs']}",
+            "output": f"Validated final output: {a['output']} (approved or rejected with feedback)",
+            "section": a["section"],
+            "note": a.get("note")
+        }
+    ]
+
 agents_dir = ROOT / "agents"
 skills_dir = ROOT / "skills"
 deploy_rows = []
 n_a = n_s = 0
+
+# First, clean up old monolithic outputs of granular agents to avoid pollution
 for a in data["agents"]:
-    ad = agents_dir / a["id"]; ad.mkdir(parents=True, exist_ok=True)
-    (ad / "SOUL.md").write_text(soul(a), encoding="utf-8"); n_a += 1
-    sd = skills_dir / a["skill"]; sd.mkdir(parents=True, exist_ok=True)
-    (sd / "SKILL.md").write_text(skill(a), encoding="utf-8"); n_s += 1
-    deploy_rows.append("|".join([a["id"], model_id(a), a["emoji"], a["name"], a["host"], a["skill"]]))
+    remove_dir(agents_dir / a["id"])
+    remove_dir(skills_dir / a["skill"])
+
+# Generate sub-agents and sub-skills
+for a in data["agents"]:
+    sub_agents = expand_agent(a)
+    for sub in sub_agents:
+        ad = agents_dir / sub["id"]
+        ad.mkdir(parents=True, exist_ok=True)
+        (ad / "SOUL.md").write_text(soul(sub), encoding="utf-8")
+        n_a += 1
+        
+        sd = skills_dir / sub["skill"]
+        sd.mkdir(parents=True, exist_ok=True)
+        (sd / "SKILL.md").write_text(skill(sub), encoding="utf-8")
+        n_s += 1
+        
+        deploy_rows.append("|".join([sub["id"], model_id(sub), sub["emoji"], sub["name"], sub["host"], sub["skill"]]))
 
 (ROOT / "deploy-list.txt").write_text("\n".join(deploy_rows) + "\n", encoding="utf-8")
-print(f"generated {n_a} agents, {n_s} skills, {len(deploy_rows)} deploy rows")
+print(f"Generated {n_a} agents, {n_s} skills, {len(deploy_rows)} deploy rows under Three Amigos architecture.")

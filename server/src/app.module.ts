@@ -4,6 +4,8 @@ import { RedisModule } from './modules/redis/redis.module.js';
 import { TemporalModule } from './modules/temporal/temporal.module.js';
 import { LlmModule } from './modules/llm/llm.module.js';
 import { EnvatoModule } from './modules/envato/envato.module.js';
+import { SearchModule } from './modules/search/search.module.js';
+import { VideoModule } from './modules/video/video.module.js';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { EnvatoModule } from './modules/envato/envato.module.js';
     TemporalModule,
     LlmModule,
     EnvatoModule,
+    SearchModule,
+    VideoModule,
   ],
 })
 export class AppModule {}

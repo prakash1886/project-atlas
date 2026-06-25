@@ -3,6 +3,7 @@ import type { AdAutomationActivities } from '../activities/ad-automation.activit
 
 const { scanTrends, generateAdContent, registerPrintOnDemand, publishToShopify } =
   proxyActivities<AdAutomationActivities>({
+    taskQueue: 'ad-automation',
     startToCloseTimeout: '5 minutes',
   });
 

@@ -1,0 +1,33 @@
+# Fact Sheet: API Governance & Policy Compliance (SYS-POLICY)
+
+[policy/manifest]
+F-001: Each external data provider shall have a version-pinned, machine-readable policy manifest
+       (pricing, rate limits, storage rights, ToS URL + content hash, plain-language agent rules). @spec @db
+F-002: SearchService and agents shall read all enforcement parameters from the manifest — never hardcoded. @spec
+
+[policy/compliance]
+F-003: Result bodies shall NOT be persisted unless the provider manifest sets `storageRights: true`;
+       the default cache mode is **signals-only** (derived numeric metrics + query hash). @spec @db
+F-004: Brave (current $5 Search plan) is `storageRights: false` → signals-only caching is mandatory.
+       Exa (free tier) is signals-only until its ToS is confirmed to permit storage. @spec
+F-005: Per-provider rate limiting shall respect documented QPS and adapt to `X-RateLimit-*` / `Retry-After`
+       headers, with exponential backoff + jitter and a per-provider circuit breaker on repeated 429/401. @cache
+F-006: Brave POI ids expire ~8h and shall not be stored beyond that window. @db
+
+[policy/cost]
+F-007: Every provider call shall be logged to `api_usage_ledger` with estimated cost from the manifest. @db
+F-008: Default policy is ZERO paid overage for EVERY provider — the monthly cap is the free-tier /
+       free-credit ceiling, with a safety margin (cap at ~90–95% of the free allowance to absorb
+       concurrency/in-flight). Brave ~900 of the 1,000 free-credit requests; Exa ~19,000 of 20,000.
+       Paid overage is opt-in per provider (`allowPaidOverage: true`), never the default. @spec @ui
+F-009: Per-workflow / per-agent sub-quotas shall prevent a single run from draining the monthly cap. @spec
+F-009a: The monthly counter shall be atomic (Redis INCR) with reserve-before-call semantics so
+        concurrent agents cannot collectively overshoot the cap. @cache
+
+[policy/drift]
+F-010: A scheduled policy-watch workflow shall (weekly) fetch each provider's pricing + ToS, hash the
+       content, and diff against the stored manifest hash. @spec
+F-011: On a detected change, a policy-interpreter agent (reasoning tier) shall propose structured manifest
+       edits + a risk flag; changes require **human approval** before apply (no auto-interpretation of legal text). @spec
+F-012: Approved changes bump the manifest version (git commit = audit trail) and hot-reload SearchService
+       enforcement + the agents' plain-language policy rules. @spec

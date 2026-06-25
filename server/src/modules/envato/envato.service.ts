@@ -80,4 +80,88 @@ export class EnvatoService {
       throw e;
     }
   }
+
+  /**
+   * Generates a video clip using Envato VideoGen AI based on a prompt.
+   */
+  async generateVideoClip(
+    prompt: string,
+    options?: { duration?: number; aspect_ratio?: string }
+  ): Promise<Record<string, unknown>> {
+    if (!this.apiToken) {
+      this.logger.warn(`[EnvatoService] Stub: Generating VideoGen clip for prompt: "${prompt}"`);
+      return {
+        clipId: `videogen-${Math.random().toString(36).substring(2, 10)}`,
+        prompt,
+        status: 'completed',
+        url: 'https://elements.envato.com/video/mock-videogen-output.mp4',
+        duration: options?.duration || 5,
+        aspect_ratio: options?.aspect_ratio || '16:9',
+      };
+    }
+
+    try {
+      const response = await fetch('https://api.envato.com/v1/videogen/generate', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${this.apiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          duration: options?.duration || 5,
+          aspect_ratio: options?.aspect_ratio || '16:9',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Envato VideoGen API responded with status ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (e: any) {
+      this.logger.error(`[EnvatoService] Error generating VideoGen clip: ${e.message}`);
+      throw e;
+    }
+  }
+
+  /**
+   * Registers usage of an Envato Elements asset for a specific project/video to comply with license terms.
+   */
+  async registerAssetLicense(itemId: string, projectName: string): Promise<Record<string, unknown>> {
+    if (!this.apiToken) {
+      this.logger.warn(`[EnvatoService] Stub: Registering license for item ${itemId} under project "${projectName}"`);
+      return {
+        registrationId: `license-reg-${Math.random().toString(36).substring(2, 10)}`,
+        itemId,
+        projectName,
+        status: 'registered',
+        licenseKey: `ELEMENTS-MOCK-LICENSE-${itemId}-${Date.now()}`,
+      };
+    }
+
+    try {
+      const response = await fetch('https://api.envato.com/v1/user/download', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${this.apiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          item_id: itemId,
+          project_name: projectName,
+          app_name: 'Project Atlas Content Engine',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Envato Elements license registration responded with status ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (e: any) {
+      this.logger.error(`[EnvatoService] Error registering Envato Elements asset license: ${e.message}`);
+      throw e;
+    }
+  }
 }

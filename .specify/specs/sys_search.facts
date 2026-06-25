@@ -1,0 +1,18 @@
+# Fact Sheet: Search Intelligence (SYS-SEARCH)
+
+[search/providers]
+F-001: System shall query the Brave Search API (web + news) for search-volume, discussion and media signals. @spec @db
+F-002: System shall query the Exa API (neural/semantic) for content-supply gaps, biographies and long-tail / hidden-legend discovery. @spec @db
+F-003: Brave and Exa MCP servers shall be registered into OpenClaw and granted to agents per the agent->server mapping in the plan. @spec
+
+[search/credentials]
+F-004: Provider credentials shall be read from environment/secret store (`BRAVE_API_KEY`, `EXA_API_KEY`) and never committed to git. @spec
+F-005: When a credential is missing the connector shall fall back to a stubbed response, matching the established skill safety pattern. @spec
+
+[search/caching-and-limits]
+F-006: All provider queries shall pass through the `search_cache` 30-day no-repeat gate before hitting the API (spec §6.2). @spec @db @cache
+F-007: Third-party API calls shall be throttled via Redis rate limiters (reuses SYS-TREND F-003). @cache
+
+[search/consumers]
+F-008: Agent-driven search shall use MCP tools; deterministic high-volume polling shall use the NestJS SearchService. @spec
+F-009: Raw provider responses feeding the trend pipeline shall be normalized to `{datetime, metric, value}` and stored to `raw_signals` (SYS-TREND F-002). @db

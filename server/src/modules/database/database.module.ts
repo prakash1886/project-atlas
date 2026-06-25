@@ -26,11 +26,20 @@ const { Pool } = pg;
           pool = new PgMemPool();
         }
         
+        let hasTimescale = false;
         try {
           await pool.query(`CREATE EXTENSION IF NOT EXISTS vector;`);
           console.log('[DatabaseModule] pgvector extension verified');
         } catch (err) {
           console.warn(`[DatabaseModule] Could not load pgvector: ${err}`);
+        }
+
+        try {
+          await pool.query(`CREATE EXTENSION IF NOT EXISTS timescaledb;`);
+          console.log('[DatabaseModule] timescaledb extension verified');
+          hasTimescale = true;
+        } catch (err) {
+          console.warn(`[DatabaseModule] Could not load timescaledb (falling back to standard SQL tables): ${err}`);
         }
 
         // Initialize schema for Project Atlas
@@ -62,6 +71,61 @@ const { Pool } = pg;
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             UNIQUE(source_id, target_id, type)
           );
+
+          CREATE TABLE IF NOT EXISTS video_analytics (
+            time TIMESTAMP WITH TIME ZONE NOT NULL,
+            video_id VARCHAR(50) NOT NULL,
+            views INTEGER NOT NULL DEFAULT 0,
+            ctr NUMERIC(4,2) DEFAULT 0.00,
+            watch_time_seconds INTEGER DEFAULT 0,
+            average_retention NUMERIC(4,2) DEFAULT 0.00,
+            PRIMARY KEY (time, video_id)
+          );
+
+          -- SIGNALS-ONLY (SYS-POLICY F-003): stores a derived numeric signal, never provider result
+          -- bodies, so it is compliant on Brave's non-storage-rights $5 plan.
+          CREATE TABLE IF NOT EXISTS search_cache (
+            source VARCHAR(16) NOT NULL,
+            query TEXT NOT NULL,
+            metric VARCHAR(32) NOT NULL,
+            value NUMERIC NOT NULL,
+            fetched_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (source, query)
+          );
+
+          -- Per-call cost ledger backing the zero-overage monthly cap (SYS-POLICY F-007/F-008).
+          CREATE TABLE IF NOT EXISTS api_usage_ledger (
+            id SERIAL PRIMARY KEY,
+            provider VARCHAR(16) NOT NULL,
+            endpoint VARCHAR(32) NOT NULL,
+            request_count INTEGER NOT NULL DEFAULT 1,
+            est_cost_usd NUMERIC(10,5) NOT NULL DEFAULT 0,
+            day DATE NOT NULL DEFAULT CURRENT_DATE,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+          );
+
+          CREATE TABLE IF NOT EXISTS envato_asset_references (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            designer_task_id UUID,
+            video_id UUID,
+            envato_item_id VARCHAR(255) NOT NULL,
+            item_type VARCHAR(50) NOT NULL,
+            license_type VARCHAR(100) DEFAULT 'Elements Single-Use',
+            usage_role VARCHAR(50) NOT NULL,
+            incorporated_description TEXT,
+            registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          );
+
+          CREATE TABLE IF NOT EXISTS video_production_metrics (
+            video_id UUID PRIMARY KEY,
+            visual_tempo_seconds INT,
+            transition_style VARCHAR(50),
+            music_prompt_used TEXT,
+            audio_ducking_db INT,
+            sfx_count INT,
+            average_view_duration_percent DECIMAL,
+            ctr_percent DECIMAL
+          );
         `;
 
         if (!databaseUrl) {
@@ -70,6 +134,16 @@ const { Pool } = pg;
         }
 
         await pool.query(initSql);
+
+        // Convert video_analytics to a TimescaleDB hypertable if the extension is available
+        if (hasTimescale) {
+          try {
+            await pool.query(`SELECT create_hypertable('video_analytics', 'time', if_not_exists => TRUE);`);
+            console.log('[DatabaseModule] video_analytics converted to TimescaleDB hypertable');
+          } catch (err) {
+            console.warn(`[DatabaseModule] Failed to convert video_analytics to hypertable: ${err}`);
+          }
+        }
 
         // Seed Mock Data
         const opportunitiesCount = await pool.query(`SELECT COUNT(*) FROM content_opportunities;`);
