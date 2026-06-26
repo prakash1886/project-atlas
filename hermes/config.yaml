@@ -4,14 +4,35 @@
 api:
   port: 8000
   host: "0.0.0.0"
-  secret_key: "default-ds-star-api-secret-key-12345"
+  # No default here on purpose — set DSSTAR_API_KEY as a Railway env var.
+  # app.py disables auth entirely if both are unset, so deploys without a
+  # real key set are intentionally locked out rather than silently exposed.
+  secret_key: ""
 
 ds_star:
   data_directory: "../ds-star/data"
   max_refinement_rounds: 3
+  # Bare model ids, no provider prefix -- AIAgent calls Google's API directly
+  # (base_url=generativelanguage.googleapis.com), so a LiteLLM-style "gemini/"
+  # prefix 404s ("models/gemini/gemini-1.5-flash is not found"). gemini-2.5-flash
+  # is the id already verified working elsewhere in this repo (LiteLLM gateway,
+  # gemini-direct provider) with the same GEMINI_API_KEY.
+  # NOTE: only "analyzer" is actually read by app.py's execute_self_improving_hermes_agent;
+  # the other four keys are unused by current code, kept here for when per-role
+  # model selection gets wired up.
   agent_models:
-    router: "gemini/gemini-1.5-flash-lite"
-    researcher: "gemini/gemini-1.5-flash"
-    analyzer: "gemini/gemini-1.5-flash"
-    verifier: "gemini/gemini-1.5-flash-lite"
-    finalizer: "gemini/gemini-1.5-flash"
+    router: "gemini-2.5-flash-lite"
+    researcher: "gemini-2.5-flash"
+    analyzer: "gemini-2.5-flash"
+    verifier: "gemini-2.5-flash-lite"
+    finalizer: "gemini-2.5-flash"
+
+modal:
+  # Production host for the Script agent (Gemma 4 26B-A4B MoE, spec §11.1).
+  # Served by Gemma4InferenceEngine.generate_script in server/src/modules/llm/modal/app.py,
+  # reachable at <openai_proxy base URL>/v1/script (current deploy:
+  # https://prakash1886--cost-effective-gemma4-pipeline-gemma4infere-5c4b8b.modal.run/v1/script).
+  # Left blank by default; set via MODAL_SCRIPT_ENDPOINT_URL env var instead of committing the
+  # live URL here. Falls back to the local self-improving deepseek/gemini loop when unset.
+  endpoint_url: ""
+  timeout_seconds: 60
