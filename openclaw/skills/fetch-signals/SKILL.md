@@ -37,6 +37,9 @@ def fetch_signals(source: str, query: str) -> list:
 - Enforce `search_cache` 30-day no-repeat per query; only re-query on a real signal change.
 - Batch multiple candidate queries per call where possible.
 
+## Implementation
+Call the `temporal-bridge` MCP tool `start_workflow("fetchSignalsWorkflow", "trend-signals", [{"source": source, "query": query}])`, then poll `get_workflow_result(workflow_id)`. Runs the already-implemented `fetchSignals` Temporal activity (`server/src/modules/temporal/activities/trend-signals.activities.ts`), which goes through the cached, rate-limited `SearchService` (the `search_cache` 30-day gate + Redis limiter apply automatically).
+
 ## Backend dependency
 - `search_cache` is implemented (DatabaseModule); `youtube_topics/_trends` tables (Railway) — **stubbed** until wired.
 - API keys: **Brave is live** (`BRAVE_API_KEY`, via the `brave-search` MCP server / SearchService, SYS-SEARCH).

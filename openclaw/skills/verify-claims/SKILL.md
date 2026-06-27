@@ -37,8 +37,11 @@ def verify_claims(draft_text: str) -> dict:
 For claims that name a real person/culture or where confidence is low, escalate to a
 **different provider** (Gemini) for a second opinion — conditional, ~5–10% sampling, not every call.
 
+## Implementation
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="verify-claims", query=<ask>, context={"draft_text": draft_text})`. Hits Hermes's `POST /v1/agents/verify-claims` (new `hermes/agents/verify-claims/`), same self-correcting LLM loop / mock-fallback pattern. Caveat: this checks claims against the model's training-data knowledge, not a live verified-fact database -- treat flags as input for a human fact-checker, not a final verdict.
+
 ## Backend dependency
-- Reads the graph/citation store (Railway) gathered by `gather-citations`. **Stubbed** until wired.
+- Reading the graph/citation store (Railway) gathered by `gather-citations` is still **stubbed** until the Postgres/AGE backbone is wired -- the claim-checking call itself works today against the model's own knowledge, it just isn't cross-referenced against `gather-citations`'s stored output yet.
 
 ## Model
 Primary deepseek-direct/deepseek-chat; conditional cross-check gemini-direct/gemini-2.5-flash.

@@ -31,9 +31,12 @@ def gather_citations(topic: str) -> dict:
 Store only facts, events, dates, relationships and reference metadata. Never store or rewrite
 full articles/books. Never use a single source as the sole source.
 
+## Implementation
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="gather-citations", query=<ask>, context={"topic": topic})`. Hits Hermes's `POST /v1/agents/gather-citations` (new `hermes/agents/gather-citations/`), same self-correcting LLM loop / mock-fallback pattern. Caveat: this is LLM judgment from training-data knowledge, not live retrieval against Wikipedia/Wikidata/Exa yet -- treat the dossier as a first draft for a human fact-checker, the same caveat that already applies to `vibe`/`voice-director` today.
+
 ## Backend dependency
-- Writes facts/citations to the graph (Railway, **stubbed** until wired); `search_cache` is implemented (DatabaseModule).
-- API keys: **Exa is live** (`EXA_API_KEY`, via the `exa` MCP server / SearchService, SYS-SEARCH).
+- Writing facts/citations to the graph (Railway) is still **stubbed** until the Postgres/AGE backbone is wired; `search_cache` is implemented (DatabaseModule).
+- API keys: **Exa is live** (`EXA_API_KEY`, via the `exa` MCP server / SearchService, SYS-SEARCH) but not yet routed into this skill's judgment call -- a future improvement is feeding Exa search results into the `context` passed to `run_judgment_agent`.
   NewsAPI still pending; Wikipedia/Wikidata/GDELT are keyless; Jina available.
 
 ## Model

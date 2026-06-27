@@ -31,8 +31,11 @@ def draft_video_script(factual_dossier: dict, psych_profile: dict, duration_minu
 ## Copyright-safe (spec §2.5)
 Original narrative built from facts only — never rewrite a source article.
 
+## Implementation
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="script", query=<ask>, context={"factual_dossier": factual_dossier, "psych_profile": psych_profile, "duration_minutes": duration_minutes})`. Reuses Hermes's *existing* `hermes/agents/script/` agent as-is (`POST /v1/agents/script`) -- the same agent the orchestrate-content-run endpoint already names as an upstream judgment dependency, so no new Hermes-side files were needed here.
+
 ## Backend dependency
-- Persists `script_markdown` to the asset bundle / object storage (Railway/R2). **Stubbed** until wired.
+- Persists `script_markdown` to the asset bundle / object storage (Railway/R2). **Stubbed** until wired -- the script-drafting call itself works today, it just isn't durably stored yet.
 
 ## Model
 gemini-direct/gemini-2.5-flash — premium narrative design. Output-heavy: do NOT compress input (spec §11.3).

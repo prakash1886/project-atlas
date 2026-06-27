@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "topic": { "type": "string" },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "statement": { "type": "string" },
+          "date": { "type": "string" },
+          "source": { "type": "string" }
+        },
+        "required": ["statement", "source"]
+      }
+    },
+    "friction_points": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["generated_at", "topic", "facts"]
+}

@@ -29,8 +29,12 @@ def autolink_entities(entity_id: str) -> list:
 - **Input:** `entity_id`.
 - **Output:** list of suggested edges `{from, type, to, confidence}`.
 
-## Backend dependency
+## Backend dependency — intentionally still blocked, not wired
 - **Apache AGE graph on Railway Postgres** — read existing nodes/edges, write new ones. **Stubbed** until wired.
+- **Why this isn't routed through an LLM judgment call as an interim measure**: there is no real graph
+  to "cross-reference" yet -- an LLM proposing edges against a graph that doesn't exist would fabricate
+  plausible-looking but fake relationships rather than real ones. Wait for the Postgres/AGE backbone
+  (P5) rather than faking this one, same reasoning as `query-semantic-nodes`.
 
 ## Model
 deepseek-direct/deepseek-chat to read a summary and propose typed edges; the human/Curator

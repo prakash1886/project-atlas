@@ -25,8 +25,11 @@ def generate_psych_profile(subject_entity: str) -> dict:
 - **Input:** `subject_entity` (name or entity id).
 - **Output:** `{focus, motivations[], biases[], mental_models[], arc: {identity, struggle, failure, growth, resilience, reinvention, legacy}}`.
 
+## Implementation
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="generate-psych-profile", query=<ask>, context={"subject_entity": subject_entity})`. Hits Hermes's `POST /v1/agents/generate-psych-profile` (new `hermes/agents/generate-psych-profile/`), the same self-correcting LLM loop / mock-fallback pattern as `vibe`/`voice-director`. Caveat: this is LLM judgment from training-data knowledge, not retrieval against the actual graph/dossier yet -- treat the output as a first draft until `gather-citations` + `query-semantic-nodes` are feeding it real context.
+
 ## Backend dependency
-- Reads dossier/graph (from gather-citations + query-semantic-nodes); writes `psychological_arcs` (Railway). **Stubbed** until wired.
+- Persisting to `psychological_arcs` (Railway) is still **stubbed** until the Postgres/AGE backbone is wired -- the judgment call itself works today, it just isn't durably stored yet.
 - Deep biography discovery via **Exa** (key not present yet).
 
 ## Model

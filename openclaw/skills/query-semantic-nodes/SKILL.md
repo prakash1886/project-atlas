@@ -31,9 +31,14 @@ def query_semantic_nodes(query_text: str, limit: int = 5) -> list:
 - **Input:** `query_text`, `limit`.
 - **Output:** list of `{name, type, summary, distance}`.
 
-## Backend dependency
+## Backend dependency — intentionally still blocked, not wired
 - **PGVector `entities` table on Railway** — **stubbed** until backbone wired.
 - Embeddings via **Jina Embedding API** (`JINA_API` available) instead of an LLM embedding endpoint (spec §11.3).
+- **Why this isn't routed through an LLM judgment call as an interim measure**: this skill is a
+  cosine-distance SQL query over real stored vectors -- there is no real PGVector `entities` table to
+  query yet. An LLM "pretending" to do semantic graph recall would fabricate plausible-looking but
+  fake related entities, which is worse than returning nothing. Wait for the Postgres/AGE/PGVector
+  backbone (P5) rather than faking this one.
 
 ## Model
 No generative LLM — embedding + DB only. Use Jina for the embedding step.

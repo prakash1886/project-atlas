@@ -17,6 +17,25 @@ export interface CoverageGapResult {
   sources: { brave: number; exa: number };
 }
 
+/** Raw weighted-component inputs to the opportunity score, each 0-100 (calculate-opportunity-score skill). */
+export interface RawOpportunityMetrics {
+  topic: string;
+  search: number;
+  discussion: number;
+  video: number;
+  evergreen: number;
+  emotional: number;
+  competition: number;
+  monetization: number;
+  regional: number;
+}
+
+export interface OpportunityScoreResult {
+  topic: string;
+  final_score: number;
+  classification: 'create_now' | 'create_later' | 'archive';
+}
+
 /**
  * Server-side fetch-signals path for the trend pipeline (SYS-SEARCH F-008/F-009).
  * Runs Brave + Exa through the cached, rate-limited SearchService rather than raw MCP, so bulk
@@ -56,5 +75,27 @@ export class TrendSignalsActivities {
       gap_score: gap,
       sources: { brave: demand.resultCount, exa: supply.resultCount },
     };
+  }
+
+  /**
+   * Weighted-sum opportunity score (calculate-opportunity-score skill, manifest §2):
+   * Search 20% + Discussion 15% + Video 15% + Evergreen 15% + Emotional 10% + Competition 10%
+   * + Monetization 10% + Regional 5%. Pure arithmetic at zero LLM cost, per the skill's own
+   * "computation-first" requirement -- no model call here.
+   */
+  async calculateOpportunityScore(raw: RawOpportunityMetrics): Promise<OpportunityScoreResult> {
+    const final_score = Math.round(
+      raw.search * 0.2 +
+        raw.discussion * 0.15 +
+        raw.video * 0.15 +
+        raw.evergreen * 0.15 +
+        raw.emotional * 0.1 +
+        raw.competition * 0.1 +
+        raw.monetization * 0.1 +
+        raw.regional * 0.05
+    );
+    const classification = final_score >= 75 ? 'create_now' : final_score >= 50 ? 'create_later' : 'archive';
+    this.logger.log(`[calculateOpportunityScore] ${raw.topic}: final_score=${final_score} (${classification})`);
+    return { topic: raw.topic, final_score, classification };
   }
 }

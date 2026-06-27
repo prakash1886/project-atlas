@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "design_prompt": { "type": "string" },
+    "text_overlay": { "type": "string" },
+    "rationale": { "type": "string" }
+  },
+  "required": ["generated_at", "design_prompt", "rationale"]
+}

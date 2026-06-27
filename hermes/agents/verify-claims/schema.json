@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim": { "type": "string" },
+          "issue": { "type": "string" },
+          "severity": { "type": "string", "enum": ["low", "medium", "high"] }
+        },
+        "required": ["claim", "issue", "severity"]
+      }
+    },
+    "overall_verdict": { "type": "string", "enum": ["pass", "needs_review", "fail"] }
+  },
+  "required": ["generated_at", "contradictions", "overall_verdict"]
+}

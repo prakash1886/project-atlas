@@ -33,13 +33,14 @@ AGENTS=(
 
 # Agents that need the hermes-bridge MCP tool (run_judgment_agent/start_content_run/
 # get_content_run_status) to actually reach Hermes -- everyone else has no reason to.
-HERMES_BRIDGE_AGENTS=("chief-editor" "content-factory" "ds-star")
+HERMES_BRIDGE_AGENTS=("chief-editor" "content-factory" "ds-star" "narrative-psychology" "research-factcheck" "commerce-design")
 
 # Agents that need direct Temporal-client access (start/signal/query any workflow
 # on the shared cluster), not just Hermes's HTTP surface -- ds-star to kick the
 # nightly/weekly TS scientist workflows on demand, chief-editor as the prerequisite
-# for a future real HITL signal replacing submit-editorial-review's placeholder.
-TEMPORAL_BRIDGE_AGENTS=("ds-star" "chief-editor")
+# for a future real HITL signal replacing submit-editorial-review's placeholder,
+# trend-intelligence for fetch-signals/calculate-opportunity-score on trend-signals.
+TEMPORAL_BRIDGE_AGENTS=("ds-star" "chief-editor" "trend-intelligence")
 
 echo ">> staging skills + personas + mcp bridges to $HOST:$REMOTE"
 $SSH "$HOST" "mkdir -p $REMOTE"

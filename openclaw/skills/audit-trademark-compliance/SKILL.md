@@ -28,9 +28,15 @@ def audit_trademark_compliance(design_text: str) -> dict:
 - Envato incorporation gate (§10.5): require an `incorporated_description` for any Envato-sourced asset.
 - FTC affiliate disclosure + Redbubble AI-disclosure (§10.8/§10.1) before publish.
 
-## Backend dependency
+## Backend dependency — intentionally still blocked, not wired
 - Trademark DB API (e.g. USPTO/EUIPO) — key/integration not present yet. **Stubbed.**
 - Writes outcome to `designer_tasks.review_outcome` (Railway).
+- **Why this isn't routed through `run_judgment_agent` like the other commerce-design skill**: an
+  LLM guessing trademark conflicts from training-data knowledge alone, with no real trademark-search
+  backend, would produce a confident-sounding but unverified `clean: true/false` -- a false-confidence
+  legal-risk problem for a merch pipeline, not a missing-wiring problem. This needs either a real
+  USPTO/TMDN API integration, or at minimum routing through the existing Brave/Exa `SearchService`
+  (the same way `fetch-signals` already does) for grounded search results, before it's safe to wire.
 
 ## Model
 deepseek-direct/deepseek-chat to summarize matches; deterministic pass/fail on exact-mark hits.

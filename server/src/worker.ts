@@ -57,6 +57,7 @@ async function bootstrap() {
     activities: {
       fetchSignals: trendSignalsInstance.fetchSignals.bind(trendSignalsInstance),
       computeCoverageGap: trendSignalsInstance.computeCoverageGap.bind(trendSignalsInstance),
+      calculateOpportunityScore: trendSignalsInstance.calculateOpportunityScore.bind(trendSignalsInstance),
     },
     taskQueue: 'trend-signals',
     dataConverter: secureDataConverter,

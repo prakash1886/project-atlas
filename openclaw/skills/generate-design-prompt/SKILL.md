@@ -28,8 +28,11 @@ def generate_design_prompt(topic: str, product_type: str) -> str:
 Output is **reference/raw material for a human designer** — agents do research & ideation;
 humans create and upload the sellable artwork (Redbubble AI-disclosure / IP-risk rules).
 
+## Implementation
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="generate-design-prompt", query=<ask>, context={"topic": topic, "product_type": product_type})`. Hits Hermes's `POST /v1/agents/generate-design-prompt` (new `hermes/agents/generate-design-prompt/`), same self-correcting LLM loop / mock-fallback pattern as `vibe`/`voice-director`.
+
 ## Backend dependency
-- Attaches to `merch_briefs` / `designer_tasks` (Railway). **Stubbed** until wired.
+- Attaching the result to `merch_briefs` / `designer_tasks` (Railway) is still **stubbed** until the Postgres/AGE backbone is wired -- the prompt-generation call itself works today, it just isn't durably tracked yet.
 - Envato Elements MCP for human-made raw assets (spec §10.4) — separate integration.
 
 ## Model

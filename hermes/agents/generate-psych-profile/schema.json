@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "subject_entity": { "type": "string" },
+    "core_motivations": { "type": "array", "items": { "type": "string" } },
+    "cognitive_biases": { "type": "array", "items": { "type": "string" } },
+    "psychological_arc": {
+      "type": "object",
+      "properties": {
+        "identity": { "type": "string" },
+        "struggle": { "type": "string" },
+        "failure": { "type": "string" },
+        "growth": { "type": "string" },
+        "resilience": { "type": "string" },
+        "reinvention": { "type": "string" },
+        "legacy": { "type": "string" }
+      },
+      "required": ["identity", "struggle", "failure", "growth", "resilience", "reinvention", "legacy"]
+    }
+  },
+  "required": ["generated_at", "subject_entity", "core_motivations", "psychological_arc"]
+}
