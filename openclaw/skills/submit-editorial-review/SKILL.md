@@ -19,7 +19,7 @@ Move a run from machine-approved to human-approved via the HITL gate.
 1. Push assets to the NestJS editorial dashboard queue.
 2. Set `content_assets.status = UNDER_REVIEW`; emit editor notification.
 3. Suspend the workflow until a human votes PASS/REJECT.
-4. PASS → `APPROVED` → trigger publishing worker. REJECT → return to `orchestrate-content-run` with notes.
+4. PASS → `APPROVED` → call `dispatch-hermes-content-run` to trigger Hermes's production pipeline. REJECT → return to `orchestrate-content-run` with notes.
 
 ## Function signature (manifest contract)
 ```python

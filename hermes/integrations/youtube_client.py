@@ -10,6 +10,7 @@ import os
 import httpx
 
 UPLOAD_BASE_URL = "https://www.googleapis.com/upload/youtube/v3/videos"
+THUMBNAIL_BASE_URL = "https://www.googleapis.com/upload/youtube/v3/thumbnails/set"
 ACCESS_TOKEN = os.getenv("YOUTUBE_ACCESS_TOKEN", "")
 
 
@@ -42,3 +43,21 @@ async def upload_video(file_path: str, title: str, description: str, tags: list,
         )
         upload_resp.raise_for_status()
         return upload_resp.json()
+
+
+async def set_thumbnail(video_id: str, image_url: str) -> dict:
+    """Downloads the thumbnail-generation agent's image_url and sets it as the
+    video's thumbnail via YouTube's thumbnails.set endpoint."""
+    async with httpx.AsyncClient(timeout=60) as client:
+        image_resp = await client.get(image_url)
+        image_resp.raise_for_status()
+        image_bytes = image_resp.content
+
+        set_resp = await client.post(
+            THUMBNAIL_BASE_URL,
+            params={"videoId": video_id},
+            headers={**_auth_header(), "Content-Type": "image/png"},
+            content=image_bytes,
+        )
+        set_resp.raise_for_status()
+        return set_resp.json()

@@ -24,7 +24,7 @@ async def _download_render(media_url: str) -> str:
     return local_path
 
 
-async def compile_result(media_url: str, metadata: dict) -> dict:
+async def compile_result(media_url: str, metadata: dict, thumbnail_url: str = None) -> dict:
     """compiler phase: download the validated render, then resumable-upload to YouTube."""
     result = {}
     try:
@@ -39,6 +39,14 @@ async def compile_result(media_url: str, metadata: dict) -> dict:
     except Exception as exc:
         result["status"] = "failed"
         result["error"] = str(exc)
+        return result
+
+    if thumbnail_url and result["status"] == "succeeded":
+        try:
+            await youtube_client.set_thumbnail(result["video_id"], thumbnail_url)
+        except Exception as exc:
+            # The video itself published fine; a thumbnail failure is non-fatal.
+            result["thumbnail_error"] = str(exc)
     return result
 
 
@@ -57,5 +65,5 @@ async def run(payload: dict) -> dict:
     metadata = create_metadata(
         payload["title"], payload["description"], payload.get("tags", []), payload.get("privacy_status", "private")
     )
-    result = await compile_result(payload["media_url"], metadata)
+    result = await compile_result(payload["media_url"], metadata, payload.get("thumbnail_url"))
     return {"generated_at": datetime.datetime.utcnow().isoformat() + "Z", **result}

@@ -32,8 +32,11 @@ engagement score, so archetypes that convert (not just engage) get prioritized.
 ## Computation-first (spec §11.3)
 Gradient/regression is **pure Python** at zero LLM cost. No model call needed for the math.
 
+## Implementation
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="optimize-weights", query=<ask>, context={"actual_vs_predicted": actual_vs_predicted})`. Hits Hermes's `POST /v1/agents/optimize-weights` — note the `insight_type` is `optimize-weights`, not this skill's own name — the same endpoint `runDataScienceInsight('optimize-weights', ...)` calls from the TS `ds-star-scientists` Temporal activities, so this skill and the nightly Temporal pass terminate at the same implementation. No separate backend to wire here.
+
 ## Backend dependency
-- `backlog_rankings`, `revenue_actuals`, `story_scores` (Railway). **Stubbed** until wired.
+- `backlog_rankings`, `revenue_actuals`, `story_scores` (Railway) feed Hermes's own data pipeline, not this skill directly.
 - Production host is **Railway** (spec §11.1), not the VPS.
 
 ## Model

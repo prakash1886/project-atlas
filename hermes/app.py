@@ -9,6 +9,7 @@ from typing import List, Dict, Any, Optional
 import httpx
 from fastapi import FastAPI, HTTPException, Header, Depends, status
 from pydantic import BaseModel
+import uuid
 import agent_loader
 import orchestrator
 
@@ -69,6 +70,7 @@ class ContentRunRequest(BaseModel):
     target_format: str = "long_form"
     asset_planner_output: Dict[str, Any]
     voice_assignment: Dict[str, Any]
+    thumbnail_concepts: List[Dict[str, Any]] = []
     publish_metadata: Dict[str, Any] = {}
 
 # Video-production execution agents (spec gap identified in the Higgsfield/video-generation
@@ -530,18 +532,108 @@ def get_mock_scientist_response(insight_type: str, query: str, data_files: List[
         }
     return {"status": "success", "message": f"Insight type {insight_type} completed."}
 
+async def _run_via_temporal(run_id: str, payload: dict) -> dict:
+    """Starts ContentRunWorkflow on the hermes-content-run task queue and awaits
+    its result, giving the pipeline Temporal's durability/retries/visibility
+    instead of orchestrator.run_content_pipeline's in-process asyncio loop."""
+    from temporalio.client import Client
+    from temporal_codec import EncryptionCodec
+    from temporal_workflows import ContentRunWorkflow
+    from temporalio.converter import DataConverter
+
+    address = os.getenv("TEMPORAL_ADDRESS", "localhost:7233")
+    client = await Client.connect(address, data_converter=DataConverter(payload_codec=EncryptionCodec()))
+    return await client.execute_workflow(
+        ContentRunWorkflow.run,
+        payload,
+        id=run_id,
+        task_queue="hermes-content-run",
+    )
+
 @app.post("/v1/orchestrate/content-run", dependencies=[Depends(verify_api_key)])
 async def run_content_orchestration(request: ContentRunRequest):
     """The implementation behind chief-editor's orchestrate-content-run skill
     (openclaw/agents.manifest.json) — sequences all 11 production agents end to end.
     Callers still need to have already run the upstream LLM judgment agents (Script,
     Vibe, Voice Director, Asset Planner, Thumbnail) and pass their outputs in; this
-    endpoint only owns the deterministic execution side of the pipeline."""
+    endpoint only owns the deterministic execution side of the pipeline.
+
+    Runs durably on the hermes-content-run Temporal worker (temporal_worker.py).
+    If Temporal is unreachable, falls back to running the pipeline in-process
+    (orchestrator.run_content_pipeline) rather than failing the request outright --
+    mirrors the TS-side TemporalModule's offline/stub-client edge case."""
+    run_id = str(uuid.uuid4())
+    payload = request.dict()
     try:
-        return await orchestrator.run_content_pipeline(request.dict())
+        result = await _run_via_temporal(run_id, payload)
     except Exception as e:
-        logger.error(f"Error running content orchestration: {e}")
-        raise HTTPException(status_code=500, detail=f"Content orchestration error: {str(e)}")
+        logger.warning(f"Temporal unavailable ({e}); falling back to in-process orchestration.")
+        try:
+            return await orchestrator.run_content_pipeline(payload)
+        except Exception as fallback_exc:
+            logger.error(f"Error running content orchestration: {fallback_exc}")
+            raise HTTPException(status_code=500, detail=f"Content orchestration error: {str(fallback_exc)}")
+    return orchestrator._persist(run_id, payload, result)
+
+async def _temporal_client():
+    from temporalio.client import Client
+    from temporal_codec import EncryptionCodec
+    from temporalio.converter import DataConverter
+
+    address = os.getenv("TEMPORAL_ADDRESS", "localhost:7233")
+    return await Client.connect(address, data_converter=DataConverter(payload_codec=EncryptionCodec()))
+
+@app.post("/v1/orchestrate/content-run/start", dependencies=[Depends(verify_api_key)])
+async def start_content_orchestration(request: ContentRunRequest):
+    """Fire-and-forget counterpart to /v1/orchestrate/content-run -- starts
+    ContentRunWorkflow and returns immediately instead of awaiting the full
+    pipeline. A real run (generation + assembly + render + upload) easily
+    exceeds any reasonable synchronous HTTP timeout for an external caller
+    like an OpenClaw agent; poll /v1/orchestrate/content-run/status/{run_id}
+    for completion instead. No in-process fallback here -- a caller depending
+    on the async contract needs a real Temporal cluster, not a synchronous
+    surprise."""
+    from temporal_workflows import ContentRunWorkflow
+
+    run_id = str(uuid.uuid4())
+    payload = request.dict()
+    try:
+        client = await _temporal_client()
+        await client.start_workflow(
+            ContentRunWorkflow.run,
+            payload,
+            id=run_id,
+            task_queue="hermes-content-run",
+        )
+    except Exception as e:
+        logger.error(f"Error starting content orchestration workflow: {e}")
+        raise HTTPException(status_code=503, detail=f"Could not start content-run workflow: {str(e)}")
+    return {"run_id": run_id, "status": "started"}
+
+@app.get("/v1/orchestrate/content-run/status/{run_id}", dependencies=[Depends(verify_api_key)])
+async def get_content_orchestration_status(run_id: str):
+    """Polled by callers of /v1/orchestrate/content-run/start. Checks the
+    workflow's status via describe() (non-blocking) before ever awaiting
+    result(), so an in-progress run doesn't hang this request."""
+    try:
+        client = await _temporal_client()
+        handle = client.get_workflow_handle(run_id)
+        description = await handle.describe()
+    except Exception as e:
+        logger.error(f"Error describing content-run workflow {run_id}: {e}")
+        raise HTTPException(status_code=503, detail=f"Could not query workflow status: {str(e)}")
+
+    from temporalio.client import WorkflowExecutionStatus
+
+    if description.status == WorkflowExecutionStatus.RUNNING:
+        return {"run_id": run_id, "status": "running"}
+
+    if description.status == WorkflowExecutionStatus.COMPLETED:
+        result = await handle.result()
+        orchestrator._persist(run_id, {}, result)
+        return {"run_id": run_id, "status": "completed", "result": result}
+
+    return {"run_id": run_id, "status": "failed", "workflow_status": description.status.name}
 
 @app.post("/v1/produce/{agent_id}", dependencies=[Depends(verify_api_key)])
 async def run_production_agent(agent_id: str, request: ProduceRequest):

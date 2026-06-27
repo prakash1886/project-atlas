@@ -6,4 +6,6 @@ pydantic
 litellm
 google-generativeai
 boto3
+temporalio
+cryptography
 git+https://github.com/NousResearch/hermes-agent.git

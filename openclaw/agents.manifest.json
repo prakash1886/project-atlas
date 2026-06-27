@@ -11,7 +11,15 @@
       "emoji": "🎬",
       "role": "Swarm supervisor & workflow coordinator",
       "model": "gemini-direct/gemini-2.5-flash",
-      "skills": ["orchestrate-content-run", "submit-editorial-review"]
+      "skills": ["orchestrate-content-run", "submit-editorial-review", "dispatch-hermes-content-run"]
+    },
+    {
+      "id": "content-factory",
+      "name": "Content Factory",
+      "emoji": "🏭",
+      "role": "Production-prep judgment agent (vibe/voice/assets/thumbnails -> Hermes)",
+      "model": "deepseek-direct/deepseek-chat",
+      "skills": ["select-vibe", "direct-voice", "plan-assets", "generate-thumbnails"]
     },
     {
       "id": "trend-intelligence",
