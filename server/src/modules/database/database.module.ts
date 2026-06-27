@@ -126,6 +126,22 @@ const { Pool } = pg;
             average_view_duration_percent DECIMAL,
             ctr_percent DECIMAL
           );
+
+          -- P2 editorial review HITL gate (sys_content.plan.md). temporal_workflow_id is the
+          -- editorialReviewWorkflow instance the /api/reviews/:id/vote endpoint signals.
+          CREATE TABLE IF NOT EXISTS content_assets (
+            id SERIAL PRIMARY KEY,
+            topic VARCHAR(250) NOT NULL,
+            status VARCHAR(20) DEFAULT 'DRAFT', -- DRAFT, UNDER_REVIEW, APPROVED, REJECTED
+            script_content TEXT,
+            article_content TEXT,
+            voice_url VARCHAR(500),
+            thumbnail_prompt TEXT,
+            license_refs TEXT[],
+            temporal_workflow_id VARCHAR(255),
+            review_notes TEXT,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+          );
         `;
 
         if (!databaseUrl) {

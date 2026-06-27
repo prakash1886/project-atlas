@@ -93,12 +93,21 @@ async function bootstrap() {
     dataConverter: secureDataConverter,
   });
 
-  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science", "knowledge-graph"...');
+  const editorialReviewWorker = await Worker.create({
+    connection,
+    workflowsPath,
+    activities: {},
+    taskQueue: 'editorial-review',
+    dataConverter: secureDataConverter,
+  });
+
+  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science", "knowledge-graph", "editorial-review"...');
   await Promise.all([
     adAutomationWorker.run(),
     trendSignalsWorker.run(),
     dsStarScienceWorker.run(),
     knowledgeGraphWorker.run(),
+    editorialReviewWorker.run(),
   ]);
 }
 

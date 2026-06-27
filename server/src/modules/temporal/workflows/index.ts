@@ -3,3 +3,4 @@ export * from './nightly-intelligence.workflow.js';
 export * from './weekly-intelligence.workflow.js';
 export * from './trend-signals.workflow.js';
 export * from './graph.workflow.js';
+export * from './editorial-review.workflow.js';
