@@ -135,6 +135,18 @@ const { Pool } = pg;
 
         await pool.query(initSql);
 
+        // CREATE TABLE IF NOT EXISTS doesn't retroactively fix a column type on an already-deployed
+        // table -- the live entities.embedding column was vector(1536) until this fix; both existing
+        // rows have a NULL embedding (never populated), so this migration is safe to run unconditionally.
+        if (databaseUrl) {
+          try {
+            await pool.query(`ALTER TABLE entities ALTER COLUMN embedding TYPE vector(300);`);
+            console.log('[DatabaseModule] entities.embedding migrated to vector(300)');
+          } catch (err) {
+            console.warn(`[DatabaseModule] Could not migrate entities.embedding to vector(300): ${err}`);
+          }
+        }
+
         // Convert video_analytics to a TimescaleDB hypertable if the extension is available
         if (hasTimescale) {
           try {
