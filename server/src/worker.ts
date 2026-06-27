@@ -7,6 +7,7 @@ import { AdAutomationActivities } from './modules/temporal/activities/ad-automat
 import { DsStarScientistActivities } from './modules/temporal/activities/ds-star-scientists.activities.js';
 import { TrendSignalsActivities } from './modules/temporal/activities/trend-signals.activities.js';
 import { GraphActivities } from './modules/graph/graph.activities.js';
+import { QualityLoopActivities } from './modules/quality-loop/quality-loop.activities.js';
 import { EncryptionCodec } from './modules/temporal/crypto/encryption-codec.js';
 
 async function bootstrap() {
@@ -18,6 +19,7 @@ async function bootstrap() {
   const scientistActivitiesInstance = app.get(DsStarScientistActivities);
   const trendSignalsInstance = app.get(TrendSignalsActivities);
   const graphActivitiesInstance = app.get(GraphActivities);
+  const qualityLoopActivitiesInstance = app.get(QualityLoopActivities);
   const temporalAddress = process.env.TEMPORAL_ADDRESS || 'localhost:7233';
   const secretKey = process.env.TEMPORAL_ENCRYPTION_KEY || 'default-temporary-insecure-32-chars-key';
 
@@ -101,13 +103,30 @@ async function bootstrap() {
     dataConverter: secureDataConverter,
   });
 
-  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science", "knowledge-graph", "editorial-review"...');
+  const qualityLoopWorker = await Worker.create({
+    connection,
+    workflowsPath,
+    activities: {
+      createContentAsset: qualityLoopActivitiesInstance.createContentAsset.bind(qualityLoopActivitiesInstance),
+      updateContentAsset: qualityLoopActivitiesInstance.updateContentAsset.bind(qualityLoopActivitiesInstance),
+      gatherCitations: qualityLoopActivitiesInstance.gatherCitations.bind(qualityLoopActivitiesInstance),
+      generatePsychProfile: qualityLoopActivitiesInstance.generatePsychProfile.bind(qualityLoopActivitiesInstance),
+      draftVideoScript: qualityLoopActivitiesInstance.draftVideoScript.bind(qualityLoopActivitiesInstance),
+      verifyClaims: qualityLoopActivitiesInstance.verifyClaims.bind(qualityLoopActivitiesInstance),
+      scoreFromVerification: qualityLoopActivitiesInstance.scoreFromVerification.bind(qualityLoopActivitiesInstance),
+    },
+    taskQueue: 'quality-loop',
+    dataConverter: secureDataConverter,
+  });
+
+  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science", "knowledge-graph", "editorial-review", "quality-loop"...');
   await Promise.all([
     adAutomationWorker.run(),
     trendSignalsWorker.run(),
     dsStarScienceWorker.run(),
     knowledgeGraphWorker.run(),
     editorialReviewWorker.run(),
+    qualityLoopWorker.run(),
   ]);
 }
 

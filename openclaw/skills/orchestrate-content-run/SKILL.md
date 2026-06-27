@@ -17,11 +17,9 @@ scores exceed threshold before human review.
 - You must coordinate the Research, Fact-Check, Psychology, and Story agents on one run.
 
 ## Workflow
-1. Instantiate a `content_assets` record → status `DRAFT`.
-2. Dispatch sub-agents (research-factcheck, narrative-psychology) for the topic.
-3. Collect the asset bundle; compute the overall quality score.
-4. If `quality_report.overall_score < 90`, loop back with targeted feedback (max iterations enforced).
-5. On pass, hand off to `submit-editorial-review`.
+1. Call the `temporal-bridge` MCP tool `start_workflow("qualityLoopWorkflow", "quality-loop", [{"topic": topic, "subjectEntity": subject_entity, "durationMinutes": duration_minutes}])`.
+2. Call `get_workflow_result(workflow_id)` -- blocks until the workflow finishes its (max 3) durable revision loop: gather-citations + generate-psych-profile -> draft-video-script -> verify-claims, scored deterministically (`100 - 30*high - 10*medium - 5*low` per flagged contradiction, not by asking a model to grade itself), feeding contradictions back into the next draft as revision notes.
+3. Result is `{contentAssetId, finalScore, passed}`. On `passed: true`, hand off to `submit-editorial-review` with `contentAssetId`. On `passed: false` (3 iterations exhausted), the `content_assets` row is left `NEEDS_REVISION` for a human to look at directly rather than looping forever.
 
 ## Function signature (manifest contract)
 ```python
@@ -43,8 +41,12 @@ def orchestrate_content_run(topic_opportunity: dict) -> dict:
 - **Output:** asset bundle + quality report (see signature).
 
 ## Backend dependency
-- `content_assets` / `agent_runs` tables (Railway Postgres) — **stubbed** until backbone wired.
-- Sub-agent dispatch uses OpenClaw agent-to-agent routing.
+- `content_assets` table (Railway Postgres) is live; `qualityLoopWorkflow` creates the row at the
+  *start* of the loop (not just at editorial-review time), so iteration state and accumulated
+  revision feedback are durable -- a worker restart resumes exactly where it left off instead of
+  losing all progress, the same way every other Temporal workflow in this codebase is durable.
+- `agent_runs` table is not used; `content_assets.status` (`DRAFT`/`NEEDS_REVISION`/`UNDER_REVIEW`/
+  `APPROVED`/`REJECTED`) tracks the run's state instead.
 
 ## Model
 Runs on the Chief Editor's reasoning model (gemini-direct/gemini-2.5-flash) — judgment/coordination.

@@ -32,14 +32,14 @@ def submit_for_editorial_review(run_id: str, assets: dict) -> bool:
 - **Output:** `bool` (queued successfully); workflow resumes on the human vote.
 
 ## Implementation
-1. Insert/update the `content_assets` row (`status = 'UNDER_REVIEW'`).
+1. The `content_assets` row already exists by this point -- `qualityLoopWorkflow` (orchestrate-content-run) created it at the *start* of the quality loop, not here. Just `UPDATE content_assets SET status = 'UNDER_REVIEW' WHERE id = :contentAssetId`.
 2. Call the `temporal-bridge` MCP tool `start_workflow("editorialReviewWorkflow", "editorial-review", [{"contentAssetId": <id>}])`, and store the returned `workflow_id` on that `content_assets` row as `temporal_workflow_id` (the `POST /api/reviews/:id/vote` REST endpoint signals this instance when a human votes).
-3. Call `get_workflow_result(workflow_id)` -- this blocks (up to a 30-day SLA timeout) until a human hits PASS/REJECT on the review queue (`GET /api/reviews/pending`, `POST /api/reviews/:id/vote`, both on the live NestJS server, guarded by `REVIEWER_TOKEN`).
+3. Call `get_workflow_result(workflow_id)` -- this blocks (up to a 30-day SLA timeout) until a human hits PASS/REJECT on the review queue (`GET /api/reviews/pending`, `POST /api/reviews/:id/vote`, both on the live NestJS server, guarded by `REVIEWER_TOKEN`, with a `/reviews` page in the frontend).
 4. PASS → `APPROVED` → call `dispatch-hermes-content-run`. REJECT → return to `orchestrate-content-run` with the vote's `notes`.
 
 ## Backend dependency
-- NestJS `content_assets` table and `ReviewController` (`server/src/modules/review/`) are live.
-- No frontend review page yet -- voting today is via direct API calls (`curl`/Postman) to `/api/reviews/*`; a `/reviews` UI is a planned fast-follow.
+- NestJS `content_assets` table, `ReviewController` (`server/src/modules/review/`), and the `/reviews`
+  frontend page (`src/ReviewsView.tsx`) are all live.
 
 ## Model
 Chief Editor model (gemini-direct/gemini-2.5-flash).

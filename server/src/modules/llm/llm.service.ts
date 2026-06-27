@@ -281,4 +281,38 @@ export class LlmService {
       throw e;
     }
   }
+
+  /**
+   * Calls Hermes's generic self-improving judgment-agent endpoint (POST /v1/agents/{agentId}),
+   * the TS-side counterpart to hermes-bridge's run_judgment_agent MCP tool -- reuses the same
+   * DSSTAR_API_URL/DSSTAR_API_KEY config as runDataScienceInsight, just a different route.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async runJudgmentAgent(agentId: string, query: string, context?: Record<string, any>, maxRefinementRounds?: number): Promise<any> {
+    const baseURL = process.env.DSSTAR_API_URL || process.env.MODAL_LLM_URL;
+    const apiKey = process.env.DSSTAR_API_KEY || process.env.MODAL_API_KEY;
+
+    if (!baseURL) {
+      this.logger.warn(`[LlmService] (Mocked) Running judgment agent: ${agentId}`);
+      return { generated_at: new Date().toISOString(), agent_id: agentId, mocked: true };
+    }
+
+    try {
+      this.logger.log(`[LlmService] Calling judgment agent ${agentId}...`);
+      const url = `${baseURL}/v1/agents/${agentId}`;
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (apiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+      const response = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ query, context, max_refinement_rounds: maxRefinementRounds }),
+      });
+      return await response.json();
+    } catch (e) {
+      this.logger.error(`[LlmService] Error calling judgment agent ${agentId}: ${e}`);
+      throw e;
+    }
+  }
 }

@@ -8,6 +8,7 @@ import { SearchModule } from './modules/search/search.module.js';
 import { VideoModule } from './modules/video/video.module.js';
 import { GraphModule } from './modules/graph/graph.module.js';
 import { ReviewModule } from './modules/review/review.module.js';
+import { QualityLoopModule } from './modules/quality-loop/quality-loop.module.js';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ReviewModule } from './modules/review/review.module.js';
     VideoModule,
     GraphModule,
     ReviewModule,
+    QualityLoopModule,
   ],
 })
 export class AppModule {}
