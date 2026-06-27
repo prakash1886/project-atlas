@@ -40,7 +40,9 @@ async def compile_result(input_props: dict) -> dict:
         progress = await remotion_client.wait_for_render(started["renderId"], started["bucketName"])
         if progress.get("fatalErrorEncountered"):
             result["status"] = "failed"
-            result["error"] = "; ".join(progress.get("errors", [])) or "Remotion reported a fatal error"
+            errors = progress.get("errors", [])
+            messages = [e.get("message", str(e)) if isinstance(e, dict) else str(e) for e in errors]
+            result["error"] = "; ".join(messages) or "Remotion reported a fatal error"
         else:
             result["output_url"] = progress.get("outputFile")
             result["status"] = "succeeded" if result["output_url"] else "failed"
