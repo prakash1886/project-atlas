@@ -33,7 +33,9 @@ export class QualityLoopActivities {
     return this.qualityLoop.verifyClaims(draftText);
   }
 
-  scoreFromVerification(result: VerifyClaimsResult): number {
+  // Temporal activities must be async -- proxyActivities<T>()'s type machinery assumes every
+  // method returns a Promise, even though the scoring itself is pure synchronous arithmetic.
+  async scoreFromVerification(result: VerifyClaimsResult): Promise<number> {
     return this.qualityLoop.scoreFromVerification(result);
   }
 }
