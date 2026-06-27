@@ -6,7 +6,7 @@ FROM python:3.11-slim
 # Railpack builder doesn't honor nixpacks.toml, so this Dockerfile is the
 # reliable way to get both runtimes into the same image).
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ffmpeg curl \
+    ffmpeg curl git \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
