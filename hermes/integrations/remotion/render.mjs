@@ -35,7 +35,7 @@ try {
       region,
       functionName,
       serveUrl,
-      bucketName: renderBucket,
+      forceBucketName: renderBucket,
       composition: args.composition,
       inputProps: args.inputProps,
       codec: args.codec || "h264",
