@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import ReviewsView from './ReviewsView';
 
 interface Opportunity {
   id: number;
@@ -9,6 +10,7 @@ interface Opportunity {
 
 export default function App() {
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+  const [view, setView] = useState<'dashboard' | 'reviews'>('dashboard');
 
   useEffect(() => {
     // Simulated opportunities for frontend fallback
@@ -25,11 +27,28 @@ export default function App() {
         <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-violet-500 bg-clip-text text-transparent">
           Project Atlas Dashboard
         </h1>
+        <nav className="flex items-center gap-2">
+          <button
+            onClick={() => setView('dashboard')}
+            className={`text-sm px-4 py-2 rounded-lg transition ${view === 'dashboard' ? 'bg-zinc-800 text-zinc-100' : 'text-zinc-400 hover:text-zinc-200'}`}
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={() => setView('reviews')}
+            className={`text-sm px-4 py-2 rounded-lg transition ${view === 'reviews' ? 'bg-zinc-800 text-zinc-100' : 'text-zinc-400 hover:text-zinc-200'}`}
+          >
+            Reviews
+          </button>
+        </nav>
         <div className="flex items-center gap-2 text-sm text-zinc-400">
           <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Live Flywheel
         </div>
       </header>
-      
+
+      {view === 'reviews' ? (
+        <ReviewsView />
+      ) : (
       <main className="flex-1 max-w-7xl w-full mx-auto p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         <section className="md:col-span-2 space-y-6">
           <h2 className="text-xl font-semibold text-zinc-200">Content Opportunities</h2>
@@ -63,6 +82,7 @@ export default function App() {
           </div>
         </aside>
       </main>
+      )}
     </div>
   );
 }
