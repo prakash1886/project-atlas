@@ -29,12 +29,13 @@ def autolink_entities(entity_id: str) -> list:
 - **Input:** `entity_id`.
 - **Output:** list of suggested edges `{from, type, to, confidence}`.
 
-## Backend dependency — intentionally still blocked, not wired
-- **Apache AGE graph on Railway Postgres** — read existing nodes/edges, write new ones. **Stubbed** until wired.
-- **Why this isn't routed through an LLM judgment call as an interim measure**: there is no real graph
-  to "cross-reference" yet -- an LLM proposing edges against a graph that doesn't exist would fabricate
-  plausible-looking but fake relationships rather than real ones. Wait for the Postgres/AGE backbone
-  (P5) rather than faking this one, same reasoning as `query-semantic-nodes`.
+## Implementation
+Call the `temporal-bridge` MCP tool `start_workflow("autolinkEntitiesWorkflow", "knowledge-graph", [{"entity_id": entity_id}])`, then poll `get_workflow_result(workflow_id)`. Reads the entity + its existing `relationships` rows and nearby candidates (via `query-semantic-nodes`) from the live Railway Postgres graph, then one LLM call proposes typed edges restricted to the vocabulary above (`server/src/modules/graph/graph.service.ts`'s `autolinkEntities`). Returns suggestions only -- does **not** write to `relationships` itself; a human/Curator must approve and persist them separately, per the existing rule below.
+
+## Backend dependency
+- Implemented as plain Postgres `entities`/`relationships` tables (live on Railway), not the Apache AGE
+  extension this skill's description originally assumed -- the spec (`sys_graph.spec.md`) only requires
+  node/edge CRUD + vector lookup + edge suggestion, which this schema already satisfies.
 
 ## Model
 deepseek-direct/deepseek-chat to read a summary and propose typed edges; the human/Curator

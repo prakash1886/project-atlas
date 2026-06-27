@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { AdAutomationActivities } from './modules/temporal/activities/ad-automation.activities.js';
 import { DsStarScientistActivities } from './modules/temporal/activities/ds-star-scientists.activities.js';
 import { TrendSignalsActivities } from './modules/temporal/activities/trend-signals.activities.js';
+import { GraphActivities } from './modules/graph/graph.activities.js';
 import { EncryptionCodec } from './modules/temporal/crypto/encryption-codec.js';
 
 async function bootstrap() {
@@ -16,6 +17,7 @@ async function bootstrap() {
   const activitiesInstance = app.get(AdAutomationActivities);
   const scientistActivitiesInstance = app.get(DsStarScientistActivities);
   const trendSignalsInstance = app.get(TrendSignalsActivities);
+  const graphActivitiesInstance = app.get(GraphActivities);
   const temporalAddress = process.env.TEMPORAL_ADDRESS || 'localhost:7233';
   const secretKey = process.env.TEMPORAL_ENCRYPTION_KEY || 'default-temporary-insecure-32-chars-key';
 
@@ -80,11 +82,23 @@ async function bootstrap() {
     dataConverter: secureDataConverter,
   });
 
-  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science"...');
+  const knowledgeGraphWorker = await Worker.create({
+    connection,
+    workflowsPath,
+    activities: {
+      querySemanticNodes: graphActivitiesInstance.querySemanticNodes.bind(graphActivitiesInstance),
+      autolinkEntities: graphActivitiesInstance.autolinkEntities.bind(graphActivitiesInstance),
+    },
+    taskQueue: 'knowledge-graph',
+    dataConverter: secureDataConverter,
+  });
+
+  console.log('[Worker] Temporal Workers initialized. Polling task queues: "ad-automation", "trend-signals", "ds-star-science", "knowledge-graph"...');
   await Promise.all([
     adAutomationWorker.run(),
     trendSignalsWorker.run(),
     dsStarScienceWorker.run(),
+    knowledgeGraphWorker.run(),
   ]);
 }
 

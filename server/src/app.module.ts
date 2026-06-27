@@ -6,6 +6,7 @@ import { LlmModule } from './modules/llm/llm.module.js';
 import { EnvatoModule } from './modules/envato/envato.module.js';
 import { SearchModule } from './modules/search/search.module.js';
 import { VideoModule } from './modules/video/video.module.js';
+import { GraphModule } from './modules/graph/graph.module.js';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { VideoModule } from './modules/video/video.module.js';
     EnvatoModule,
     SearchModule,
     VideoModule,
+    GraphModule,
   ],
 })
 export class AppModule {}

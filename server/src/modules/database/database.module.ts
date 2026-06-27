@@ -58,7 +58,7 @@ const { Pool } = pg;
             name VARCHAR(250) NOT NULL,
             type VARCHAR(50) NOT NULL,
             summary TEXT,
-            embedding vector(1536),
+            embedding vector(300),
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
           );
 
@@ -130,7 +130,7 @@ const { Pool } = pg;
 
         if (!databaseUrl) {
           // pg-mem does not support pgvector, rewrite type to text
-          initSql = initSql.replace(/vector\(1536\)/g, 'text');
+          initSql = initSql.replace(/vector\(300\)/g, 'text');
         }
 
         await pool.query(initSql);

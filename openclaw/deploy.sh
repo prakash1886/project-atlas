@@ -39,8 +39,9 @@ HERMES_BRIDGE_AGENTS=("chief-editor" "content-factory" "ds-star" "narrative-psyc
 # on the shared cluster), not just Hermes's HTTP surface -- ds-star to kick the
 # nightly/weekly TS scientist workflows on demand, chief-editor as the prerequisite
 # for a future real HITL signal replacing submit-editorial-review's placeholder,
-# trend-intelligence for fetch-signals/calculate-opportunity-score on trend-signals.
-TEMPORAL_BRIDGE_AGENTS=("ds-star" "chief-editor" "trend-intelligence")
+# trend-intelligence for fetch-signals/calculate-opportunity-score on trend-signals,
+# knowledge-graph for query-semantic-nodes/autolink-entities on knowledge-graph (P5).
+TEMPORAL_BRIDGE_AGENTS=("ds-star" "chief-editor" "trend-intelligence" "knowledge-graph")
 
 echo ">> staging skills + personas + mcp bridges to $HOST:$REMOTE"
 $SSH "$HOST" "mkdir -p $REMOTE"

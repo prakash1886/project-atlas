@@ -31,14 +31,13 @@ def query_semantic_nodes(query_text: str, limit: int = 5) -> list:
 - **Input:** `query_text`, `limit`.
 - **Output:** list of `{name, type, summary, distance}`.
 
-## Backend dependency — intentionally still blocked, not wired
-- **PGVector `entities` table on Railway** — **stubbed** until backbone wired.
-- Embeddings via **Jina Embedding API** (`JINA_API` available) instead of an LLM embedding endpoint (spec §11.3).
-- **Why this isn't routed through an LLM judgment call as an interim measure**: this skill is a
-  cosine-distance SQL query over real stored vectors -- there is no real PGVector `entities` table to
-  query yet. An LLM "pretending" to do semantic graph recall would fabricate plausible-looking but
-  fake related entities, which is worse than returning nothing. Wait for the Postgres/AGE/PGVector
-  backbone (P5) rather than faking this one.
+## Implementation
+Call the `temporal-bridge` MCP tool `start_workflow("querySemanticNodesWorkflow", "knowledge-graph", [{"query_text": query_text, "limit": limit}])`, then poll `get_workflow_result(workflow_id)`. Runs the SQL above for real against the live Railway Postgres `entities` table (`server/src/modules/graph/graph.service.ts`'s `querySemanticNodes`), embedding `query_text` via `LlmService.generateEmbeddings()` (Modal-hosted `embeddinggemma-300m`, 300-dim — note this is **not** Jina; the embedding column is sized to match whatever model actually writes to it).
+
+## Backend dependency
+- **PGVector `entities` table on Railway** is live (`pgvector extension verified` in production), but
+  only the two original seed rows (Sachin/McGrath) exist until `gather-citations`/`autolink-entities` or
+  another caller starts calling `upsertEntity` to actually populate it. Results will be sparse until then.
 
 ## Model
-No generative LLM — embedding + DB only. Use Jina for the embedding step.
+No generative LLM for this skill itself — embedding + DB only.
