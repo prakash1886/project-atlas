@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "caption_cues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start_seconds": { "type": "number" },
+          "end_seconds": { "type": "number" },
+          "text": { "type": "string" }
+        },
+        "required": ["start_seconds", "end_seconds", "text"]
+      }
+    },
+    "status": { "type": "string", "enum": ["succeeded", "failed", "coverage_gap"] },
+    "error": { "type": "string" }
+  },
+  "required": ["generated_at", "caption_cues", "status"]
+}

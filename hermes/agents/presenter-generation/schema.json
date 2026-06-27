@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "avatar_id": { "type": "string" },
+    "clip_url": { "type": "string" },
+    "status": { "type": "string", "enum": ["succeeded", "failed", "timed_out"] },
+    "error": { "type": "string" }
+  },
+  "required": ["generated_at", "avatar_id", "status"]
+}

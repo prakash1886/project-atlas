@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "voice_id": { "type": "string" },
+    "pace": { "type": "string", "enum": ["slow", "moderate", "fast"] },
+    "energy": { "type": "string", "enum": ["low", "medium", "high"] },
+    "emotion": { "type": "string" },
+    "rationale": { "type": "string" }
+  },
+  "required": ["generated_at", "voice_id", "pace", "energy", "emotion", "rationale"]
+}

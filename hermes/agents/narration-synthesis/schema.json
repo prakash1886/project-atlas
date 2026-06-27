@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "voice_id": { "type": "string" },
+    "audio_path": { "type": "string" },
+    "audio_url": { "type": "string" },
+    "duration_seconds": { "type": "number" },
+    "status": { "type": "string", "enum": ["succeeded", "failed", "implausible_duration"] },
+    "error": { "type": "string" }
+  },
+  "required": ["generated_at", "voice_id", "status"]
+}

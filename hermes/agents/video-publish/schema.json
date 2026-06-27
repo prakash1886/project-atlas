@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "video_id": { "type": "string" },
+    "live_url": { "type": "string" },
+    "privacy_status": { "type": "string" },
+    "status": { "type": "string", "enum": ["succeeded", "failed", "blocked_by_qc"] },
+    "error": { "type": "string" }
+  },
+  "required": ["generated_at", "status"]
+}

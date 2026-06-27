@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string" },
+          "asset_type": { "type": "string", "enum": ["broll", "music", "image"] },
+          "item_id": { "type": "string" },
+          "file_path": { "type": "string" },
+          "asset_url": { "type": "string" },
+          "status": { "type": "string", "enum": ["succeeded", "no_match", "failed"] }
+        },
+        "required": ["query", "asset_type", "status"]
+      }
+    },
+    "unresolved_count": { "type": "integer" }
+  },
+  "required": ["generated_at", "assets", "unresolved_count"]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "format": { "type": "string", "enum": ["short", "reel", "long_form", "podcast", "blog"] },
+    "script_text": { "type": "string" },
+    "estimated_duration_sec": { "type": "number" },
+    "word_count": { "type": "integer" }
+  },
+  "required": ["generated_at", "format", "script_text", "word_count"]
+}

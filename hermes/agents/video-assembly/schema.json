@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "render_id": { "type": "string" },
+    "bucket_name": { "type": "string" },
+    "output_url": { "type": "string" },
+    "clip_count": { "type": "integer" },
+    "status": { "type": "string", "enum": ["succeeded", "failed", "timed_out"] },
+    "error": { "type": "string" }
+  },
+  "required": ["generated_at", "status"]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "personality_id": { "type": "string" },
+    "soul_id": { "type": "string" },
+    "source": { "type": "string", "enum": ["cache_hit", "newly_trained"] },
+    "status": { "type": "string", "enum": ["succeeded", "failed", "timed_out"] },
+    "error": { "type": "string" }
+  },
+  "required": ["generated_at", "personality_id", "status"]
+}

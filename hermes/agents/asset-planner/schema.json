@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "broll": { "type": "array", "items": { "type": "string" } },
+    "music": { "type": "array", "items": { "type": "string" } },
+    "lyria_prompts": { "type": "array", "items": { "type": "string" } },
+    "images": { "type": "array", "items": { "type": "string" } },
+    "veo_prompts": { "type": "array", "items": { "type": "string" } },
+    "higgsfield_prompts": { "type": "array", "items": { "type": "string" } },
+    "heygen_presenter": {
+      "type": "object",
+      "properties": {
+        "avatar_id": { "type": "string" },
+        "script_segment": { "type": "string" }
+      },
+      "required": ["avatar_id", "script_segment"]
+    }
+  },
+  "required": ["generated_at", "broll", "music", "lyria_prompts", "images", "veo_prompts", "higgsfield_prompts", "heygen_presenter"]
+}

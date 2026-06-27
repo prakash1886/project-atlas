@@ -1,0 +1,19 @@
+# Hermes needs two runtimes: Python (the FastAPI/agent service itself) and
+# Node.js (hermes/integrations/remotion/render.mjs, the @remotion/lambda CLI
+# wrapper video-assembly shells out to). Railway's auto-detected Nixpacks plan
+# only picks one provider per service from requirements.txt, so this file adds
+# Node + ffmpeg explicitly and runs `npm install` in the Remotion subfolder at
+# build time. ffmpeg (not just ffprobe) is pulled in because narration-synthesis/
+# music-generation/render-qc need both binaries, and Nixpacks only ships them
+# together.
+[phases.setup]
+nixPkgs = ["python311", "nodejs_20", "ffmpeg"]
+
+[phases.install]
+cmds = [
+  "pip install -r requirements.txt",
+  "npm install --prefix integrations/remotion"
+]
+
+[start]
+cmd = "python app.py"

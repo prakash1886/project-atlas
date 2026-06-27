@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "concepts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prompt": { "type": "string" },
+          "focal_emotion": { "type": "string" },
+          "text_overlay": { "type": "string" }
+        },
+        "required": ["prompt", "focal_emotion", "text_overlay"]
+      }
+    }
+  },
+  "required": ["generated_at", "concepts"]
+}

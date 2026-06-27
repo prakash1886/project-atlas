@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "clips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "shot_index": { "type": "integer" },
+          "provider": { "type": "string", "enum": ["veo", "higgsfield"] },
+          "prompt": { "type": "string" },
+          "clip_url": { "type": "string" },
+          "status": { "type": "string", "enum": ["succeeded", "failed", "timed_out"] },
+          "error": { "type": "string" }
+        },
+        "required": ["shot_index", "provider", "prompt", "status"]
+      }
+    },
+    "failed_shot_count": { "type": "integer" }
+  },
+  "required": ["generated_at", "clips", "failed_shot_count"]
+}

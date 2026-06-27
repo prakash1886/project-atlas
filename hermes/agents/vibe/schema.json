@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "vibe": {
+      "type": "string",
+      "enum": ["epic", "mysterious", "dark", "emotional", "hopeful", "motivational", "intellectual", "dramatic"]
+    },
+    "confidence": { "type": "number" },
+    "rationale": { "type": "string" }
+  },
+  "required": ["generated_at", "vibe", "confidence", "rationale"]
+}

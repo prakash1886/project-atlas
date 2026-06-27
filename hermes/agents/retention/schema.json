@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "at_timestamp_sec": { "type": "number" },
+          "risk_type": { "type": "string", "enum": ["slow_intro", "pacing_drop", "confusing_section", "weak_payoff"] },
+          "severity": { "type": "string", "enum": ["low", "medium", "high"] },
+          "recommendation": { "type": "string" }
+        },
+        "required": ["at_timestamp_sec", "risk_type", "severity", "recommendation"]
+      }
+    }
+  },
+  "required": ["generated_at", "flags"]
+}

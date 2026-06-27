@@ -6,8 +6,11 @@ import logging
 import asyncio
 import traceback
 from typing import List, Dict, Any, Optional
+import httpx
 from fastapi import FastAPI, HTTPException, Header, Depends, status
 from pydantic import BaseModel
+import agent_loader
+import orchestrator
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -49,10 +52,44 @@ class DsStarRequest(BaseModel):
     max_refinement_rounds: Optional[int] = None
     scientist_outputs: Optional[Dict[str, Any]] = None
 
+class AgentRequest(BaseModel):
+    query: str
+    data_files: List[str] = []
+    max_refinement_rounds: Optional[int] = None
+    context: Optional[Dict[str, Any]] = None
+
+class ProduceRequest(BaseModel):
+    payload: Dict[str, Any] = {}
+
+class ContentRunRequest(BaseModel):
+    personality_id: Optional[str] = None
+    personality_name: Optional[str] = None
+    reference_image_urls: List[str] = []
+    script_text: str
+    target_format: str = "long_form"
+    asset_planner_output: Dict[str, Any]
+    voice_assignment: Dict[str, Any]
+    publish_metadata: Dict[str, Any] = {}
+
+# Video-production execution agents (spec gap identified in the Higgsfield/video-generation
+# design discussion): deterministic API-calling agents, not LLM judgment loops, so they don't
+# go through execute_self_improving_hermes_agent. Each ships its own executor.py with a
+# creator/compiler/auditor-phased run(payload) coroutine, mirroring the OpenClaw Three-Sub-Agent
+# Isolation Pattern in code instead of separate LLM-prompted sub-agents.
+PRODUCTION_AGENT_IDS = {
+    "soul-reference", "visual-generation", "presenter-generation", "narration-synthesis",
+    "music-generation", "asset-sourcing", "thumbnail-generation", "video-assembly",
+    "captioning", "render-qc", "video-publish",
+}
+
 # API Authentication Dependency
 async def verify_api_key(authorization: Optional[str] = Header(None)):
     if not API_SECRET:
-        return
+        # Fail closed: no configured secret means no access, not open access.
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="DSSTAR_API_KEY is not configured on this deployment"
+        )
     if not authorization:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -112,6 +149,37 @@ def validate_schema(data, schema):
             
     return True, ""
 
+async def call_modal_script_agent(
+    query: str,
+    extra_context: Optional[dict] = None
+) -> Optional[Dict[str, Any]]:
+    """
+    Proxies script generation to the Modal-hosted fine-tuned Gemma endpoint (spec §11.1).
+    Returns None (caller falls back to the local self-improving loop) if Modal isn't configured
+    or the call fails — Modal is the intended production host but isn't required to exist yet.
+    """
+    modal_cfg = config.get("modal", {})
+    endpoint_url = os.getenv("MODAL_SCRIPT_ENDPOINT_URL") or modal_cfg.get("endpoint_url")
+    if not endpoint_url:
+        return None
+
+    modal_token = os.getenv("MODAL_TOKEN")
+    headers = {"Authorization": f"Bearer {modal_token}"} if modal_token else {}
+    timeout = modal_cfg.get("timeout_seconds", 60)
+
+    try:
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            resp = await client.post(
+                endpoint_url,
+                headers=headers,
+                json={"query": query, "context": extra_context or {}}
+            )
+            resp.raise_for_status()
+            return resp.json()
+    except Exception as e:
+        logger.warning(f"[Hermes] Modal script endpoint call failed, falling back to local loop: {e}")
+        return None
+
 async def execute_self_improving_hermes_agent(
     insight_type: str,
     query: str,
@@ -125,6 +193,12 @@ async def execute_self_improving_hermes_agent(
     and returns a structured JSON result matching the specific scientist schema.
     """
     logger.info(f"[Hermes] Spawning self-improving loop for scientist: {insight_type}")
+
+    if insight_type == "script":
+        modal_result = await call_modal_script_agent(query, extra_context)
+        if modal_result is not None:
+            logger.info("[Hermes] Script served by Modal/Gemma endpoint")
+            return modal_result
 
     # Load agent-specific soul (system prompt) and schema
     agent_dir = os.path.join(os.path.dirname(__file__), "agents", insight_type)
@@ -171,8 +245,6 @@ async def execute_self_improving_hermes_agent(
 
     # Instantiate the self-improving AIAgent
     try:
-        agent = AIAgent(model=model_name, quiet_mode=True)
-        
         # Load local memory history if available
         history = []
         if os.path.exists(history_path):
@@ -181,7 +253,7 @@ async def execute_self_improving_hermes_agent(
                     history = json.load(f)
             except Exception:
                 pass
-        
+
         # Craft system instructions explaining the self-improvement loop
         system_instructions = f"""
         You are the Hermes self-improving agent.
@@ -209,23 +281,26 @@ async def execute_self_improving_hermes_agent(
         Return ONLY a valid JSON object matching the schema. Do not write markdown blocks or text wrapper.
         """
 
-        # Set prompt system instructions
-        agent.system_prompt = system_instructions
-        
+        # ephemeral_system_prompt is the real constructor param AIAgent honors —
+        # a plain `agent.system_prompt = ...` attribute assignment is a silent no-op.
+        agent = AIAgent(model=model_name, quiet_mode=True, ephemeral_system_prompt=system_instructions)
+
         # Run conversation with dynamic schema self-correction loops
         loop_id = f"hermes-{insight_type}-{int(asyncio.get_event_loop().time())}"
         logger.info(f"[Hermes] Running conversation loop ID: {loop_id}")
-        
+
         current_prompt = f"""
         User Query: {query}
         Execute the self-improving loop for {insight_type}.
         Perform the data science analysis and return the final JSON.
         """
-        
+
         final_json = None
         for attempt in range(1, rounds + 1):
             logger.info(f"[Hermes] Round {attempt}/{rounds} for {insight_type}")
-            result = await asyncio.to_thread(agent.run_conversation, current_prompt, loop_id)
+            # task_id must be passed by keyword — run_conversation's 2nd positional
+            # param is system_message, which would silently override ephemeral_system_prompt.
+            result = await asyncio.to_thread(agent.run_conversation, current_prompt, task_id=loop_id)
             final_text = result.get("final_response", "").strip()
             
             # Clean markdown code block wraps if LLM returns them
@@ -397,7 +472,122 @@ def get_mock_scientist_response(insight_type: str, query: str, data_files: List[
             "archive": [],
             "scoring_weights": {"trend": 0.25, "story_quality": 0.25, "geographic_demand": 0.20, "audience_fit": 0.15, "competition_gap": 0.15}
         }
+    elif insight_type == "vibe":
+        return {
+            "generated_at": timestamp,
+            "vibe": "motivational",
+            "confidence": 0.84,
+            "rationale": "Underdog archetype with a redemption arc maps strongly to motivational tone."
+        }
+    elif insight_type == "voice-director":
+        return {
+            "generated_at": timestamp,
+            "voice_id": "mock-voice-grit-01",
+            "pace": "moderate",
+            "energy": "high",
+            "emotion": "determined",
+            "rationale": "Matches the motivational vibe and underdog archetype."
+        }
+    elif insight_type == "asset-planner":
+        return {
+            "generated_at": timestamp,
+            "broll": ["stadium-crowd-roar.mp4"],
+            "music": ["epic-rise-build.mp3"],
+            "images": ["press-conference-still.jpg"],
+            "veo_prompts": ["A lone athlete walking into an empty stadium at dawn, cinematic, slow push-in"],
+            "higgsfield_prompts": ["Portrait of determination, dramatic side lighting"],
+            "heygen_presenter": {"avatar_id": "mock-presenter-01", "script_segment": "intro_hook"}
+        }
+    elif insight_type == "thumbnail":
+        return {
+            "generated_at": timestamp,
+            "concepts": [
+                {"prompt": "Close-up intense stare, bold red text 'THE COMEBACK'", "focal_emotion": "determination", "text_overlay": "THE COMEBACK"}
+            ]
+        }
+    elif insight_type == "retention":
+        return {
+            "generated_at": timestamp,
+            "flags": [
+                {"at_timestamp_sec": 8.0, "risk_type": "slow_intro", "severity": "medium", "recommendation": "Move the hook line earlier; trim establishing shots."}
+            ]
+        }
+    elif insight_type == "script":
+        return {
+            "generated_at": timestamp,
+            "format": "short",
+            "script_text": "[HOOK] He lost it all in front of millions. [BODY] ... [LESSON] The comeback always starts before anyone is watching.",
+            "estimated_duration_sec": 45.0,
+            "word_count": 24
+        }
+    elif insight_type == "submission-review":
+        return {
+            "generated_at": timestamp,
+            "outcome": "needs_revision",
+            "ip_check_passed": True,
+            "license_check_passed": False,
+            "notes": ["Missing Envato Elements license reference for background track."]
+        }
     return {"status": "success", "message": f"Insight type {insight_type} completed."}
+
+@app.post("/v1/orchestrate/content-run", dependencies=[Depends(verify_api_key)])
+async def run_content_orchestration(request: ContentRunRequest):
+    """The implementation behind chief-editor's orchestrate-content-run skill
+    (openclaw/agents.manifest.json) — sequences all 11 production agents end to end.
+    Callers still need to have already run the upstream LLM judgment agents (Script,
+    Vibe, Voice Director, Asset Planner, Thumbnail) and pass their outputs in; this
+    endpoint only owns the deterministic execution side of the pipeline."""
+    try:
+        return await orchestrator.run_content_pipeline(request.dict())
+    except Exception as e:
+        logger.error(f"Error running content orchestration: {e}")
+        raise HTTPException(status_code=500, detail=f"Content orchestration error: {str(e)}")
+
+@app.post("/v1/produce/{agent_id}", dependencies=[Depends(verify_api_key)])
+async def run_production_agent(agent_id: str, request: ProduceRequest):
+    """Deterministic execution endpoint for the video-production agents (Higgsfield/Veo/
+    HeyGen/ElevenLabs/Envato/ffmpeg/YouTube callers) — separate from /v1/agents/{agent_id},
+    which runs the LLM self-improving judgment loop these agents don't need."""
+    if agent_id not in PRODUCTION_AGENT_IDS:
+        raise HTTPException(status_code=404, detail=f"Unknown production agent '{agent_id}'")
+
+    schema_path = os.path.join(os.path.dirname(__file__), "agents", agent_id, "schema.json")
+    schema_content = {}
+    if os.path.exists(schema_path):
+        with open(schema_path, "r", encoding="utf-8") as f:
+            schema_content = json.load(f)
+
+    try:
+        executor = agent_loader.load_executor(agent_id)
+        result = await executor.run(request.payload)
+        if schema_content:
+            is_valid, err_msg = validate_schema(result, schema_content)
+            if not is_valid:
+                logger.warning(f"[Hermes] Production agent {agent_id} output failed schema validation: {err_msg}")
+        return result
+    except Exception as e:
+        logger.error(f"Error executing production agent {agent_id}: {e}")
+        raise HTTPException(status_code=500, detail=f"Production agent execution error: {str(e)}")
+
+@app.post("/v1/agents/{agent_id}", dependencies=[Depends(verify_api_key)])
+async def run_agent(agent_id: str, request: AgentRequest):
+    rounds = request.max_refinement_rounds or config.get("ds_star", {}).get("max_refinement_rounds", 3)
+
+    try:
+        result = await execute_self_improving_hermes_agent(
+            insight_type=agent_id,
+            query=request.query,
+            data_files=request.data_files,
+            rounds=rounds,
+            extra_context=request.context
+        )
+        return result
+    except Exception as e:
+        logger.error(f"Error executing agent {agent_id}: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Hermes agent execution error: {str(e)}"
+        )
 
 @app.post("/v1/ds-star/{insight_type}", dependencies=[Depends(verify_api_key)])
 async def run_ds_star_scientist(insight_type: str, request: DsStarRequest):

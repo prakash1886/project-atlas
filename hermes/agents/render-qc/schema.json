@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "duration_seconds": { "type": "number" },
+    "resolution": { "type": "string" },
+    "has_audio_track": { "type": "boolean" },
+    "format": { "type": "string", "enum": ["shorts", "reels", "long_form"] },
+    "go_no_go": { "type": "string", "enum": ["go", "no_go"] },
+    "reasons": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["generated_at", "duration_seconds", "resolution", "has_audio_track", "format", "go_no_go", "reasons"]
+}

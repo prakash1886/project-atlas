@@ -36,3 +36,39 @@ modal:
   # live URL here. Falls back to the local self-improving deepseek/gemini loop when unset.
   endpoint_url: ""
   timeout_seconds: 60
+
+production_agents:
+  # The 11 video-production execution agents (soul-reference, visual-generation,
+  # presenter-generation, narration-synthesis, music-generation, asset-sourcing,
+  # thumbnail-generation, video-assembly, captioning, render-qc, video-publish) are
+  # deterministic API callers, not LLM judgment loops — they read secrets straight
+  # from env vars (see each hermes/integrations/*_client.py for the exact name),
+  # nothing is configured here. Listed for visibility only:
+  #   HIGGSFIELD_KEY_ID / HIGGSFIELD_KEY_SECRET       - higgsfield_client.py
+  #   GOOGLE_VEO_PROJECT_ID / GOOGLE_VEO_ACCESS_TOKEN  - veo_client.py
+  #   GOOGLE_LYRIA_PROJECT_ID / GOOGLE_LYRIA_ACCESS_TOKEN - lyria_client.py
+  #   HEYGEN_API_KEY                                   - heygen_client.py
+  #   ELEVENLABS_API_KEY                               - elevenlabs_client.py
+  #   ENVATO_API_TOKEN                                 - envato_client.py
+  #   YOUTUBE_ACCESS_TOKEN                              - youtube_client.py
+  #   REMOTION_AWS_REGION / REMOTION_LAMBDA_FUNCTION_NAME / REMOTION_SERVE_URL
+  #     - remotion_client.py (outputs of `npx remotion lambda functions deploy` +
+  #       `npx remotion lambda sites create`); AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY
+  #       are read automatically by the AWS SDK inside the Node helper, not by Python.
+  #   ASSET_UPLOAD_S3_BUCKET / ASSET_UPLOAD_AWS_REGION - storage_client.py (separate
+  #     from Remotion's own render-output bucket; this is where narration-synthesis/
+  #     music-generation/asset-sourcing upload local bytes so Remotion Lambda has a
+  #     URL to fetch them from — Lambda cannot read the Railway filesystem).
+  # narration-synthesis/music-generation/render-qc require the `ffprobe` binary on
+  # PATH (not a pip dependency — add via the Railway build image, nixpacks.toml or an
+  # apt buildpack). video-assembly requires Node.js + `npm install` run inside
+  # hermes/integrations/remotion/ at deploy time (its @remotion/lambda dependency is
+  # intentionally kept out of requirements.txt — it's a Node package, not a Python one).
+  #
+  # POST /v1/orchestrate/content-run (orchestrator.py) sequences all 11 of these for
+  # one full content run — soul-reference -> parallel fan-out -> captioning ->
+  # video-assembly -> render-qc -> video-publish. It persists the consolidated result
+  # to hermes/data/content_runs/<run_id>.json, NOT Postgres/Apache AGE as spec §2.3
+  # calls for — Hermes has no DB driver in requirements.txt yet. Migrating this once
+  # a DB connection exists is a known follow-up, not done here.
+  enabled: true

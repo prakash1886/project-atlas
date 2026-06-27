@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prompt": { "type": "string" },
+          "text_overlay": { "type": "string" },
+          "image_url": { "type": "string" },
+          "status": { "type": "string", "enum": ["succeeded", "failed", "timed_out"] },
+          "error": { "type": "string" }
+        },
+        "required": ["prompt", "text_overlay", "status"]
+      }
+    },
+    "failed_variant_count": { "type": "integer" }
+  },
+  "required": ["generated_at", "variants", "failed_variant_count"]
+}

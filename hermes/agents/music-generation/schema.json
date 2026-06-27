@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prompt": { "type": "string" },
+          "audio_path": { "type": "string" },
+          "audio_url": { "type": "string" },
+          "duration_seconds": { "type": "number" },
+          "status": { "type": "string", "enum": ["succeeded", "failed", "no_samples_returned"] },
+          "error": { "type": "string" }
+        },
+        "required": ["prompt", "status"]
+      }
+    },
+    "failed_track_count": { "type": "integer" }
+  },
+  "required": ["generated_at", "tracks", "failed_track_count"]
+}
