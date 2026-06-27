@@ -56,7 +56,14 @@ export class EncryptionCodec implements PayloadCodec {
   async decode(payloads: Payload[]): Promise<Payload[]> {
     return Promise.all(
       payloads.map(async (payload) => {
-        if (!payload.data || payload.metadata?.encoding?.toString() !== 'binary/encrypted') {
+        // payload.metadata.encoding arrives as a plain Uint8Array (not a Node Buffer) when
+        // deserialized from a real workflow activation -- Uint8Array.prototype.toString() joins
+        // byte values with commas instead of decoding UTF-8, so the comparison must go through
+        // Buffer.from() first. Without this, decode() always took the early-return path below,
+        // silently leaving every real activation payload encrypted (only round-trip tests calling
+        // encode()/decode() directly in the same process, where encoding was already a Buffer, passed).
+        const encoding = payload.metadata?.encoding ? Buffer.from(payload.metadata.encoding).toString() : undefined;
+        if (!payload.data || encoding !== 'binary/encrypted') {
           return payload;
         }
 
