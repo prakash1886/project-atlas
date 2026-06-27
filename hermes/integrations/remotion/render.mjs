@@ -15,11 +15,16 @@ const args = JSON.parse(rawArgs || "{}");
 const region = process.env.REMOTION_AWS_REGION;
 const functionName = process.env.REMOTION_LAMBDA_FUNCTION_NAME;
 const serveUrl = process.env.REMOTION_SERVE_URL;
+// Must be set explicitly: the SDK's bucket-autodetection scans for any S3 bucket
+// starting with "remotionlambda-" in the region and throws if more than one
+// matches, which it will here since ASSET_UPLOAD_S3_BUCKET also uses that prefix.
+const renderBucket = process.env.REMOTION_RENDER_BUCKET;
 
-if (!region || !functionName || !serveUrl) {
+if (!region || !functionName || !serveUrl || !renderBucket) {
   console.error(JSON.stringify({
-    error: "REMOTION_AWS_REGION / REMOTION_LAMBDA_FUNCTION_NAME / REMOTION_SERVE_URL must be set "
-      + "(output of `npx remotion lambda functions deploy` and `npx remotion lambda sites create`)."
+    error: "REMOTION_AWS_REGION / REMOTION_LAMBDA_FUNCTION_NAME / REMOTION_SERVE_URL / "
+      + "REMOTION_RENDER_BUCKET must be set (output of `npx remotion lambda functions deploy` "
+      + "and `npx remotion lambda sites create`)."
   }));
   process.exit(1);
 }
@@ -30,6 +35,7 @@ try {
       region,
       functionName,
       serveUrl,
+      bucketName: renderBucket,
       composition: args.composition,
       inputProps: args.inputProps,
       codec: args.codec || "h264",
@@ -38,7 +44,7 @@ try {
   } else if (action === "progress") {
     const result = await getRenderProgress({
       renderId: args.renderId,
-      bucketName: args.bucketName,
+      bucketName: args.bucketName || renderBucket,
       functionName,
       region,
     });
