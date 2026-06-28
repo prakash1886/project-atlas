@@ -19,3 +19,18 @@ mcp_servers:
   nexlev:
     url: "https://prod.dashboard.nexlev.io/api/claude-mcp"
     auth: oauth
+
+# This deployment's startup log warned: "API server is network-accessible
+# (0.0.0.0) AND the terminal backend is 'local' (unsandboxed). Agent work
+# dispatched through this endpoint runs as the host user with full
+# terminal/file access." We only need this agent to answer content-opportunity
+# research queries and call the nexlev MCP tools -- not run shell commands or
+# touch the filesystem -- so disable the toolsets that would let an
+# API_SERVER_KEY leak turn into host code execution.
+agent:
+  disabled_toolsets:
+    - terminal
+    - file
+    - computer_use
+    - browser
+    - cronjob
