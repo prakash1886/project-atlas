@@ -1,0 +1,21 @@
+# Template config for the hermes-gateway Railway service. Copied to
+# $HERMES_CONFIG by entrypoint.sh on first boot only -- never overwritten on
+# redeploy, since the OAuth token cache for any mcp_servers entry below lives
+# alongside this file once `hermes mcp login <name>` has been run.
+#
+# host/port/key for the api_server platform come from env vars
+# (API_SERVER_HOST/API_SERVER_PORT/API_SERVER_KEY), set on the Railway
+# service directly -- not duplicated here. This file only needs to declare
+# that the platform is enabled.
+platforms:
+  api_server: {}
+
+# Register MCP servers here. NexLev's MCP endpoint, per
+# dashboard.nexlev.io/docs/mcp/quickstart -- requires the one-time headless
+# OAuth handshake (`hermes mcp login nexlev`) to be run manually against this
+# deployed service (e.g. via `railway shell`) before it's usable; this file
+# alone does not complete authentication.
+mcp_servers:
+  nexlev:
+    url: "https://prod.dashboard.nexlev.io/api/claude-mcp"
+    auth: oauth

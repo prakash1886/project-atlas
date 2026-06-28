@@ -59,6 +59,22 @@ production_agents:
   #     from Remotion's own render-output bucket; this is where narration-synthesis/
   #     music-generation/asset-sourcing upload local bytes so Remotion Lambda has a
   #     URL to fetch them from — Lambda cannot read the Railway filesystem).
+  #
+  # The content-opportunity scientist (app.py's execute_self_improving_hermes_agent,
+  # not a production_agent) optionally calls TubeLab's niche/outlier API for extra
+  # research context - tubelab_client.py. Optional like the rest: unset means
+  # content-opportunity just runs without this data source, not an error.
+  #   TUBELAB_API_KEY - tubelab_client.py
+  #
+  # execute_self_improving_hermes_agent's refinement loop (any insight_type) tries
+  # the hermes-gateway service first when configured -- a separate Railway service
+  # (../hermes-gateway/) running the real Nous Hermes agent runtime with MCP servers
+  # (NexLev) registered, reached over its OpenAI-compatible /v1/chat/completions
+  # endpoint (call_hermes_gateway in app.py). Falls back to the locally embedded
+  # AIAgent loop when unset or the call fails -- not a hard dependency.
+  #   HERMES_GATEWAY_URL - base URL of the hermes-gateway service, e.g.
+  #     https://hermes-gateway.up.railway.app (no trailing slash)
+  #   HERMES_GATEWAY_KEY - must match API_SERVER_KEY set on the hermes-gateway service
   # narration-synthesis/music-generation/render-qc require the `ffprobe` binary on
   # PATH (not a pip dependency — add via the Railway build image, nixpacks.toml or an
   # apt buildpack). video-assembly requires Node.js + `npm install` run inside

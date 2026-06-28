@@ -12,6 +12,7 @@ from pydantic import BaseModel
 import uuid
 import agent_loader
 import orchestrator
+from integrations import tubelab_client
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -151,6 +152,47 @@ def validate_schema(data, schema):
             
     return True, ""
 
+HERMES_GATEWAY_URL = os.getenv("HERMES_GATEWAY_URL", "").rstrip("/")
+HERMES_GATEWAY_KEY = os.getenv("HERMES_GATEWAY_KEY", "")
+
+
+async def call_hermes_gateway(system_instructions: str, current_prompt: str) -> Optional[str]:
+    """
+    Calls the real Nous Hermes agent runtime (hermes-gateway, a separate Railway
+    service running `hermes gateway run` with the api_server platform enabled) over its
+    OpenAI-compatible /v1/chat/completions endpoint, instead of the locally embedded
+    AIAgent instance. The gateway's agent has MCP servers (e.g. NexLev) registered in its
+    own config.yaml and can transparently invoke their tools while answering -- something
+    the embedded AIAgent path has no documented way to do.
+
+    Returns None (caller falls back to the local AIAgent loop) if the gateway isn't
+    configured or the call fails -- same optional/graceful-degradation contract as
+    call_modal_script_agent, since the gateway is an enhancement, not a hard dependency.
+    """
+    if not HERMES_GATEWAY_URL:
+        return None
+
+    try:
+        async with httpx.AsyncClient(timeout=120) as client:
+            resp = await client.post(
+                f"{HERMES_GATEWAY_URL}/v1/chat/completions",
+                headers={"Authorization": f"Bearer {HERMES_GATEWAY_KEY}"},
+                json={
+                    "model": "hermes-agent",
+                    "messages": [
+                        {"role": "system", "content": system_instructions},
+                        {"role": "user", "content": current_prompt},
+                    ],
+                },
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            return data["choices"][0]["message"]["content"]
+    except Exception as e:
+        logger.warning(f"[Hermes] Gateway call failed, falling back to local AIAgent loop: {e}")
+        return None
+
+
 async def call_modal_script_agent(
     query: str,
     extra_context: Optional[dict] = None
@@ -202,6 +244,20 @@ async def execute_self_improving_hermes_agent(
             logger.info("[Hermes] Script served by Modal/Gemma endpoint")
             return modal_result
 
+    tubelab_context = ""
+    if insight_type == "content-opportunity":
+        # query is the free-text topic/niche seed the scientist was asked to research.
+        # Empty results (TUBELAB_API_KEY unset or the call failing) are fine here --
+        # this is supplementary context, not a required input.
+        outliers, channels = await asyncio.gather(
+            tubelab_client.search_outliers(query), tubelab_client.search_channels(query)
+        )
+        if outliers or channels:
+            tubelab_context = (
+                f"\n        - TubeLab outlier videos for '{query}': {json.dumps(outliers)}"
+                f"\n        - TubeLab niche channels for '{query}': {json.dumps(channels)}"
+            )
+
     # Load agent-specific soul (system prompt) and schema
     agent_dir = os.path.join(os.path.dirname(__file__), "agents", insight_type)
     soul_content = ""
@@ -238,14 +294,50 @@ async def execute_self_improving_hermes_agent(
 
     # Model configuration
     model_name = config.get("ds_star", {}).get("agent_models", {}).get("analyzer", "google/gemini-2.5-flash")
-    
-    # Retrieve API key for safety
+
+    # Craft system instructions explaining the self-improvement loop. Built before the
+    # local-AIAgent gate below since the hermes-gateway path (call_hermes_gateway) needs
+    # this same text regardless of whether GEMINI_API_KEY/AIAgent are available locally.
+    system_instructions = f"""
+        You are the Hermes self-improving agent.
+
+        ### Agent Identity & Role:
+        {soul_content or f"You are the {insight_type} analysis specialist."}
+
+        Your primary responsibility is to analyze data, verify calculations for correctness, and produce a structured JSON report.
+
+        ### The Self-Improvement Workflow:
+        1. **Plan:** Analyze the query and the data files provided.
+        2. **Implement & Execute:** Write a Python script to process the datasets and calculate the necessary metrics. Run the code.
+        3. **Verify:** Check the output for logical contradictions, missing values, or outliers.
+        4. **Correct:** If validation fails, rewrite your code or prompt to fix the gaps, re-execute, and re-verify.
+        5. **Finalize:** Construct a final JSON object matching the exact schema required for this scientist role.
+
+        ### Input Context:
+        - Files available in directory '{DATA_DIR}':
+          {chr(10).join(file_summaries)}
+        - Extra Context: {json.dumps(extra_context or {})}{tubelab_context}
+
+        ### Required JSON Schema format:
+        {json.dumps(schema_content, indent=2) if schema_content else "Return a structured JSON report."}
+
+        Return ONLY a valid JSON object matching the schema. Do not write markdown blocks or text wrapper.
+        """
+
+    loop_id = f"hermes-{insight_type}-{int(asyncio.get_event_loop().time())}"
+    current_prompt = f"""
+        User Query: {query}
+        Execute the self-improving loop for {insight_type}.
+        Perform the data science analysis and return the final JSON.
+        """
+
+    # Retrieve API key for the local-AIAgent fallback path. Only required when
+    # HERMES_GATEWAY_URL isn't set -- the gateway path needs neither.
     gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-    if not HAS_HERMES or not gemini_key:
+    if not HERMES_GATEWAY_URL and (not HAS_HERMES or not gemini_key):
         logger.warning("[Hermes] AIAgent library not active or GEMINI_API_KEY missing. Falling back to high-fidelity simulated response.")
         return get_mock_scientist_response(insight_type, query, data_files)
 
-    # Instantiate the self-improving AIAgent
     try:
         # Load local memory history if available
         history = []
@@ -256,54 +348,26 @@ async def execute_self_improving_hermes_agent(
             except Exception:
                 pass
 
-        # Craft system instructions explaining the self-improvement loop
-        system_instructions = f"""
-        You are the Hermes self-improving agent.
-        
-        ### Agent Identity & Role:
-        {soul_content or f"You are the {insight_type} analysis specialist."}
-        
-        Your primary responsibility is to analyze data, verify calculations for correctness, and produce a structured JSON report.
-        
-        ### The Self-Improvement Workflow:
-        1. **Plan:** Analyze the query and the data files provided.
-        2. **Implement & Execute:** Write a Python script to process the datasets and calculate the necessary metrics. Run the code.
-        3. **Verify:** Check the output for logical contradictions, missing values, or outliers.
-        4. **Correct:** If validation fails, rewrite your code or prompt to fix the gaps, re-execute, and re-verify.
-        5. **Finalize:** Construct a final JSON object matching the exact schema required for this scientist role.
-        
-        ### Input Context:
-        - Files available in directory '{DATA_DIR}':
-          {chr(10).join(file_summaries)}
-        - Extra Context: {json.dumps(extra_context or {})}
-        
-        ### Required JSON Schema format:
-        {json.dumps(schema_content, indent=2) if schema_content else "Return a structured JSON report."}
-        
-        Return ONLY a valid JSON object matching the schema. Do not write markdown blocks or text wrapper.
-        """
-
-        # ephemeral_system_prompt is the real constructor param AIAgent honors —
-        # a plain `agent.system_prompt = ...` attribute assignment is a silent no-op.
-        agent = AIAgent(model=model_name, quiet_mode=True, ephemeral_system_prompt=system_instructions)
-
-        # Run conversation with dynamic schema self-correction loops
-        loop_id = f"hermes-{insight_type}-{int(asyncio.get_event_loop().time())}"
+        # Local AIAgent is instantiated lazily, only the first time the gateway path
+        # is unavailable for this run -- ephemeral_system_prompt is the real
+        # constructor param AIAgent honors; a plain `agent.system_prompt = ...`
+        # attribute assignment is a silent no-op.
+        agent = None
         logger.info(f"[Hermes] Running conversation loop ID: {loop_id}")
-
-        current_prompt = f"""
-        User Query: {query}
-        Execute the self-improving loop for {insight_type}.
-        Perform the data science analysis and return the final JSON.
-        """
 
         final_json = None
         for attempt in range(1, rounds + 1):
             logger.info(f"[Hermes] Round {attempt}/{rounds} for {insight_type}")
-            # task_id must be passed by keyword — run_conversation's 2nd positional
-            # param is system_message, which would silently override ephemeral_system_prompt.
-            result = await asyncio.to_thread(agent.run_conversation, current_prompt, task_id=loop_id)
-            final_text = result.get("final_response", "").strip()
+            gateway_text = await call_hermes_gateway(system_instructions, current_prompt)
+            if gateway_text is not None:
+                final_text = gateway_text.strip()
+            else:
+                if agent is None:
+                    agent = AIAgent(model=model_name, quiet_mode=True, ephemeral_system_prompt=system_instructions)
+                # task_id must be passed by keyword — run_conversation's 2nd positional
+                # param is system_message, which would silently override ephemeral_system_prompt.
+                result = await asyncio.to_thread(agent.run_conversation, current_prompt, task_id=loop_id)
+                final_text = result.get("final_response", "").strip()
             
             # Clean markdown code block wraps if LLM returns them
             if final_text.startswith("```json"):
