@@ -14,6 +14,7 @@
     "worker:start": "node dist-server/src/worker.js",
     "start": "node dist-server/src/main.js",
     "test": "vitest run",
+    "typecheck": "tsc -p . --noEmit && tsc -p tsconfig.server.json --noEmit",
     "qmd:add": "qmd collection add ./.specify --name specify --mask \"**/*.{md,facts}\" --overwrite",
     "qmd:embed": "qmd embed",
     "qmd:search": "qmd search"
