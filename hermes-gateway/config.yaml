@@ -1,7 +1,8 @@
 # Template config for the hermes-gateway Railway service. Copied to
-# $HERMES_CONFIG by entrypoint.sh on first boot only -- never overwritten on
-# redeploy, since the OAuth token cache for any mcp_servers entry below lives
-# alongside this file once `hermes mcp login <name>` has been run.
+# $HERMES_HOME/config.yaml by entrypoint.sh on first boot only -- never
+# overwritten on redeploy, since the OAuth token cache for any mcp_servers
+# entry below lives alongside this file once `hermes mcp login <name>` has
+# been run.
 #
 # host/port/key for the api_server platform come from env vars
 # (API_SERVER_HOST/API_SERVER_PORT/API_SERVER_KEY), set on the Railway
