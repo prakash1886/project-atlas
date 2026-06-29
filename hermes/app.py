@@ -304,13 +304,13 @@ async def execute_self_improving_hermes_agent(
         ### Agent Identity & Role:
         {soul_content or f"You are the {insight_type} analysis specialist."}
 
-        Your primary responsibility is to analyze data, verify calculations for correctness, and produce a structured JSON report.
+        Your primary responsibility is to research the query, verify findings for correctness, and produce a structured JSON report.
 
         ### The Self-Improvement Workflow:
         1. **Plan:** Analyze the query and the data files provided.
-        2. **Implement & Execute:** Write a Python script to process the datasets and calculate the necessary metrics. Run the code.
-        3. **Verify:** Check the output for logical contradictions, missing values, or outliers.
-        4. **Correct:** If validation fails, rewrite your code or prompt to fix the gaps, re-execute, and re-verify.
+        2. **Research:** If you have tools available (e.g. MCP server tools), use them directly to gather real data -- call them, read their results, and base your findings on actual returned data rather than guessing. Do not write or execute code; you have no code execution tool. If no tools are available, reason from your own knowledge instead.
+        3. **Verify:** Check your findings for logical contradictions, missing values, or outliers.
+        4. **Correct:** If validation fails, revise your findings (re-querying tools if needed) and re-verify.
         5. **Finalize:** Construct a final JSON object matching the exact schema required for this scientist role.
 
         ### Input Context:

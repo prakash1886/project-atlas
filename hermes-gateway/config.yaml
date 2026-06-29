@@ -41,3 +41,14 @@ agent:
     - computer_use
     - browser
     - cronjob
+    # "terminal" is the OS-shell toolset; code_execution (execute_code) is a
+    # SEPARATE toolset that runs arbitrary Python and can spawn subprocesses
+    # -- not covered by disabling "terminal". It surfaced when the model
+    # tried to follow content-opportunity's "write a Python script" framing
+    # literally, then failed because execute_code requires a one-shot
+    # interactive approval that can't be granted headlessly. Disabling it
+    # forces the model to use its real tools (the nexlev MCP toolset) instead.
+    - code_execution
+    # No legitimate use for sub-agent spawning in this single-purpose
+    # research gateway; keep the tool surface minimal.
+    - delegation
