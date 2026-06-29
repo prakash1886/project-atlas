@@ -1,11 +1,15 @@
 FROM python:3.11-slim
 
-# aiohttp is the only extra dependency gateway/platforms/api_server.py needs
-# beyond the base hermes-agent install (confirmed in its source comments).
+# aiohttp is needed by gateway/platforms/api_server.py (confirmed in its
+# source comments); the [mcp] extra (mcp==1.26.0, starlette==1.0.1, per
+# hermes-agent's pyproject.toml) is required for any MCP server reached over
+# HTTP transport (NexLev) -- a bare install pulls no mcp package at all, and
+# `hermes mcp login` fails with "mcp.client.streamable_http is not available"
+# without it.
 RUN apt-get update && apt-get install -y --no-install-recommends git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir aiohttp git+https://github.com/NousResearch/hermes-agent.git
+RUN pip install --no-cache-dir aiohttp "hermes-agent[mcp] @ git+https://github.com/NousResearch/hermes-agent.git"
 
 WORKDIR /app
 COPY config.yaml /app/config.template.yaml
