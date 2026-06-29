@@ -4,6 +4,12 @@
 # entry below lives alongside this file once `hermes mcp login <name>` has
 # been run.
 #
+# The gateway runs its own inference call per request (separate from
+# hermes-dsstar's embedded AIAgent) -- /v1/chat/completions errored with
+# "No inference provider configured" until this was set. Needs a matching
+# GEMINI_API_KEY env var on this service (reuses hermes-dsstar's key).
+model: "google/gemini-2.5-flash"
+#
 # host/port/key for the api_server platform come from env vars
 # (API_SERVER_HOST/API_SERVER_PORT/API_SERVER_KEY), set on the Railway
 # service directly -- not duplicated here. This file only needs to declare
