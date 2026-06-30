@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import type { Pool } from 'pg';
 
-export type SearchSource = 'brave' | 'exa' | 'currents' | 'freenews';
+export type SearchSource = 'brave' | 'exa' | 'currents' | 'freenews' | 'wikipedia';
 
 export interface SearchResultItem {
   title: string;
@@ -28,8 +28,9 @@ export interface SearchResult {
  * provider-policies/<provider>.policy.json manifest in the PolicyService layer; embedded here for now.
  */
 interface ProviderLimits {
-  freeCap: number; // free-tier / free-credit request allowance, scoped to capPeriod
-  capPeriod: 'monthly' | 'daily'; // matches the provider's actual free-tier reset cadence
+  freeCap: number; // free-tier / free-credit request allowance, scoped to capPeriod ('none' → unused)
+  capPeriod: 'monthly' | 'daily' | 'none'; // 'none' = no quota-exhaustion concept, only perMinuteRate applies
+  requiresKey: boolean; // false for keyless providers (e.g. Wikipedia anonymous access)
   safetyMargin: number; // cap at this fraction to absorb concurrency / in-flight (zero paid overage)
   costPer1kUsd: number; // for the ledger cost estimate
   allowPaidOverage: boolean; // default false → never spend past the free tier
@@ -39,16 +40,22 @@ interface ProviderLimits {
 
 const PROVIDERS: Record<SearchSource, ProviderLimits> = {
   // Brave $5 Search plan: 50 QPS, $5/mo credit (~1,000 req). storageRights=false → signals-only cache.
-  brave: { freeCap: 1000, capPeriod: 'monthly', safetyMargin: 0.9, costPer1kUsd: 5, allowPaidOverage: false, perMinuteRate: 30, endpoint: 'web/search' },
+  brave: { freeCap: 1000, capPeriod: 'monthly', requiresKey: true, safetyMargin: 0.9, costPer1kUsd: 5, allowPaidOverage: false, perMinuteRate: 30, endpoint: 'web/search' },
   // Exa free tier: 20,000 req/mo, /search 10 QPS.
-  exa: { freeCap: 20000, capPeriod: 'monthly', safetyMargin: 0.95, costPer1kUsd: 7, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
+  exa: { freeCap: 20000, capPeriod: 'monthly', requiresKey: true, safetyMargin: 0.95, costPer1kUsd: 7, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
   // Currents free tier: 1,000 req/DAY (confirmed live via X-Ratelimit-Limit header), resets at UTC
-  // midnight -- not monthly, hence capPeriod: 'daily' (see reserveDailyQuota).
-  currents: { freeCap: 1000, capPeriod: 'daily', safetyMargin: 0.9, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
+  // midnight -- not monthly, hence capPeriod: 'daily'.
+  currents: { freeCap: 1000, capPeriod: 'daily', requiresKey: true, safetyMargin: 0.9, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
   // FreeNewsApi.io free tier: 5,000 req/day, no paid tier exists. Server was unresponsive in live
   // testing (TLS connects, no response) -- kept here since the existing stub-on-error path already
   // degrades gracefully; treat as a secondary/fallback news source, not primary.
-  freenews: { freeCap: 5000, capPeriod: 'daily', safetyMargin: 0.9, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'v1/news' },
+  freenews: { freeCap: 5000, capPeriod: 'daily', requiresKey: true, safetyMargin: 0.9, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'v1/news' },
+  // Wikipedia REST API: keyless, no quota to exhaust -- api.wikimedia.org's old personal-token portal
+  // 301-redirects to mediawiki.org now (confirmed live), so there's no key-signup flow to wire up.
+  // Anonymous + compliant User-Agent gets 200 req/min (vs 10 req/min with none) per Wikimedia's
+  // current rate-limit policy; perMinuteRate kept safely under that ceiling. freeCap/safetyMargin
+  // unused for capPeriod: 'none' (see reserveQuota).
+  wikipedia: { freeCap: 0, capPeriod: 'none', requiresKey: false, safetyMargin: 1, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 150, endpoint: 'v1/search/page' },
 };
 
 const CACHE_TTL_DAYS = 30; // 30-day no-repeat gate (SYS-SEARCH F-006 / spec §6.2)
@@ -73,9 +80,10 @@ export class SearchService {
   ) {
     this.logger.log(
       `[SearchService] init (brave=${this.braveKey ? 'live' : 'stub'}, exa=${this.exaKey ? 'live' : 'stub'}, ` +
-        `currents=${this.currentsKey ? 'live' : 'stub'}, freenews=${this.freenewsKey ? 'live' : 'stub'}; ` +
+        `currents=${this.currentsKey ? 'live' : 'stub'}, freenews=${this.freenewsKey ? 'live' : 'stub'}, wikipedia=live (keyless); ` +
         `caps brave=${this.effectiveCap('brave')}/mo exa=${this.effectiveCap('exa')}/mo ` +
-        `currents=${this.effectiveCap('currents')}/day freenews=${this.effectiveCap('freenews')}/day, zero paid overage)`,
+        `currents=${this.effectiveCap('currents')}/day freenews=${this.effectiveCap('freenews')}/day ` +
+        `wikipedia=${PROVIDERS.wikipedia.perMinuteRate}/min, zero paid overage)`,
     );
   }
 
@@ -95,6 +103,10 @@ export class SearchService {
     return this.search('freenews', query, count);
   }
 
+  wikipediaSearch(query: string, count = 10): Promise<SearchResult> {
+    return this.search('wikipedia', query, count);
+  }
+
   /** cache gate → key → burst limit → monthly cap reserve → live call → ledger + signals-only cache. */
   async search(source: SearchSource, query: string, count = 10): Promise<SearchResult> {
     // 1. signals-only cache hit — zero outbound calls, zero quota spent (F-006)
@@ -103,9 +115,9 @@ export class SearchService {
       return { source, query, cached: true, fetchedAt: hit.fetchedAt, resultCount: hit.value, results: [] };
     }
 
-    // 2. credential check
+    // 2. credential check (skipped for keyless providers, e.g. Wikipedia anonymous access)
     const key = this.keyFor(source);
-    if (!key) {
+    if (PROVIDERS[source].requiresKey && !key) {
       this.logger.warn(`[SearchService] ${source} key missing — stub for "${query}"`);
       return this.stub(source, query);
     }
@@ -125,7 +137,7 @@ export class SearchService {
 
     // 5. live call → ledger → signals-only cache (result bodies returned to caller, never stored)
     try {
-      const results = await this.callProvider(source, query, count, key);
+      const results = await this.callProvider(source, query, count, key ?? '');
       await this.writeLedger(source);
       await this.writeCache(source, query, results.length);
       return { source, query, cached: false, fetchedAt: new Date().toISOString(), resultCount: results.length, results };
@@ -137,10 +149,10 @@ export class SearchService {
   }
 
   /** Current usage vs cap for a provider, scoped to its real cap period (Operator Dashboard / tests). */
-  async getUsage(source: SearchSource): Promise<{ used: number; cap: number; remaining: number; period: 'monthly' | 'daily' }> {
+  async getUsage(source: SearchSource): Promise<{ used: number; cap: number; remaining: number; period: 'monthly' | 'daily' | 'none' }> {
     const cap = this.effectiveCap(source);
     const period = PROVIDERS[source].capPeriod;
-    const since = period === 'monthly' ? this.monthStart() : this.dayStart();
+    const since = period === 'monthly' ? this.monthStart() : this.dayStart(); // 'none' providers don't consult this, harmless default
     let used = 0;
     try {
       const res = await this.db.query(
@@ -168,6 +180,7 @@ export class SearchService {
       case 'exa': return this.exaKey;
       case 'currents': return this.currentsKey;
       case 'freenews': return this.freenewsKey;
+      case 'wikipedia': return undefined; // keyless
     }
   }
 
@@ -177,6 +190,7 @@ export class SearchService {
       case 'exa': return this.callExa(query, count, key);
       case 'currents': return this.callCurrents(query, count, key);
       case 'freenews': return this.callFreenews(query, count, key);
+      case 'wikipedia': return this.callWikipedia(query, count);
     }
   }
 
@@ -235,6 +249,27 @@ export class SearchService {
     } finally {
       clearTimeout(timeout);
     }
+  }
+
+  /**
+   * Keyless. Response shape confirmed live: {"pages":[{id,key,title,excerpt,description,
+   * thumbnail},...]}. `key` is the URL slug (e.g. "Marcus_Aurelius"); `excerpt` carries
+   * <span class="searchmatch"> highlight tags that get stripped for a clean snippet. Wikimedia
+   * policy requires a descriptive User-Agent identifying the app (not an API key) for anonymous
+   * access at the 200 req/min tier instead of 10 req/min with none.
+   */
+  private async callWikipedia(query: string, count: number): Promise<SearchResultItem[]> {
+    const url = `https://en.wikipedia.org/w/rest.php/v1/search/page?q=${encodeURIComponent(query)}&limit=${count}`;
+    const res = await fetch(url, { headers: { 'User-Agent': 'ProjectAtlas/1.0 (https://github.com/prakash1886/project-atlas)' } });
+    if (!res.ok) throw new Error(`Wikipedia API responded with status ${res.status}`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data: any = await res.json();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (data?.pages ?? []).map((r: any) => ({
+      title: r.title,
+      url: `https://en.wikipedia.org/wiki/${r.key}`,
+      snippet: r.description ?? (typeof r.excerpt === 'string' ? r.excerpt.replace(/<\/?span[^>]*>/g, '') : undefined),
+    }));
   }
 
   // --- search_cache (SIGNALS-ONLY — never stores provider result bodies, SYS-POLICY F-003) ----------
@@ -296,6 +331,7 @@ export class SearchService {
   private async reserveQuota(source: SearchSource): Promise<boolean> {
     const cfg = PROVIDERS[source];
     if (cfg.allowPaidOverage) return true; // explicitly opted into paid usage
+    if (cfg.capPeriod === 'none') return true; // no quota-exhaustion concept (e.g. Wikipedia) — only underRateLimit applies
     const cap = this.effectiveCap(source);
     const isDaily = cfg.capPeriod === 'daily';
     const bucket = isDaily ? new Date().toISOString().slice(0, 10) : new Date().toISOString().slice(0, 7); // YYYY-MM-DD or YYYY-MM
