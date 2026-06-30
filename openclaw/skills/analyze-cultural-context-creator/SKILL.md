@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Determine why this pers
 - When the Cultural Context Creator agent is invoked in the L3 Story pipeline and its inputs are available.
 
 ## Inputs / Sources
-News, GDELT, cultural analysis sources
+News, GDELT, cultural analysis sources. Use the `vidiq` MCP server's `vidiq_video_watch` tool on
+existing top videos about this personality to see how other creators have already framed their
+cultural significance, avoiding a redundant angle. vidiq is the prioritized subscription; fall
+back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Context narrative

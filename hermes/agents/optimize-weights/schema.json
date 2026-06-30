@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "optimized_weights": {
+      "type": "object",
+      "properties": {
+        "search": { "type": "number" },
+        "discussion": { "type": "number" },
+        "video": { "type": "number" },
+        "evergreen": { "type": "number" },
+        "emotion": { "type": "number" },
+        "competition": { "type": "number" },
+        "monetization": { "type": "number" },
+        "regional": { "type": "number" }
+      },
+      "required": ["search", "discussion", "video", "evergreen", "emotion", "competition", "monetization", "regional"]
+    },
+    "learning_rate": { "type": "number" },
+    "status": { "type": "string" },
+    "used_stub_data": { "type": "boolean" }
+  },
+  "required": ["generated_at", "optimized_weights", "learning_rate", "status", "used_stub_data"]
+}

@@ -31,7 +31,7 @@ is only used to write a one-line interpretation of a flagged hotspot — and onl
 unusual is found.
 
 ## Implementation
-Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="forecast-retention", query=<ask>, context={"video_id": video_id})`. Hits Hermes's `POST /v1/agents/forecast-retention` — the same endpoint `runDataScienceInsight('forecast-retention', ...)` calls from the TS `ds-star-scientists` Temporal activities, so this skill and the nightly/weekly Temporal workflows terminate at the same implementation. No separate backend to wire here.
+Call the `hermes-bridge` MCP tool `run_judgment_agent(insight_type="retention", query=<ask>, context={"video_id": video_id})`. Hits Hermes's `POST /v1/agents/retention` (the real directory is `hermes/agents/retention/`, not `forecast-retention` -- using this skill's own name as the insight_type previously missed it and silently fell back to an empty/generic response). Note: the TS `ds-star-scientists` Temporal activities (`server/src/modules/temporal/activities/ds-star-scientists.activities.ts`) don't currently call a `forecast-retention`/`retention` scientist at all -- only 8 others are wired there -- so this fix only affects this OpenClaw skill's own path, not a parallel Temporal one.
 
 ## Backend dependency
 - YouTube Analytics API + `story_scores`/retention tables (Railway) feed Hermes's own data pipeline, not this skill directly.
