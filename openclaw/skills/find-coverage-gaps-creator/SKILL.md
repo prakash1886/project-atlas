@@ -16,7 +16,11 @@ Focus on sourcing, drafting, and creative selection for: Find high-demand, low-c
 - When the Coverage Gap Creator agent is invoked in the L1 Trend pipeline and its inputs are available.
 
 ## Inputs / Sources
-Search volume + content supply data (Brave + Exa)
+Search volume + content supply data (Brave + Exa). For niche/keyword-level opportunity
+scoring (volume vs. competition) and channel supply lookups, prefer the `vidiq` MCP
+server's tools (`vidiq_keyword_research`, `vidiq_channel_search`, `vidiq_breakout_channels`)
+first -- it is the prioritized subscription. Fall back to `nexlev` MCP tools only if vidiq
+can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: {personality, interest_score, coverage_score, gap_score}
