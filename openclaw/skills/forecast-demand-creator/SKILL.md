@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Predict whether a topic
 - When the Demand Forecast Creator agent is invoked in the L1 Trend pipeline and its inputs are available.
 
 ## Inputs / Sources
-Trend Discovery output
+Trend Discovery output. Use the `vidiq` MCP server's `vidiq_keyword_research` (volume/competition
+trend) and `vidiq_channel_performance_trends` (view trajectory) tools to ground the prediction in
+real data rather than estimating from training data alone. vidiq is the prioritized subscription;
+fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: {topic, predicted_growth, confidence}
