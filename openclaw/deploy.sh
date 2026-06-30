@@ -59,8 +59,14 @@ echo ">> staging skills + personas + mcp bridges to $HOST:$REMOTE"
 $SSH "$HOST" "mkdir -p $REMOTE"
 scp -i "$KEY" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r \
     "$SRC/skills" "$SRC/agents" "$SRC/agents.manifest.json" "$SRC/deploy-list.txt" "$SRC/mcp" "$HOST:$REMOTE/" >/dev/null
-$SSH "$HOST" "pip3 install -q -r '$REMOTE/mcp/hermes-bridge/requirements.txt'"
-$SSH "$HOST" "pip3 install -q -r '$REMOTE/mcp/temporal-bridge/requirements.txt'"
+# --break-system-packages: this VPS's Python is Debian-managed (PEP 668),
+# which refuses unscoped pip installs. --ignore-installed: a bare
+# --break-system-packages still fails trying to uninstall typing_extensions
+# (RECORD file not found -- it's Debian-owned, not pip-owned); skip the
+# uninstall instead of fighting it. Confirmed both flags together work on
+# this VPS where neither alone does.
+$SSH "$HOST" "pip3 install --break-system-packages --ignore-installed -q -r '$REMOTE/mcp/hermes-bridge/requirements.txt'"
+$SSH "$HOST" "pip3 install --break-system-packages --ignore-installed -q -r '$REMOTE/mcp/temporal-bridge/requirements.txt'"
 
 deploy_one() {   # id model emoji name skills_csv
   local id="$1" model="$2" emoji="$3" name="$4" skills="$5"
@@ -87,31 +93,43 @@ while IFS='|' read -r id model emoji name host skill; do
   deploy_one "$id" "$model" "$emoji" "$name" "$skill"
 done < "$SRC/deploy-list.txt"
 
-echo "== registering hermes-bridge MCP tool =="
-for id in "${HERMES_BRIDGE_AGENTS[@]}"; do
-  $SSH "$HOST" "openclaw mcp add hermes-bridge \
-                  --command 'python3 $REMOTE/mcp/hermes-bridge/server.py' \
-                  --env HERMES_BASE_URL='$HERMES_BASE_URL' \
-                  --env DSSTAR_API_KEY='$DSSTAR_API_KEY' \
-                  --agent '$id' >/dev/null 2>&1 && echo '   + hermes-bridge -> $id' || echo '   ! hermes-bridge -> $id FAILED'"
-done
+# openclaw mcp add has no --agent flag -- mcp.servers is one global config
+# shared by every agent on this OpenClaw install (confirmed via `openclaw mcp
+# add --help`: no per-agent scoping option exists). HERMES_BRIDGE_AGENTS/
+# TEMPORAL_BRIDGE_AGENTS/VIDIQ_AGENTS above describe *intended* scope, not
+# enforceable scope -- every registered server is reachable by every agent.
+# Each `mcp add` also probes (connects to) the server before saving, so a
+# bad command/url/header fails loudly here instead of silently.
+# --command takes ONLY the bare executable -- it is not shell-split, so a
+# combined "python3 -u /path/server.py" string fails to spawn and openclaw
+# reports it as a generic "write EPIPE" rather than a clear not-found error.
+# Args go through repeatable --arg flags instead. -u (unbuffered) avoids a
+# second failure mode: Python block-buffers stdout when it isn't a TTY,
+# which can delay the MCP handshake response past openclaw's probe window.
+echo "== registering hermes-bridge MCP tool (global -- no per-agent scoping exists) =="
+$SSH "$HOST" "openclaw mcp add hermes-bridge \
+                --command python3 --arg -u --arg '$REMOTE/mcp/hermes-bridge/server.py' \
+                --env HERMES_BASE_URL='$HERMES_BASE_URL' \
+                --env DSSTAR_API_KEY='$DSSTAR_API_KEY' \
+                && echo '   + hermes-bridge' || echo '   ! hermes-bridge FAILED'"
 
-echo "== registering temporal-bridge MCP tool =="
-for id in "${TEMPORAL_BRIDGE_AGENTS[@]}"; do
-  $SSH "$HOST" "openclaw mcp add temporal-bridge \
-                  --command 'python3 $REMOTE/mcp/temporal-bridge/server.py' \
-                  --env TEMPORAL_ADDRESS='$TEMPORAL_ADDRESS' \
-                  --env TEMPORAL_ENCRYPTION_KEY='$TEMPORAL_ENCRYPTION_KEY' \
-                  --agent '$id' >/dev/null 2>&1 && echo '   + temporal-bridge -> $id' || echo '   ! temporal-bridge -> $id FAILED'"
-done
+echo "== registering temporal-bridge MCP tool (global -- no per-agent scoping exists) =="
+$SSH "$HOST" "openclaw mcp add temporal-bridge \
+                --command python3 --arg -u --arg '$REMOTE/mcp/temporal-bridge/server.py' \
+                --env TEMPORAL_ADDRESS='$TEMPORAL_ADDRESS' \
+                --env TEMPORAL_ENCRYPTION_KEY='$TEMPORAL_ENCRYPTION_KEY' \
+                && echo '   + temporal-bridge' || echo '   ! temporal-bridge FAILED'"
 
-echo "== registering vidiq MCP tool =="
-for id in "${VIDIQ_AGENTS[@]}"; do
-  $SSH "$HOST" "openclaw mcp add vidiq \
-                  --url 'https://mcp.vidiq.com/mcp' \
-                  --env VIDIQ_API_KEY='$VIDIQ_API_KEY' \
-                  --agent '$id' >/dev/null 2>&1 && echo '   + vidiq -> $id' || echo '   ! vidiq -> $id FAILED'"
-done
+# vidIQ's MCP server speaks streamable-http -- openclaw's transport
+# auto-detection hangs/times out against it without --transport forced
+# explicitly (confirmed: a bare `mcp add --url` here timed out after 30s,
+# while the identical request worked instantly once --transport was added).
+echo "== registering vidiq MCP tool (global -- no per-agent scoping exists) =="
+$SSH "$HOST" "openclaw mcp add vidiq \
+                --url 'https://mcp.vidiq.com/mcp' \
+                --header 'Authorization=Bearer $VIDIQ_API_KEY' \
+                --transport streamable-http \
+                && echo '   + vidiq' || echo '   ! vidiq FAILED'"
 
 echo ">> restart gateway + summary"
 $SSH "$HOST" "openclaw gateway restart >/dev/null 2>&1; sleep 5; openclaw agents list 2>&1 | head -30"
