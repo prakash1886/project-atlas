@@ -26,6 +26,15 @@ mcp_servers:
   nexlev:
     url: "https://prod.dashboard.nexlev.io/api/claude-mcp"
     auth: oauth
+  # vidIQ's official MCP server (vidiq.com/mcp) -- keyword research, competitor
+  # analysis, channel/video analytics. Read-only, requires a vidIQ "max" plan.
+  # API-key auth on an HTTP MCP server goes via `headers`, not `auth:` (that's
+  # for oauth, as used by nexlev above) -- VIDIQ_API_KEY is already set on this
+  # Railway service and gets interpolated into the header at connect time.
+  vidiq:
+    url: "https://mcp.vidiq.com/mcp"
+    headers:
+      Authorization: "Bearer ${VIDIQ_API_KEY}"
 
 # This deployment's startup log warned: "API server is network-accessible
 # (0.0.0.0) AND the terminal backend is 'local' (unsandboxed). Agent work

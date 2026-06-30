@@ -19,6 +19,13 @@ REMOTE="/root/atlas-openclaw"                   # staging dir on the VPS
 : "${TEMPORAL_ADDRESS:?Set TEMPORAL_ADDRESS to the shared Temporal cluster before running deploy.sh}"
 : "${TEMPORAL_ENCRYPTION_KEY:?Set TEMPORAL_ENCRYPTION_KEY (same value the NestJS/Hermes Temporal workers use) before running deploy.sh}"
 
+# Required for vidIQ's official remote MCP server (vidiq.com/mcp) -- keyword
+# research, competitor analysis, channel/video analytics. Read-only, requires
+# a vidIQ "max" plan. Same endpoint also registered on hermes-gateway
+# (../hermes-gateway/config.yaml) so both OpenClaw and Hermes agents share
+# one VidIQ connection.
+: "${VIDIQ_API_KEY:?Set VIDIQ_API_KEY before running deploy.sh}"
+
 # agent id | model | emoji | display name | comma-separated skills
 AGENTS=(
   "chief-editor|gemini-direct/gemini-2.5-flash|🎬|Chief Editor|orchestrate-content-run,submit-editorial-review,dispatch-hermes-content-run"
@@ -42,6 +49,11 @@ HERMES_BRIDGE_AGENTS=("chief-editor" "content-factory" "ds-star" "narrative-psyc
 # trend-intelligence for fetch-signals/calculate-opportunity-score on trend-signals,
 # knowledge-graph for query-semantic-nodes/autolink-entities on knowledge-graph (P5).
 TEMPORAL_BRIDGE_AGENTS=("ds-star" "chief-editor" "trend-intelligence" "knowledge-graph")
+
+# All 8 hand-authored coordinators do research-adjacent work (trend/keyword/
+# competitor/audience/narrative judgment), so all get vidIQ MCP access -- same
+# scope as the AGENTS array itself.
+VIDIQ_AGENTS=("chief-editor" "content-factory" "trend-intelligence" "knowledge-graph" "research-factcheck" "narrative-psychology" "commerce-design" "ds-star")
 
 echo ">> staging skills + personas + mcp bridges to $HOST:$REMOTE"
 $SSH "$HOST" "mkdir -p $REMOTE"
@@ -91,6 +103,14 @@ for id in "${TEMPORAL_BRIDGE_AGENTS[@]}"; do
                   --env TEMPORAL_ADDRESS='$TEMPORAL_ADDRESS' \
                   --env TEMPORAL_ENCRYPTION_KEY='$TEMPORAL_ENCRYPTION_KEY' \
                   --agent '$id' >/dev/null 2>&1 && echo '   + temporal-bridge -> $id' || echo '   ! temporal-bridge -> $id FAILED'"
+done
+
+echo "== registering vidiq MCP tool =="
+for id in "${VIDIQ_AGENTS[@]}"; do
+  $SSH "$HOST" "openclaw mcp add vidiq \
+                  --url 'https://mcp.vidiq.com/mcp' \
+                  --env VIDIQ_API_KEY='$VIDIQ_API_KEY' \
+                  --agent '$id' >/dev/null 2>&1 && echo '   + vidiq -> $id' || echo '   ! vidiq -> $id FAILED'"
 done
 
 echo ">> restart gateway + summary"
