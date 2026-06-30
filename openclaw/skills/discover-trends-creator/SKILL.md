@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Continuously discover r
 - When the Trend Discovery Creator agent is invoked in the L1 Trend pipeline and its inputs are available.
 
 ## Inputs / Sources
-Google Trends, YouTube, Reddit, News, Wikipedia, Podcasts, Quora (fetched/cleaned via Jina Reader)
+Google Trends, YouTube, Reddit, News, Wikipedia, Podcasts, Quora (fetched/cleaned via Jina Reader).
+Use the `vidiq` MCP server's `vidiq_trending_videos` and `vidiq_trend_categories` tools as a
+real YouTube-native trend signal alongside the general web sources above. vidiq is the
+prioritized subscription; fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: {topic, trend_score, regions, growth_rate}

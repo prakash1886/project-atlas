@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Find athletes, leaders,
 - When the Personality Discovery Creator agent is invoked in the L2 Personality pipeline and its inputs are available.
 
 ## Inputs / Sources
-Trend + Coverage data
+Trend + Coverage data. Use the `vidiq` MCP server's `vidiq_youtube_search` tool to check existing
+YouTube coverage of a candidate personality before adding them to the list, rather than assuming
+saturation from training-data familiarity. vidiq is the prioritized subscription; fall back to
+`nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Personality candidate list

@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Organize stories into c
 - When the Playlist Intelligence Creator agent is invoked in the L4 Audience pipeline and its inputs are available.
 
 ## Inputs / Sources
-Archetype + Theme data
+Archetype + Theme data. Use the `vidiq` MCP server's `vidiq_trend_categories` and
+`vidiq_similar_channels` tools to validate that a proposed content universe/playlist theme
+corresponds to a real, coherent audience cluster rather than an arbitrary grouping. vidiq is
+the prioritized subscription; fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Playlist assignments

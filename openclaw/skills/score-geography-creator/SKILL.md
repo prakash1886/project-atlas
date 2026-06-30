@@ -16,7 +16,11 @@ Focus on sourcing, drafting, and creative selection for: Calculate India / US / 
 - When the Geographic Intelligence Creator agent is invoked in the L4 Audience pipeline and its inputs are available.
 
 ## Inputs / Sources
-Trend + audience data
+Trend + audience data. Use the `vidiq` MCP server's `vidiq_keyword_research` tool (with a
+country code) to get real per-country search volume and top-markets data for the
+India/US/Europe/Australia scores, rather than estimating regional relevance from training data.
+vidiq is the prioritized subscription; fall back to `nexlev` only if vidiq can't answer the
+lookup.
 
 ## Output
 Draft proposal and creative options for: {india, usa, europe, australia} scores

@@ -16,7 +16,11 @@ Focus on sourcing, drafting, and creative selection for: Find unknown but fascin
 - When the Hidden Legends Creator agent is invoked in the L2 Personality pipeline and its inputs are available.
 
 ## Inputs / Sources
-Biography sources, Wikipedia gap analysis (Exa, Books, Archives)
+Biography sources, Wikipedia gap analysis (Exa, Books, Archives). Before recommending a
+candidate, use the `vidiq` MCP server's `vidiq_youtube_search` tool to confirm "low-coverage" is
+actually true (real YouTube search-result count) rather than assuming from training-data
+familiarity -- this only validates the coverage gap, the actual discovery still comes from the
+biography/archive sources above, not vidiq.
 
 ## Output
 Draft proposal and creative options for: {name, story_quality, fame_score}

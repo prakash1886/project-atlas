@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Identify segments: stud
 - When the Audience Mapping Creator agent is invoked in the L4 Audience pipeline and its inputs are available.
 
 ## Inputs / Sources
-Story + Archetype data
+Story + Archetype data. Use the `vidiq` MCP server's `vidiq_channel_analytics` tool on
+comparable existing channels/videos to ground audience-segment identification in real viewer
+data rather than estimating from training data. vidiq is the prioritized subscription; fall
+back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: audience_segments mapping
