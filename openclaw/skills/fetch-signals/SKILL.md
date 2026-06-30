@@ -16,11 +16,16 @@ Harvest real-time demand signals from external sources for a given query/topic.
 - A topic needs current volume/velocity before scoring.
 
 ## Sources (spec §5.5 mapping)
-- **Brave Search** (live) via the `brave-search` MCP server — call it directly for web/news volume.
+- **Brave Search** (live) via the `brave-search` MCP server — call it directly for web volume.
   High-volume deterministic polling instead routes through the NestJS `SearchService`, which adds the
   `search_cache` 30-day gate + Redis rate limiter (SYS-SEARCH).
-- YouTube Data API + Reddit + Google Trends + GDELT (real-time signals).
-- **Wikipedia Pageviews** for spike detection.
+- **News** (live) via `SearchService`'s `currents` source (Currents API, primary) — confirmed working,
+  1,000 req/day free tier, daily-reset cap. `freenews` (FreeNewsApi.io) is registered as a secondary/
+  fallback source but was unresponsive in live testing (server accepts the connection, never replies);
+  treat it as best-effort, not primary.
+- YouTube Data API + Reddit + Google Trends + GDELT — **still not implemented**, no client exists for
+  any of these despite being listed here historically. Don't rely on this skill for those signals yet.
+- **Wikipedia Pageviews** for spike detection — also not implemented yet.
 - Fetch & clean page text with **Jina Reader** (avoids headless browser on the VPS, spec §11.3).
 
 ## Function signature (manifest contract)
@@ -30,7 +35,10 @@ def fetch_signals(source: str, query: str) -> list:
 ```
 
 ## Inputs / Outputs
-- **Input:** `source` (google_trends|reddit|youtube|news|wikipedia), `query`.
+- **Input:** `source` — must be one of `SearchService`'s real `SearchSource` values:
+  `brave`, `exa`, `currents`, `freenews` (NOT the `google_trends|reddit|youtube|news|wikipedia`
+  labels this doc used to list -- those aren't real source identifiers at the implementation
+  level; `currents`/`freenews` are what to pass for a news signal), `query`.
 - **Output:** list of `{datetime, metric, value}` raw signals.
 
 ## Cost discipline (spec §6)
@@ -42,8 +50,9 @@ Call the `temporal-bridge` MCP tool `start_workflow("fetchSignalsWorkflow", "tre
 
 ## Backend dependency
 - `search_cache` is implemented (DatabaseModule); `youtube_topics/_trends` tables (Railway) — **stubbed** until wired.
-- API keys: **Brave is live** (`BRAVE_API_KEY`, via the `brave-search` MCP server / SearchService, SYS-SEARCH).
-  YouTube, Reddit still pending. Jina key is available (`JINA_API`).
+- API keys: **Brave and Currents are live** (`BRAVE_API_KEY`, `CURRENTS_API_KEY`, via SearchService, SYS-SEARCH).
+  `FREENEWS_API_KEY` is also set but the provider itself is unresponsive (see Sources above).
+  YouTube, Reddit, Google Trends, Wikipedia still pending -- no client exists for any of them. Jina key is available (`JINA_API`).
 
 ## Model
 deepseek-direct/deepseek-chat (cheap, high-volume). Output must be schema-only JSON (spec §11.3).

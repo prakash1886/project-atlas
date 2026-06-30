@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import type { Pool } from 'pg';
 
-export type SearchSource = 'brave' | 'exa';
+export type SearchSource = 'brave' | 'exa' | 'currents' | 'freenews';
 
 export interface SearchResultItem {
   title: string;
@@ -28,7 +28,8 @@ export interface SearchResult {
  * provider-policies/<provider>.policy.json manifest in the PolicyService layer; embedded here for now.
  */
 interface ProviderLimits {
-  freeMonthlyCap: number; // free-tier / free-credit request allowance
+  freeCap: number; // free-tier / free-credit request allowance, scoped to capPeriod
+  capPeriod: 'monthly' | 'daily'; // matches the provider's actual free-tier reset cadence
   safetyMargin: number; // cap at this fraction to absorb concurrency / in-flight (zero paid overage)
   costPer1kUsd: number; // for the ledger cost estimate
   allowPaidOverage: boolean; // default false → never spend past the free tier
@@ -38,9 +39,16 @@ interface ProviderLimits {
 
 const PROVIDERS: Record<SearchSource, ProviderLimits> = {
   // Brave $5 Search plan: 50 QPS, $5/mo credit (~1,000 req). storageRights=false → signals-only cache.
-  brave: { freeMonthlyCap: 1000, safetyMargin: 0.9, costPer1kUsd: 5, allowPaidOverage: false, perMinuteRate: 30, endpoint: 'web/search' },
+  brave: { freeCap: 1000, capPeriod: 'monthly', safetyMargin: 0.9, costPer1kUsd: 5, allowPaidOverage: false, perMinuteRate: 30, endpoint: 'web/search' },
   // Exa free tier: 20,000 req/mo, /search 10 QPS.
-  exa: { freeMonthlyCap: 20000, safetyMargin: 0.95, costPer1kUsd: 7, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
+  exa: { freeCap: 20000, capPeriod: 'monthly', safetyMargin: 0.95, costPer1kUsd: 7, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
+  // Currents free tier: 1,000 req/DAY (confirmed live via X-Ratelimit-Limit header), resets at UTC
+  // midnight -- not monthly, hence capPeriod: 'daily' (see reserveDailyQuota).
+  currents: { freeCap: 1000, capPeriod: 'daily', safetyMargin: 0.9, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'search' },
+  // FreeNewsApi.io free tier: 5,000 req/day, no paid tier exists. Server was unresponsive in live
+  // testing (TLS connects, no response) -- kept here since the existing stub-on-error path already
+  // degrades gracefully; treat as a secondary/fallback news source, not primary.
+  freenews: { freeCap: 5000, capPeriod: 'daily', safetyMargin: 0.9, costPer1kUsd: 0, allowPaidOverage: false, perMinuteRate: 60, endpoint: 'v1/news' },
 };
 
 const CACHE_TTL_DAYS = 30; // 30-day no-repeat gate (SYS-SEARCH F-006 / spec §6.2)
@@ -56,14 +64,18 @@ export class SearchService {
   private readonly logger = new Logger(SearchService.name);
   private readonly braveKey = process.env.BRAVE_API_KEY;
   private readonly exaKey = process.env.EXA_API_KEY;
+  private readonly currentsKey = process.env.CURRENTS_API_KEY;
+  private readonly freenewsKey = process.env.FREENEWS_API_KEY;
 
   constructor(
     @Inject('DATABASE_POOL') private readonly db: Pool,
     @Inject('REDIS_CLIENT') private readonly redis: unknown,
   ) {
     this.logger.log(
-      `[SearchService] init (brave=${this.braveKey ? 'live' : 'stub'}, exa=${this.exaKey ? 'live' : 'stub'}; ` +
-        `caps brave=${this.effectiveCap('brave')} exa=${this.effectiveCap('exa')} /mo, zero paid overage)`,
+      `[SearchService] init (brave=${this.braveKey ? 'live' : 'stub'}, exa=${this.exaKey ? 'live' : 'stub'}, ` +
+        `currents=${this.currentsKey ? 'live' : 'stub'}, freenews=${this.freenewsKey ? 'live' : 'stub'}; ` +
+        `caps brave=${this.effectiveCap('brave')}/mo exa=${this.effectiveCap('exa')}/mo ` +
+        `currents=${this.effectiveCap('currents')}/day freenews=${this.effectiveCap('freenews')}/day, zero paid overage)`,
     );
   }
 
@@ -75,6 +87,14 @@ export class SearchService {
     return this.search('exa', query, count);
   }
 
+  currentsSearch(query: string, count = 10): Promise<SearchResult> {
+    return this.search('currents', query, count);
+  }
+
+  freenewsSearch(query: string, count = 10): Promise<SearchResult> {
+    return this.search('freenews', query, count);
+  }
+
   /** cache gate → key → burst limit → monthly cap reserve → live call → ledger + signals-only cache. */
   async search(source: SearchSource, query: string, count = 10): Promise<SearchResult> {
     // 1. signals-only cache hit — zero outbound calls, zero quota spent (F-006)
@@ -84,7 +104,7 @@ export class SearchService {
     }
 
     // 2. credential check
-    const key = source === 'brave' ? this.braveKey : this.exaKey;
+    const key = this.keyFor(source);
     if (!key) {
       this.logger.warn(`[SearchService] ${source} key missing — stub for "${query}"`);
       return this.stub(source, query);
@@ -96,16 +116,16 @@ export class SearchService {
       return this.stub(source, query);
     }
 
-    // 4. monthly zero-overage cap — atomic reserve, FAIL CLOSED (cost safety > availability) (F-008)
-    if (!(await this.reserveMonthlyQuota(source))) {
-      this.logger.warn(`[SearchService] ${source} monthly free-tier cap reached — suppressing call (zero-overage)`);
+    // 4. zero-overage cap — atomic reserve, FAIL CLOSED (cost safety > availability) (F-008)
+    if (!(await this.reserveQuota(source))) {
+      this.logger.warn(`[SearchService] ${source} ${PROVIDERS[source].capPeriod} free-tier cap reached — suppressing call (zero-overage)`);
       // TODO(SYS-POLICY): emit Operator Dashboard alert
       return { ...this.stub(source, query), capped: true };
     }
 
     // 5. live call → ledger → signals-only cache (result bodies returned to caller, never stored)
     try {
-      const results = source === 'brave' ? await this.callBrave(query, count, key) : await this.callExa(query, count, key);
+      const results = await this.callProvider(source, query, count, key);
       await this.writeLedger(source);
       await this.writeCache(source, query, results.length);
       return { source, query, cached: false, fetchedAt: new Date().toISOString(), resultCount: results.length, results };
@@ -116,23 +136,49 @@ export class SearchService {
     }
   }
 
-  /** Current month's usage vs cap for a provider (Operator Dashboard / tests). */
-  async getMonthlyUsage(source: SearchSource): Promise<{ used: number; cap: number; remaining: number }> {
+  /** Current usage vs cap for a provider, scoped to its real cap period (Operator Dashboard / tests). */
+  async getUsage(source: SearchSource): Promise<{ used: number; cap: number; remaining: number; period: 'monthly' | 'daily' }> {
     const cap = this.effectiveCap(source);
+    const period = PROVIDERS[source].capPeriod;
+    const since = period === 'monthly' ? this.monthStart() : this.dayStart();
     let used = 0;
     try {
       const res = await this.db.query(
         `SELECT COALESCE(SUM(request_count), 0) AS used FROM api_usage_ledger WHERE provider = $1 AND day >= $2`,
-        [source, this.monthStart()],
+        [source, since],
       );
       used = Number(res.rows[0]?.used ?? 0);
     } catch {
       /* ledger unavailable → report 0 used */
     }
-    return { used, cap, remaining: Math.max(0, cap - used) };
+    return { used, cap, remaining: Math.max(0, cap - used), period };
+  }
+
+  /** @deprecated use getUsage — kept for any existing monthly-only callers. */
+  async getMonthlyUsage(source: SearchSource): Promise<{ used: number; cap: number; remaining: number }> {
+    const { used, cap, remaining } = await this.getUsage(source);
+    return { used, cap, remaining };
   }
 
   // --- providers -------------------------------------------------------------
+
+  private keyFor(source: SearchSource): string | undefined {
+    switch (source) {
+      case 'brave': return this.braveKey;
+      case 'exa': return this.exaKey;
+      case 'currents': return this.currentsKey;
+      case 'freenews': return this.freenewsKey;
+    }
+  }
+
+  private callProvider(source: SearchSource, query: string, count: number, key: string): Promise<SearchResultItem[]> {
+    switch (source) {
+      case 'brave': return this.callBrave(query, count, key);
+      case 'exa': return this.callExa(query, count, key);
+      case 'currents': return this.callCurrents(query, count, key);
+      case 'freenews': return this.callFreenews(query, count, key);
+    }
+  }
 
   private async callBrave(query: string, count: number, key: string): Promise<SearchResultItem[]> {
     const url = `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=${count}`;
@@ -155,6 +201,40 @@ export class SearchService {
     const data: any = await res.json();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (data?.results ?? []).map((r: any) => ({ title: r.title, url: r.url, snippet: typeof r.text === 'string' ? r.text.slice(0, 200) : undefined }));
+  }
+
+  /** Response shape confirmed live: {"status":"ok","news":[{title,url,description,...}],"page":1}. */
+  private async callCurrents(query: string, count: number, key: string): Promise<SearchResultItem[]> {
+    const url = `https://api.currentsapi.services/v1/search?keywords=${encodeURIComponent(query)}&apiKey=${key}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Currents API responded with status ${res.status}`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data: any = await res.json();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (data?.news ?? []).slice(0, count).map((r: any) => ({ title: r.title, url: r.url, snippet: r.description }));
+  }
+
+  /**
+   * Best-effort per published docs -- live testing showed the server accepting the TLS connection
+   * then never responding (10s+ hang on every attempt). Relies on this method's own fetch timeout
+   * plus search()'s existing catch-and-stub path to degrade gracefully rather than hang the caller.
+   */
+  private async callFreenews(query: string, count: number, key: string): Promise<SearchResultItem[]> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    try {
+      const url = `https://api.freenewsapi.io/v1/news?q=${encodeURIComponent(query)}`;
+      const res = await fetch(url, { headers: { 'x-api-key': key }, signal: controller.signal });
+      if (!res.ok) throw new Error(`FreeNewsApi responded with status ${res.status}`);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const data: any = await res.json();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const articles = data?.articles ?? data?.news ?? data?.results ?? [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return articles.slice(0, count).map((r: any) => ({ title: r.title, url: r.url, snippet: r.description ?? r.summary }));
+    } finally {
+      clearTimeout(timeout);
+    }
   }
 
   // --- search_cache (SIGNALS-ONLY — never stores provider result bodies, SYS-POLICY F-003) ----------
@@ -193,7 +273,7 @@ export class SearchService {
 
   private effectiveCap(source: SearchSource): number {
     const c = PROVIDERS[source];
-    return Math.floor(c.freeMonthlyCap * c.safetyMargin);
+    return Math.floor(c.freeCap * c.safetyMargin);
   }
 
   private monthStart(): Date {
@@ -201,25 +281,34 @@ export class SearchService {
     return new Date(now.getFullYear(), now.getMonth(), 1);
   }
 
+  private dayStart(): Date {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  }
+
   /**
-   * Reserve one unit of this month's quota. Atomic via Redis INCR (reserve-before-call so concurrent
-   * agents can't collectively overshoot). FAILS CLOSED — if neither Redis nor the ledger can confirm
-   * we're under cap, deny the call rather than risk paid overage.
+   * Reserve one unit of this provider's quota, scoped to its real cap period (monthly for
+   * brave/exa, daily for currents/freenews -- see ProviderLimits.capPeriod). Atomic via Redis
+   * INCR (reserve-before-call so concurrent agents can't collectively overshoot). FAILS CLOSED —
+   * if neither Redis nor the ledger can confirm we're under cap, deny the call rather than risk
+   * paid overage.
    */
-  private async reserveMonthlyQuota(source: SearchSource): Promise<boolean> {
+  private async reserveQuota(source: SearchSource): Promise<boolean> {
     const cfg = PROVIDERS[source];
     if (cfg.allowPaidOverage) return true; // explicitly opted into paid usage
     const cap = this.effectiveCap(source);
-    const month = new Date().toISOString().slice(0, 7); // YYYY-MM
+    const isDaily = cfg.capPeriod === 'daily';
+    const bucket = isDaily ? new Date().toISOString().slice(0, 10) : new Date().toISOString().slice(0, 7); // YYYY-MM-DD or YYYY-MM
+    const ttlSeconds = isDaily ? 60 * 60 * 26 : 60 * 60 * 24 * 40; // ~26h or ~40d — outlives the bucket, never accumulates
 
     // Preferred: atomic Redis counter
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const r = this.redis as any;
       if (r && typeof r.incr === 'function') {
-        const k = `apiquota:${source}:${month}`;
+        const k = `apiquota:${source}:${bucket}`;
         const n: number = await r.incr(k);
-        if (n === 1 && typeof r.expire === 'function') await r.expire(k, 60 * 60 * 24 * 40); // ~40d
+        if (n === 1 && typeof r.expire === 'function') await r.expire(k, ttlSeconds);
         if (n > cap) {
           try {
             await r.decr(k); // roll back the over-cap reservation
@@ -234,11 +323,12 @@ export class SearchService {
       /* Redis unavailable → fall through to ledger-count fallback */
     }
 
-    // Fallback: count this month's ledger. Less atomic, but fail-closed on error (cost > availability).
+    // Fallback: count this period's ledger. Less atomic, but fail-closed on error (cost > availability).
     try {
+      const since = isDaily ? this.dayStart() : this.monthStart();
       const res = await this.db.query(
         `SELECT COALESCE(SUM(request_count), 0) AS used FROM api_usage_ledger WHERE provider = $1 AND day >= $2`,
-        [source, this.monthStart()],
+        [source, since],
       );
       return Number(res.rows[0]?.used ?? 0) < cap;
     } catch (e) {
