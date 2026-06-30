@@ -16,7 +16,11 @@ Focus on sourcing, drafting, and creative selection for: Transform one personali
 - When the Story Atomizer Creator agent is invoked in the L3 Story pipeline and its inputs are available.
 
 ## Inputs / Sources
-Personality Graph
+Personality Graph. Use the `vidiq` MCP server's `vidiq_youtube_search` and `vidiq_video_watch`
+tools to check which story angles for this personality are already saturated on YouTube, so the
+generated candidates skew toward genuinely untapped angles rather than duplicating existing
+coverage. vidiq is the prioritized subscription; fall back to `nexlev` only if vidiq can't
+answer the lookup.
 
 ## Output
 Draft proposal and creative options for: 50-200 story candidates per personality
