@@ -16,7 +16,9 @@ Focus on sourcing, drafting, and creative selection for: Drive comment-stage eng
 - When the Community Engagement Creator agent is invoked in the Growth pipeline and its inputs are available.
 
 ## Inputs / Sources
-Comments + sentiment
+Comments + sentiment. Pull real comment data via the `vidiq` MCP server's `vidiq_video_comments`
+tool (per published video) rather than relying on judgment alone for sentiment/high-signal
+question surfacing.
 
 ## Output
 Draft proposal and creative options for: Reply drafts + surfaced topics

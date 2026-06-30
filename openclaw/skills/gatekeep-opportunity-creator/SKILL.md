@@ -16,7 +16,11 @@ Focus on sourcing, drafting, and creative selection for: Final gatekeeper above 
 - When the Story Opportunity Intelligence Creator agent is invoked in the Executive pipeline and its inputs are available.
 
 ## Inputs / Sources
-Outputs of all discovery/intelligence agents
+Outputs of all discovery/intelligence agents. To assess YouTube saturation concretely (not
+just from upstream judgment), use the `vidiq` MCP server's `vidiq_youtube_search` and
+`vidiq_channel_search` to check how much existing coverage a personality/topic already has
+before deciding go/no-go. vidiq is the prioritized subscription; fall back to `nexlev` only
+if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: {go_no_go, can_generate_50plus, target_regions, saturation, rationale}
