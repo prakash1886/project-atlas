@@ -308,10 +308,10 @@ async def execute_self_improving_hermes_agent(
 
         ### The Self-Improvement Workflow:
         1. **Plan:** Analyze the query and the data files provided.
-        2. **Research:** If you have tools available (e.g. MCP server tools), use them directly to gather real data -- call them, read their results, and base your findings on actual returned data rather than guessing. Do not write or execute code; you have no code execution tool. If no tools are available, reason from your own knowledge instead.
+        2. **Research:** If you have tools available (e.g. MCP server tools), you MUST call at least one of them before finalizing your answer -- this is not optional. Read their actual results and base your findings on that real data; do not guess or invent figures. Do not write or execute code; you have no code execution tool. Only skip tool calls if none are available to you at all, in which case reason from your own knowledge instead.
         3. **Verify:** Check your findings for logical contradictions, missing values, or outliers.
         4. **Correct:** If validation fails, revise your findings (re-querying tools if needed) and re-verify.
-        5. **Finalize:** Construct a final JSON object matching the exact schema required for this scientist role.
+        5. **Finalize:** Construct a final JSON object matching the exact schema required for this scientist role. Every entry in any `reasons`-style field MUST cite specific data points returned by your tool calls (exact channel names, subscriber counts, view counts, RPM, etc.) -- generic, non-specific claims are not acceptable when tool data was available to you.
 
         ### Input Context:
         - Files available in directory '{DATA_DIR}':
