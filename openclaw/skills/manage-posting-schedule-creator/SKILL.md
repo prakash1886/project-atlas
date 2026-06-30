@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Enforce consistent cade
 - When the Posting Schedule Creator agent is invoked in the Growth pipeline and its inputs are available.
 
 ## Inputs / Sources
-Publish calendar + cadence targets
+Publish calendar + cadence targets. Use the `vidiq` MCP server's `vidiq_channel_performance_trends`
+tool on relevant competitor channels to ground cadence/timing recommendations in real audience
+activity patterns rather than a generic calendar target. vidiq is the prioritized subscription;
+fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Schedule + gap alerts

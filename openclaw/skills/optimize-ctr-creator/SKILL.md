@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Maximize click-through 
 - When the Thumbnail/Title CTR Creator agent is invoked in the Growth pipeline and its inputs are available.
 
 ## Inputs / Sources
-Video + impression CTR data
+Video + impression CTR data. Use the `vidiq` MCP server's `vidiq_score_title` and
+`vidiq_score_thumbnail` to score candidate variants, and `vidiq_generate_titles` to produce
+new variants to test, rather than inventing variants from judgment alone. vidiq is the
+prioritized subscription; fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: {variants, winner, ctr_by_archetype}

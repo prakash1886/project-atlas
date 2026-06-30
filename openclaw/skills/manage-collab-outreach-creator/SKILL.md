@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Build a creator-to-crea
 - When the Collaboration Outreach Creator agent is invoked in the Growth pipeline and its inputs are available.
 
 ## Inputs / Sources
-Creator graph + audience overlap
+Creator graph + audience overlap. Use the `vidiq` MCP server's `vidiq_similar_channels` tool to
+find adjacent/competing creators by real audience overlap, rather than guessing candidates from
+judgment alone. vidiq is the prioritized subscription; fall back to `nexlev` only if vidiq can't
+answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Outreach pipeline entries
