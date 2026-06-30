@@ -16,14 +16,16 @@ Render QC -> Video Publish), and wait for it to finish.
 
 ## When to use
 - `submit-editorial-review` recorded a human **PASS** (`content_assets.status = APPROVED`).
-- The four upstream judgment outputs (`select-vibe`, `direct-voice`, `plan-assets`,
-  `generate-thumbnails`, all owned by `content-factory`) and the approved script are available.
+- The five upstream judgment outputs (`select-vibe`, `direct-voice`, `plan-assets`,
+  `generate-thumbnails`, `generate-seo-metadata`, all owned by `content-factory`) and the
+  approved script are available.
 
 ## Workflow
 1. Assemble the `ContentRunRequest` payload: `script_text`, `asset_planner_output` (from
    `plan-assets`), `voice_assignment` (from `direct-voice`), `thumbnail_concepts` (from
    `generate-thumbnails`), `personality_id`/`personality_name`/`reference_image_urls`,
-   `publish_metadata` (title/description/tags/privacy_status).
+   `publish_metadata` -- `title`/`description`/`tags` from `generate-seo-metadata`'s output,
+   `privacy_status` set directly (unrelated to SEO, defaults to `"private"` if omitted).
 2. Call the `hermes-bridge` MCP tool `start_content_run(payload)` — returns `{run_id, status: "started"}` immediately.
 3. Poll `get_content_run_status(run_id)` (a few minutes apart; this is a multi-minute pipeline, do not poll tightly) until `status` is `completed` or `failed`.
 4. On `completed`, record the result's `publish_result.live_url` against the run; on `failed`, surface the failed `stage` for human follow-up.

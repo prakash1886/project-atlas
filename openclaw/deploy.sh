@@ -29,7 +29,7 @@ REMOTE="/root/atlas-openclaw"                   # staging dir on the VPS
 # agent id | model | emoji | display name | comma-separated skills
 AGENTS=(
   "chief-editor|gemini-direct/gemini-2.5-flash|🎬|Chief Editor|orchestrate-content-run,submit-editorial-review,dispatch-hermes-content-run"
-  "content-factory|deepseek-direct/deepseek-chat|🏭|Content Factory|select-vibe,direct-voice,plan-assets,generate-thumbnails"
+  "content-factory|deepseek-direct/deepseek-chat|🏭|Content Factory|select-vibe,direct-voice,plan-assets,generate-thumbnails,generate-seo-metadata"
   "trend-intelligence|deepseek-direct/deepseek-chat|📈|Trend Intelligence|fetch-signals,calculate-opportunity-score"
   "knowledge-graph|deepseek-direct/deepseek-chat|🕸️|Knowledge Graph Curator|query-semantic-nodes,autolink-entities"
   "research-factcheck|deepseek-direct/deepseek-chat|🔎|Research & Fact-Check|gather-citations,verify-claims"

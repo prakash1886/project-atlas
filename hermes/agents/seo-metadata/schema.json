@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "generated_at": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["generated_at", "title", "description", "tags"]
+}
