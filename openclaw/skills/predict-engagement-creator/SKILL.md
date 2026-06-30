@@ -16,7 +16,10 @@ Focus on sourcing, drafting, and creative selection for: Predict CTR, watch time
 - When the Engagement Prediction Creator agent is invoked in the L4 Audience pipeline and its inputs are available.
 
 ## Inputs / Sources
-Historical performance + story metadata
+Historical performance + story metadata. Use the `vidiq` MCP server's `vidiq_video_stats` and
+`vidiq_channel_analytics` tools on comparable existing videos as a real calibration baseline for
+the prediction, rather than guessing from judgment alone. vidiq is the prioritized subscription;
+fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Predicted engagement metrics

@@ -16,7 +16,11 @@ Focus on sourcing, drafting, and creative selection for: Predict RPM, affiliate,
 - When the Revenue Optimization Creator agent is invoked in the L6 Commerce pipeline and its inputs are available.
 
 ## Inputs / Sources
-Story + Audience + Region data
+Story + Audience + Region data. Use the `vidiq` MCP server's `vidiq_channel_analytics`/`vidiq_video_stats`
+tools as a real view/engagement-volume input (more reach -> more ad/affiliate/sponsor surface),
+and `vidiq_similar_channels` for sponsorship-rate comparables. Note: vidiq has no RPM data --
+this grounds the volume side of the forecast, not the RPM/rate side. vidiq is the prioritized
+subscription; fall back to `nexlev` only if vidiq can't answer the lookup.
 
 ## Output
 Draft proposal and creative options for: Revenue forecast
