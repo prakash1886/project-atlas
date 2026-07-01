@@ -23,9 +23,16 @@ Harvest real-time demand signals from external sources for a given query/topic.
   1,000 req/day free tier, daily-reset cap. `freenews` (FreeNewsApi.io) is registered as a secondary/
   fallback source but was unresponsive in live testing (server accepts the connection, never replies);
   treat it as best-effort, not primary.
-- YouTube Data API + Reddit + Google Trends + GDELT — **still not implemented**, no client exists for
-  any of these despite being listed here historically. Don't rely on this skill for those signals yet.
-- **Wikipedia Pageviews** for spike detection — also not implemented yet.
+- **Google SERP** (live) via the `brightdata` MCP server's `search_engine` tool (`engine: "google"`) —
+  structured organic results (title, URL, description) for demand-signal research. Complements Brave.
+- **YouTube video data** (live) via `brightdata` MCP's `web_data_youtube_videos` tool — structured
+  metadata (views, likes, description, channel) for a known video URL. Use after `search_engine` finds
+  candidate video URLs to enrich competitor analysis.
+- **Reddit discussion signal** (live) via `brightdata` MCP's `web_data_reddit_posts` tool — structured
+  post data (title, score, comments, subreddit) for a known Reddit post URL. Replaces the Reddit API
+  approach (which requires a commercial contract); Bright Data handles compliance. Surface Reddit URLs
+  first via `search_engine` (`site:reddit.com <topic>`), then read each post with `web_data_reddit_posts`.
+- Google Trends + GDELT — **still not implemented**, no client exists. Wikipedia Pageviews also pending.
 - Fetch & clean page text with **Jina Reader** (avoids headless browser on the VPS, spec §11.3).
 
 ## Function signature (manifest contract)

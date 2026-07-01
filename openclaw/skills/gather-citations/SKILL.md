@@ -15,7 +15,7 @@ Build a bulletproof, source-linked factual dossier and narrative friction map.
 - A topic is approved for production and needs verified facts and narrative tension points before drafting.
 
 ## Sources (spec §5.2/§5.3/§5.5)
-Wikipedia API, Wikidata, DBpedia, Crossref, Semantic Scholar, OpenAlex, NewsAPI, GDELT, Internet Archive, Project Gutenberg, Stack Exchange (Philosophy/History/Literature), public Discourse forums; **Exa** (live) via the `exa` MCP server — bulk polling routes through the NestJS `SearchService` (SYS-SEARCH). Fetch & clean with **Jina Reader**. Stack Exchange and Discourse are queried specifically to harvest the core human struggles, common questions, and debates surrounding the topic to build the story's narrative arc (not for trends).
+Wikipedia API, Wikidata, DBpedia, Crossref, Semantic Scholar, OpenAlex, NewsAPI, GDELT, Internet Archive, Project Gutenberg, Stack Exchange (Philosophy/History/Literature), public Discourse forums; **Exa** (live) via the `exa` MCP server — bulk polling routes through the NestJS `SearchService` (SYS-SEARCH). **Bright Data** (live) via the `brightdata` MCP server — use `search_engine` (Google/Bing) to surface source URLs, then `web_data_reddit_posts` to read Reddit discussions for human-struggle/debate signals, and `web_data_youtube_videos` to check how the topic has already been framed by other creators. Fetch & clean with **Jina Reader**. Stack Exchange and Discourse are queried specifically to harvest the core human struggles, common questions, and debates surrounding the topic to build the story's narrative arc (not for trends).
 
 ## Function signature (manifest contract)
 ```python

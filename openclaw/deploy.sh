@@ -26,6 +26,12 @@ REMOTE="/root/atlas-openclaw"                   # staging dir on the VPS
 # one VidIQ connection.
 : "${VIDIQ_API_KEY:?Set VIDIQ_API_KEY before running deploy.sh}"
 
+# Required for Bright Data's MCP server (search_engine, web_data_youtube_videos,
+# web_data_reddit_posts, etc.) -- structured SERP + social data without platform
+# API keys. Token goes in the URL query param (not a header -- Bright Data's
+# remote MCP convention differs from VidIQ's header-based auth).
+: "${BRIGHTDATA_API_KEY:?Set BRIGHTDATA_API_KEY before running deploy.sh}"
+
 # agent id | model | emoji | display name | comma-separated skills
 AGENTS=(
   "chief-editor|gemini-direct/gemini-2.5-flash|🎬|Chief Editor|orchestrate-content-run,submit-editorial-review,dispatch-hermes-content-run"
@@ -130,6 +136,15 @@ $SSH "$HOST" "openclaw mcp add vidiq \
                 --header 'Authorization=Bearer $VIDIQ_API_KEY' \
                 --transport streamable-http \
                 && echo '   + vidiq' || echo '   ! vidiq FAILED'"
+
+# Bright Data token goes in the URL query param (not a header -- their remote MCP
+# convention). Supports search_engine (Google/Bing SERP), web_data_youtube_videos,
+# web_data_reddit_posts, web_data_instagram_posts, web_data_tiktok_posts, etc.
+echo "== registering brightdata MCP tool (global -- no per-agent scoping exists) =="
+$SSH "$HOST" "openclaw mcp add brightdata \
+                --url 'https://mcp.brightdata.com/mcp?token=$BRIGHTDATA_API_KEY' \
+                --transport streamable-http \
+                && echo '   + brightdata' || echo '   ! brightdata FAILED'"
 
 echo ">> restart gateway + summary"
 $SSH "$HOST" "openclaw gateway restart >/dev/null 2>&1; sleep 5; openclaw agents list 2>&1 | head -30"

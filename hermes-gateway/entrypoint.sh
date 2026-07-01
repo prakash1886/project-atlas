@@ -31,4 +31,10 @@ if ! grep -q '^  vidiq:' "$HERMES_HOME/config.yaml"; then
       Authorization: "Bearer ${VIDIQ_API_KEY}"' "$HERMES_HOME/config.yaml"
 fi
 
+if ! grep -q '^  brightdata:' "$HERMES_HOME/config.yaml"; then
+    sed -i '/^    Authorization: "Bearer \${VIDIQ_API_KEY}"$/a\
+  brightdata:\
+    url: "https://mcp.brightdata.com/mcp?token=${BRIGHTDATA_API_KEY}"' "$HERMES_HOME/config.yaml"
+fi
+
 exec hermes gateway run --no-supervise
